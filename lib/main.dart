@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sampleflutter/app/items/page.dart';
+import 'package:sampleflutter/app/items/id/page.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 
 void main() {
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         home: const MyHomePage(title: 'カテゴリ画面'),
         routes: <String, WidgetBuilder>{
           '/items': (BuildContext context) => const Items(),
+          '/items/id': (BuildContext context) => const ItemDetail(),
         });
   }
 }

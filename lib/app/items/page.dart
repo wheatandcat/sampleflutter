@@ -37,37 +37,40 @@ class Items extends StatelessWidget {
               children: List.generate(5, (index) {
                 // ここで各アイテムのウィジェットを生成します。
                 // ダミーデータを使用していますが、実際にはリストやデータソースからデータを取得します。
-                return Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Expanded(
-                        child: Image.network(
-                          'https://via.placeholder.com/150',
-                          fit: BoxFit.cover,
-                        ), // 画像URLを指定
+                return InkWell(
+                    onTap: () => Navigator.pushNamed(context, '/items/id'),
+                    child: Card(
+                      color: Colors.transparent,
+                      elevation: 0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Expanded(
+                            child: Image.network(
+                              'https://via.placeholder.com/150',
+                              fit: BoxFit.cover,
+                            ), // 画像URLを指定
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.zero,
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text('100%',
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                  SizedBox(width: 20),
+                                  Text('使用期限\n2021/12/31',
+                                      style: TextStyle(
+                                          fontSize: 10, color: Colors.white)),
+                                ]), // 期限日
+                          ),
+                        ],
                       ),
-                      const Padding(
-                        padding: EdgeInsets.zero,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text('100%',
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold)),
-                              SizedBox(width: 20),
-                              Text('使用期限\n2021/12/31',
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.white)),
-                            ]), // 期限日
-                      ),
-                    ],
-                  ),
-                );
+                    ));
               }),
             ),
           ),
