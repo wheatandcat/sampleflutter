@@ -1,9 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:sampleflutter/app/items/page.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
+import 'package:sampleflutter/graphql/categories.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initHiveForFlutter();
+
   runApp(const MyApp());
 }
 
@@ -13,50 +20,66 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-            useMaterial3: true,
-            appBarTheme: const AppBarTheme(
-                iconTheme: IconThemeData(color: Colors.white)),
-            colorScheme: ColorScheme.fromSwatch(
-              brightness: Brightness.light,
-              primarySwatch: Colors.purple,
-              accentColor: Colors.red,
-            ),
-            scaffoldBackgroundColor: Colors.brown[200]),
-        home: const MyHomePage(title: 'カテゴリ画面'),
-        routes: <String, WidgetBuilder>{
-          '/items': (BuildContext context) => const Items(),
-          '/items/id': (BuildContext context) => const ItemDetail(),
-        });
+    final HttpLink httpLink =
+        HttpLink('https://stock-keeper-voytob3xvq-an.a.run.app/graphql');
+
+    final ValueNotifier<GraphQLClient> client = ValueNotifier<GraphQLClient>(
+      GraphQLClient(
+        link: httpLink,
+        cache: GraphQLCache(store: InMemoryStore()),
+      ),
+    );
+
+    return GraphQLProvider(
+        client: client,
+        child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+                useMaterial3: true,
+                appBarTheme: const AppBarTheme(
+                    iconTheme: IconThemeData(color: Colors.white)),
+                colorScheme: ColorScheme.fromSwatch(
+                  brightness: Brightness.light,
+                  primarySwatch: Colors.purple,
+                  accentColor: Colors.red,
+                ),
+                scaffoldBackgroundColor: Colors.brown[200]),
+            home: MyHomePage(),
+            routes: <String, WidgetBuilder>{
+              '/items': (BuildContext context) => const Items(),
+              '/items/id': (BuildContext context) => const ItemDetail(),
+            }));
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final List<Map<String, String>> items = [
-    {'title': 'リビング', 'subtitle': '39 ITEM'},
-    {'title': 'キッチン', 'subtitle': '39 ITEM'},
-    {'title': '洗面所 & トイレ', 'subtitle': '39 ITEM'},
-    {'title': '玄関', 'subtitle': '39 ITEM'},
-    {'title': '冷蔵庫', 'subtitle': '39 ITEM'},
-  ];
-
+class MyHomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final queryResult = useQuery$Categories(Options$Query$Categories());
+
+    final result = queryResult.result;
+
+    if (result.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    if (result.hasException) {
+      return Text(result.exception.toString());
+    }
+    final data = result.data;
+    if (data == null || data.isEmpty) {
+      return const Text('データがありません');
+    }
+
+    final List<Query$Categories$categories> categories = (data["categories"]
+            as List<dynamic>)
+        .map((item) =>
+            Query$Categories$categories.fromJson(item as Map<String, dynamic>))
+        .toList();
+
     return Scaffold(
-      appBar: CommonAppBar(title: widget.title),
+      appBar: const CommonAppBar(title: "カテゴリ画面"),
       body: ListView.builder(
-        itemCount: items.length,
+        itemCount: categories.length,
         itemBuilder: (context, index) {
           return InkWell(
               onTap: () {
@@ -68,13 +91,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: const Border(
                     bottom: BorderSide(color: Colors.white, width: 3)),
                 child: ListTile(
-                  title: Text(items[index]['title'] ?? '',
+                  title: Text(categories[index].name,
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold)),
-                  subtitle: Text(items[index]['subtitle'] ?? '',
-                      style: const TextStyle(color: Colors.white)),
+                  subtitle: const Text("39 ITEMS",
+                      style: TextStyle(color: Colors.white)),
                 ),
               ));
         },

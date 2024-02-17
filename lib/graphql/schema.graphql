@@ -1,0 +1,39 @@
+type Query {
+  hello: String
+  categories: [Category]
+}
+
+type Category {
+  "カテゴリーID"
+  id: ID!
+  "カテゴリー名"
+  name: String!
+  "順番"
+  order: Int!
+}
+
+type Item {
+  "アイテムID"
+  id: ID!
+  "カテゴリーID"
+  categoryId: ID!
+  "アイテム名"
+  name: String!
+  "在庫数"
+  stock: Int!
+  "消費期限"
+  expirationDate: Time
+}
+
+input NewCategory {
+  "カテゴリー名"
+  name: String!
+  "順番"
+  order: Int!
+}
+
+type Mutation {
+  createCategory(input: NewCategory!): Category!
+}
+
+scalar Time
