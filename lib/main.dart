@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.brown[200]),
           home: MyHomePage(),
           routes: <String, WidgetBuilder>{
-            '/items': (BuildContext context) => const Items(id: 1),
             '/items/id': (BuildContext context) => const ItemDetail(),
           },
           onGenerateRoute: (settings) {
@@ -54,6 +53,16 @@ class MyApp extends StatelessWidget {
                 settings: settings,
               );
             }
+            final Uri uri = Uri.parse(settings.name ?? "");
+            if (uri.pathSegments.length == 2 &&
+                uri.pathSegments.first == 'category') {
+              final int? id = int.tryParse(uri.pathSegments[1]);
+              return MaterialPageRoute(
+                builder: (context) => Items(id: id ?? 0),
+                settings: settings,
+              );
+            }
+
             return null;
           },
         ));

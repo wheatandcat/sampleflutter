@@ -12,7 +12,7 @@ class Items extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final queryResult = useQuery$Category(
-        Options$Query$Category(variables: Variables$Query$Category(id: 1)));
+        Options$Query$Category(variables: Variables$Query$Category(id: id)));
 
     final result = queryResult.result;
 
