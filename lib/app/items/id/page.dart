@@ -1,7 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
+import 'package:sampleflutter/components/button/button.dart';
 
 class ItemDetail extends StatefulWidget {
   const ItemDetail({super.key});
@@ -158,26 +157,10 @@ class _ItemDetailState extends State<ItemDetail> {
           Center(
               child: Padding(
             padding: const EdgeInsets.only(top: 30),
-            child: SizedBox(
-                width: 150,
-                height: 40,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                      side: const BorderSide(
-                        color: Colors.white,
-                        width: 3,
-                      ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50) //こちらを適用
-                          ),
-                      backgroundColor: Colors.transparent),
-                  onPressed: () => {debugPrint("保存する")},
-                  child: const Text("保存する",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
-                )),
+            child: Button(
+              title: "保存する",
+              onPressed: () => {debugPrint("保存する")},
+            ),
           ))
         ],
       ),

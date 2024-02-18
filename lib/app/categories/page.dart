@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/graphql/categories.gql.dart';
@@ -48,7 +47,7 @@ class MyHomePage extends HookWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         onPressed: () {
-          debugPrint('Floating action button pressed');
+          Navigator.pushNamed(context, '/categories/new');
         },
         tooltip: 'Increment',
         child: Container(
