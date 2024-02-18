@@ -11,7 +11,7 @@ class MyHomePage extends HookWidget {
 
     final result = queryResult.result;
 
-    final List<Query$Categories$categories> categories = extractGraphQLData(
+    final List<Query$Categories$categories> categories = extractGraphQLDataList(
       data: result.data,
       fieldName: "categories",
       fromJson: Query$Categories$categories.fromJson,
@@ -24,7 +24,8 @@ class MyHomePage extends HookWidget {
         itemBuilder: (context, index) {
           return InkWell(
               onTap: () {
-                Navigator.pushNamed(context, '/items');
+                Navigator.pushNamed(
+                    context, '/category/${categories[index].id}');
               },
               child: Card(
                 color: Colors.transparent,

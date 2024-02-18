@@ -1,29 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
+import 'package:sampleflutter/graphql/category.gql.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:sampleflutter/utils/graphql.dart';
 
-class Items extends StatelessWidget {
-  const Items({super.key});
+class Items extends HookWidget {
+  final int id;
+
+  const Items({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
+    final queryResult = useQuery$Category(
+        Options$Query$Category(variables: Variables$Query$Category(id: 1)));
+
+    final result = queryResult.result;
+
+    if (result.isLoading) {
+      return const Scaffold(
+        appBar: CommonAppBar(title: ""),
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    final Query$Category$category category = extractGraphQLData(
+      data: result.data,
+      fieldName: "category",
+      fromJson: Query$Category$category.fromJson,
+    );
+
     return Scaffold(
       appBar: const CommonAppBar(title: ""),
       body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: Card(
               color: Colors.transparent,
               elevation: 0,
-              shape: Border(bottom: BorderSide(color: Colors.white, width: 3)),
+              shape: const Border(
+                  bottom: BorderSide(color: Colors.white, width: 3)),
               child: ListTile(
                 contentPadding: EdgeInsets.zero,
-                title: Text("リビング",
-                    style: TextStyle(
+                title: Text(category.name,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold)),
-                subtitle: Text('4 ITEM', style: TextStyle(color: Colors.white)),
+                subtitle:
+                    const Text('4 ITEM', style: TextStyle(color: Colors.white)),
               ),
             ),
           ),

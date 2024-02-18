@@ -1,6 +1,7 @@
 type Query {
   hello: String
   categories: [Category]
+  category(id: Int!): Category
 }
 
 type Category {

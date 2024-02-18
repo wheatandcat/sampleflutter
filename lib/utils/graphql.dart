@@ -1,4 +1,4 @@
-List<T> extractGraphQLData<T>({
+List<T> extractGraphQLDataList<T>({
   required Map<String, dynamic>? data,
   required String fieldName,
   required T Function(Map<String, dynamic>) fromJson,
@@ -12,4 +12,14 @@ List<T> extractGraphQLData<T>({
   return (data[fieldName] as List<dynamic>)
       .map((item) => fromJson(item as Map<String, dynamic>))
       .toList();
+}
+
+T extractGraphQLData<T>({
+  required Map<String, dynamic>? data,
+  required String fieldName,
+  required T Function(Map<String, dynamic>) fromJson,
+}) {
+  // データを指定された型のリストに変換
+  final item = data?[fieldName] as dynamic;
+  return fromJson(item as Map<String, dynamic>);
 }

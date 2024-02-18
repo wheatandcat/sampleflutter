@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.brown[200]),
           home: MyHomePage(),
           routes: <String, WidgetBuilder>{
-            '/items': (BuildContext context) => const Items(),
+            '/items': (BuildContext context) => const Items(id: 1),
             '/items/id': (BuildContext context) => const ItemDetail(),
           },
           onGenerateRoute: (settings) {
