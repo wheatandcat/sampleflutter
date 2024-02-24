@@ -238,6 +238,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_config:
+    dependency: "direct main"
+    description:
+      name: flutter_config
+      sha256: a07e6156bb6e776e29c6357be433155acda87d1dab1a3f787a72091a1b71ffbf
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   flutter_hooks:
     dependency: "direct main"
     description:
@@ -416,6 +424,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.19.0"
   io:
     dependency: transitive
     description:

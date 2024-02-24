@@ -103,22 +103,31 @@ class _CopyWithStubImpl$Variables$Query$Category<TRes>
 class Query$Category {
   Query$Category({
     this.category,
+    this.items,
     this.$__typename = 'Query',
   });
 
   factory Query$Category.fromJson(Map<String, dynamic> json) {
     final l$category = json['category'];
+    final l$items = json['items'];
     final l$$__typename = json['__typename'];
     return Query$Category(
       category: l$category == null
           ? null
           : Query$Category$category.fromJson(
               (l$category as Map<String, dynamic>)),
+      items: (l$items as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Query$Category$items.fromJson((e as Map<String, dynamic>)))
+          .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Query$Category$category? category;
+
+  final List<Query$Category$items?>? items;
 
   final String $__typename;
 
@@ -126,6 +135,8 @@ class Query$Category {
     final _resultData = <String, dynamic>{};
     final l$category = category;
     _resultData['category'] = l$category?.toJson();
+    final l$items = items;
+    _resultData['items'] = l$items?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -134,9 +145,11 @@ class Query$Category {
   @override
   int get hashCode {
     final l$category = category;
+    final l$items = items;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$category,
+      l$items == null ? null : Object.hashAll(l$items.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -152,6 +165,22 @@ class Query$Category {
     final l$category = category;
     final lOther$category = other.category;
     if (l$category != lOther$category) {
+      return false;
+    }
+    final l$items = items;
+    final lOther$items = other.items;
+    if (l$items != null && lOther$items != null) {
+      if (l$items.length != lOther$items.length) {
+        return false;
+      }
+      for (int i = 0; i < l$items.length; i++) {
+        final l$items$entry = l$items[i];
+        final lOther$items$entry = lOther$items[i];
+        if (l$items$entry != lOther$items$entry) {
+          return false;
+        }
+      }
+    } else if (l$items != lOther$items) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -182,9 +211,14 @@ abstract class CopyWith$Query$Category<TRes> {
 
   TRes call({
     Query$Category$category? category,
+    List<Query$Category$items?>? items,
     String? $__typename,
   });
   CopyWith$Query$Category$category<TRes> get category;
+  TRes items(
+      Iterable<Query$Category$items?>? Function(
+              Iterable<CopyWith$Query$Category$items<Query$Category$items>?>?)
+          _fn);
 }
 
 class _CopyWithImpl$Query$Category<TRes>
@@ -202,12 +236,16 @@ class _CopyWithImpl$Query$Category<TRes>
 
   TRes call({
     Object? category = _undefined,
+    Object? items = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$Category(
         category: category == _undefined
             ? _instance.category
             : (category as Query$Category$category?),
+        items: items == _undefined
+            ? _instance.items
+            : (items as List<Query$Category$items?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -220,6 +258,19 @@ class _CopyWithImpl$Query$Category<TRes>
         : CopyWith$Query$Category$category(
             local$category, (e) => call(category: e));
   }
+
+  TRes items(
+          Iterable<Query$Category$items?>? Function(
+                  Iterable<
+                      CopyWith$Query$Category$items<Query$Category$items>?>?)
+              _fn) =>
+      call(
+          items: _fn(_instance.items?.map((e) => e == null
+              ? null
+              : CopyWith$Query$Category$items(
+                  e,
+                  (i) => i,
+                )))?.toList());
 }
 
 class _CopyWithStubImpl$Query$Category<TRes>
@@ -230,12 +281,15 @@ class _CopyWithStubImpl$Query$Category<TRes>
 
   call({
     Query$Category$category? category,
+    List<Query$Category$items?>? items,
     String? $__typename,
   }) =>
       _res;
 
   CopyWith$Query$Category$category<TRes> get category =>
       CopyWith$Query$Category$category.stub(_res);
+
+  items(_fn) => _res;
 }
 
 const documentNodeQueryCategory = DocumentNode(definitions: [
@@ -282,6 +336,61 @@ const documentNodeQueryCategory = DocumentNode(definitions: [
           ),
           FieldNode(
             name: NameNode(value: 'order'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'items'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'categoryId'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'name'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'order'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'stock'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'expirationDate'),
             alias: null,
             arguments: [],
             directives: [],
@@ -612,6 +721,207 @@ class _CopyWithStubImpl$Query$Category$category<TRes>
     String? id,
     String? name,
     int? order,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$Category$items {
+  Query$Category$items({
+    required this.id,
+    required this.name,
+    required this.order,
+    required this.stock,
+    this.expirationDate,
+    this.$__typename = 'Item',
+  });
+
+  factory Query$Category$items.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$order = json['order'];
+    final l$stock = json['stock'];
+    final l$expirationDate = json['expirationDate'];
+    final l$$__typename = json['__typename'];
+    return Query$Category$items(
+      id: (l$id as String),
+      name: (l$name as String),
+      order: (l$order as int),
+      stock: (l$stock as int),
+      expirationDate: (l$expirationDate as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String name;
+
+  final int order;
+
+  final int stock;
+
+  final String? expirationDate;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$order = order;
+    _resultData['order'] = l$order;
+    final l$stock = stock;
+    _resultData['stock'] = l$stock;
+    final l$expirationDate = expirationDate;
+    _resultData['expirationDate'] = l$expirationDate;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$order = order;
+    final l$stock = stock;
+    final l$expirationDate = expirationDate;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$order,
+      l$stock,
+      l$expirationDate,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$Category$items) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$stock = stock;
+    final lOther$stock = other.stock;
+    if (l$stock != lOther$stock) {
+      return false;
+    }
+    final l$expirationDate = expirationDate;
+    final lOther$expirationDate = other.expirationDate;
+    if (l$expirationDate != lOther$expirationDate) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$Category$items on Query$Category$items {
+  CopyWith$Query$Category$items<Query$Category$items> get copyWith =>
+      CopyWith$Query$Category$items(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$Category$items<TRes> {
+  factory CopyWith$Query$Category$items(
+    Query$Category$items instance,
+    TRes Function(Query$Category$items) then,
+  ) = _CopyWithImpl$Query$Category$items;
+
+  factory CopyWith$Query$Category$items.stub(TRes res) =
+      _CopyWithStubImpl$Query$Category$items;
+
+  TRes call({
+    String? id,
+    String? name,
+    int? order,
+    int? stock,
+    String? expirationDate,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$Category$items<TRes>
+    implements CopyWith$Query$Category$items<TRes> {
+  _CopyWithImpl$Query$Category$items(
+    this._instance,
+    this._then,
+  );
+
+  final Query$Category$items _instance;
+
+  final TRes Function(Query$Category$items) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? order = _undefined,
+    Object? stock = _undefined,
+    Object? expirationDate = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$Category$items(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        order: order == _undefined || order == null
+            ? _instance.order
+            : (order as int),
+        stock: stock == _undefined || stock == null
+            ? _instance.stock
+            : (stock as int),
+        expirationDate: expirationDate == _undefined
+            ? _instance.expirationDate
+            : (expirationDate as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$Category$items<TRes>
+    implements CopyWith$Query$Category$items<TRes> {
+  _CopyWithStubImpl$Query$Category$items(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? name,
+    int? order,
+    int? stock,
+    String? expirationDate,
     String? $__typename,
   }) =>
       _res;

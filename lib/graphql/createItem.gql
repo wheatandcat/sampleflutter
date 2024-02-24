@@ -1,0 +1,10 @@
+mutation CreateItem($input: NewItem!) {
+  createItem(input: $input) {
+    id
+    name
+    categoryId
+    order
+    stock
+    expirationDate
+  }
+}

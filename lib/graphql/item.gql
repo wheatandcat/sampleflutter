@@ -1,0 +1,10 @@
+query Item($id: Int!) {
+  item(id: $id) {
+    id
+    name
+    categoryId
+    order
+    stock
+    expirationDate
+  }
+}

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
+import 'package:sampleflutter/components/icon/add.dart';
 import 'package:sampleflutter/graphql/category.gql.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/utils/graphql.dart';
+import 'package:intl/intl.dart';
 
 class Items extends HookWidget {
   final int id;
@@ -31,6 +33,12 @@ class Items extends HookWidget {
       fromJson: Query$Category$category.fromJson,
     );
 
+    final List<Query$Category$items> items = extractGraphQLDataList(
+      data: result.data,
+      fieldName: "items",
+      fromJson: Query$Category$items.fromJson,
+    );
+
     return Scaffold(
       appBar: const CommonAppBar(title: ""),
       body: Column(
@@ -49,8 +57,8 @@ class Items extends HookWidget {
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold)),
-                subtitle:
-                    const Text('4 ITEM', style: TextStyle(color: Colors.white)),
+                subtitle: Text('${items.length.toString()} ITEM',
+                    style: const TextStyle(color: Colors.white)),
               ),
             ),
           ),
@@ -61,9 +69,43 @@ class Items extends HookWidget {
               padding: const EdgeInsets.all(10),
               mainAxisSpacing: 4.0,
               crossAxisSpacing: 4.0,
-              children: List.generate(5, (index) {
-                // ここで各アイテムのウィジェットを生成します。
-                // ダミーデータを使用していますが、実際にはリストやデータソースからデータを取得します。
+              children: List.generate(items.length + 1, (index) {
+                if (index == items.length) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/items/new');
+                    },
+                    child: const Card(
+                      color: Colors.black45,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero, // Cardの角を直角にする
+                      ),
+                      elevation: 0,
+                      child: SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Center(
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: <Widget>[
+                              AddIcon(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
+
+                final item = items[index];
+
+                String expirationDate = '';
+
+                if (item.expirationDate != null) {
+                  expirationDate = DateFormat('yyyy/MM/DD')
+                      .format(DateTime.parse(item.expirationDate ?? ''));
+                }
+
                 return InkWell(
                     onTap: () => Navigator.pushNamed(context, '/items/id'),
                     child: Card(
@@ -78,21 +120,22 @@ class Items extends HookWidget {
                               fit: BoxFit.cover,
                             ), // 画像URLを指定
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.zero,
                             child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  Text('100%',
-                                      style: TextStyle(
+                                  Text('${item.stock}%',
+                                      style: const TextStyle(
                                           fontSize: 24,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold)),
-                                  SizedBox(width: 20),
-                                  Text('使用期限\n2021/12/31',
-                                      style: TextStyle(
-                                          fontSize: 10, color: Colors.white)),
+                                  const SizedBox(width: 20),
+                                  if (item.expirationDate != null)
+                                    Text('使用期限\n$expirationDate',
+                                        style: const TextStyle(
+                                            fontSize: 10, color: Colors.white)),
                                 ]), // 期限日
                           ),
                         ],

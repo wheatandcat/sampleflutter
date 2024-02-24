@@ -124,6 +124,198 @@ class _CopyWithStubImpl$Input$NewCategory<TRes>
       _res;
 }
 
+class Input$NewItem {
+  factory Input$NewItem({
+    required int categoryId,
+    required String name,
+    required int stock,
+    String? expirationDate,
+    required int order,
+  }) =>
+      Input$NewItem._({
+        r'categoryId': categoryId,
+        r'name': name,
+        r'stock': stock,
+        if (expirationDate != null) r'expirationDate': expirationDate,
+        r'order': order,
+      });
+
+  Input$NewItem._(this._$data);
+
+  factory Input$NewItem.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$categoryId = data['categoryId'];
+    result$data['categoryId'] = (l$categoryId as int);
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    final l$stock = data['stock'];
+    result$data['stock'] = (l$stock as int);
+    if (data.containsKey('expirationDate')) {
+      final l$expirationDate = data['expirationDate'];
+      result$data['expirationDate'] = (l$expirationDate as String?);
+    }
+    final l$order = data['order'];
+    result$data['order'] = (l$order as int);
+    return Input$NewItem._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  int get categoryId => (_$data['categoryId'] as int);
+
+  String get name => (_$data['name'] as String);
+
+  int get stock => (_$data['stock'] as int);
+
+  String? get expirationDate => (_$data['expirationDate'] as String?);
+
+  int get order => (_$data['order'] as int);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$categoryId = categoryId;
+    result$data['categoryId'] = l$categoryId;
+    final l$name = name;
+    result$data['name'] = l$name;
+    final l$stock = stock;
+    result$data['stock'] = l$stock;
+    if (_$data.containsKey('expirationDate')) {
+      final l$expirationDate = expirationDate;
+      result$data['expirationDate'] = l$expirationDate;
+    }
+    final l$order = order;
+    result$data['order'] = l$order;
+    return result$data;
+  }
+
+  CopyWith$Input$NewItem<Input$NewItem> get copyWith => CopyWith$Input$NewItem(
+        this,
+        (i) => i,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$NewItem) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$categoryId = categoryId;
+    final lOther$categoryId = other.categoryId;
+    if (l$categoryId != lOther$categoryId) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$stock = stock;
+    final lOther$stock = other.stock;
+    if (l$stock != lOther$stock) {
+      return false;
+    }
+    final l$expirationDate = expirationDate;
+    final lOther$expirationDate = other.expirationDate;
+    if (_$data.containsKey('expirationDate') !=
+        other._$data.containsKey('expirationDate')) {
+      return false;
+    }
+    if (l$expirationDate != lOther$expirationDate) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (l$order != lOther$order) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$categoryId = categoryId;
+    final l$name = name;
+    final l$stock = stock;
+    final l$expirationDate = expirationDate;
+    final l$order = order;
+    return Object.hashAll([
+      l$categoryId,
+      l$name,
+      l$stock,
+      _$data.containsKey('expirationDate') ? l$expirationDate : const {},
+      l$order,
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$NewItem<TRes> {
+  factory CopyWith$Input$NewItem(
+    Input$NewItem instance,
+    TRes Function(Input$NewItem) then,
+  ) = _CopyWithImpl$Input$NewItem;
+
+  factory CopyWith$Input$NewItem.stub(TRes res) =
+      _CopyWithStubImpl$Input$NewItem;
+
+  TRes call({
+    int? categoryId,
+    String? name,
+    int? stock,
+    String? expirationDate,
+    int? order,
+  });
+}
+
+class _CopyWithImpl$Input$NewItem<TRes>
+    implements CopyWith$Input$NewItem<TRes> {
+  _CopyWithImpl$Input$NewItem(
+    this._instance,
+    this._then,
+  );
+
+  final Input$NewItem _instance;
+
+  final TRes Function(Input$NewItem) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? categoryId = _undefined,
+    Object? name = _undefined,
+    Object? stock = _undefined,
+    Object? expirationDate = _undefined,
+    Object? order = _undefined,
+  }) =>
+      _then(Input$NewItem._({
+        ..._instance._$data,
+        if (categoryId != _undefined && categoryId != null)
+          'categoryId': (categoryId as int),
+        if (name != _undefined && name != null) 'name': (name as String),
+        if (stock != _undefined && stock != null) 'stock': (stock as int),
+        if (expirationDate != _undefined)
+          'expirationDate': (expirationDate as String?),
+        if (order != _undefined && order != null) 'order': (order as int),
+      }));
+}
+
+class _CopyWithStubImpl$Input$NewItem<TRes>
+    implements CopyWith$Input$NewItem<TRes> {
+  _CopyWithStubImpl$Input$NewItem(this._res);
+
+  TRes _res;
+
+  call({
+    int? categoryId,
+    String? name,
+    int? stock,
+    String? expirationDate,
+    int? order,
+  }) =>
+      _res;
+}
+
 enum Enum$__TypeKind {
   SCALAR,
   OBJECT,

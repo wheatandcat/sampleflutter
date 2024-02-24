@@ -2,6 +2,8 @@ type Query {
   hello: String
   categories: [Category]
   category(id: Int!): Category
+  items(categoryId: Int!): [Item]
+  item(id: Int!): Item
 }
 
 type Category {
@@ -24,6 +26,8 @@ type Item {
   stock: Int!
   "消費期限"
   expirationDate: Time
+  "順番"
+  order: Int!
 }
 
 input NewCategory {
@@ -33,8 +37,22 @@ input NewCategory {
   order: Int!
 }
 
+input NewItem {
+  "カテゴリーID"
+  categoryId: Int!
+  "アイテム名"
+  name: String!
+  "在庫数"
+  stock: Int!
+  "消費期限"
+  expirationDate: Time
+  "順番"
+  order: Int!
+}
+
 type Mutation {
   createCategory(input: NewCategory!): Category!
+  createItem(input: NewItem!): Item!
 }
 
 scalar Time

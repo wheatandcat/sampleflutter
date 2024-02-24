@@ -4,4 +4,11 @@ query Category($id: Int!) {
     name
     order
   }
+  items(categoryId: $id) {
+    id
+    name
+    order
+    stock
+    expirationDate
+  }
 }
