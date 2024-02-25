@@ -26,7 +26,7 @@ class MyHomePage extends HookWidget {
           return InkWell(
               onTap: () {
                 Navigator.pushNamed(
-                    context, '/category/${categories[index].id}');
+                    context, '/categories/${categories[index].id}');
               },
               child: Card(
                 color: Colors.transparent,

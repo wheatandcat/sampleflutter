@@ -1,11 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:sampleflutter/app/items/page.dart';
 import 'package:sampleflutter/app/categories/page.dart';
 import 'package:sampleflutter/app/categories/new/page.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
+import 'package:sampleflutter/app/items/new/page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,10 +53,19 @@ class MyApp extends StatelessWidget {
                 reverseDuration: const Duration(milliseconds: 150),
                 settings: settings,
               );
+            } else if (settings.name == '/items/new') {
+              return PageTransition(
+                child: NewItem(),
+                type: PageTransitionType.bottomToTop,
+                duration: const Duration(milliseconds: 150),
+                reverseDuration: const Duration(milliseconds: 150),
+                settings: settings,
+              );
             }
+
             final Uri uri = Uri.parse(settings.name ?? "");
             if (uri.pathSegments.length == 2 &&
-                uri.pathSegments.first == 'category') {
+                uri.pathSegments.first == 'categories') {
               final int? id = int.tryParse(uri.pathSegments[1]);
               return MaterialPageRoute(
                 builder: (context) => Items(id: id ?? 0),
@@ -65,6 +75,14 @@ class MyApp extends StatelessWidget {
 
             return null;
           },
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('ja'), // 日本語
+          ],
         ));
   }
 }
