@@ -41,26 +41,36 @@ class MyApp extends StatelessWidget {
                   iconTheme: IconThemeData(color: Colors.white)),
               scaffoldBackgroundColor: Colors.brown[200]),
           home: MyHomePage(),
-          routes: <String, WidgetBuilder>{
-            '/items/id': (BuildContext context) => const ItemDetail(),
-          },
           onGenerateRoute: (settings) {
-            if (settings.name == '/categories/new') {
-              return PageTransition(
-                child: CategoryNew(),
-                type: PageTransitionType.bottomToTop,
-                duration: const Duration(milliseconds: 150),
-                reverseDuration: const Duration(milliseconds: 150),
-                settings: settings,
-              );
-            } else if (settings.name == '/items/new') {
-              return PageTransition(
-                child: NewItem(),
-                type: PageTransitionType.bottomToTop,
-                duration: const Duration(milliseconds: 150),
-                reverseDuration: const Duration(milliseconds: 150),
-                settings: settings,
-              );
+            switch (settings.name) {
+              case '/categories/new':
+                return PageTransition(
+                  child: CategoryNew(),
+                  type: PageTransitionType.bottomToTop,
+                  duration: const Duration(milliseconds: 150),
+                  reverseDuration: const Duration(milliseconds: 150),
+                  settings: settings,
+                );
+              case '/items/new':
+                final args = settings.arguments as NewItem;
+
+                return PageTransition(
+                  child: NewItem(onCallback: args.onCallback),
+                  type: PageTransitionType.bottomToTop,
+                  duration: const Duration(milliseconds: 150),
+                  reverseDuration: const Duration(milliseconds: 150),
+                  settings: settings,
+                );
+              case '/items/id':
+                final args = settings.arguments as ItemDetail;
+
+                return PageTransition(
+                  child: ItemDetail(id: args.id, onCallback: args.onCallback),
+                  type: PageTransitionType.bottomToTop,
+                  duration: const Duration(milliseconds: 150),
+                  reverseDuration: const Duration(milliseconds: 150),
+                  settings: settings,
+                );
             }
 
             final Uri uri = Uri.parse(settings.name ?? "");

@@ -4,6 +4,8 @@ import 'package:sampleflutter/components/icon/add.dart';
 import 'package:sampleflutter/graphql/category.gql.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/utils/graphql.dart';
+import 'package:sampleflutter/app/items/new/page.dart';
+import 'package:sampleflutter/app/items/id/page.dart';
 import 'package:intl/intl.dart';
 
 class Items extends HookWidget {
@@ -73,7 +75,12 @@ class Items extends HookWidget {
                 if (index == items.length) {
                   return InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, '/items/new');
+                      Navigator.pushNamed(context, '/items/new',
+                          arguments: NewItem(
+                        onCallback: () {
+                          queryResult.refetch();
+                        },
+                      ));
                     },
                     child: const Card(
                       color: Colors.black45,
@@ -107,7 +114,12 @@ class Items extends HookWidget {
                 }
 
                 return InkWell(
-                    onTap: () => Navigator.pushNamed(context, '/items/id'),
+                    onTap: () => Navigator.pushNamed(context, '/items/id',
+                        arguments: ItemDetail(
+                            id: id,
+                            onCallback: () {
+                              queryResult.refetch();
+                            })),
                     child: Card(
                       color: Colors.transparent,
                       elevation: 0,

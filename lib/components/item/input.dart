@@ -4,18 +4,44 @@ import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/components/button/button.dart';
-import 'package:sampleflutter/graphql/schema.graphql.dart';
+
+class InputItem {
+  late final String name;
+  late final int stock;
+  String? expirationDate;
+  late final int order;
+
+  InputItem({
+    required this.name,
+    required this.stock,
+    this.expirationDate,
+    required this.order,
+  });
+}
 
 class Input extends HookWidget {
-  final void Function(Input$NewItem) onPressed;
+  final InputItem? defaultValue;
+  final void Function(InputItem) onPressed;
 
-  const Input({super.key, required this.onPressed});
+  const Input({super.key, required this.onPressed, this.defaultValue});
 
   @override
   Widget build(BuildContext context) {
-    final inputStockPercentage = useState(0.0);
-    final inputStock = useState(0);
-    final expirationDate = useState<DateTime?>(null);
+    int defaultStock = 0;
+    double defaultStockPercentage = 0.0;
+    DateTime? defaultExpirationDate;
+
+    if (defaultValue != null) {
+      defaultStock = (defaultValue!.stock / 100).ceil();
+      defaultStockPercentage = defaultValue!.stock % 100;
+      if (defaultValue!.expirationDate != null) {
+        defaultExpirationDate = DateTime.parse(defaultValue!.expirationDate!);
+      }
+    }
+
+    final inputStockPercentage = useState(defaultStockPercentage);
+    final inputStock = useTextEditingController(text: defaultStock.toString());
+    final expirationDate = useState<DateTime?>(defaultExpirationDate);
     final inputName = useState('');
 
     // 日付選択ダイアログを表示する関数
@@ -35,7 +61,8 @@ class Input extends HookWidget {
     }
 
     onInputPressed() async {
-      final stock = inputStock.value * 100 + inputStockPercentage.value;
+      final stockNum = int.tryParse(inputStock.text) ?? 0;
+      final stock = stockNum * 100 + inputStockPercentage.value;
 
       debugPrint(
         expirationDate.value?.toIso8601String(),
@@ -46,8 +73,7 @@ class Input extends HookWidget {
         ed = '${expirationDate.value!.toIso8601String()}+09:00';
       }
 
-      onPressed(Input$NewItem(
-        categoryId: 1,
+      onPressed(InputItem(
         name: inputName.value,
         stock: stock.toInt(),
         expirationDate: ed,
@@ -55,187 +81,183 @@ class Input extends HookWidget {
       ));
     }
 
-    return Scaffold(
-      appBar: const CommonAppBar(title: ""),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Card(
-              color: Colors.black26,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero, // Cardの角を直角にする
-              ),
-              elevation: 0,
-              child: SizedBox(
-                  width: 250,
-                  height: 250,
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    padding: const EdgeInsets.all(2), // ボーダーの幅を調整
-                    child: const Icon(
-                      Icons.camera_alt,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                  ))),
-          SizedBox(
-              height: 80,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text("  0%",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
-                  SizedBox(
-                    width: 250,
-                    child: Slider(
-                      activeColor: Colors.white,
-                      inactiveColor: Colors.black.withOpacity(0.2),
-                      value: inputStockPercentage.value,
-                      min: 0.0,
-                      max: 100.0,
-                      divisions: 100,
-                      onChanged: (double value) {
-                        inputStockPercentage.value = value;
-                      },
-                    ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Card(
+            color: Colors.black26,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero, // Cardの角を直角にする
+            ),
+            elevation: 0,
+            child: SizedBox(
+                width: 250,
+                height: 250,
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  padding: const EdgeInsets.all(2), // ボーダーの幅を調整
+                  child: const Icon(
+                    Icons.camera_alt,
+                    color: Colors.white,
+                    size: 40,
                   ),
-                  const Text("100%",
+                ))),
+        SizedBox(
+            height: 80,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text("  0%",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
+                SizedBox(
+                  width: 250,
+                  child: Slider(
+                    activeColor: Colors.white,
+                    inactiveColor: Colors.black.withOpacity(0.2),
+                    value: inputStockPercentage.value,
+                    min: 0.0,
+                    max: 100.0,
+                    divisions: 100,
+                    onChanged: (double value) {
+                      inputStockPercentage.value = value;
+                    },
+                  ),
+                ),
+                const Text("100%",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
+              ],
+            )),
+        SizedBox(
+            width: 300,
+            height: 60,
+            child: Center(
+                child: Row(
+              children: <Widget>[
+                const SizedBox(
+                  width: 150,
+                  child: Text("ストック数",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold)),
-                ],
-              )),
-          SizedBox(
-              width: 300,
-              height: 60,
-              child: Center(
-                  child: Row(
-                children: <Widget>[
-                  const SizedBox(
+                ),
+                Flexible(
+                    child: SizedBox(
+                  width: 68,
+                  height: 40,
+                  child: Padding(
+                      padding: const EdgeInsets.only(left: 10, top: 20),
+                      child: TextField(
+                          controller: inputStock,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly, // 数値のみを許可
+                          ],
+                          maxLength: 3,
+                          textAlign: TextAlign.center,
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.number,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold),
+                          decoration: const InputDecoration(
+                            labelText: '',
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            counterText: "",
+                          ))),
+                ))
+              ],
+            ))),
+        SizedBox(
+            width: 300,
+            height: 60,
+            child: Center(
+                child: Row(
+              children: <Widget>[
+                const SizedBox(
                     width: 150,
-                    child: Text("ストック数",
+                    child: Text("消費期限",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 24,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                  Flexible(
-                      child: SizedBox(
-                    width: 68,
-                    height: 40,
+                            fontWeight: FontWeight.bold))),
+                Padding(
+                    padding: const EdgeInsets.only(left: 0),
+                    child: SizedBox(
+                        child: InkWell(
+                            onTap: () => {
+                                  setExpirationDate(context),
+                                },
+                            child: (expirationDate.value == null)
+                                ? const Text("設定なし",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                    ))
+                                : Text(
+                                    DateFormat('yyyy/MM/dd').format(
+                                        DateTime.parse(
+                                            expirationDate.value.toString())),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                    ))))),
+              ],
+            ))),
+        SizedBox(
+            width: 300,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(
+                    width: 300,
+                    child: Text("MEMO",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold))),
+                SizedBox(
+                    width: 300,
+                    height: 100,
                     child: Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 20),
+                        padding: EdgeInsets.only(top: 0),
                         child: TextField(
-                            onChanged: (value) =>
-                                {inputStock.value = int.tryParse(value) ?? 0},
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly, // 数値のみを許可
-                            ],
-                            maxLength: 3,
-                            textAlign: TextAlign.center,
+                            onChanged: (value) => inputName.value = value,
+                            maxLines: null, // 複数行入力可能
+                            minLines: 3,
                             cursorColor: Colors.white,
-                            keyboardType: TextInputType.number,
                             style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 26,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold),
                             decoration: const InputDecoration(
-                              labelText: '',
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              counterText: "",
-                            ))),
-                  ))
-                ],
-              ))),
-          SizedBox(
-              width: 300,
-              height: 60,
-              child: Center(
-                  child: Row(
-                children: <Widget>[
-                  const SizedBox(
-                      width: 150,
-                      child: Text("消費期限",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold))),
-                  Padding(
-                      padding: const EdgeInsets.only(left: 0),
-                      child: SizedBox(
-                          child: InkWell(
-                              onTap: () => {
-                                    setExpirationDate(context),
-                                  },
-                              child: (expirationDate.value == null)
-                                  ? const Text("設定なし",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                      ))
-                                  : Text(
-                                      DateFormat('yyyy/MM/dd').format(
-                                          DateTime.parse(
-                                              expirationDate.value.toString())),
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                      ))))),
-                ],
-              ))),
-          SizedBox(
-              width: 300,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  const SizedBox(
-                      width: 300,
-                      child: Text("MEMO",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold))),
-                  SizedBox(
-                      width: 300,
-                      height: 100,
-                      child: Padding(
-                          padding: EdgeInsets.only(top: 0),
-                          child: TextField(
-                              onChanged: (value) => inputName.value = value,
-                              maxLines: null, // 複数行入力可能
-                              minLines: 3,
-                              cursorColor: Colors.white,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                              decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Colors.black26,
-                                border: InputBorder.none,
-                              )))),
-                ],
-              )),
-          Center(
-              child: Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child: Button(
-              title: "登録する",
-              onPressed: onInputPressed,
-            ),
-          ))
-        ],
-      ),
+                              filled: true,
+                              fillColor: Colors.black26,
+                              border: InputBorder.none,
+                            )))),
+              ],
+            )),
+        Center(
+            child: Padding(
+          padding: const EdgeInsets.only(top: 30),
+          child: Button(
+            title: "登録する",
+            onPressed: onInputPressed,
+          ),
+        ))
+      ],
     );
   }
 }
