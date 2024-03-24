@@ -13,6 +13,8 @@ type Category {
   name: String!
   "順番"
   order: Int!
+  "アイテム数"
+  itemCount: Int
 }
 
 type Item {
@@ -37,7 +39,31 @@ input NewCategory {
   order: Int!
 }
 
+input UpdateCategory {
+  "アイテムID"
+  id: Int!
+  "カテゴリー名"
+  name: String!
+  "順番"
+  order: Int!
+}
+
 input NewItem {
+  "カテゴリーID"
+  categoryId: Int!
+  "アイテム名"
+  name: String!
+  "在庫数"
+  stock: Int!
+  "消費期限"
+  expirationDate: Time
+  "順番"
+  order: Int!
+}
+
+input UpdateItem {
+  "アイテムID"
+  id: Int!
   "カテゴリーID"
   categoryId: Int!
   "アイテム名"
@@ -52,7 +78,11 @@ input NewItem {
 
 type Mutation {
   createCategory(input: NewCategory!): Category!
+  updateCategory(input: UpdateCategory!): Category!
+  deleteCategory(id: Int!): Category!
   createItem(input: NewItem!): Item!
+  updateItem(input: UpdateItem!): Item!
+  deleteItem(id: Int!): Item!
 }
 
 scalar Time

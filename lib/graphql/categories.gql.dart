@@ -200,6 +200,13 @@ const documentNodeQueryCategories = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'itemCount'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -358,6 +365,7 @@ class Query$Categories$categories {
     required this.id,
     required this.name,
     required this.order,
+    this.itemCount,
     this.$__typename = 'Category',
   });
 
@@ -365,11 +373,13 @@ class Query$Categories$categories {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$order = json['order'];
+    final l$itemCount = json['itemCount'];
     final l$$__typename = json['__typename'];
     return Query$Categories$categories(
       id: (l$id as String),
       name: (l$name as String),
       order: (l$order as int),
+      itemCount: (l$itemCount as int?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -379,6 +389,8 @@ class Query$Categories$categories {
   final String name;
 
   final int order;
+
+  final int? itemCount;
 
   final String $__typename;
 
@@ -390,6 +402,8 @@ class Query$Categories$categories {
     _resultData['name'] = l$name;
     final l$order = order;
     _resultData['order'] = l$order;
+    final l$itemCount = itemCount;
+    _resultData['itemCount'] = l$itemCount;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -400,11 +414,13 @@ class Query$Categories$categories {
     final l$id = id;
     final l$name = name;
     final l$order = order;
+    final l$itemCount = itemCount;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
       l$order,
+      l$itemCount,
       l$$__typename,
     ]);
   }
@@ -431,6 +447,11 @@ class Query$Categories$categories {
     final l$order = order;
     final lOther$order = other.order;
     if (l$order != lOther$order) {
+      return false;
+    }
+    final l$itemCount = itemCount;
+    final lOther$itemCount = other.itemCount;
+    if (l$itemCount != lOther$itemCount) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -464,6 +485,7 @@ abstract class CopyWith$Query$Categories$categories<TRes> {
     String? id,
     String? name,
     int? order,
+    int? itemCount,
     String? $__typename,
   });
 }
@@ -485,6 +507,7 @@ class _CopyWithImpl$Query$Categories$categories<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? order = _undefined,
+    Object? itemCount = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$Categories$categories(
@@ -495,6 +518,8 @@ class _CopyWithImpl$Query$Categories$categories<TRes>
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
+        itemCount:
+            itemCount == _undefined ? _instance.itemCount : (itemCount as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -511,6 +536,7 @@ class _CopyWithStubImpl$Query$Categories$categories<TRes>
     String? id,
     String? name,
     int? order,
+    int? itemCount,
     String? $__typename,
   }) =>
       _res;

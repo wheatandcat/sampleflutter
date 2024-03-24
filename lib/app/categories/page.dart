@@ -39,8 +39,8 @@ class MyHomePage extends HookWidget {
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold)),
-                  subtitle: const Text("39 ITEMS",
-                      style: TextStyle(color: Colors.white)),
+                  subtitle: Text('${categories[index].itemCount} ITEMS',
+                      style: const TextStyle(color: Colors.white)),
                 ),
               ));
         },
