@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/graphql/item.gql.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/components/item/input.dart';
+import 'package:sampleflutter/utils/graphql.dart';
 
 class ItemDetail extends HookWidget {
   final int id;
@@ -17,10 +18,6 @@ class ItemDetail extends HookWidget {
 
     final result = queryResult.result;
 
-    onPressed(InputItem input) async {
-      queryResult.refetch();
-    }
-
     if (result.isLoading) {
       return const Scaffold(
         appBar: CommonAppBar(title: ""),
@@ -30,11 +27,27 @@ class ItemDetail extends HookWidget {
       );
     }
 
+    final Query$Item$item item = extractGraphQLData(
+      data: result.data,
+      fieldName: "item",
+      fromJson: Query$Item$item.fromJson,
+    );
+
+    onPressed(InputItem input) async {
+      queryResult.refetch();
+    }
+
     return Scaffold(
       appBar: const CommonAppBar(title: ""),
       body: Input(
-        onPressed: onPressed,
-      ),
+          onPressed: onPressed,
+          buttonText: "更新する",
+          defaultValue: InputItem(
+            name: "",
+            stock: item.stock,
+            expirationDate: item.expirationDate,
+            order: item.order,
+          )),
     );
   }
 }

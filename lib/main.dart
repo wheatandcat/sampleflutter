@@ -55,7 +55,8 @@ class MyApp extends StatelessWidget {
                 final args = settings.arguments as NewItem;
 
                 return PageTransition(
-                  child: NewItem(onCallback: args.onCallback),
+                  child: NewItem(
+                      categoryId: args.categoryId, onCallback: args.onCallback),
                   type: PageTransitionType.bottomToTop,
                   duration: const Duration(milliseconds: 150),
                   reverseDuration: const Duration(milliseconds: 150),

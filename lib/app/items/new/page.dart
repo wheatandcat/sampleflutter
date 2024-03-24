@@ -6,9 +6,11 @@ import 'package:sampleflutter/components/item/input.dart';
 import 'package:sampleflutter/graphql/schema.graphql.dart';
 
 class NewItem extends HookWidget {
+  final int categoryId;
   final void Function() onCallback;
 
-  const NewItem({super.key, required this.onCallback});
+  const NewItem(
+      {super.key, required this.categoryId, required this.onCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class NewItem extends HookWidget {
 
     onPressed(InputItem input) async {
       final Input$NewItem p = Input$NewItem(
-        categoryId: 1,
+        categoryId: categoryId,
         name: input.name,
         stock: input.stock,
         expirationDate: input.expirationDate,

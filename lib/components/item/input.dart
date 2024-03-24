@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
-import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/components/button/button.dart';
 
 class InputItem {
@@ -20,10 +19,12 @@ class InputItem {
 }
 
 class Input extends HookWidget {
+  final String? buttonText;
   final InputItem? defaultValue;
   final void Function(InputItem) onPressed;
 
-  const Input({super.key, required this.onPressed, this.defaultValue});
+  const Input(
+      {super.key, required this.onPressed, this.defaultValue, this.buttonText});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class Input extends HookWidget {
     DateTime? defaultExpirationDate;
 
     if (defaultValue != null) {
-      defaultStock = (defaultValue!.stock / 100).ceil();
+      defaultStock = (defaultValue!.stock / 100).floor();
       defaultStockPercentage = defaultValue!.stock % 100;
       if (defaultValue!.expirationDate != null) {
         defaultExpirationDate = DateTime.parse(defaultValue!.expirationDate!);
@@ -253,7 +254,7 @@ class Input extends HookWidget {
             child: Padding(
           padding: const EdgeInsets.only(top: 30),
           child: Button(
-            title: "登録する",
+            title: buttonText ?? "登録する",
             onPressed: onInputPressed,
           ),
         ))
