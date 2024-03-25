@@ -5,6 +5,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:sampleflutter/app/items/page.dart';
 import 'package:sampleflutter/app/categories/page.dart';
 import 'package:sampleflutter/app/categories/new/page.dart';
+import 'package:sampleflutter/app/categories/edit/page.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
 import 'package:sampleflutter/app/items/new/page.dart';
 
@@ -44,8 +45,25 @@ class MyApp extends StatelessWidget {
           onGenerateRoute: (settings) {
             switch (settings.name) {
               case '/categories/new':
+                final args = settings.arguments as CategoryNew;
+
                 return PageTransition(
-                  child: CategoryNew(),
+                  child: CategoryNew(
+                    onCallback: args.onCallback,
+                  ),
+                  type: PageTransitionType.bottomToTop,
+                  duration: const Duration(milliseconds: 150),
+                  reverseDuration: const Duration(milliseconds: 150),
+                  settings: settings,
+                );
+              case '/categories/edit':
+                final args = settings.arguments as CategoryEdit;
+
+                return PageTransition(
+                  child: CategoryEdit(
+                      id: args.id,
+                      name: args.name,
+                      onCallback: args.onCallback),
                   type: PageTransitionType.bottomToTop,
                   duration: const Duration(milliseconds: 150),
                   reverseDuration: const Duration(milliseconds: 150),
