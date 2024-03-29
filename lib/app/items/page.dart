@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/components/icon/add.dart';
+import 'package:sampleflutter/components/category/card.dart';
 import 'package:sampleflutter/graphql/category.gql.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/utils/graphql.dart';
@@ -46,24 +47,8 @@ class Items extends HookWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Card(
-              color: Colors.transparent,
-              elevation: 0,
-              shape: const Border(
-                  bottom: BorderSide(color: Colors.white, width: 3)),
-              child: ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text(category.name,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                subtitle: Text('${items.length.toString()} ITEM',
-                    style: const TextStyle(color: Colors.white)),
-              ),
-            ),
-          ),
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: CategoryCard(name: category.name, count: items.length)),
           Expanded(
             child: GridView.count(
               crossAxisCount: 2,

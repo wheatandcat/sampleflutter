@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
     return GraphQLProvider(
         client: client,
         child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Stock Keeper',
           theme: ThemeData(
               useMaterial3: true,
               appBarTheme: const AppBarTheme(

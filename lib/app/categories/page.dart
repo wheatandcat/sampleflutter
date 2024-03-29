@@ -72,7 +72,7 @@ class MyHomePage extends HookWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: const Text('削除確認'),
+                            title: const Text('確認'),
                             content: Text('${category.name}を削除しますか？'),
                             actions: <Widget>[
                               TextButton(
@@ -82,7 +82,8 @@ class MyHomePage extends HookWidget {
                                 },
                               ),
                               TextButton(
-                                child: const Text('削除'),
+                                child: const Text('削除',
+                                    style: TextStyle(color: Colors.red)),
                                 onPressed: () {
                                   mutationHookResult.runMutation(
                                       Variables$Mutation$DeleteCategory(
