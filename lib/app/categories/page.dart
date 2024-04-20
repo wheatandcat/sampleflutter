@@ -70,7 +70,7 @@ class MyHomePage extends HookWidget {
                     onTap: () {
                       showDialog(
                         context: context,
-                        builder: (BuildContext context) {
+                        builder: (BuildContext contextDialog) {
                           return AlertDialog(
                             title: const Text('確認'),
                             content: Text('${category.name}を削除しますか？'),
@@ -78,6 +78,7 @@ class MyHomePage extends HookWidget {
                               TextButton(
                                 child: const Text('キャンセル'),
                                 onPressed: () {
+                                  Navigator.of(contextDialog).pop();
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -89,6 +90,7 @@ class MyHomePage extends HookWidget {
                                       Variables$Mutation$DeleteCategory(
                                     id: int.tryParse(category.id) ?? 0,
                                   ));
+                                  Navigator.of(contextDialog).pop();
                                   Navigator.of(context).pop();
                                 },
                               ),

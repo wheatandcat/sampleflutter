@@ -46,7 +46,7 @@ class ItemCard extends StatelessWidget {
                     onTap: () {
                       showDialog(
                         context: context,
-                        builder: (BuildContext context) {
+                        builder: (BuildContext contextDialog) {
                           return AlertDialog(
                             title: const Text('確認'),
                             content: Text('$nameを削除しますか？'),
@@ -54,6 +54,7 @@ class ItemCard extends StatelessWidget {
                               TextButton(
                                 child: const Text('キャンセル'),
                                 onPressed: () {
+                                  Navigator.of(contextDialog).pop();
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -61,8 +62,9 @@ class ItemCard extends StatelessWidget {
                                 child: const Text('削除',
                                     style: TextStyle(color: Colors.red)),
                                 onPressed: () {
-                                  onDelete();
+                                  Navigator.of(contextDialog).pop();
                                   Navigator.of(context).pop();
+                                  onDelete();
                                 },
                               ),
                             ],
