@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/components/icon/add.dart';
 import 'package:sampleflutter/components/category/card.dart';
+import 'package:sampleflutter/components/item/card.dart';
 import 'package:sampleflutter/graphql/category.gql.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:sampleflutter/graphql/deleteItem.gql.dart';
 import 'package:sampleflutter/utils/graphql.dart';
 import 'package:sampleflutter/app/items/new/page.dart';
-import 'package:sampleflutter/app/items/id/page.dart';
-import 'package:intl/intl.dart';
 
 class Items extends HookWidget {
   final int id;
@@ -20,6 +20,13 @@ class Items extends HookWidget {
         Options$Query$Category(variables: Variables$Query$Category(id: id)));
 
     final result = queryResult.result;
+
+    final mutationHookResult =
+        useMutation$DeleteItem(WidgetOptions$Mutation$DeleteItem(
+      onCompleted: (Map<String, dynamic>? data, Mutation$DeleteItem? result) {
+        queryResult.refetch();
+      },
+    ));
 
     if (result.isLoading) {
       return const Scaffold(
@@ -51,96 +58,63 @@ class Items extends HookWidget {
               child: CategoryCard(name: category.name, count: items.length)),
           Expanded(
             child: GridView.count(
-              crossAxisCount: 2,
-              childAspectRatio: 1.0,
-              padding: const EdgeInsets.all(10),
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
-              children: List.generate(items.length + 1, (index) {
-                if (index == items.length) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/items/new',
-                          arguments: NewItem(
-                            categoryId: id,
-                            onCallback: () {
-                              queryResult.refetch();
-                            },
-                          ));
-                    },
-                    child: const Card(
-                      color: Colors.black45,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero, // Cardの角を直角にする
-                      ),
-                      elevation: 0,
-                      child: SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: Center(
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: <Widget>[
-                              AddIcon(),
-                            ],
+                crossAxisCount: 2,
+                childAspectRatio: 1.0,
+                padding: const EdgeInsets.all(10),
+                mainAxisSpacing: 4.0,
+                crossAxisSpacing: 4.0,
+                children: List.generate(items.length + 1, (index) {
+                  if (index == items.length) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/items/new',
+                            arguments: NewItem(
+                              categoryId: id,
+                              onCallback: () {
+                                queryResult.refetch();
+                              },
+                            ));
+                      },
+                      child: const Card(
+                        color: Colors.black45,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero, // Cardの角を直角にする
+                        ),
+                        elevation: 0,
+                        child: SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Center(
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: <Widget>[
+                                AddIcon(),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                    );
+                  }
+
+                  final item = items[index];
+
+                  return ItemCard(
+                    id: item.id,
+                    name: item.name,
+                    stock: item.stock,
+                    expirationDate: item.expirationDate,
+                    onRefetch: () {
+                      queryResult.refetch();
+                    },
+                    onDelete: () {
+                      mutationHookResult
+                          .runMutation(Variables$Mutation$DeleteItem(
+                        id: int.tryParse(item.id) ?? 0,
+                      ));
+                    },
                   );
-                }
-
-                final item = items[index];
-
-                String expirationDate = '';
-
-                if (item.expirationDate != null) {
-                  expirationDate = DateFormat('yyyy/MM/DD')
-                      .format(DateTime.parse(item.expirationDate ?? ''));
-                }
-
-                return InkWell(
-                    onTap: () => Navigator.pushNamed(context, '/items/id',
-                        arguments: ItemDetail(
-                            id: int.parse(item.id),
-                            onCallback: () {
-                              queryResult.refetch();
-                            })),
-                    child: Card(
-                      color: Colors.transparent,
-                      elevation: 0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          Expanded(
-                            child: Image.network(
-                              'https://via.placeholder.com/150',
-                              fit: BoxFit.cover,
-                            ), // 画像URLを指定
-                          ),
-                          Padding(
-                            padding: EdgeInsets.zero,
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text('${item.stock}%',
-                                      style: const TextStyle(
-                                          fontSize: 24,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold)),
-                                  const SizedBox(width: 20),
-                                  if (item.expirationDate != null)
-                                    Text('使用期限\n$expirationDate',
-                                        style: const TextStyle(
-                                            fontSize: 10, color: Colors.white)),
-                                ]), // 期限日
-                          ),
-                        ],
-                      ),
-                    ));
-              }),
-            ),
+                })),
           ),
         ],
       ),
