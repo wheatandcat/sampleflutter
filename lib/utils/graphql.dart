@@ -19,7 +19,13 @@ T extractGraphQLData<T>({
   required String fieldName,
   required T Function(Map<String, dynamic>) fromJson,
 }) {
+  if (data == null || data[fieldName] == null) {
+    // データまたはフィールドがnullの場合はnullを返す
+    return fromJson(<String, dynamic>{});
+  }
+
   // データを指定された型のリストに変換
-  final item = data?[fieldName] as dynamic;
+  final item = data[fieldName] as dynamic;
+
   return fromJson(item as Map<String, dynamic>);
 }

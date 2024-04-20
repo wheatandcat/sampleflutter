@@ -2,36 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/components/button/button.dart';
-import 'package:sampleflutter/graphql/createCategory.gql.dart';
+import 'package:sampleflutter/graphql/updateCategory.gql.dart';
 import 'package:sampleflutter/graphql/schema.graphql.dart';
 
-class CategoryNew extends HookWidget {
+class CategoryEdit extends HookWidget {
+  final int id;
+  final String name;
   final void Function() onCallback;
 
-  const CategoryNew({super.key, required this.onCallback});
+  const CategoryEdit(
+      {super.key,
+      required this.id,
+      required this.name,
+      required this.onCallback});
 
   @override
   Widget build(BuildContext context) {
-    final inputText = useState('');
+    final inputName = useTextEditingController(text: name);
 
     final mutationHookResult =
-        useMutation$CreateCategory(WidgetOptions$Mutation$CreateCategory(
+        useMutation$UpdateCategory(WidgetOptions$Mutation$UpdateCategory(
       onCompleted:
-          (Map<String, dynamic>? data, Mutation$CreateCategory? result) async {
+          (Map<String, dynamic>? data, Mutation$UpdateCategory? result) {
         onCallback();
-        Navigator.pushNamed(
-            context, '/categories/${result?.createCategory.id}');
+        Navigator.pop(context);
       },
     ));
 
     onPressed() async {
-      if (inputText.value.isEmpty) {
+      if (inputName.text.isEmpty) {
         return;
       }
 
-      mutationHookResult.runMutation(Variables$Mutation$CreateCategory(
-          input: Input$NewCategory(
-        name: inputText.value,
+      mutationHookResult.runMutation(Variables$Mutation$UpdateCategory(
+          input: Input$UpdateCategory(
+        id: id,
+        name: inputName.text,
         order: 0,
       )));
     }
@@ -44,7 +50,7 @@ class CategoryNew extends HookWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text("カテゴリを登録する",
+              const Text("カテゴリ名を変更する",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -52,7 +58,7 @@ class CategoryNew extends HookWidget {
                   )),
               Center(
                   child: TextField(
-                      onChanged: (value) => inputText.value = value,
+                      controller: inputName,
                       cursorColor: Colors.white,
                       style: const TextStyle(
                           color: Colors.white,
@@ -70,7 +76,7 @@ class CategoryNew extends HookWidget {
               Expanded(
                   child: Center(
                       heightFactor: 3,
-                      child: Button(title: "登録", onPressed: onPressed))),
+                      child: Button(title: "更新する", onPressed: onPressed))),
             ],
           )),
     );

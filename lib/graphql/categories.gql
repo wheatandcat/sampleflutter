@@ -3,5 +3,6 @@ query Categories {
     id
     name
     order
+    itemCount
   }
 }

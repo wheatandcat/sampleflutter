@@ -5,6 +5,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:sampleflutter/app/items/page.dart';
 import 'package:sampleflutter/app/categories/page.dart';
 import 'package:sampleflutter/app/categories/new/page.dart';
+import 'package:sampleflutter/app/categories/edit/page.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
 import 'package:sampleflutter/app/items/new/page.dart';
 
@@ -34,33 +35,61 @@ class MyApp extends StatelessWidget {
     return GraphQLProvider(
         client: client,
         child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Stock Keeper',
           theme: ThemeData(
               useMaterial3: true,
               appBarTheme: const AppBarTheme(
                   iconTheme: IconThemeData(color: Colors.white)),
               scaffoldBackgroundColor: Colors.brown[200]),
           home: MyHomePage(),
-          routes: <String, WidgetBuilder>{
-            '/items/id': (BuildContext context) => const ItemDetail(),
-          },
           onGenerateRoute: (settings) {
-            if (settings.name == '/categories/new') {
-              return PageTransition(
-                child: CategoryNew(),
-                type: PageTransitionType.bottomToTop,
-                duration: const Duration(milliseconds: 150),
-                reverseDuration: const Duration(milliseconds: 150),
-                settings: settings,
-              );
-            } else if (settings.name == '/items/new') {
-              return PageTransition(
-                child: NewItem(),
-                type: PageTransitionType.bottomToTop,
-                duration: const Duration(milliseconds: 150),
-                reverseDuration: const Duration(milliseconds: 150),
-                settings: settings,
-              );
+            switch (settings.name) {
+              case '/categories/new':
+                final args = settings.arguments as CategoryNew;
+
+                return PageTransition(
+                  child: CategoryNew(
+                    onCallback: args.onCallback,
+                  ),
+                  type: PageTransitionType.bottomToTop,
+                  duration: const Duration(milliseconds: 150),
+                  reverseDuration: const Duration(milliseconds: 150),
+                  settings: settings,
+                );
+              case '/categories/edit':
+                final args = settings.arguments as CategoryEdit;
+
+                return PageTransition(
+                  child: CategoryEdit(
+                      id: args.id,
+                      name: args.name,
+                      onCallback: args.onCallback),
+                  type: PageTransitionType.bottomToTop,
+                  duration: const Duration(milliseconds: 150),
+                  reverseDuration: const Duration(milliseconds: 150),
+                  settings: settings,
+                );
+              case '/items/new':
+                final args = settings.arguments as NewItem;
+
+                return PageTransition(
+                  child: NewItem(
+                      categoryId: args.categoryId, onCallback: args.onCallback),
+                  type: PageTransitionType.bottomToTop,
+                  duration: const Duration(milliseconds: 150),
+                  reverseDuration: const Duration(milliseconds: 150),
+                  settings: settings,
+                );
+              case '/items/id':
+                final args = settings.arguments as ItemDetail;
+
+                return PageTransition(
+                  child: ItemDetail(id: args.id, onCallback: args.onCallback),
+                  type: PageTransitionType.bottomToTop,
+                  duration: const Duration(milliseconds: 150),
+                  reverseDuration: const Duration(milliseconds: 150),
+                  settings: settings,
+                );
             }
 
             final Uri uri = Uri.parse(settings.name ?? "");
