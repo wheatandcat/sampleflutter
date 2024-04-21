@@ -8,6 +8,7 @@ import 'package:sampleflutter/app/categories/new/page.dart';
 import 'package:sampleflutter/app/categories/edit/page.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
 import 'package:sampleflutter/app/items/new/page.dart';
+import 'package:sampleflutter/app/login/page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +42,10 @@ class MyApp extends StatelessWidget {
               appBarTheme: const AppBarTheme(
                   iconTheme: IconThemeData(color: Colors.white)),
               scaffoldBackgroundColor: Colors.brown[200]),
-          home: MyHomePage(),
+          home: const MyHomePage(),
+          routes: {
+            '/login': (context) => const Login(),
+          },
           onGenerateRoute: (settings) {
             switch (settings.name) {
               case '/categories/new':

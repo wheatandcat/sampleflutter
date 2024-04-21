@@ -36,10 +36,10 @@ void _showDialog(BuildContext context) {
                 width: double.infinity,
                 padding: const EdgeInsets.only(
                     top: 20, bottom: 40, right: 20, left: 20),
-                child: const Column(
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    ListTile(
+                    const ListTile(
                       title: Align(
                         alignment: Alignment.center,
                         child: Text("設定",
@@ -48,22 +48,25 @@ void _showDialog(BuildContext context) {
                       ),
                     ),
                     InkWell(
-                        child: Card(
-                      margin: EdgeInsets.zero,
-                      color: Colors.transparent,
-                      elevation: 0,
-                      shape: Border(
-                          bottom:
-                              BorderSide(color: Colors.black26, width: 0.0)),
-                      child: ListTile(
-                        title: Text("ログイン",
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    )),
-                    Card(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        child: const Card(
+                          margin: EdgeInsets.zero,
+                          color: Colors.transparent,
+                          elevation: 0,
+                          shape: Border(
+                              bottom: BorderSide(
+                                  color: Colors.black26, width: 0.0)),
+                          child: ListTile(
+                            title: Text("ログイン",
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        )),
+                    const Card(
                       margin: EdgeInsets.zero,
                       color: Colors.transparent,
                       elevation: 0,
@@ -78,7 +81,7 @@ void _showDialog(BuildContext context) {
                                 fontWeight: FontWeight.bold)),
                       ),
                     ),
-                    Card(
+                    const Card(
                       margin: EdgeInsets.zero,
                       color: Colors.transparent,
                       elevation: 0,
