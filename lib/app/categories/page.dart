@@ -10,6 +10,8 @@ import 'package:sampleflutter/app/categories/edit/page.dart';
 import 'package:sampleflutter/app/categories/new/page.dart';
 
 class MyHomePage extends HookWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final queryResult = useQuery$Categories(Options$Query$Categories());
@@ -31,7 +33,7 @@ class MyHomePage extends HookWidget {
       },
     ));
 
-    void _showCustomMenu(
+    void showCustomMenu(
         BuildContext context, Query$Categories$categories category) {
       showModalBottomSheet(
         context: context,
@@ -113,7 +115,7 @@ class MyHomePage extends HookWidget {
         itemBuilder: (context, index) {
           return InkWell(
               key: Key(categories[index].id.toString()),
-              onLongPress: () => _showCustomMenu(context, categories[index]),
+              onLongPress: () => showCustomMenu(context, categories[index]),
               onTap: () {
                 Navigator.pushNamed(
                     context, '/categories/${categories[index].id}');
