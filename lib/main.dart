@@ -9,9 +9,14 @@ import 'package:sampleflutter/app/categories/edit/page.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
 import 'package:sampleflutter/app/items/new/page.dart';
 import 'package:sampleflutter/app/login/page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await initHiveForFlutter();
 
   runApp(const MyApp());
