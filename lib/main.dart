@@ -8,9 +8,16 @@ import 'package:sampleflutter/app/categories/new/page.dart';
 import 'package:sampleflutter/app/categories/edit/page.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
 import 'package:sampleflutter/app/items/new/page.dart';
+import 'package:sampleflutter/app/login/page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:sampleflutter/utils/auth.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await initHiveForFlutter();
 
   runApp(const MyApp());
@@ -24,10 +31,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final HttpLink httpLink =
         HttpLink('https://stock-keeper-voytob3xvq-an.a.run.app/graphql');
+    final AuthService authService = AuthService();
+    final authLink = AuthLink(getToken: () async => authService.getToken());
+    final link = authLink.concat(httpLink);
 
     final ValueNotifier<GraphQLClient> client = ValueNotifier<GraphQLClient>(
       GraphQLClient(
-        link: httpLink,
+        link: link,
         cache: GraphQLCache(store: InMemoryStore()),
       ),
     );
@@ -41,7 +51,10 @@ class MyApp extends StatelessWidget {
               appBarTheme: const AppBarTheme(
                   iconTheme: IconThemeData(color: Colors.white)),
               scaffoldBackgroundColor: Colors.brown[200]),
-          home: MyHomePage(),
+          home: const MyHomePage(),
+          routes: {
+            '/login': (context) => const Login(),
+          },
           onGenerateRoute: (settings) {
             switch (settings.name) {
               case '/categories/new':
