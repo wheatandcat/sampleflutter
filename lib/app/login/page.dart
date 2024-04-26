@@ -4,6 +4,7 @@ import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/components/button/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sampleflutter/utils/auth.dart';
 
 class Login extends HookWidget {
   const Login({Key? key}) : super(key: key);
@@ -37,6 +38,9 @@ class Login extends HookWidget {
           //既存ユーザーの場合の処理
           debugPrint("既存ユーザー");
         }
+
+        final AuthService authService = AuthService();
+        await authService.refreshAndStoreToken();
       } on FirebaseException catch (e) {
         debugPrint(e.message);
       } catch (e) {
@@ -45,6 +49,9 @@ class Login extends HookWidget {
     }
 
     onLogout() async {
+      final AuthService authService = AuthService();
+      await authService.deleteToken();
+
       await FirebaseAuth.instance.signOut();
     }
 
