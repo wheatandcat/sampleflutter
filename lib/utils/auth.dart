@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthService {
@@ -18,9 +19,16 @@ class AuthService {
 
   // トークンの有効性をチェックし、必要に応じて更新
   Future<String?> getToken() async {
-    String? token = await secureStorage.read(key: 'token');
-    String? storedDate = await secureStorage.read(key: 'tokenDate');
-    if (token != null && storedDate != null) {
+    try {
+      String? token = await secureStorage.read(key: 'token');
+      if (token == null) {
+        return null;
+      }
+      String? storedDate = await secureStorage.read(key: 'tokenDate');
+      if (storedDate == null) {
+        return null;
+      }
+
       DateTime tokenDate = DateTime.parse(storedDate);
       DateTime now = DateTime.now();
 
@@ -29,9 +37,12 @@ class AuthService {
         await refreshAndStoreToken();
         token = await secureStorage.read(key: 'token'); // 更新されたトークンを取得
       }
-    }
+      debugPrint('token: $token');
 
-    return token;
+      return token;
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<void> deleteToken() async {

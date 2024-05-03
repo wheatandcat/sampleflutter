@@ -4,6 +4,14 @@ type Query {
   category(id: Int!): Category
   items(categoryId: Int!): [Item]
   item(id: Int!): Item
+  me: User
+}
+
+type User {
+  "ユーザーID"
+  id: ID!
+  "UID"
+  uid: String!
 }
 
 type Category {
@@ -77,6 +85,7 @@ input UpdateItem {
 }
 
 type Mutation {
+  createUser: User!
   createCategory(input: NewCategory!): Category!
   updateCategory(input: UpdateCategory!): Category!
   deleteCategory(id: Int!): Category!

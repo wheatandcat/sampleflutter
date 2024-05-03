@@ -1,0 +1,6 @@
+mutation CreateUser {
+  createUser {
+    id
+    uid
+  }
+}
