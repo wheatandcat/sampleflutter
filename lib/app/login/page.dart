@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/components/button/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sampleflutter/utils/auth.dart';
 import 'package:sampleflutter/graphql/createUser.gql.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sampleflutter/providers/user.dart';
 
-class Login extends HookWidget {
+class Login extends HookConsumerWidget {
   const Login({Key? key}) : super(key: key);
 
   static final googleLogin = GoogleSignIn(scopes: [
@@ -16,7 +17,9 @@ class Login extends HookWidget {
   ]);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userDataAsyncValue = ref.watch(userDataProvider);
+
     onLogout() async {
       final AuthService authService = AuthService();
       await authService.deleteToken();
@@ -81,8 +84,13 @@ class Login extends HookWidget {
                     return Button(
                         title: "Google ログイン", width: 300, onPressed: onPressed);
                   } else {
-                    return Button(
-                        title: "ログアウト", width: 300, onPressed: onLogout);
+                    return Column(children: [
+                      ListTile(
+                        title: const Text("ログイン中のユーザー"),
+                        subtitle: Text("ID:${userDataAsyncValue.value!.id}"),
+                      ),
+                      Button(title: "ログアウト", width: 300, onPressed: onLogout)
+                    ]);
                   }
                 })));
   }

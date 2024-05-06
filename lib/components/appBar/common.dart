@@ -49,6 +49,7 @@ void _showDialog(BuildContext context) {
                     ),
                     InkWell(
                         onTap: () {
+                          Navigator.pop(context);
                           Navigator.pushNamed(context, '/login');
                         },
                         child: const Card(

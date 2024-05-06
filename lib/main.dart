@@ -9,8 +9,9 @@ import 'package:sampleflutter/app/categories/edit/page.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
 import 'package:sampleflutter/app/items/new/page.dart';
 import 'package:sampleflutter/app/login/page.dart';
+import 'package:sampleflutter/utils/graphql.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:sampleflutter/utils/auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -20,7 +21,7 @@ void main() async {
   );
   await initHiveForFlutter();
 
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,18 +30,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final HttpLink httpLink =
-        HttpLink('https://stock-keeper-voytob3xvq-an.a.run.app/graphql');
-    final AuthService authService = AuthService();
-    final authLink = AuthLink(getToken: () async => authService.getToken());
-    final link = authLink.concat(httpLink);
-
-    final ValueNotifier<GraphQLClient> client = ValueNotifier<GraphQLClient>(
-      GraphQLClient(
-        link: link,
-        cache: GraphQLCache(store: InMemoryStore()),
-      ),
-    );
+    final ValueNotifier<GraphQLClient> client =
+        ValueNotifier<GraphQLClient>(graphqlClient());
 
     return GraphQLProvider(
         client: client,
