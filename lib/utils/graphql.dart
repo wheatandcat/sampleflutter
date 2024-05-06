@@ -1,3 +1,6 @@
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:sampleflutter/utils/auth.dart';
+
 List<T> extractGraphQLDataList<T>({
   required Map<String, dynamic>? data,
   required String fieldName,
@@ -28,4 +31,17 @@ T extractGraphQLData<T>({
   final item = data[fieldName] as dynamic;
 
   return fromJson(item as Map<String, dynamic>);
+}
+
+graphqlClient() {
+  final HttpLink httpLink =
+      HttpLink('https://stock-keeper-voytob3xvq-an.a.run.app/graphql');
+  final AuthService authService = AuthService();
+  final authLink = AuthLink(getToken: () async => authService.getToken());
+  final link = authLink.concat(httpLink);
+
+  return GraphQLClient(
+    link: link,
+    cache: GraphQLCache(),
+  );
 }

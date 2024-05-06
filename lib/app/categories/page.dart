@@ -4,17 +4,21 @@ import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/components/icon/add.dart';
 import 'package:sampleflutter/graphql/categories.gql.dart';
 import 'package:sampleflutter/graphql/deleteCategory.gql.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sampleflutter/utils/graphql.dart';
 import 'package:sampleflutter/app/categories/edit/page.dart';
 import 'package:sampleflutter/app/categories/new/page.dart';
+import 'package:sampleflutter/providers/user.dart';
 
-class MyHomePage extends HookWidget {
+class MyHomePage extends HookConsumerWidget {
   const MyHomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final queryResult = useQuery$Categories(Options$Query$Categories());
+    final userDataAsyncValue = ref.watch(userDataProvider);
+
+    debugPrint("userDataAsyncValue:$userDataAsyncValue");
 
     final result = queryResult.result;
 
