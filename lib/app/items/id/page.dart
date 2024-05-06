@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sampleflutter/components/background/background.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/graphql/item.gql.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
@@ -37,7 +38,8 @@ class ItemDetail extends HookWidget {
       queryResult.refetch();
     }
 
-    return Scaffold(
+    return BackgroundImage(
+        child: Scaffold(
       appBar: const CommonAppBar(title: ""),
       body: Input(
           onPressed: onPressed,
@@ -48,6 +50,6 @@ class ItemDetail extends HookWidget {
             expirationDate: item.expirationDate,
             order: item.order,
           )),
-    );
+    ));
   }
 }

@@ -12,6 +12,7 @@ import 'package:sampleflutter/app/login/page.dart';
 import 'package:sampleflutter/utils/graphql.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
@@ -38,10 +39,11 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Stock Keeper',
           theme: ThemeData(
-              useMaterial3: true,
-              appBarTheme: const AppBarTheme(
-                  iconTheme: IconThemeData(color: Colors.white)),
-              scaffoldBackgroundColor: Colors.brown[200]),
+            useMaterial3: true,
+            appBarTheme: const AppBarTheme(
+                iconTheme: IconThemeData(color: Colors.white)),
+            scaffoldBackgroundColor: Colors.transparent,
+          ),
           home: const MyHomePage(),
           routes: {
             '/login': (context) => const Login(),

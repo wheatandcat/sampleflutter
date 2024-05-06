@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
+import 'package:sampleflutter/components/background/background.dart';
 import 'package:sampleflutter/components/icon/add.dart';
 import 'package:sampleflutter/graphql/categories.gql.dart';
 import 'package:sampleflutter/graphql/deleteCategory.gql.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sampleflutter/utils/graphql.dart';
 import 'package:sampleflutter/app/categories/edit/page.dart';
 import 'package:sampleflutter/app/categories/new/page.dart';
@@ -112,50 +113,52 @@ class MyHomePage extends HookConsumerWidget {
       );
     }
 
-    return Scaffold(
-      appBar: const CommonAppBar(title: "カテゴリ画面"),
-      body: ListView.builder(
-        itemCount: categories.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-              key: Key(categories[index].id.toString()),
-              onLongPress: () => showCustomMenu(context, categories[index]),
-              onTap: () {
-                Navigator.pushNamed(
-                    context, '/categories/${categories[index].id}');
+    return BackgroundImage(
+      child: Scaffold(
+        appBar: const CommonAppBar(title: "カテゴリ画面"),
+        body: ListView.builder(
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+                key: Key(categories[index].id.toString()),
+                onLongPress: () => showCustomMenu(context, categories[index]),
+                onTap: () {
+                  Navigator.pushNamed(
+                      context, '/categories/${categories[index].id}');
+                },
+                child: Card(
+                  color: Colors.transparent,
+                  elevation: 0,
+                  shape: const Border(
+                      bottom: BorderSide(color: Colors.white, width: 3)),
+                  child: ListTile(
+                    title: Text(categories[index].name,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold)),
+                    subtitle: Text('${categories[index].itemCount} ITEMS',
+                        style: const TextStyle(color: Colors.white)),
+                  ),
+                ));
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          onPressed: () {
+            Navigator.pushNamed(context, '/categories/new',
+                arguments: CategoryNew(
+              onCallback: () {
+                queryResult.refetch();
               },
-              child: Card(
-                color: Colors.transparent,
-                elevation: 0,
-                shape: const Border(
-                    bottom: BorderSide(color: Colors.white, width: 3)),
-                child: ListTile(
-                  title: Text(categories[index].name,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
-                  subtitle: Text('${categories[index].itemCount} ITEMS',
-                      style: const TextStyle(color: Colors.white)),
-                ),
-              ));
-        },
+            ));
+          },
+          tooltip: 'Increment',
+          child: const AddIcon(),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        onPressed: () {
-          Navigator.pushNamed(context, '/categories/new',
-              arguments: CategoryNew(
-            onCallback: () {
-              queryResult.refetch();
-            },
-          ));
-        },
-        tooltip: 'Increment',
-        child: const AddIcon(),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
