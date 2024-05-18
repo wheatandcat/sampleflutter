@@ -57,7 +57,7 @@ class Items extends HookWidget {
         children: [
           Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
-              child: CategoryCard(name: category.name, count: items.length)),
+              child: CategoryCard(name: category.name)),
           Expanded(
             child: GridView.count(
                 crossAxisCount: 2,

@@ -57,9 +57,7 @@ class MyApp extends StatelessWidget {
                   child: CategoryNew(
                     onCallback: args.onCallback,
                   ),
-                  type: PageTransitionType.bottomToTop,
-                  duration: const Duration(milliseconds: 150),
-                  reverseDuration: const Duration(milliseconds: 150),
+                  type: PageTransitionType.rightToLeft,
                   settings: settings,
                 );
               case '/categories/edit':
@@ -70,9 +68,7 @@ class MyApp extends StatelessWidget {
                       id: args.id,
                       name: args.name,
                       onCallback: args.onCallback),
-                  type: PageTransitionType.bottomToTop,
-                  duration: const Duration(milliseconds: 150),
-                  reverseDuration: const Duration(milliseconds: 150),
+                  type: PageTransitionType.leftToRight,
                   settings: settings,
                 );
               case '/items/new':
@@ -81,9 +77,7 @@ class MyApp extends StatelessWidget {
                 return PageTransition(
                   child: NewItem(
                       categoryId: args.categoryId, onCallback: args.onCallback),
-                  type: PageTransitionType.bottomToTop,
-                  duration: const Duration(milliseconds: 150),
-                  reverseDuration: const Duration(milliseconds: 150),
+                  type: PageTransitionType.rightToLeft,
                   settings: settings,
                 );
               case '/items/id':
@@ -91,9 +85,7 @@ class MyApp extends StatelessWidget {
 
                 return PageTransition(
                   child: ItemDetail(id: args.id, onCallback: args.onCallback),
-                  type: PageTransitionType.bottomToTop,
-                  duration: const Duration(milliseconds: 150),
-                  reverseDuration: const Duration(milliseconds: 150),
+                  type: PageTransitionType.rightToLeft,
                   settings: settings,
                 );
             }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
 
 class ItemCard extends StatelessWidget {
@@ -21,8 +20,6 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String expiration = '';
-
     void _showCustomMenu(BuildContext context) {
       showModalBottomSheet(
         context: context,
@@ -79,50 +76,33 @@ class ItemCard extends StatelessWidget {
       );
     }
 
-    if (expirationDate != null) {
-      expiration =
-          DateFormat('yyyy/MM/DD').format(DateTime.parse(expirationDate ?? ''));
-    }
-
     return InkWell(
-        onLongPress: () => _showCustomMenu(context),
-        onTap: () => Navigator.pushNamed(context, '/items/id',
-            arguments: ItemDetail(
-                id: int.parse(id),
-                onCallback: () {
-                  onRefetch();
-                })),
-        child: Card(
-          color: Colors.transparent,
-          elevation: 0,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Expanded(
-                child: Image.network(
-                  'https://via.placeholder.com/150',
-                  fit: BoxFit.cover,
-                ), // 画像URLを指定
-              ),
-              Padding(
-                padding: EdgeInsets.zero,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text('$stock%',
-                          style: const TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                      const SizedBox(width: 20),
-                      if (expirationDate != null)
-                        Text('使用期限\n$expiration',
-                            style: const TextStyle(
-                                fontSize: 10, color: Colors.white)),
-                    ]), // 期限日
-              ),
-            ],
+      onLongPress: () => _showCustomMenu(context),
+      onTap: () => Navigator.pushNamed(context, '/items/id',
+          arguments: ItemDetail(
+              id: int.parse(id),
+              onCallback: () {
+                onRefetch();
+              })),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.network(
+              'https://via.placeholder.com/100',
+              width: 100,
+              height: 100,
+            ), // 画像URLを指定
           ),
-        ));
+          Text('$stock個',
+              style: const TextStyle(
+                  fontSize: 21,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold)),
+          const SizedBox(width: 20),
+        ],
+      ),
+    );
   }
 }
