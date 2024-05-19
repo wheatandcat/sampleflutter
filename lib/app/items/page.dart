@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sampleflutter/components/background/background.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/components/icon/add.dart';
 import 'package:sampleflutter/components/category/card.dart';
@@ -49,13 +50,14 @@ class Items extends HookWidget {
       fromJson: Query$Category$items.fromJson,
     );
 
-    return Scaffold(
+    return BackgroundImage(
+        child: Scaffold(
       appBar: const CommonAppBar(title: ""),
       body: Column(
         children: [
           Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
-              child: CategoryCard(name: category.name, count: items.length)),
+              child: CategoryCard(name: category.name)),
           Expanded(
             child: GridView.count(
                 crossAxisCount: 2,
@@ -118,6 +120,6 @@ class Items extends HookWidget {
           ),
         ],
       ),
-    );
+    ));
   }
 }

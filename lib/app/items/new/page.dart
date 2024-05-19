@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:sampleflutter/components/background/background.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/graphql/createItem.gql.dart';
 import 'package:sampleflutter/components/item/input.dart';
@@ -37,11 +38,12 @@ class NewItem extends HookWidget {
       mutationHookResult.runMutation(Variables$Mutation$CreateItem(input: p));
     }
 
-    return Scaffold(
+    return BackgroundImage(
+        child: Scaffold(
       appBar: const CommonAppBar(title: ""),
       body: Input(
         onPressed: onPressed,
       ),
-    );
+    ));
   }
 }

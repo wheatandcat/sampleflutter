@@ -7,6 +7,7 @@ import 'package:sampleflutter/utils/auth.dart';
 import 'package:sampleflutter/graphql/createUser.gql.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sampleflutter/providers/user.dart';
+import 'package:sampleflutter/components/background/background.dart';
 
 class Login extends HookConsumerWidget {
   const Login({Key? key}) : super(key: key);
@@ -74,24 +75,30 @@ class Login extends HookConsumerWidget {
       }
     }
 
-    return Scaffold(
-        appBar: const CommonAppBar(title: "ログイン"),
-        body: Center(
-            child: StreamBuilder(
-                stream: FirebaseAuth.instance.authStateChanges(),
-                builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-                  if (!snapshot.hasData) {
-                    return Button(
-                        title: "Google ログイン", width: 300, onPressed: onPressed);
-                  } else {
-                    return Column(children: [
-                      ListTile(
-                        title: const Text("ログイン中のユーザー"),
-                        subtitle: Text("ID:${userDataAsyncValue.value!.id}"),
-                      ),
-                      Button(title: "ログアウト", width: 300, onPressed: onLogout)
-                    ]);
-                  }
-                })));
+    return BackgroundImage(
+        child: Scaffold(
+            appBar: const CommonAppBar(title: "ログイン"),
+            body: Center(
+                child: StreamBuilder(
+                    stream: FirebaseAuth.instance.authStateChanges(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<User?> snapshot) {
+                      if (!snapshot.hasData) {
+                        return Button(
+                            title: "Google ログイン",
+                            width: 300,
+                            onPressed: onPressed);
+                      } else {
+                        return Column(children: [
+                          ListTile(
+                            title: const Text("ログイン中のユーザー"),
+                            subtitle:
+                                Text("ID:${userDataAsyncValue.value!.id}"),
+                          ),
+                          Button(
+                              title: "ログアウト", width: 300, onPressed: onLogout)
+                        ]);
+                      }
+                    }))));
   }
 }
