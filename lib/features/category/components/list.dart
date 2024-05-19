@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sampleflutter/graphql/categories.gql.dart';
 import 'package:sampleflutter/utils/style.dart';
 import 'package:sampleflutter/components/icon/add.dart';
-import 'package:sampleflutter/features/category/icon.dart';
+import 'package:sampleflutter/features/category/components/icon.dart';
 import 'package:sampleflutter/components/appBar/menu.dart';
 
 class CategoryList extends StatelessWidget {

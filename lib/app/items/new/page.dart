@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/components/background/background.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/graphql/createItem.gql.dart';
-import 'package:sampleflutter/features/item/input.dart';
+import 'package:sampleflutter/features/item/components/input.dart';
 import 'package:sampleflutter/graphql/schema.graphql.dart';
 
 class NewItem extends HookWidget {
