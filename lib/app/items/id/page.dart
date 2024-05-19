@@ -3,7 +3,7 @@ import 'package:sampleflutter/components/background/background.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/graphql/item.gql.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
-import 'package:sampleflutter/components/item/input.dart';
+import 'package:sampleflutter/features/item/components/input.dart';
 import 'package:sampleflutter/utils/graphql.dart';
 import 'package:sampleflutter/graphql/updateItem.gql.dart';
 import 'package:sampleflutter/graphql/schema.graphql.dart';
