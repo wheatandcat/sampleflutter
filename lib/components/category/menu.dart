@@ -59,7 +59,6 @@ class CategoryMenu extends StatelessWidget {
                           child: const Text('キャンセル'),
                           onPressed: () {
                             Navigator.of(contextDialog).pop();
-                            Navigator.of(context).pop();
                           },
                         ),
                         TextButton(
@@ -68,7 +67,6 @@ class CategoryMenu extends StatelessWidget {
                           onPressed: () {
                             onDelete(id);
                             Navigator.of(contextDialog).pop();
-                            Navigator.of(context).pop();
                           },
                         ),
                       ],

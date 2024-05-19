@@ -3,6 +3,7 @@ import 'package:sampleflutter/graphql/categories.gql.dart';
 import 'package:sampleflutter/utils/style.dart';
 import 'package:sampleflutter/components/icon/add.dart';
 import 'package:sampleflutter/components/category/icon.dart';
+import 'package:sampleflutter/components/appBar/menu.dart';
 
 class CategoryList extends StatelessWidget {
   final List<Query$Categories$categories> categories;
@@ -40,6 +41,7 @@ class CategoryList extends StatelessWidget {
                     if (index == categories.length) {
                       // 最後の要素に追加ボタンを表示
                       return FloatingActionButton(
+                        heroTag: "add",
                         backgroundColor: Colors.transparent,
                         elevation: 0,
                         onPressed: () {
@@ -61,7 +63,32 @@ class CategoryList extends StatelessWidget {
                         ));
                   }),
             )),
+            Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: FloatingActionButton(
+                  heroTag: "setting",
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  onPressed: () {
+                    _showSettingDialog(context);
+                  },
+                  tooltip: 'Increment',
+                  child: const Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                )),
           ],
         ));
   }
+}
+
+void _showSettingDialog(BuildContext context) {
+  showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return const AppBarMenu();
+    },
+  );
 }

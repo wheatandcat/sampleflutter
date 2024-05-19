@@ -5,6 +5,8 @@ import 'package:sampleflutter/graphql/item.gql.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
 import 'package:sampleflutter/components/item/input.dart';
 import 'package:sampleflutter/utils/graphql.dart';
+import 'package:sampleflutter/graphql/updateItem.gql.dart';
+import 'package:sampleflutter/graphql/schema.graphql.dart';
 
 class ItemDetail extends HookWidget {
   final int id;
@@ -34,8 +36,28 @@ class ItemDetail extends HookWidget {
       fromJson: Query$Item$item.fromJson,
     );
 
+    final mutationHookResult =
+        useMutation$UpdateItem(WidgetOptions$Mutation$UpdateItem(
+      onCompleted: (Map<String, dynamic>? data, Mutation$UpdateItem? result) {
+        onCallback();
+        Navigator.pop(context);
+      },
+      onError: (error) {
+        debugPrint(error.toString());
+      },
+    ));
+
     onPressed(InputItem input) async {
-      queryResult.refetch();
+      final Input$UpdateItem p = Input$UpdateItem(
+        id: id,
+        categoryId: int.parse(item.categoryId),
+        name: input.name,
+        stock: input.stock,
+        expirationDate: input.expirationDate,
+        order: input.order,
+      );
+
+      mutationHookResult.runMutation(Variables$Mutation$UpdateItem(input: p));
     }
 
     return BackgroundImage(

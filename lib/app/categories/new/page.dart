@@ -20,8 +20,7 @@ class CategoryNew extends HookWidget {
       onCompleted:
           (Map<String, dynamic>? data, Mutation$CreateCategory? result) async {
         onCallback();
-        Navigator.pushNamed(
-            context, '/categories/${result?.createCategory.id}');
+        Navigator.pop(context);
       },
     ));
 

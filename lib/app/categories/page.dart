@@ -39,13 +39,13 @@ class MyHomePage extends HookConsumerWidget {
     }));
 
     final userDataAsyncValue = ref.watch(userDataProvider);
-
     debugPrint('userDataAsyncValue: ${userDataAsyncValue.asData?.value?.id}');
 
     Future<void> getItems(int categoryId) async {
       final result = await client.query<Query$Category>(
         QueryOptions(
           document: documentNodeQueryCategory,
+          fetchPolicy: FetchPolicy.networkOnly,
           variables: <String, dynamic>{
             'id': categoryId,
           },
@@ -64,6 +64,7 @@ class MyHomePage extends HookConsumerWidget {
 
     useEffect(() {
       getItems(selectCategoryId.value);
+      return null;
     }, [selectCategoryId.value]);
 
     final List<Query$Categories$categories> categories = extractGraphQLDataList(
@@ -71,8 +72,6 @@ class MyHomePage extends HookConsumerWidget {
       fieldName: "categories",
       fromJson: Query$Categories$categories.fromJson,
     );
-
-    debugPrint('selectCategoryId: ${selectCategoryId.value}');
 
     final mhdcr =
         useMutation$DeleteCategory(WidgetOptions$Mutation$DeleteCategory(
@@ -85,7 +84,7 @@ class MyHomePage extends HookConsumerWidget {
 
     final mhdir = useMutation$DeleteItem(WidgetOptions$Mutation$DeleteItem(
       onCompleted: (Map<String, dynamic>? data, Mutation$DeleteItem? result) {
-        qcrs.refetch();
+        getItems(selectCategoryId.value);
       },
     ));
 
@@ -109,8 +108,6 @@ class MyHomePage extends HookConsumerWidget {
 
     final double deviceHeight = MediaQuery.of(context).size.height;
     final double deviceWidth = MediaQuery.of(context).size.width;
-
-    debugPrint('items: ${items.value.length}');
 
     String categoryName = '';
     if (categories.isNotEmpty) {
@@ -163,20 +160,20 @@ class MyHomePage extends HookConsumerWidget {
                         children:
                             List.generate(items.value.length + 1, (index) {
                           if (index == items.value.length) {
-                            return InkWell(
-                                onTap: () {
-                                  Navigator.pushNamed(context, '/items/new',
-                                      arguments: NewItem(
-                                        categoryId: selectCategoryId.value,
-                                        onCallback: () {
-                                          getItems(selectCategoryId.value);
-                                        },
-                                      ));
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.only(
-                                      right: 20, left: 5, bottom: 28),
-                                  child: Card(
+                            return Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 20, left: 5, bottom: 28),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, '/items/new',
+                                        arguments: NewItem(
+                                          categoryId: selectCategoryId.value,
+                                          onCallback: () {
+                                            getItems(selectCategoryId.value);
+                                          },
+                                        ));
+                                  },
+                                  child: const Card(
                                     color: Colors.black45,
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -209,7 +206,7 @@ class MyHomePage extends HookConsumerWidget {
                                 stock: item.stock,
                                 expirationDate: item.expirationDate,
                                 onRefetch: () {
-                                  qcrs.refetch();
+                                  getItems(selectCategoryId.value);
                                 },
                                 onDelete: () {
                                   mhdir.runMutation(

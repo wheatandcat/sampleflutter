@@ -45,9 +45,6 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Colors.transparent,
           ),
           home: const MyHomePage(),
-          routes: {
-            '/login': (context) => const Login(),
-          },
           onGenerateRoute: (settings) {
             switch (settings.name) {
               case '/categories/new':
@@ -85,6 +82,13 @@ class MyApp extends StatelessWidget {
 
                 return PageTransition(
                   child: ItemDetail(id: args.id, onCallback: args.onCallback),
+                  type: PageTransitionType.rightToLeft,
+                  settings: settings,
+                );
+
+              case '/login':
+                return PageTransition(
+                  child: const Login(),
                   type: PageTransitionType.rightToLeft,
                   settings: settings,
                 );

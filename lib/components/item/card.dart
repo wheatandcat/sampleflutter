@@ -76,33 +76,32 @@ class ItemCard extends StatelessWidget {
       );
     }
 
-    return InkWell(
-      onLongPress: () => _showCustomMenu(context),
-      onTap: () => Navigator.pushNamed(context, '/items/id',
-          arguments: ItemDetail(
-              id: int.parse(id),
-              onCallback: () {
-                onRefetch();
-              })),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.network(
-              'https://via.placeholder.com/100',
-              width: 100,
-              height: 100,
-            ), // 画像URLを指定
-          ),
-          Text('$stock個',
-              style: const TextStyle(
-                  fontSize: 21,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold)),
-          const SizedBox(width: 20),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        InkWell(
+            onLongPress: () => _showCustomMenu(context),
+            onTap: () => Navigator.pushNamed(context, '/items/id',
+                arguments: ItemDetail(
+                    id: int.parse(id),
+                    onCallback: () {
+                      onRefetch();
+                    })),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                'https://via.placeholder.com/100',
+                width: 100,
+                height: 100,
+              ), // 画像URLを指定
+            )),
+        Text('$stock%',
+            style: const TextStyle(
+                fontSize: 21,
+                color: Colors.white,
+                fontWeight: FontWeight.bold)),
+        const SizedBox(width: 20),
+      ],
     );
   }
 }
