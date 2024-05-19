@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sampleflutter/utils/style.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:sampleflutter/components/background/background.dart';
 import 'package:sampleflutter/features/category/components/list.dart';
 import 'package:sampleflutter/features/category/components/menu.dart';
@@ -10,24 +9,22 @@ import 'package:sampleflutter/components/icon/add.dart';
 import 'package:sampleflutter/features/item/components/card.dart';
 import 'package:sampleflutter/features/category/components/card.dart';
 import 'package:sampleflutter/graphql/categories.gql.dart';
-import 'package:sampleflutter/graphql/category.gql.dart';
 import 'package:sampleflutter/graphql/deleteCategory.gql.dart';
 import 'package:sampleflutter/graphql/deleteItem.gql.dart';
 import 'package:sampleflutter/utils/graphql.dart';
 import 'package:sampleflutter/app/categories/new/page.dart';
 import 'package:sampleflutter/providers/user.dart';
-import 'package:sampleflutter/providers/graphql.dart';
 import 'package:sampleflutter/app/items/new/page.dart';
+import 'package:sampleflutter/features/category/hooks/useItems.dart';
 
 class MyHomePage extends HookConsumerWidget {
   const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final client = ref.read(graphqlClientProvider);
+    final items = useItems(ref);
 
     final selectCategoryId = useState<int>(0);
-    final items = useState<List<Query$Category$items>>([]);
 
     final qcrs = useQuery$Categories(Options$Query$Categories(
         onComplete: (Map<String, dynamic>? data, Query$Categories? result) {
@@ -41,29 +38,8 @@ class MyHomePage extends HookConsumerWidget {
     final userDataAsyncValue = ref.watch(userDataProvider);
     debugPrint('userDataAsyncValue: ${userDataAsyncValue.asData?.value?.id}');
 
-    Future<void> getItems(int categoryId) async {
-      final result = await client.query<Query$Category>(
-        QueryOptions(
-          document: documentNodeQueryCategory,
-          fetchPolicy: FetchPolicy.networkOnly,
-          variables: <String, dynamic>{
-            'id': categoryId,
-          },
-        ),
-      );
-      if (result.hasException) {
-        return;
-      }
-
-      items.value = extractGraphQLDataList(
-        data: result.data,
-        fieldName: "items",
-        fromJson: Query$Category$items.fromJson,
-      );
-    }
-
     useEffect(() {
-      getItems(selectCategoryId.value);
+      items.get(selectCategoryId.value);
       return null;
     }, [selectCategoryId.value]);
 
@@ -84,7 +60,7 @@ class MyHomePage extends HookConsumerWidget {
 
     final mhdir = useMutation$DeleteItem(WidgetOptions$Mutation$DeleteItem(
       onCompleted: (Map<String, dynamic>? data, Mutation$DeleteItem? result) {
-        getItems(selectCategoryId.value);
+        items.get(selectCategoryId.value);
       },
     ));
 
@@ -169,7 +145,7 @@ class MyHomePage extends HookConsumerWidget {
                                         arguments: NewItem(
                                           categoryId: selectCategoryId.value,
                                           onCallback: () {
-                                            getItems(selectCategoryId.value);
+                                            items.get(selectCategoryId.value);
                                           },
                                         ));
                                   },
@@ -206,7 +182,7 @@ class MyHomePage extends HookConsumerWidget {
                                 stock: item.stock,
                                 expirationDate: item.expirationDate,
                                 onRefetch: () {
-                                  getItems(selectCategoryId.value);
+                                  items.get(selectCategoryId.value);
                                 },
                                 onDelete: () {
                                   mhdir.runMutation(
