@@ -10,7 +10,7 @@ import 'package:sampleflutter/providers/user.dart';
 import 'package:sampleflutter/components/background/background.dart';
 
 class Login extends HookConsumerWidget {
-  const Login({Key? key}) : super(key: key);
+  const Login({super.key});
 
   static final googleLogin = GoogleSignIn(scopes: [
     'email',

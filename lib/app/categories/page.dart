@@ -180,7 +180,6 @@ class MyHomePage extends HookConsumerWidget {
                                 id: item.id,
                                 name: item.name,
                                 stock: item.stock,
-                                expirationDate: item.expirationDate,
                                 onRefetch: () {
                                   items.get(selectCategoryId.value);
                                 },

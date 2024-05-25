@@ -5,7 +5,6 @@ class ItemCard extends StatelessWidget {
   final String id;
   final String name;
   final int stock;
-  String? expirationDate;
   final void Function() onRefetch;
   final void Function() onDelete;
 
@@ -14,13 +13,12 @@ class ItemCard extends StatelessWidget {
       required this.id,
       required this.name,
       required this.stock,
-      this.expirationDate,
       required this.onRefetch,
       required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
-    void _showCustomMenu(BuildContext context) {
+    void showCustomMenu(BuildContext context) {
       showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -80,7 +78,7 @@ class ItemCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         InkWell(
-            onLongPress: () => _showCustomMenu(context),
+            onLongPress: () => showCustomMenu(context),
             onTap: () => Navigator.pushNamed(context, '/items/id',
                 arguments: ItemDetail(
                     id: int.parse(id),
@@ -95,7 +93,7 @@ class ItemCard extends StatelessWidget {
                 height: 100,
               ), // 画像URLを指定
             )),
-        Text('$stock%',
+        Text('$stock個',
             style: const TextStyle(
                 fontSize: 21,
                 color: Colors.white,

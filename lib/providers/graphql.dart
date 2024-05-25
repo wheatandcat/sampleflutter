@@ -5,3 +5,5 @@ import 'package:sampleflutter/utils/graphql.dart';
 final graphqlClientProvider = Provider<GraphQLClient>((ref) {
   return graphqlClient();
 });
+
+final countProvider = StateProvider((ref) => 0);
