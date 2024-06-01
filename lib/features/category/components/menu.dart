@@ -31,7 +31,7 @@ class CategoryMenu extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.edit),
-              title: const Text('カテゴリー名を変更する'),
+              title: const Text('カテゴリーを編集する'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, '/categories/edit',

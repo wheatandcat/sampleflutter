@@ -87,8 +87,8 @@ class ItemCard extends StatelessWidget {
                     })),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                'https://via.placeholder.com/100',
+              child: Image.asset(
+                'images/150x150.png',
                 width: 100,
                 height: 100,
               ), // 画像URLを指定

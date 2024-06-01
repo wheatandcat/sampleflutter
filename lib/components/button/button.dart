@@ -20,16 +20,16 @@ class Button extends StatelessWidget {
             style: OutlinedButton.styleFrom(
                 side: const BorderSide(
                   color: Colors.white,
-                  width: 3,
+                  width: 0,
                 ),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50) //こちらを適用
                     ),
-                backgroundColor: Colors.transparent),
+                backgroundColor: Colors.white),
             onPressed: onPressed,
             child: Text(title,
                 style: const TextStyle(
-                    color: Colors.white,
+                    color: Colors.brown,
                     fontSize: 20,
                     fontWeight: FontWeight.bold))));
   }
