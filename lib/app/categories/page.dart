@@ -5,7 +5,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/components/background/background.dart';
 import 'package:sampleflutter/features/category/components/list.dart';
 import 'package:sampleflutter/features/category/components/menu.dart';
-import 'package:sampleflutter/components/icon/add.dart';
 import 'package:sampleflutter/features/item/components/card.dart';
 import 'package:sampleflutter/features/category/components/card.dart';
 import 'package:sampleflutter/graphql/categories.gql.dart';
@@ -14,8 +13,8 @@ import 'package:sampleflutter/graphql/deleteItem.gql.dart';
 import 'package:sampleflutter/utils/graphql.dart';
 import 'package:sampleflutter/app/categories/new/page.dart';
 import 'package:sampleflutter/providers/user.dart';
-import 'package:sampleflutter/app/items/new/page.dart';
 import 'package:sampleflutter/features/category/hooks/useItems.dart';
+import 'package:sampleflutter/features/category/components/newItem.dart';
 
 class MyHomePage extends HookConsumerWidget {
   const MyHomePage({super.key});
@@ -139,35 +138,10 @@ class MyHomePage extends HookConsumerWidget {
                             return Padding(
                                 padding: const EdgeInsets.only(
                                     right: 20, left: 5, bottom: 28),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(context, '/items/new',
-                                        arguments: NewItem(
-                                          categoryId: selectCategoryId.value,
-                                          onCallback: () {
-                                            items.get(selectCategoryId.value);
-                                          },
-                                        ));
-                                  },
-                                  child: const Card(
-                                    color: Colors.black45,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8.0))),
-                                    elevation: 0,
-                                    child: SizedBox(
-                                      width: 100,
-                                      height: 100,
-                                      child: Center(
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: <Widget>[
-                                            AddIcon(),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                child: CategoryNewItem(
+                                  categoryId: selectCategoryId.value,
+                                  onCallback: () =>
+                                      {items.get(selectCategoryId.value)},
                                 ));
                           }
 
