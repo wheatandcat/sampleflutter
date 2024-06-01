@@ -5,8 +5,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/components/background/background.dart';
 import 'package:sampleflutter/features/category/components/list.dart';
 import 'package:sampleflutter/features/category/components/menu.dart';
-import 'package:sampleflutter/features/item/components/card.dart';
-import 'package:sampleflutter/features/category/components/card.dart';
 import 'package:sampleflutter/graphql/categories.gql.dart';
 import 'package:sampleflutter/graphql/deleteCategory.gql.dart';
 import 'package:sampleflutter/graphql/deleteItem.gql.dart';
@@ -14,7 +12,7 @@ import 'package:sampleflutter/utils/graphql.dart';
 import 'package:sampleflutter/app/categories/new/page.dart';
 import 'package:sampleflutter/providers/user.dart';
 import 'package:sampleflutter/features/category/hooks/useItems.dart';
-import 'package:sampleflutter/features/category/components/newItem.dart';
+import 'package:sampleflutter/features/category/components/items.dart';
 
 class MyHomePage extends HookConsumerWidget {
   const MyHomePage({super.key});
@@ -120,53 +118,21 @@ class MyHomePage extends HookConsumerWidget {
               height: deviceHeight,
               color: Colors.transparent,
               margin: const EdgeInsets.symmetric(vertical: AppSpacing.large),
-              child: Column(
-                children: [
-                  Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: CategoryCard(name: categoryName)),
-                  Expanded(
-                    child: GridView.count(
-                        crossAxisCount: 2,
-                        childAspectRatio: 1.0,
-                        padding: const EdgeInsets.all(10),
-                        mainAxisSpacing: 4.0,
-                        crossAxisSpacing: 4.0,
-                        children:
-                            List.generate(items.value.length + 1, (index) {
-                          if (index == items.value.length) {
-                            return Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 20, left: 5, bottom: 28),
-                                child: CategoryNewItem(
-                                  categoryId: selectCategoryId.value,
-                                  onCallback: () =>
-                                      {items.get(selectCategoryId.value)},
-                                ));
-                          }
-
-                          final item = items.value[index];
-
-                          return Container(
-                              padding:
-                                  const EdgeInsets.only(right: 10, left: 10),
-                              child: ItemCard(
-                                id: item.id,
-                                name: item.name,
-                                stock: item.stock,
-                                onRefetch: () {
-                                  items.get(selectCategoryId.value);
-                                },
-                                onDelete: () {
-                                  mhdir.runMutation(
-                                      Variables$Mutation$DeleteItem(
-                                    id: int.tryParse(item.id) ?? 0,
-                                  ));
-                                },
-                              ));
-                        })),
-                  ),
-                ],
+              child: CategoryItems(
+                categoryId: selectCategoryId.value,
+                categoryName: categoryName,
+                items: items.value,
+                onNewItem: () {
+                  items.get(selectCategoryId.value);
+                },
+                onRefetch: () {
+                  items.get(selectCategoryId.value);
+                },
+                onDelete: (int itemId) {
+                  mhdir.runMutation(Variables$Mutation$DeleteItem(
+                    id: itemId,
+                  ));
+                },
               ),
             )
           ],
