@@ -30,39 +30,60 @@ class CategoryItems extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: CategoryCard(name: categoryName)),
         Expanded(
-          child: GridView.count(
-              crossAxisCount: 2,
-              childAspectRatio: 1.0,
-              padding: const EdgeInsets.all(10),
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
-              children: List.generate(items.length + 1, (index) {
-                if (index == items.length) {
-                  return Padding(
-                      padding:
-                          const EdgeInsets.only(right: 20, left: 5, bottom: 28),
-                      child: CategoryNewItem(
-                        categoryId: categoryId,
-                        onCallback: () => onNewItem(),
-                      ));
-                }
+          child: (items.isEmpty)
+              ? Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        CategoryNewItem(
+                          categoryId: categoryId,
+                          onCallback: () => onNewItem(),
+                        ),
+                        const Padding(
+                            padding: EdgeInsets.only(left: 10, top: 20),
+                            child: Text(
+                              'OK！\n次は部屋のアイテムを\n登録してみましょう。',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      ]))
+              : GridView.count(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.0,
+                  padding: const EdgeInsets.all(10),
+                  mainAxisSpacing: 4.0,
+                  crossAxisSpacing: 4.0,
+                  children: List.generate(items.length + 1, (index) {
+                    if (index == items.length) {
+                      return Padding(
+                          padding: const EdgeInsets.only(
+                              right: 20, left: 5, bottom: 28),
+                          child: CategoryNewItem(
+                            categoryId: categoryId,
+                            onCallback: () => onNewItem(),
+                          ));
+                    }
 
-                final item = items[index];
+                    final item = items[index];
 
-                return Container(
-                    padding: const EdgeInsets.only(right: 10, left: 10),
-                    child: ItemCard(
-                      id: item.id,
-                      name: item.name,
-                      stock: item.stock,
-                      onRefetch: () {
-                        onRefetch();
-                      },
-                      onDelete: () {
-                        onDelete(int.tryParse(item.id) ?? 0);
-                      },
-                    ));
-              })),
+                    return Container(
+                        padding: const EdgeInsets.only(right: 10, left: 10),
+                        child: ItemCard(
+                          id: item.id,
+                          name: item.name,
+                          stock: item.stock,
+                          onRefetch: () {
+                            onRefetch();
+                          },
+                          onDelete: () {
+                            onDelete(int.tryParse(item.id) ?? 0);
+                          },
+                        ));
+                  })),
         ),
       ],
     );

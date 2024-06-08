@@ -25,7 +25,6 @@ class MyHomePage extends HookConsumerWidget {
 
     final qcrs = useQuery$Categories(Options$Query$Categories(
         onComplete: (Map<String, dynamic>? data, Query$Categories? result) {
-      debugPrint('onComplete');
       List<Query$Categories$categories?> categories = result?.categories ?? [];
       if (categories.isNotEmpty) {
         selectCategoryId.value = int.tryParse(categories[0]?.id ?? '0')!;
@@ -118,22 +117,33 @@ class MyHomePage extends HookConsumerWidget {
               height: deviceHeight,
               color: Colors.transparent,
               margin: const EdgeInsets.symmetric(vertical: AppSpacing.large),
-              child: CategoryItems(
-                categoryId: selectCategoryId.value,
-                categoryName: categoryName,
-                items: items.value,
-                onNewItem: () {
-                  items.get(selectCategoryId.value);
-                },
-                onRefetch: () {
-                  items.get(selectCategoryId.value);
-                },
-                onDelete: (int itemId) {
-                  mhdir.runMutation(Variables$Mutation$DeleteItem(
-                    id: itemId,
-                  ));
-                },
-              ),
+              child: categories.isEmpty
+                  ? const SafeArea(
+                      child: Padding(
+                          padding: EdgeInsets.only(left: 20, top: 10),
+                          child: Text(
+                            'まずは部屋を作りましょう！\n左の＋マークを\nタップしてください。',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          )))
+                  : CategoryItems(
+                      categoryId: selectCategoryId.value,
+                      categoryName: categoryName,
+                      items: items.value,
+                      onNewItem: () {
+                        items.get(selectCategoryId.value);
+                      },
+                      onRefetch: () {
+                        items.get(selectCategoryId.value);
+                      },
+                      onDelete: (int itemId) {
+                        mhdir.runMutation(Variables$Mutation$DeleteItem(
+                          id: itemId,
+                        ));
+                      },
+                    ),
             )
           ],
         ),
