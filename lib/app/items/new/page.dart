@@ -31,7 +31,6 @@ class NewItem extends HookWidget {
         categoryId: categoryId,
         name: input.name,
         stock: input.stock,
-        expirationDate: input.expirationDate,
         order: input.order,
       );
 

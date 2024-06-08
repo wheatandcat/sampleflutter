@@ -53,7 +53,6 @@ class ItemDetail extends HookWidget {
         categoryId: int.parse(item.categoryId),
         name: input.name,
         stock: input.stock,
-        expirationDate: input.expirationDate,
         order: input.order,
       );
 
@@ -65,11 +64,10 @@ class ItemDetail extends HookWidget {
       appBar: const CommonAppBar(title: ""),
       body: Input(
           onPressed: onPressed,
-          buttonText: "更新する",
+          buttonText: "保存",
           defaultValue: InputItem(
             name: "",
             stock: item.stock,
-            expirationDate: item.expirationDate,
             order: item.order,
           )),
     ));

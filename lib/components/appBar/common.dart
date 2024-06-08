@@ -16,26 +16,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           fit: BoxFit.cover, // 画像がAppBar全体に広がるように設定
         ),
       ),
-      actions: <Widget>[
-        IconButton(
-            color: Colors.white,
-            icon: const Icon(Icons.menu), // メニューアイコン
-            onPressed: () {
-              _showDialog(context);
-            }),
-      ],
     );
   }
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-void _showDialog(BuildContext context) {
-  showDialog<void>(
-    context: context,
-    builder: (BuildContext context) {
-      return const AppBarMenu();
-    },
-  );
 }

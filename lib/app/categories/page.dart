@@ -5,17 +5,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/components/background/background.dart';
 import 'package:sampleflutter/features/category/components/list.dart';
 import 'package:sampleflutter/features/category/components/menu.dart';
-import 'package:sampleflutter/components/icon/add.dart';
-import 'package:sampleflutter/features/item/components/card.dart';
-import 'package:sampleflutter/features/category/components/card.dart';
 import 'package:sampleflutter/graphql/categories.gql.dart';
 import 'package:sampleflutter/graphql/deleteCategory.gql.dart';
 import 'package:sampleflutter/graphql/deleteItem.gql.dart';
 import 'package:sampleflutter/utils/graphql.dart';
 import 'package:sampleflutter/app/categories/new/page.dart';
 import 'package:sampleflutter/providers/user.dart';
-import 'package:sampleflutter/app/items/new/page.dart';
 import 'package:sampleflutter/features/category/hooks/useItems.dart';
+import 'package:sampleflutter/features/category/components/items.dart';
 
 class MyHomePage extends HookConsumerWidget {
   const MyHomePage({super.key});
@@ -28,7 +25,6 @@ class MyHomePage extends HookConsumerWidget {
 
     final qcrs = useQuery$Categories(Options$Query$Categories(
         onComplete: (Map<String, dynamic>? data, Query$Categories? result) {
-      debugPrint('onComplete');
       List<Query$Categories$categories?> categories = result?.categories ?? [];
       if (categories.isNotEmpty) {
         selectCategoryId.value = int.tryParse(categories[0]?.id ?? '0')!;
@@ -121,80 +117,33 @@ class MyHomePage extends HookConsumerWidget {
               height: deviceHeight,
               color: Colors.transparent,
               margin: const EdgeInsets.symmetric(vertical: AppSpacing.large),
-              child: Column(
-                children: [
-                  Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: CategoryCard(name: categoryName)),
-                  Expanded(
-                    child: GridView.count(
-                        crossAxisCount: 2,
-                        childAspectRatio: 1.0,
-                        padding: const EdgeInsets.all(10),
-                        mainAxisSpacing: 4.0,
-                        crossAxisSpacing: 4.0,
-                        children:
-                            List.generate(items.value.length + 1, (index) {
-                          if (index == items.value.length) {
-                            return Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 20, left: 5, bottom: 28),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(context, '/items/new',
-                                        arguments: NewItem(
-                                          categoryId: selectCategoryId.value,
-                                          onCallback: () {
-                                            items.get(selectCategoryId.value);
-                                          },
-                                        ));
-                                  },
-                                  child: const Card(
-                                    color: Colors.black45,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8.0))),
-                                    elevation: 0,
-                                    child: SizedBox(
-                                      width: 100,
-                                      height: 100,
-                                      child: Center(
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: <Widget>[
-                                            AddIcon(),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ));
-                          }
-
-                          final item = items.value[index];
-
-                          return Container(
-                              padding:
-                                  const EdgeInsets.only(right: 10, left: 10),
-                              child: ItemCard(
-                                id: item.id,
-                                name: item.name,
-                                stock: item.stock,
-                                expirationDate: item.expirationDate,
-                                onRefetch: () {
-                                  items.get(selectCategoryId.value);
-                                },
-                                onDelete: () {
-                                  mhdir.runMutation(
-                                      Variables$Mutation$DeleteItem(
-                                    id: int.tryParse(item.id) ?? 0,
-                                  ));
-                                },
-                              ));
-                        })),
-                  ),
-                ],
-              ),
+              child: categories.isEmpty
+                  ? const SafeArea(
+                      child: Padding(
+                          padding: EdgeInsets.only(left: 20, top: 10),
+                          child: Text(
+                            'まずは部屋を作りましょう！\n左の＋マークを\nタップしてください。',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          )))
+                  : CategoryItems(
+                      categoryId: selectCategoryId.value,
+                      categoryName: categoryName,
+                      items: items.value,
+                      onNewItem: () {
+                        items.get(selectCategoryId.value);
+                      },
+                      onRefetch: () {
+                        items.get(selectCategoryId.value);
+                      },
+                      onDelete: (int itemId) {
+                        mhdir.runMutation(Variables$Mutation$DeleteItem(
+                          id: itemId,
+                        ));
+                      },
+                    ),
             )
           ],
         ),

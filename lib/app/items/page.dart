@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sampleflutter/components/background/background.dart';
 import 'package:sampleflutter/components/appBar/common.dart';
-import 'package:sampleflutter/components/icon/add.dart';
 import 'package:sampleflutter/features/category/components/card.dart';
 import 'package:sampleflutter/features/item/components/card.dart';
+import 'package:sampleflutter/features/item/components/addButton.dart';
 import 'package:sampleflutter/graphql/category.gql.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/graphql/deleteItem.gql.dart';
@@ -67,36 +67,15 @@ class Items extends HookWidget {
                 crossAxisSpacing: 4.0,
                 children: List.generate(items.length + 1, (index) {
                   if (index == items.length) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/items/new',
-                            arguments: NewItem(
-                              categoryId: id,
-                              onCallback: () {
-                                queryResult.refetch();
-                              },
-                            ));
-                      },
-                      child: const Card(
-                        color: Colors.black45,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero, // Cardの角を直角にする
-                        ),
-                        elevation: 0,
-                        child: SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: Center(
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: <Widget>[
-                                AddIcon(),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
+                    return ItemAddButton(onAdd: () {
+                      Navigator.pushNamed(context, '/items/new',
+                          arguments: NewItem(
+                            categoryId: id,
+                            onCallback: () {
+                              queryResult.refetch();
+                            },
+                          ));
+                    });
                   }
 
                   final item = items[index];
@@ -105,7 +84,6 @@ class Items extends HookWidget {
                     id: item.id,
                     name: item.name,
                     stock: item.stock,
-                    expirationDate: item.expirationDate,
                     onRefetch: () {
                       queryResult.refetch();
                     },

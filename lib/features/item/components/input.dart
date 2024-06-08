@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'package:sampleflutter/components/button/button.dart';
 
 class InputItem {
   late final String name;
   late final int stock;
-  String? expirationDate;
   late final int order;
 
   InputItem({
     required this.name,
     required this.stock,
-    this.expirationDate,
     required this.order,
   });
 }
@@ -29,55 +26,20 @@ class Input extends HookWidget {
   @override
   Widget build(BuildContext context) {
     int defaultStock = 0;
-    double defaultStockPercentage = 0.0;
-    DateTime? defaultExpirationDate;
 
     if (defaultValue != null) {
-      defaultStock = (defaultValue!.stock / 100).floor();
-      defaultStockPercentage = defaultValue!.stock % 100;
-      if (defaultValue!.expirationDate != null) {
-        defaultExpirationDate = DateTime.parse(defaultValue!.expirationDate!);
-      }
+      defaultStock = defaultValue!.stock;
     }
 
-    final inputStockPercentage = useState(defaultStockPercentage);
     final inputStock = useTextEditingController(text: defaultStock.toString());
-    final expirationDate = useState<DateTime?>(defaultExpirationDate);
     final inputName = useState('');
 
-    // 日付選択ダイアログを表示する関数
-    Future<void> setExpirationDate(BuildContext context) async {
-      final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: expirationDate.value ?? DateTime.now(), // 初期選択日付
-        firstDate: DateTime(2023), // 選択可能な最初の日付
-        lastDate: DateTime(2030), // 選択可能な最後の日付
-        locale: const Locale('ja'),
-      );
-      if (picked != null && picked != expirationDate.value) {
-        expirationDate.value = picked.add(const Duration(hours: 9));
-
-        debugPrint(picked.toString());
-      }
-    }
-
-    onInputPressed() async {
-      final stockNum = int.tryParse(inputStock.text) ?? 0;
-      final stock = stockNum * 100 + inputStockPercentage.value;
-
-      debugPrint(
-        expirationDate.value?.toIso8601String(),
-      );
-
-      String? ed;
-      if (expirationDate.value != null) {
-        ed = '${expirationDate.value!.toIso8601String()}+09:00';
-      }
+    onInputPressed() {
+      final stock = int.tryParse(inputStock.text) ?? 0;
 
       onPressed(InputItem(
         name: inputName.value,
         stock: stock.toInt(),
-        expirationDate: ed,
         order: 0,
       ));
     }
@@ -104,37 +66,6 @@ class Input extends HookWidget {
                     size: 40,
                   ),
                 ))),
-        SizedBox(
-            height: 80,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text("  0%",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                SizedBox(
-                  width: 250,
-                  child: Slider(
-                    activeColor: Colors.white,
-                    inactiveColor: Colors.black.withOpacity(0.2),
-                    value: inputStockPercentage.value,
-                    min: 0.0,
-                    max: 100.0,
-                    divisions: 100,
-                    onChanged: (double value) {
-                      inputStockPercentage.value = value;
-                    },
-                  ),
-                ),
-                const Text("100%",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-              ],
-            )),
         SizedBox(
             width: 300,
             height: 60,
@@ -183,42 +114,6 @@ class Input extends HookWidget {
             ))),
         SizedBox(
             width: 300,
-            height: 60,
-            child: Center(
-                child: Row(
-              children: <Widget>[
-                const SizedBox(
-                    width: 150,
-                    child: Text("消費期限",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold))),
-                Padding(
-                    padding: const EdgeInsets.only(left: 0),
-                    child: SizedBox(
-                        child: InkWell(
-                            onTap: () => {
-                                  setExpirationDate(context),
-                                },
-                            child: (expirationDate.value == null)
-                                ? const Text("設定なし",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                    ))
-                                : Text(
-                                    DateFormat('yyyy/MM/dd').format(
-                                        DateTime.parse(
-                                            expirationDate.value.toString())),
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                    ))))),
-              ],
-            ))),
-        SizedBox(
-            width: 300,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -233,7 +128,7 @@ class Input extends HookWidget {
                     width: 300,
                     height: 100,
                     child: Padding(
-                        padding: EdgeInsets.only(top: 0),
+                        padding: const EdgeInsets.only(top: 0),
                         child: TextField(
                             onChanged: (value) => inputName.value = value,
                             maxLines: null, // 複数行入力可能
@@ -243,8 +138,13 @@ class Input extends HookWidget {
                                 color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               filled: true,
+                              hintText: "備考",
+                              hintStyle: TextStyle(
+                                  color: Colors.white.withOpacity(0.6),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
                               fillColor: Colors.black26,
                               border: InputBorder.none,
                             )))),
