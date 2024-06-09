@@ -5,6 +5,7 @@ import 'package:sampleflutter/components/button/button.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter/cupertino.dart';
 
 class InputCategory {
@@ -36,6 +37,36 @@ class Input extends HookWidget {
     final imageURL = useState<String?>(defaultValue?.imageURL);
     final storageRef = FirebaseStorage.instance.ref();
 
+    Future<void> cropImage(String path) async {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: path,
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: '画像を切り取る',
+              initAspectRatio: CropAspectRatioPreset.square,
+              lockAspectRatio: true,
+              aspectRatioPresets: [
+                CropAspectRatioPreset.square,
+              ]),
+          IOSUiSettings(
+            title: '画像を切り取る',
+            minimumAspectRatio: 1.0,
+            aspectRatioPresets: [
+              CropAspectRatioPreset.square,
+            ],
+            aspectRatioLockEnabled: true,
+          ),
+          WebUiSettings(
+            context: context,
+          ),
+        ],
+      );
+
+      if (croppedFile != null) {
+        image.value = File(croppedFile.path);
+      }
+    }
+
     void showPickImage() {
       showModalBottomSheet(
         context: context,
@@ -61,7 +92,7 @@ class Input extends HookWidget {
                       final pickedFile =
                           await picker.pickImage(source: ImageSource.camera);
                       if (pickedFile != null) {
-                        image.value = File(pickedFile.path);
+                        cropImage(pickedFile.path);
                       }
                     },
                   ),
@@ -73,7 +104,7 @@ class Input extends HookWidget {
                       final pickedFile =
                           await picker.pickImage(source: ImageSource.gallery);
                       if (pickedFile != null) {
-                        image.value = File(pickedFile.path);
+                        cropImage(pickedFile.path);
                       }
                     },
                   ),

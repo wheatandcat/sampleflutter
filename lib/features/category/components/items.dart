@@ -37,10 +37,17 @@ class CategoryItems extends StatelessWidget {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        CategoryNewItem(
-                          categoryId: categoryId,
-                          onCallback: () => onNewItem(),
-                        ),
+                        Container(
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                            ),
+                            margin: const EdgeInsets.all(0),
+                            width: 110,
+                            height: 100,
+                            child: CategoryNewItem(
+                              categoryId: categoryId,
+                              onCallback: () => onNewItem(),
+                            )),
                         const Padding(
                             padding: EdgeInsets.only(left: 10, top: 20),
                             child: Text(
