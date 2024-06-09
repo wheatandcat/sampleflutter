@@ -2,6 +2,7 @@ query Item($id: Int!) {
   item(id: $id) {
     id
     name
+    imageURL
     categoryId
     order
     stock

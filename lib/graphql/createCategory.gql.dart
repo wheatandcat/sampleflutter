@@ -284,6 +284,13 @@ const documentNodeMutationCreateCategory = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'imageURL'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'order'),
             alias: null,
             arguments: [],
@@ -526,6 +533,7 @@ class Mutation$CreateCategory$createCategory {
   Mutation$CreateCategory$createCategory({
     required this.id,
     required this.name,
+    this.imageURL,
     required this.order,
     this.$__typename = 'Category',
   });
@@ -534,11 +542,13 @@ class Mutation$CreateCategory$createCategory {
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$imageURL = json['imageURL'];
     final l$order = json['order'];
     final l$$__typename = json['__typename'];
     return Mutation$CreateCategory$createCategory(
       id: (l$id as String),
       name: (l$name as String),
+      imageURL: (l$imageURL as String?),
       order: (l$order as int),
       $__typename: (l$$__typename as String),
     );
@@ -547,6 +557,8 @@ class Mutation$CreateCategory$createCategory {
   final String id;
 
   final String name;
+
+  final String? imageURL;
 
   final int order;
 
@@ -558,6 +570,8 @@ class Mutation$CreateCategory$createCategory {
     _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$imageURL = imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$order = order;
     _resultData['order'] = l$order;
     final l$$__typename = $__typename;
@@ -569,11 +583,13 @@ class Mutation$CreateCategory$createCategory {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$imageURL = imageURL;
     final l$order = order;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
+      l$imageURL,
       l$order,
       l$$__typename,
     ]);
@@ -596,6 +612,11 @@ class Mutation$CreateCategory$createCategory {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$imageURL = imageURL;
+    final lOther$imageURL = other.imageURL;
+    if (l$imageURL != lOther$imageURL) {
       return false;
     }
     final l$order = order;
@@ -634,6 +655,7 @@ abstract class CopyWith$Mutation$CreateCategory$createCategory<TRes> {
   TRes call({
     String? id,
     String? name,
+    String? imageURL,
     int? order,
     String? $__typename,
   });
@@ -655,6 +677,7 @@ class _CopyWithImpl$Mutation$CreateCategory$createCategory<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? imageURL = _undefined,
     Object? order = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -663,6 +686,8 @@ class _CopyWithImpl$Mutation$CreateCategory$createCategory<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        imageURL:
+            imageURL == _undefined ? _instance.imageURL : (imageURL as String?),
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -681,6 +706,7 @@ class _CopyWithStubImpl$Mutation$CreateCategory$createCategory<TRes>
   call({
     String? id,
     String? name,
+    String? imageURL,
     int? order,
     String? $__typename,
   }) =>

@@ -288,6 +288,13 @@ const documentNodeMutationCreateItem = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'imageURL'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'order'),
             alias: null,
             arguments: [],
@@ -539,6 +546,7 @@ class Mutation$CreateItem$createItem {
     required this.id,
     required this.name,
     required this.categoryId,
+    this.imageURL,
     required this.order,
     required this.stock,
     this.expirationDate,
@@ -549,6 +557,7 @@ class Mutation$CreateItem$createItem {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$categoryId = json['categoryId'];
+    final l$imageURL = json['imageURL'];
     final l$order = json['order'];
     final l$stock = json['stock'];
     final l$expirationDate = json['expirationDate'];
@@ -557,6 +566,7 @@ class Mutation$CreateItem$createItem {
       id: (l$id as String),
       name: (l$name as String),
       categoryId: (l$categoryId as String),
+      imageURL: (l$imageURL as String?),
       order: (l$order as int),
       stock: (l$stock as int),
       expirationDate: (l$expirationDate as String?),
@@ -569,6 +579,8 @@ class Mutation$CreateItem$createItem {
   final String name;
 
   final String categoryId;
+
+  final String? imageURL;
 
   final int order;
 
@@ -586,6 +598,8 @@ class Mutation$CreateItem$createItem {
     _resultData['name'] = l$name;
     final l$categoryId = categoryId;
     _resultData['categoryId'] = l$categoryId;
+    final l$imageURL = imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$order = order;
     _resultData['order'] = l$order;
     final l$stock = stock;
@@ -602,6 +616,7 @@ class Mutation$CreateItem$createItem {
     final l$id = id;
     final l$name = name;
     final l$categoryId = categoryId;
+    final l$imageURL = imageURL;
     final l$order = order;
     final l$stock = stock;
     final l$expirationDate = expirationDate;
@@ -610,6 +625,7 @@ class Mutation$CreateItem$createItem {
       l$id,
       l$name,
       l$categoryId,
+      l$imageURL,
       l$order,
       l$stock,
       l$expirationDate,
@@ -639,6 +655,11 @@ class Mutation$CreateItem$createItem {
     final l$categoryId = categoryId;
     final lOther$categoryId = other.categoryId;
     if (l$categoryId != lOther$categoryId) {
+      return false;
+    }
+    final l$imageURL = imageURL;
+    final lOther$imageURL = other.imageURL;
+    if (l$imageURL != lOther$imageURL) {
       return false;
     }
     final l$order = order;
@@ -687,6 +708,7 @@ abstract class CopyWith$Mutation$CreateItem$createItem<TRes> {
     String? id,
     String? name,
     String? categoryId,
+    String? imageURL,
     int? order,
     int? stock,
     String? expirationDate,
@@ -711,6 +733,7 @@ class _CopyWithImpl$Mutation$CreateItem$createItem<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? categoryId = _undefined,
+    Object? imageURL = _undefined,
     Object? order = _undefined,
     Object? stock = _undefined,
     Object? expirationDate = _undefined,
@@ -724,6 +747,8 @@ class _CopyWithImpl$Mutation$CreateItem$createItem<TRes>
         categoryId: categoryId == _undefined || categoryId == null
             ? _instance.categoryId
             : (categoryId as String),
+        imageURL:
+            imageURL == _undefined ? _instance.imageURL : (imageURL as String?),
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -749,6 +774,7 @@ class _CopyWithStubImpl$Mutation$CreateItem$createItem<TRes>
     String? id,
     String? name,
     String? categoryId,
+    String? imageURL,
     int? order,
     int? stock,
     String? expirationDate,

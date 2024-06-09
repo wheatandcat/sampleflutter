@@ -5,6 +5,8 @@ import 'package:sampleflutter/graphql/updateCategory.gql.dart';
 import 'package:sampleflutter/graphql/schema.graphql.dart';
 import 'package:sampleflutter/components/background/background.dart';
 import 'package:sampleflutter/features/category/components/input.dart';
+import 'package:sampleflutter/graphql/category.gql.dart';
+import 'package:sampleflutter/utils/graphql.dart';
 
 class CategoryEdit extends HookWidget {
   final int id;
@@ -19,7 +21,25 @@ class CategoryEdit extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('CategoryEdit build:$name');
+    final queryResult = useQuery$Category(
+        Options$Query$Category(variables: Variables$Query$Category(id: id)));
+
+    final result = queryResult.result;
+
+    if (result.isLoading) {
+      return const Scaffold(
+        appBar: CommonAppBar(title: ""),
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    final Query$Category$category category = extractGraphQLData(
+      data: result.data,
+      fieldName: "category",
+      fromJson: Query$Category$category.fromJson,
+    );
 
     final mutationHookResult =
         useMutation$UpdateCategory(WidgetOptions$Mutation$UpdateCategory(
@@ -31,10 +51,13 @@ class CategoryEdit extends HookWidget {
     ));
 
     onPressed(InputCategory item) async {
+      print("imageURL2: $item.imageUrl");
+
       mutationHookResult.runMutation(Variables$Mutation$UpdateCategory(
           input: Input$UpdateCategory(
         id: id,
         name: item.name,
+        imageURL: item.imageURL,
         order: 0,
       )));
     }
@@ -45,7 +68,8 @@ class CategoryEdit extends HookWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Input(
-              defaultValue: InputCategory(name: name),
+              defaultValue: InputCategory(
+                  name: category.name, imageURL: category.imageURL),
               onPressed: onPressed,
             ),
           ),

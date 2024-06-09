@@ -30,6 +30,7 @@ class NewItem extends HookWidget {
       final Input$NewItem p = Input$NewItem(
         categoryId: categoryId,
         name: input.name,
+        imageURL: input.imageURL,
         stock: input.stock,
         order: input.order,
       );

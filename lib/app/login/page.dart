@@ -93,7 +93,7 @@ class Login extends HookConsumerWidget {
                           ListTile(
                             title: const Text("ログイン中のユーザー"),
                             subtitle:
-                                Text("ID:${userDataAsyncValue.value!.id}"),
+                                Text("ID:${userDataAsyncValue?.value?.id}"),
                           ),
                           Button(
                               title: "ログアウト", width: 300, onPressed: onLogout)

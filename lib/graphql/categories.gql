@@ -2,6 +2,7 @@ query Categories {
   categories {
     id
     name
+    imageURL
     order
     itemCount
   }

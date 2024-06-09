@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sampleflutter/components/appBar/menu.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

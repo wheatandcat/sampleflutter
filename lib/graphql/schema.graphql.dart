@@ -1,10 +1,12 @@
 class Input$NewCategory {
   factory Input$NewCategory({
     required String name,
+    String? imageURL,
     required int order,
   }) =>
       Input$NewCategory._({
         r'name': name,
+        if (imageURL != null) r'imageURL': imageURL,
         r'order': order,
       });
 
@@ -14,6 +16,10 @@ class Input$NewCategory {
     final result$data = <String, dynamic>{};
     final l$name = data['name'];
     result$data['name'] = (l$name as String);
+    if (data.containsKey('imageURL')) {
+      final l$imageURL = data['imageURL'];
+      result$data['imageURL'] = (l$imageURL as String?);
+    }
     final l$order = data['order'];
     result$data['order'] = (l$order as int);
     return Input$NewCategory._(result$data);
@@ -23,12 +29,18 @@ class Input$NewCategory {
 
   String get name => (_$data['name'] as String);
 
+  String? get imageURL => (_$data['imageURL'] as String?);
+
   int get order => (_$data['order'] as int);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$name = name;
     result$data['name'] = l$name;
+    if (_$data.containsKey('imageURL')) {
+      final l$imageURL = imageURL;
+      result$data['imageURL'] = l$imageURL;
+    }
     final l$order = order;
     result$data['order'] = l$order;
     return result$data;
@@ -53,6 +65,15 @@ class Input$NewCategory {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$imageURL = imageURL;
+    final lOther$imageURL = other.imageURL;
+    if (_$data.containsKey('imageURL') !=
+        other._$data.containsKey('imageURL')) {
+      return false;
+    }
+    if (l$imageURL != lOther$imageURL) {
+      return false;
+    }
     final l$order = order;
     final lOther$order = other.order;
     if (l$order != lOther$order) {
@@ -64,9 +85,11 @@ class Input$NewCategory {
   @override
   int get hashCode {
     final l$name = name;
+    final l$imageURL = imageURL;
     final l$order = order;
     return Object.hashAll([
       l$name,
+      _$data.containsKey('imageURL') ? l$imageURL : const {},
       l$order,
     ]);
   }
@@ -83,6 +106,7 @@ abstract class CopyWith$Input$NewCategory<TRes> {
 
   TRes call({
     String? name,
+    String? imageURL,
     int? order,
   });
 }
@@ -102,11 +126,13 @@ class _CopyWithImpl$Input$NewCategory<TRes>
 
   TRes call({
     Object? name = _undefined,
+    Object? imageURL = _undefined,
     Object? order = _undefined,
   }) =>
       _then(Input$NewCategory._({
         ..._instance._$data,
         if (name != _undefined && name != null) 'name': (name as String),
+        if (imageURL != _undefined) 'imageURL': (imageURL as String?),
         if (order != _undefined && order != null) 'order': (order as int),
       }));
 }
@@ -119,6 +145,7 @@ class _CopyWithStubImpl$Input$NewCategory<TRes>
 
   call({
     String? name,
+    String? imageURL,
     int? order,
   }) =>
       _res;
@@ -128,11 +155,13 @@ class Input$UpdateCategory {
   factory Input$UpdateCategory({
     required int id,
     required String name,
+    String? imageURL,
     required int order,
   }) =>
       Input$UpdateCategory._({
         r'id': id,
         r'name': name,
+        if (imageURL != null) r'imageURL': imageURL,
         r'order': order,
       });
 
@@ -144,6 +173,10 @@ class Input$UpdateCategory {
     result$data['id'] = (l$id as int);
     final l$name = data['name'];
     result$data['name'] = (l$name as String);
+    if (data.containsKey('imageURL')) {
+      final l$imageURL = data['imageURL'];
+      result$data['imageURL'] = (l$imageURL as String?);
+    }
     final l$order = data['order'];
     result$data['order'] = (l$order as int);
     return Input$UpdateCategory._(result$data);
@@ -155,6 +188,8 @@ class Input$UpdateCategory {
 
   String get name => (_$data['name'] as String);
 
+  String? get imageURL => (_$data['imageURL'] as String?);
+
   int get order => (_$data['order'] as int);
 
   Map<String, dynamic> toJson() {
@@ -163,6 +198,10 @@ class Input$UpdateCategory {
     result$data['id'] = l$id;
     final l$name = name;
     result$data['name'] = l$name;
+    if (_$data.containsKey('imageURL')) {
+      final l$imageURL = imageURL;
+      result$data['imageURL'] = l$imageURL;
+    }
     final l$order = order;
     result$data['order'] = l$order;
     return result$data;
@@ -192,6 +231,15 @@ class Input$UpdateCategory {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$imageURL = imageURL;
+    final lOther$imageURL = other.imageURL;
+    if (_$data.containsKey('imageURL') !=
+        other._$data.containsKey('imageURL')) {
+      return false;
+    }
+    if (l$imageURL != lOther$imageURL) {
+      return false;
+    }
     final l$order = order;
     final lOther$order = other.order;
     if (l$order != lOther$order) {
@@ -204,10 +252,12 @@ class Input$UpdateCategory {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$imageURL = imageURL;
     final l$order = order;
     return Object.hashAll([
       l$id,
       l$name,
+      _$data.containsKey('imageURL') ? l$imageURL : const {},
       l$order,
     ]);
   }
@@ -225,6 +275,7 @@ abstract class CopyWith$Input$UpdateCategory<TRes> {
   TRes call({
     int? id,
     String? name,
+    String? imageURL,
     int? order,
   });
 }
@@ -245,12 +296,14 @@ class _CopyWithImpl$Input$UpdateCategory<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? imageURL = _undefined,
     Object? order = _undefined,
   }) =>
       _then(Input$UpdateCategory._({
         ..._instance._$data,
         if (id != _undefined && id != null) 'id': (id as int),
         if (name != _undefined && name != null) 'name': (name as String),
+        if (imageURL != _undefined) 'imageURL': (imageURL as String?),
         if (order != _undefined && order != null) 'order': (order as int),
       }));
 }
@@ -264,6 +317,7 @@ class _CopyWithStubImpl$Input$UpdateCategory<TRes>
   call({
     int? id,
     String? name,
+    String? imageURL,
     int? order,
   }) =>
       _res;
@@ -273,6 +327,7 @@ class Input$NewItem {
   factory Input$NewItem({
     required int categoryId,
     required String name,
+    String? imageURL,
     required int stock,
     String? expirationDate,
     required int order,
@@ -280,6 +335,7 @@ class Input$NewItem {
       Input$NewItem._({
         r'categoryId': categoryId,
         r'name': name,
+        if (imageURL != null) r'imageURL': imageURL,
         r'stock': stock,
         if (expirationDate != null) r'expirationDate': expirationDate,
         r'order': order,
@@ -293,6 +349,10 @@ class Input$NewItem {
     result$data['categoryId'] = (l$categoryId as int);
     final l$name = data['name'];
     result$data['name'] = (l$name as String);
+    if (data.containsKey('imageURL')) {
+      final l$imageURL = data['imageURL'];
+      result$data['imageURL'] = (l$imageURL as String?);
+    }
     final l$stock = data['stock'];
     result$data['stock'] = (l$stock as int);
     if (data.containsKey('expirationDate')) {
@@ -310,6 +370,8 @@ class Input$NewItem {
 
   String get name => (_$data['name'] as String);
 
+  String? get imageURL => (_$data['imageURL'] as String?);
+
   int get stock => (_$data['stock'] as int);
 
   String? get expirationDate => (_$data['expirationDate'] as String?);
@@ -322,6 +384,10 @@ class Input$NewItem {
     result$data['categoryId'] = l$categoryId;
     final l$name = name;
     result$data['name'] = l$name;
+    if (_$data.containsKey('imageURL')) {
+      final l$imageURL = imageURL;
+      result$data['imageURL'] = l$imageURL;
+    }
     final l$stock = stock;
     result$data['stock'] = l$stock;
     if (_$data.containsKey('expirationDate')) {
@@ -356,6 +422,15 @@ class Input$NewItem {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$imageURL = imageURL;
+    final lOther$imageURL = other.imageURL;
+    if (_$data.containsKey('imageURL') !=
+        other._$data.containsKey('imageURL')) {
+      return false;
+    }
+    if (l$imageURL != lOther$imageURL) {
+      return false;
+    }
     final l$stock = stock;
     final lOther$stock = other.stock;
     if (l$stock != lOther$stock) {
@@ -382,12 +457,14 @@ class Input$NewItem {
   int get hashCode {
     final l$categoryId = categoryId;
     final l$name = name;
+    final l$imageURL = imageURL;
     final l$stock = stock;
     final l$expirationDate = expirationDate;
     final l$order = order;
     return Object.hashAll([
       l$categoryId,
       l$name,
+      _$data.containsKey('imageURL') ? l$imageURL : const {},
       l$stock,
       _$data.containsKey('expirationDate') ? l$expirationDate : const {},
       l$order,
@@ -407,6 +484,7 @@ abstract class CopyWith$Input$NewItem<TRes> {
   TRes call({
     int? categoryId,
     String? name,
+    String? imageURL,
     int? stock,
     String? expirationDate,
     int? order,
@@ -429,6 +507,7 @@ class _CopyWithImpl$Input$NewItem<TRes>
   TRes call({
     Object? categoryId = _undefined,
     Object? name = _undefined,
+    Object? imageURL = _undefined,
     Object? stock = _undefined,
     Object? expirationDate = _undefined,
     Object? order = _undefined,
@@ -438,6 +517,7 @@ class _CopyWithImpl$Input$NewItem<TRes>
         if (categoryId != _undefined && categoryId != null)
           'categoryId': (categoryId as int),
         if (name != _undefined && name != null) 'name': (name as String),
+        if (imageURL != _undefined) 'imageURL': (imageURL as String?),
         if (stock != _undefined && stock != null) 'stock': (stock as int),
         if (expirationDate != _undefined)
           'expirationDate': (expirationDate as String?),
@@ -454,6 +534,7 @@ class _CopyWithStubImpl$Input$NewItem<TRes>
   call({
     int? categoryId,
     String? name,
+    String? imageURL,
     int? stock,
     String? expirationDate,
     int? order,
@@ -466,6 +547,7 @@ class Input$UpdateItem {
     required int id,
     required int categoryId,
     required String name,
+    String? imageURL,
     required int stock,
     String? expirationDate,
     required int order,
@@ -474,6 +556,7 @@ class Input$UpdateItem {
         r'id': id,
         r'categoryId': categoryId,
         r'name': name,
+        if (imageURL != null) r'imageURL': imageURL,
         r'stock': stock,
         if (expirationDate != null) r'expirationDate': expirationDate,
         r'order': order,
@@ -489,6 +572,10 @@ class Input$UpdateItem {
     result$data['categoryId'] = (l$categoryId as int);
     final l$name = data['name'];
     result$data['name'] = (l$name as String);
+    if (data.containsKey('imageURL')) {
+      final l$imageURL = data['imageURL'];
+      result$data['imageURL'] = (l$imageURL as String?);
+    }
     final l$stock = data['stock'];
     result$data['stock'] = (l$stock as int);
     if (data.containsKey('expirationDate')) {
@@ -508,6 +595,8 @@ class Input$UpdateItem {
 
   String get name => (_$data['name'] as String);
 
+  String? get imageURL => (_$data['imageURL'] as String?);
+
   int get stock => (_$data['stock'] as int);
 
   String? get expirationDate => (_$data['expirationDate'] as String?);
@@ -522,6 +611,10 @@ class Input$UpdateItem {
     result$data['categoryId'] = l$categoryId;
     final l$name = name;
     result$data['name'] = l$name;
+    if (_$data.containsKey('imageURL')) {
+      final l$imageURL = imageURL;
+      result$data['imageURL'] = l$imageURL;
+    }
     final l$stock = stock;
     result$data['stock'] = l$stock;
     if (_$data.containsKey('expirationDate')) {
@@ -562,6 +655,15 @@ class Input$UpdateItem {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$imageURL = imageURL;
+    final lOther$imageURL = other.imageURL;
+    if (_$data.containsKey('imageURL') !=
+        other._$data.containsKey('imageURL')) {
+      return false;
+    }
+    if (l$imageURL != lOther$imageURL) {
+      return false;
+    }
     final l$stock = stock;
     final lOther$stock = other.stock;
     if (l$stock != lOther$stock) {
@@ -589,6 +691,7 @@ class Input$UpdateItem {
     final l$id = id;
     final l$categoryId = categoryId;
     final l$name = name;
+    final l$imageURL = imageURL;
     final l$stock = stock;
     final l$expirationDate = expirationDate;
     final l$order = order;
@@ -596,6 +699,7 @@ class Input$UpdateItem {
       l$id,
       l$categoryId,
       l$name,
+      _$data.containsKey('imageURL') ? l$imageURL : const {},
       l$stock,
       _$data.containsKey('expirationDate') ? l$expirationDate : const {},
       l$order,
@@ -616,6 +720,7 @@ abstract class CopyWith$Input$UpdateItem<TRes> {
     int? id,
     int? categoryId,
     String? name,
+    String? imageURL,
     int? stock,
     String? expirationDate,
     int? order,
@@ -639,6 +744,7 @@ class _CopyWithImpl$Input$UpdateItem<TRes>
     Object? id = _undefined,
     Object? categoryId = _undefined,
     Object? name = _undefined,
+    Object? imageURL = _undefined,
     Object? stock = _undefined,
     Object? expirationDate = _undefined,
     Object? order = _undefined,
@@ -649,6 +755,7 @@ class _CopyWithImpl$Input$UpdateItem<TRes>
         if (categoryId != _undefined && categoryId != null)
           'categoryId': (categoryId as int),
         if (name != _undefined && name != null) 'name': (name as String),
+        if (imageURL != _undefined) 'imageURL': (imageURL as String?),
         if (stock != _undefined && stock != null) 'stock': (stock as int),
         if (expirationDate != _undefined)
           'expirationDate': (expirationDate as String?),
@@ -666,6 +773,7 @@ class _CopyWithStubImpl$Input$UpdateItem<TRes>
     int? id,
     int? categoryId,
     String? name,
+    String? imageURL,
     int? stock,
     String? expirationDate,
     int? order,
