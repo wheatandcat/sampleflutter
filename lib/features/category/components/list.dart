@@ -56,6 +56,7 @@ class CategoryList extends StatelessWidget {
                         padding:
                             const EdgeInsets.only(bottom: AppSpacing.large),
                         child: CategoryIcon(
+                          imageURL: categories[index].imageURL,
                           onPressed: () =>
                               onPassedItem(int.parse(categories[index].id)),
                           onLongPressed: () =>

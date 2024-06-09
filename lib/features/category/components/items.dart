@@ -59,9 +59,15 @@ class CategoryItems extends StatelessWidget {
                   crossAxisSpacing: 4.0,
                   children: List.generate(items.length + 1, (index) {
                     if (index == items.length) {
-                      return Padding(
+                      return Container(
                           padding: const EdgeInsets.only(
-                              right: 20, left: 5, bottom: 28),
+                            right: 33,
+                            left: 10,
+                            bottom: 43,
+                          ),
+                          margin: const EdgeInsets.only(top: 0),
+                          width: 50,
+                          height: 50,
                           child: CategoryNewItem(
                             categoryId: categoryId,
                             onCallback: () => onNewItem(),
@@ -75,6 +81,7 @@ class CategoryItems extends StatelessWidget {
                         child: ItemCard(
                           id: item.id,
                           name: item.name,
+                          imageURL: item.imageURL,
                           stock: item.stock,
                           onRefetch: () {
                             onRefetch();

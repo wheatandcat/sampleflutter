@@ -193,6 +193,13 @@ const documentNodeQueryCategories = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'imageURL'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'order'),
             alias: null,
             arguments: [],
@@ -364,6 +371,7 @@ class Query$Categories$categories {
   Query$Categories$categories({
     required this.id,
     required this.name,
+    this.imageURL,
     required this.order,
     this.itemCount,
     this.$__typename = 'Category',
@@ -372,12 +380,14 @@ class Query$Categories$categories {
   factory Query$Categories$categories.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$imageURL = json['imageURL'];
     final l$order = json['order'];
     final l$itemCount = json['itemCount'];
     final l$$__typename = json['__typename'];
     return Query$Categories$categories(
       id: (l$id as String),
       name: (l$name as String),
+      imageURL: (l$imageURL as String?),
       order: (l$order as int),
       itemCount: (l$itemCount as int?),
       $__typename: (l$$__typename as String),
@@ -387,6 +397,8 @@ class Query$Categories$categories {
   final String id;
 
   final String name;
+
+  final String? imageURL;
 
   final int order;
 
@@ -400,6 +412,8 @@ class Query$Categories$categories {
     _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$imageURL = imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$order = order;
     _resultData['order'] = l$order;
     final l$itemCount = itemCount;
@@ -413,12 +427,14 @@ class Query$Categories$categories {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$imageURL = imageURL;
     final l$order = order;
     final l$itemCount = itemCount;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
+      l$imageURL,
       l$order,
       l$itemCount,
       l$$__typename,
@@ -442,6 +458,11 @@ class Query$Categories$categories {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$imageURL = imageURL;
+    final lOther$imageURL = other.imageURL;
+    if (l$imageURL != lOther$imageURL) {
       return false;
     }
     final l$order = order;
@@ -484,6 +505,7 @@ abstract class CopyWith$Query$Categories$categories<TRes> {
   TRes call({
     String? id,
     String? name,
+    String? imageURL,
     int? order,
     int? itemCount,
     String? $__typename,
@@ -506,6 +528,7 @@ class _CopyWithImpl$Query$Categories$categories<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? imageURL = _undefined,
     Object? order = _undefined,
     Object? itemCount = _undefined,
     Object? $__typename = _undefined,
@@ -515,6 +538,8 @@ class _CopyWithImpl$Query$Categories$categories<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        imageURL:
+            imageURL == _undefined ? _instance.imageURL : (imageURL as String?),
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -535,6 +560,7 @@ class _CopyWithStubImpl$Query$Categories$categories<TRes>
   call({
     String? id,
     String? name,
+    String? imageURL,
     int? order,
     int? itemCount,
     String? $__typename,

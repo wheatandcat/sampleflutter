@@ -26,6 +26,7 @@ class CategoryNew extends HookWidget {
       mutationHookResult.runMutation(Variables$Mutation$CreateCategory(
           input: Input$NewCategory(
         name: item.name,
+        imageURL: item.imageURL,
         order: 0,
       )));
     }

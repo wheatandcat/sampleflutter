@@ -19,6 +19,8 @@ type Category {
   id: ID!
   "カテゴリー名"
   name: String!
+  "画像URL"
+  imageURL: String
   "順番"
   order: Int!
   "アイテム数"
@@ -32,6 +34,8 @@ type Item {
   categoryId: ID!
   "アイテム名"
   name: String!
+  "画像URL"
+  imageURL: String
   "在庫数"
   stock: Int!
   "消費期限"
@@ -43,6 +47,8 @@ type Item {
 input NewCategory {
   "カテゴリー名"
   name: String!
+  "画像URL"
+  imageURL: String
   "順番"
   order: Int!
 }
@@ -52,6 +58,8 @@ input UpdateCategory {
   id: Int!
   "カテゴリー名"
   name: String!
+  "画像URL"
+  imageURL: String
   "順番"
   order: Int!
 }
@@ -61,6 +69,8 @@ input NewItem {
   categoryId: Int!
   "アイテム名"
   name: String!
+  "画像URL"
+  imageURL: String
   "在庫数"
   stock: Int!
   "消費期限"
@@ -76,6 +86,8 @@ input UpdateItem {
   categoryId: Int!
   "アイテム名"
   name: String!
+  "画像URL"
+  imageURL: String
   "在庫数"
   stock: Int!
   "消費期限"

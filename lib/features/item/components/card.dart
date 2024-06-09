@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
 
 class ItemCard extends StatelessWidget {
   final String id;
   final String name;
+  String? imageURL;
   final int stock;
   final void Function() onRefetch;
   final void Function() onDelete;
@@ -12,6 +14,7 @@ class ItemCard extends StatelessWidget {
       {super.key,
       required this.id,
       required this.name,
+      this.imageURL,
       required this.stock,
       required this.onRefetch,
       required this.onDelete});
@@ -78,21 +81,37 @@ class ItemCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         InkWell(
-            onLongPress: () => showCustomMenu(context),
-            onTap: () => Navigator.pushNamed(context, '/items/id',
-                arguments: ItemDetail(
-                    id: int.parse(id),
-                    onCallback: () {
-                      onRefetch();
-                    })),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.asset(
-                'images/150x150.png',
-                width: 100,
-                height: 100,
-              ), // 画像URLを指定
-            )),
+          onLongPress: () => showCustomMenu(context),
+          onTap: () => Navigator.pushNamed(context, '/items/id',
+              arguments: ItemDetail(
+                  id: int.parse(id),
+                  onCallback: () {
+                    onRefetch();
+                  })),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(10)),
+            width: 100,
+            height: 100,
+            child: imageURL != null
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.network(
+                      imageURL!,
+                      width: 100,
+                      height: 100,
+                    ), // 画像URLを指定
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      'images/noimage.png',
+                      width: 100,
+                      height: 100,
+                    ), // 画像URLを指定
+                  ),
+          ),
+        ),
         Text('$stock個',
             style: const TextStyle(
                 fontSize: 21,

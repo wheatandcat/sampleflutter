@@ -271,6 +271,13 @@ const documentNodeQueryItem = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'imageURL'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'categoryId'),
             alias: null,
             arguments: [],
@@ -469,6 +476,7 @@ class Query$Item$item {
   Query$Item$item({
     required this.id,
     required this.name,
+    this.imageURL,
     required this.categoryId,
     required this.order,
     required this.stock,
@@ -479,6 +487,7 @@ class Query$Item$item {
   factory Query$Item$item.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$imageURL = json['imageURL'];
     final l$categoryId = json['categoryId'];
     final l$order = json['order'];
     final l$stock = json['stock'];
@@ -487,6 +496,7 @@ class Query$Item$item {
     return Query$Item$item(
       id: (l$id as String),
       name: (l$name as String),
+      imageURL: (l$imageURL as String?),
       categoryId: (l$categoryId as String),
       order: (l$order as int),
       stock: (l$stock as int),
@@ -498,6 +508,8 @@ class Query$Item$item {
   final String id;
 
   final String name;
+
+  final String? imageURL;
 
   final String categoryId;
 
@@ -515,6 +527,8 @@ class Query$Item$item {
     _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$imageURL = imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$categoryId = categoryId;
     _resultData['categoryId'] = l$categoryId;
     final l$order = order;
@@ -532,6 +546,7 @@ class Query$Item$item {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$imageURL = imageURL;
     final l$categoryId = categoryId;
     final l$order = order;
     final l$stock = stock;
@@ -540,6 +555,7 @@ class Query$Item$item {
     return Object.hashAll([
       l$id,
       l$name,
+      l$imageURL,
       l$categoryId,
       l$order,
       l$stock,
@@ -564,6 +580,11 @@ class Query$Item$item {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$imageURL = imageURL;
+    final lOther$imageURL = other.imageURL;
+    if (l$imageURL != lOther$imageURL) {
       return false;
     }
     final l$categoryId = categoryId;
@@ -615,6 +636,7 @@ abstract class CopyWith$Query$Item$item<TRes> {
   TRes call({
     String? id,
     String? name,
+    String? imageURL,
     String? categoryId,
     int? order,
     int? stock,
@@ -639,6 +661,7 @@ class _CopyWithImpl$Query$Item$item<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? imageURL = _undefined,
     Object? categoryId = _undefined,
     Object? order = _undefined,
     Object? stock = _undefined,
@@ -650,6 +673,8 @@ class _CopyWithImpl$Query$Item$item<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        imageURL:
+            imageURL == _undefined ? _instance.imageURL : (imageURL as String?),
         categoryId: categoryId == _undefined || categoryId == null
             ? _instance.categoryId
             : (categoryId as String),
@@ -677,6 +702,7 @@ class _CopyWithStubImpl$Query$Item$item<TRes>
   call({
     String? id,
     String? name,
+    String? imageURL,
     String? categoryId,
     int? order,
     int? stock,

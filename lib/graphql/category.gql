@@ -2,11 +2,13 @@ query Category($id: Int!) {
   category(id: $id) {
     id
     name
+    imageURL
     order
   }
   items(categoryId: $id) {
     id
     name
+    imageURL
     order
     stock
     expirationDate

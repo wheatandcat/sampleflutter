@@ -15,3 +15,10 @@ $ flutter run
 $ flutter pub run build_runner build
 
 ```
+
+## android のフィンガープリント取得
+
+```bash
+$ cd android
+$ ./gradlew signingReport
+```

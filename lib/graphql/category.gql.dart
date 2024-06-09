@@ -335,6 +335,13 @@ const documentNodeQueryCategory = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'imageURL'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'order'),
             alias: null,
             arguments: [],
@@ -370,6 +377,13 @@ const documentNodeQueryCategory = DocumentNode(definitions: [
           ),
           FieldNode(
             name: NameNode(value: 'name'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'imageURL'),
             alias: null,
             arguments: [],
             directives: [],
@@ -568,6 +582,7 @@ class Query$Category$category {
   Query$Category$category({
     required this.id,
     required this.name,
+    this.imageURL,
     required this.order,
     this.$__typename = 'Category',
   });
@@ -575,11 +590,13 @@ class Query$Category$category {
   factory Query$Category$category.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$imageURL = json['imageURL'];
     final l$order = json['order'];
     final l$$__typename = json['__typename'];
     return Query$Category$category(
       id: (l$id as String),
       name: (l$name as String),
+      imageURL: (l$imageURL as String?),
       order: (l$order as int),
       $__typename: (l$$__typename as String),
     );
@@ -588,6 +605,8 @@ class Query$Category$category {
   final String id;
 
   final String name;
+
+  final String? imageURL;
 
   final int order;
 
@@ -599,6 +618,8 @@ class Query$Category$category {
     _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$imageURL = imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$order = order;
     _resultData['order'] = l$order;
     final l$$__typename = $__typename;
@@ -610,11 +631,13 @@ class Query$Category$category {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$imageURL = imageURL;
     final l$order = order;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
+      l$imageURL,
       l$order,
       l$$__typename,
     ]);
@@ -637,6 +660,11 @@ class Query$Category$category {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$imageURL = imageURL;
+    final lOther$imageURL = other.imageURL;
+    if (l$imageURL != lOther$imageURL) {
       return false;
     }
     final l$order = order;
@@ -673,6 +701,7 @@ abstract class CopyWith$Query$Category$category<TRes> {
   TRes call({
     String? id,
     String? name,
+    String? imageURL,
     int? order,
     String? $__typename,
   });
@@ -694,6 +723,7 @@ class _CopyWithImpl$Query$Category$category<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? imageURL = _undefined,
     Object? order = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -702,6 +732,8 @@ class _CopyWithImpl$Query$Category$category<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        imageURL:
+            imageURL == _undefined ? _instance.imageURL : (imageURL as String?),
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -720,6 +752,7 @@ class _CopyWithStubImpl$Query$Category$category<TRes>
   call({
     String? id,
     String? name,
+    String? imageURL,
     int? order,
     String? $__typename,
   }) =>
@@ -730,6 +763,7 @@ class Query$Category$items {
   Query$Category$items({
     required this.id,
     required this.name,
+    this.imageURL,
     required this.order,
     required this.stock,
     this.expirationDate,
@@ -739,6 +773,7 @@ class Query$Category$items {
   factory Query$Category$items.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$imageURL = json['imageURL'];
     final l$order = json['order'];
     final l$stock = json['stock'];
     final l$expirationDate = json['expirationDate'];
@@ -746,6 +781,7 @@ class Query$Category$items {
     return Query$Category$items(
       id: (l$id as String),
       name: (l$name as String),
+      imageURL: (l$imageURL as String?),
       order: (l$order as int),
       stock: (l$stock as int),
       expirationDate: (l$expirationDate as String?),
@@ -756,6 +792,8 @@ class Query$Category$items {
   final String id;
 
   final String name;
+
+  final String? imageURL;
 
   final int order;
 
@@ -771,6 +809,8 @@ class Query$Category$items {
     _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$imageURL = imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$order = order;
     _resultData['order'] = l$order;
     final l$stock = stock;
@@ -786,6 +826,7 @@ class Query$Category$items {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$imageURL = imageURL;
     final l$order = order;
     final l$stock = stock;
     final l$expirationDate = expirationDate;
@@ -793,6 +834,7 @@ class Query$Category$items {
     return Object.hashAll([
       l$id,
       l$name,
+      l$imageURL,
       l$order,
       l$stock,
       l$expirationDate,
@@ -816,6 +858,11 @@ class Query$Category$items {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$imageURL = imageURL;
+    final lOther$imageURL = other.imageURL;
+    if (l$imageURL != lOther$imageURL) {
       return false;
     }
     final l$order = order;
@@ -862,6 +909,7 @@ abstract class CopyWith$Query$Category$items<TRes> {
   TRes call({
     String? id,
     String? name,
+    String? imageURL,
     int? order,
     int? stock,
     String? expirationDate,
@@ -885,6 +933,7 @@ class _CopyWithImpl$Query$Category$items<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? imageURL = _undefined,
     Object? order = _undefined,
     Object? stock = _undefined,
     Object? expirationDate = _undefined,
@@ -895,6 +944,8 @@ class _CopyWithImpl$Query$Category$items<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        imageURL:
+            imageURL == _undefined ? _instance.imageURL : (imageURL as String?),
         order: order == _undefined || order == null
             ? _instance.order
             : (order as int),
@@ -919,6 +970,7 @@ class _CopyWithStubImpl$Query$Category$items<TRes>
   call({
     String? id,
     String? name,
+    String? imageURL,
     int? order,
     int? stock,
     String? expirationDate,

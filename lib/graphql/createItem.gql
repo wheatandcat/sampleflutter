@@ -3,6 +3,7 @@ mutation CreateItem($input: NewItem!) {
     id
     name
     categoryId
+    imageURL
     order
     stock
     expirationDate

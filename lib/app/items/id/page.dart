@@ -51,6 +51,7 @@ class ItemDetail extends HookWidget {
       final Input$UpdateItem p = Input$UpdateItem(
         id: id,
         categoryId: int.parse(item.categoryId),
+        imageURL: input.imageURL,
         name: input.name,
         stock: input.stock,
         order: input.order,
@@ -67,6 +68,7 @@ class ItemDetail extends HookWidget {
           buttonText: "保存",
           defaultValue: InputItem(
             name: "",
+            imageURL: item.imageURL,
             stock: item.stock,
             order: item.order,
           )),
