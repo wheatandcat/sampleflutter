@@ -9,6 +9,7 @@ import 'package:sampleflutter/app/categories/edit/page.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
 import 'package:sampleflutter/app/items/new/page.dart';
 import 'package:sampleflutter/app/login/page.dart';
+import 'package:sampleflutter/app/cart/page.dart';
 import 'package:sampleflutter/utils/graphql.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -89,6 +90,12 @@ class MyApp extends StatelessWidget {
               case '/login':
                 return PageTransition(
                   child: const Login(),
+                  type: PageTransitionType.rightToLeft,
+                  settings: settings,
+                );
+              case '/cart':
+                return PageTransition(
+                  child: const Cart(),
                   type: PageTransitionType.rightToLeft,
                   settings: settings,
                 );

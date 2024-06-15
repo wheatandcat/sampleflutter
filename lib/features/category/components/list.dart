@@ -65,13 +65,29 @@ class CategoryList extends StatelessWidget {
                   }),
             )),
             Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: FloatingActionButton(
+                  heroTag: "cart",
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/cart');
+                  },
+                  tooltip: 'Increment',
+                  child: const Icon(
+                    Icons.shopping_basket_sharp,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                )),
+            Padding(
                 padding: const EdgeInsets.only(bottom: 30),
                 child: FloatingActionButton(
                   heroTag: "setting",
                   backgroundColor: Colors.transparent,
                   elevation: 0,
                   onPressed: () {
-                    _showSettingDialog(context);
+                    showSettingDialog(context);
                   },
                   tooltip: 'Increment',
                   child: const Icon(
@@ -85,7 +101,7 @@ class CategoryList extends StatelessWidget {
   }
 }
 
-void _showSettingDialog(BuildContext context) {
+void showSettingDialog(BuildContext context) {
   showDialog<void>(
     context: context,
     builder: (BuildContext context) {

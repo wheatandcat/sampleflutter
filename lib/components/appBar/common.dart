@@ -9,12 +9,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
-      flexibleSpace: FlexibleSpaceBar(
-        background: Image.asset(
-          'images/background.png',
-          fit: BoxFit.cover, // 画像がAppBar全体に広がるように設定
-        ),
-      ),
+      elevation: 0,
     );
   }
 

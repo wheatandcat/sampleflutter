@@ -105,8 +105,6 @@ class MyHomePage extends HookConsumerWidget {
               },
               onPassedItem: (categoryId) {
                 selectCategoryId.value = categoryId;
-
-                //Navigator.pushNamed(context, '/categories/$categoryId');
               },
               onLongPressedItem: (category) {
                 showCustomMenu(context, category);

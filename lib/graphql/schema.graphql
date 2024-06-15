@@ -5,6 +5,8 @@ type Query {
   items(categoryId: Int!): [Item]
   item(id: Int!): Item
   me: User
+  itemAll: [Item]
+  carts: [Cart]
 }
 
 type User {
@@ -42,6 +44,21 @@ type Item {
   expirationDate: Time
   "順番"
   order: Int!
+  "カテゴリー"
+  category: Category
+}
+
+type Cart {
+  "カートID"
+  id: ID!
+  "ユーザーID"
+  userId: ID!
+  "アイテムID"
+  itemId: ID!
+  "数量"
+  quantity: Int!
+  "アイテム"
+  item: Item
 }
 
 input NewCategory {
@@ -96,6 +113,13 @@ input UpdateItem {
   order: Int!
 }
 
+input NewCart {
+  "アイテムID"
+  itemId: Int!
+  "数量"
+  quantity: Int!
+}
+
 type Mutation {
   createUser: User!
   createCategory(input: NewCategory!): Category!
@@ -104,6 +128,8 @@ type Mutation {
   createItem(input: NewItem!): Item!
   updateItem(input: UpdateItem!): Item!
   deleteItem(id: Int!): Item!
+  addCarts(input: [NewCart]!): Boolean!
+  buying: Boolean!
 }
 
 scalar Time

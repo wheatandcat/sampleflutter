@@ -124,10 +124,7 @@ class Input extends HookWidget {
               .putFile(image.value!);
           final imageUrl = await res.ref.getDownloadURL();
           imageURL.value = imageUrl;
-
-          //print("imageURL: $imageUrl");
         } catch (e) {
-          //print("error: $e");
           showDialog(
               context: context,
               builder: (BuildContext contextDialog) {

@@ -100,6 +100,7 @@ class ItemCard extends StatelessWidget {
                       imageURL!,
                       width: 100,
                       height: 100,
+                      fit: BoxFit.cover,
                     ), // 画像URLを指定
                   )
                 : ClipRRect(
@@ -108,6 +109,7 @@ class ItemCard extends StatelessWidget {
                       'images/noimage.png',
                       width: 100,
                       height: 100,
+                      fit: BoxFit.cover,
                     ), // 画像URLを指定
                   ),
           ),

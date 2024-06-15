@@ -781,6 +781,132 @@ class _CopyWithStubImpl$Input$UpdateItem<TRes>
       _res;
 }
 
+class Input$NewCart {
+  factory Input$NewCart({
+    required int itemId,
+    required int quantity,
+  }) =>
+      Input$NewCart._({
+        r'itemId': itemId,
+        r'quantity': quantity,
+      });
+
+  Input$NewCart._(this._$data);
+
+  factory Input$NewCart.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$itemId = data['itemId'];
+    result$data['itemId'] = (l$itemId as int);
+    final l$quantity = data['quantity'];
+    result$data['quantity'] = (l$quantity as int);
+    return Input$NewCart._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  int get itemId => (_$data['itemId'] as int);
+
+  int get quantity => (_$data['quantity'] as int);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$itemId = itemId;
+    result$data['itemId'] = l$itemId;
+    final l$quantity = quantity;
+    result$data['quantity'] = l$quantity;
+    return result$data;
+  }
+
+  CopyWith$Input$NewCart<Input$NewCart> get copyWith => CopyWith$Input$NewCart(
+        this,
+        (i) => i,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$NewCart) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$itemId = itemId;
+    final lOther$itemId = other.itemId;
+    if (l$itemId != lOther$itemId) {
+      return false;
+    }
+    final l$quantity = quantity;
+    final lOther$quantity = other.quantity;
+    if (l$quantity != lOther$quantity) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$itemId = itemId;
+    final l$quantity = quantity;
+    return Object.hashAll([
+      l$itemId,
+      l$quantity,
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$NewCart<TRes> {
+  factory CopyWith$Input$NewCart(
+    Input$NewCart instance,
+    TRes Function(Input$NewCart) then,
+  ) = _CopyWithImpl$Input$NewCart;
+
+  factory CopyWith$Input$NewCart.stub(TRes res) =
+      _CopyWithStubImpl$Input$NewCart;
+
+  TRes call({
+    int? itemId,
+    int? quantity,
+  });
+}
+
+class _CopyWithImpl$Input$NewCart<TRes>
+    implements CopyWith$Input$NewCart<TRes> {
+  _CopyWithImpl$Input$NewCart(
+    this._instance,
+    this._then,
+  );
+
+  final Input$NewCart _instance;
+
+  final TRes Function(Input$NewCart) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? itemId = _undefined,
+    Object? quantity = _undefined,
+  }) =>
+      _then(Input$NewCart._({
+        ..._instance._$data,
+        if (itemId != _undefined && itemId != null) 'itemId': (itemId as int),
+        if (quantity != _undefined && quantity != null)
+          'quantity': (quantity as int),
+      }));
+}
+
+class _CopyWithStubImpl$Input$NewCart<TRes>
+    implements CopyWith$Input$NewCart<TRes> {
+  _CopyWithStubImpl$Input$NewCart(this._res);
+
+  TRes _res;
+
+  call({
+    int? itemId,
+    int? quantity,
+  }) =>
+      _res;
+}
+
 enum Enum$__TypeKind {
   SCALAR,
   OBJECT,

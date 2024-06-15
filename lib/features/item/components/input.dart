@@ -54,7 +54,7 @@ class Input extends HookWidget {
           AndroidUiSettings(
               toolbarTitle: '画像を切り取る',
               initAspectRatio: CropAspectRatioPreset.square,
-              lockAspectRatio: false,
+              lockAspectRatio: true,
               aspectRatioPresets: [
                 CropAspectRatioPreset.square,
               ]),
@@ -63,7 +63,7 @@ class Input extends HookWidget {
             aspectRatioPresets: [
               CropAspectRatioPreset.square,
             ],
-            aspectRatioLockEnabled: false,
+            aspectRatioLockEnabled: true,
           ),
           WebUiSettings(
             context: context,
