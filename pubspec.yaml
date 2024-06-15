@@ -26,10 +26,19 @@ flutter_icons:
   image_path: "images/launcher/icon_ios.png"
   remove_alpha_ios: true
   android: true
+  android_gravity: center
   adaptive_icon_background: "images/launcher/icon_adaptive_background.png"
   adaptive_icon_foreground: "images/launcher/icon_adaptive_foreground.png"
   ios_settings:
     icon_name: "StockKeeper"
+
+flutter_native_splash:
+  color: "#b78e67"
+  image: images/splash.png
+  android: true
+  ios: true
+  web: false
+
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -64,6 +73,7 @@ dependencies:
   uuid: ^4.4.0
   image_cropper: ^7.0.4
   flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
 
 dev_dependencies:
   flutter_test:

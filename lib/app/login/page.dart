@@ -85,7 +85,7 @@ class Login extends HookConsumerWidget {
                         (BuildContext context, AsyncSnapshot<User?> snapshot) {
                       if (!snapshot.hasData) {
                         return Button(
-                            title: "Google ログイン",
+                            title: "Googleでログイン",
                             width: 300,
                             onPressed: onPressed);
                       } else {

@@ -174,11 +174,11 @@ class Input extends HookWidget {
                 cursorColor: Colors.white,
                 style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold),
                 decoration: const InputDecoration(
                   labelText: "部屋の名前",
-                  labelStyle: TextStyle(color: Colors.white, fontSize: 26),
+                  labelStyle: TextStyle(color: Colors.white, fontSize: 16),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),

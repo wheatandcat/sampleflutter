@@ -13,7 +13,7 @@ import 'package:sampleflutter/app/cart/page.dart';
 import 'package:sampleflutter/utils/graphql.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
                 iconTheme: IconThemeData(color: Colors.white)),
             scaffoldBackgroundColor: Colors.transparent,
           ),
-          home: const MyHomePage(),
+          home: AuthWrapper(),
           onGenerateRoute: (settings) {
             switch (settings.name) {
               case '/categories/new':
@@ -122,5 +122,24 @@ class MyApp extends StatelessWidget {
             Locale('ja'), // 日本語
           ],
         ));
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasData) {
+          return const MyHomePage();
+        } else {
+          return const Login();
+        }
+      },
+    );
   }
 }

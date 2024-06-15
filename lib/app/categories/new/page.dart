@@ -31,14 +31,14 @@ class CategoryNew extends HookWidget {
       )));
     }
 
-    return Scaffold(
-        appBar: const CommonAppBar(title: ""),
-        body: BackgroundImage(
-          child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Input(
-                onPressed: onPressed,
-              )),
-        ));
+    return BackgroundImage(
+        child: Scaffold(
+      appBar: const CommonAppBar(title: ""),
+      body: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child: Input(
+            onPressed: onPressed,
+          )),
+    ));
   }
 }

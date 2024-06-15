@@ -34,11 +34,6 @@ class ItemCard extends StatelessWidget {
               child: Wrap(
                 children: <Widget>[
                   ListTile(
-                    title: Text(name,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
-                  ),
-                  ListTile(
                     leading: const Icon(Icons.delete),
                     title: const Text('アイテムを削除する'),
                     onTap: () {
@@ -47,7 +42,7 @@ class ItemCard extends StatelessWidget {
                         builder: (BuildContext contextDialog) {
                           return AlertDialog(
                             title: const Text('確認'),
-                            content: Text('$nameを削除しますか？'),
+                            content: const Text('本当に削除しますか？'),
                             actions: <Widget>[
                               TextButton(
                                 child: const Text('キャンセル'),
