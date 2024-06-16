@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/services.dart';
 import 'package:sampleflutter/components/button/button.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -67,12 +68,23 @@ class Input extends HookWidget {
           ),
           WebUiSettings(
             context: context,
+            initialAspectRatio: 1.0,
           ),
         ],
       );
 
       if (croppedFile != null) {
-        image.value = File(croppedFile.path);
+        if (kIsWeb) {
+          final bytes = await croppedFile.readAsBytes();
+          final uuid = const Uuid().v4();
+          final fileName = "$uuid.jpg";
+          final res =
+              await storageRef.child('category/$fileName').putData(bytes);
+          final imageUrl = await res.ref.getDownloadURL();
+          imageURL.value = imageUrl;
+        } else {
+          image.value = File(croppedFile.path);
+        }
       }
     }
 

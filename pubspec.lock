@@ -798,13 +798,13 @@ packages:
     source: hosted
     version: "7.0.4"
   image_cropper_for_web:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image_cropper_for_web
-      sha256: "9e927a8bd5ee8618b608a6530eee6c35780d7225c1ccb174d0b461b02fafe9a4"
+      sha256: ae3a307f970d1d2c286bce4519f8cb20c3f0a5332867a912366e1843e24bc8d3
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.3"
+    version: "5.0.4"
   image_cropper_platform_interface:
     dependency: transitive
     description:
@@ -830,7 +830,7 @@ packages:
     source: hosted
     version: "0.8.12+3"
   image_picker_for_web:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image_picker_for_web
       sha256: "5d6eb13048cd47b60dbf1a5495424dea226c5faf3950e20bf8120a58efb5b5f3"

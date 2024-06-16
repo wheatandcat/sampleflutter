@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sampleflutter/components/button/button.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -58,12 +59,23 @@ class Input extends HookWidget {
           ),
           WebUiSettings(
             context: context,
+            initialAspectRatio: 1.0,
           ),
         ],
       );
 
       if (croppedFile != null) {
-        image.value = File(croppedFile.path);
+        if (kIsWeb) {
+          final bytes = await croppedFile.readAsBytes();
+          final uuid = const Uuid().v4();
+          final fileName = "$uuid.jpg";
+          final res =
+              await storageRef.child('category/$fileName').putData(bytes);
+          final imageUrl = await res.ref.getDownloadURL();
+          imageURL.value = imageUrl;
+        } else {
+          image.value = File(croppedFile.path);
+        }
       }
     }
 
@@ -191,7 +203,9 @@ class Input extends HookWidget {
           child: InkWell(
               onTap: showPickImage,
               child: image.value != null
-                  ? Image.file(image.value!, width: 250, height: 250)
+                  ? kIsWeb
+                      ? const Text("画像選択")
+                      : Image.file(image.value!, width: 250, height: 250)
                   : imageURL.value != null
                       ? Image.network(imageURL.value!, width: 250, height: 250)
                       : Card(
