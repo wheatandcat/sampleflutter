@@ -96,6 +96,7 @@ class MyHomePage extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CategoryList(
+              categoryId: selectCategoryId.value,
               categories: categories,
               onAdd: () => {
                 Navigator.pushNamed(context, '/categories/new',

@@ -49,7 +49,6 @@ class Cart extends HookWidget {
 
     return BackgroundImage(
       child: Scaffold(
-        extendBodyBehindAppBar: true,
         appBar: const CommonAppBar(title: ""),
         body: ListView.builder(
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
