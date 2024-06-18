@@ -14,7 +14,6 @@ import 'package:sampleflutter/utils/graphql.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:image_cropper_for_web/image_cropper_for_web.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -127,18 +126,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AuthWrapper extends StatelessWidget {
+class AuthWrapper extends ConsumerWidget {
   const AuthWrapper({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+      builder: (context, authSnapshot) {
+        print('authSnapshot: $authSnapshot');
+        if (authSnapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (snapshot.hasData) {
+        if (authSnapshot.hasData) {
           return const MyHomePage();
         } else {
           return const Login();

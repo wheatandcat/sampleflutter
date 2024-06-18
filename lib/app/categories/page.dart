@@ -32,7 +32,16 @@ class MyHomePage extends HookConsumerWidget {
     }));
 
     final userDataAsyncValue = ref.watch(userDataProvider);
-    debugPrint('userDataAsyncValue: ${userDataAsyncValue.asData?.value?.id}');
+
+    useEffect(() {
+      debugPrint('userDataAsyncValue: ${userDataAsyncValue.asData?.value?.id}');
+      if (userDataAsyncValue.asData?.value?.id != null) {
+        if (!qcrs.result.isLoading && qcrs.result.data == null) {
+          qcrs.refetch();
+        }
+      }
+      return null;
+    }, [userDataAsyncValue.asData?.value?.id]);
 
     useEffect(() {
       items.get(selectCategoryId.value);

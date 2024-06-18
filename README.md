@@ -16,6 +16,14 @@ $ flutter pub run build_runner build
 
 ```
 
+## web ビルド
+
+```bash
+$ flutter build web
+$ cd build/web
+$ http-server -p 5000
+```
+
 ## android のフィンガープリント取得
 
 ```bash
