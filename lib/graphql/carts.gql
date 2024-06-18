@@ -1,0 +1,15 @@
+query Carts {
+  carts {
+    id
+    quantity
+    item {
+      id
+      imageURL
+      category {
+        id
+        name
+        imageURL
+      }
+    }
+  }
+}

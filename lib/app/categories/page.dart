@@ -32,7 +32,16 @@ class MyHomePage extends HookConsumerWidget {
     }));
 
     final userDataAsyncValue = ref.watch(userDataProvider);
-    debugPrint('userDataAsyncValue: ${userDataAsyncValue.asData?.value?.id}');
+
+    useEffect(() {
+      debugPrint('userDataAsyncValue: ${userDataAsyncValue.asData?.value?.id}');
+      if (userDataAsyncValue.asData?.value?.id != null) {
+        if (!qcrs.result.isLoading && qcrs.result.data == null) {
+          qcrs.refetch();
+        }
+      }
+      return null;
+    }, [userDataAsyncValue.asData?.value?.id]);
 
     useEffect(() {
       items.get(selectCategoryId.value);
@@ -96,6 +105,7 @@ class MyHomePage extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CategoryList(
+              categoryId: selectCategoryId.value,
               categories: categories,
               onAdd: () => {
                 Navigator.pushNamed(context, '/categories/new',
@@ -105,8 +115,6 @@ class MyHomePage extends HookConsumerWidget {
               },
               onPassedItem: (categoryId) {
                 selectCategoryId.value = categoryId;
-
-                //Navigator.pushNamed(context, '/categories/$categoryId');
               },
               onLongPressedItem: (category) {
                 showCustomMenu(context, category);

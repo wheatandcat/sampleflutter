@@ -7,12 +7,14 @@ import 'package:sampleflutter/components/appBar/menu.dart';
 
 class CategoryList extends StatelessWidget {
   final List<Query$Categories$categories> categories;
+  final int? categoryId;
   final void Function(int categoryId) onPassedItem;
   final void Function(Query$Categories$categories category) onLongPressedItem;
   final void Function() onAdd;
 
   const CategoryList(
       {super.key,
+      this.categoryId,
       required this.categories,
       required this.onPassedItem,
       required this.onLongPressedItem,
@@ -26,6 +28,7 @@ class CategoryList extends StatelessWidget {
         width: 100,
         height: deviceHeight,
         color: Colors.brown.withOpacity(0.5),
+        padding: const EdgeInsets.only(top: 10),
         alignment: Alignment.topCenter,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -33,8 +36,8 @@ class CategoryList extends StatelessWidget {
           children: [
             Expanded(
                 child: SizedBox(
-              width: 70,
-              height: 70,
+              width: 100,
+              height: 60,
               child: ListView.builder(
                   itemCount: categories.length + 1,
                   itemBuilder: (context, index) {
@@ -56,6 +59,8 @@ class CategoryList extends StatelessWidget {
                         padding:
                             const EdgeInsets.only(bottom: AppSpacing.large),
                         child: CategoryIcon(
+                          selected:
+                              categoryId == int.parse(categories[index].id),
                           imageURL: categories[index].imageURL,
                           onPressed: () =>
                               onPassedItem(int.parse(categories[index].id)),
@@ -65,13 +70,29 @@ class CategoryList extends StatelessWidget {
                   }),
             )),
             Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: FloatingActionButton(
+                  heroTag: "cart",
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/cart');
+                  },
+                  tooltip: 'Increment',
+                  child: const Icon(
+                    Icons.shopping_basket_sharp,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                )),
+            Padding(
                 padding: const EdgeInsets.only(bottom: 30),
                 child: FloatingActionButton(
                   heroTag: "setting",
                   backgroundColor: Colors.transparent,
                   elevation: 0,
                   onPressed: () {
-                    _showSettingDialog(context);
+                    showSettingDialog(context);
                   },
                   tooltip: 'Increment',
                   child: const Icon(
@@ -85,7 +106,7 @@ class CategoryList extends StatelessWidget {
   }
 }
 
-void _showSettingDialog(BuildContext context) {
+void showSettingDialog(BuildContext context) {
   showDialog<void>(
     context: context,
     builder: (BuildContext context) {

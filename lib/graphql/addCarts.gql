@@ -1,0 +1,3 @@
+mutation AddCarts($input: [NewCart]!) {
+  addCarts(input: $input)
+}

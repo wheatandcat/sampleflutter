@@ -4,6 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sampleflutter/providers/graphql.dart';
 import 'package:sampleflutter/graphql/me.gql.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserData {
   late final String id;
@@ -48,4 +49,8 @@ final userDataProvider = FutureProvider.autoDispose<UserData?>((ref) async {
     );
   }
   return null;
+});
+
+final secureStorageProvider = Provider<FlutterSecureStorage>((ref) {
+  return const FlutterSecureStorage();
 });

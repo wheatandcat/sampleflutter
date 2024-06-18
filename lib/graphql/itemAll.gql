@@ -1,0 +1,12 @@
+query ItemAll {
+  itemAll {
+    id
+    imageURL
+    categoryId
+    stock
+    category {
+      id
+      name
+    }
+  }
+}

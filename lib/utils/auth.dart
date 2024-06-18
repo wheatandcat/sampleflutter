@@ -11,6 +11,7 @@ class AuthService {
     User? user = _auth.currentUser;
     if (user != null) {
       String? token = await user.getIdToken(true);
+
       await secureStorage.write(key: 'token', value: token);
       await secureStorage.write(
           key: 'tokenDate', value: DateTime.now().toIso8601String());
@@ -19,11 +20,18 @@ class AuthService {
 
   // トークンの有効性をチェックし、必要に応じて更新
   Future<String?> getToken() async {
+    User? user = _auth.currentUser;
     try {
       String? token = await secureStorage.read(key: 'token');
+      if (token == null && user != null) {
+        // もしログイン済みでトークンが取得できない場合は、トークンを再設定
+        await refreshAndStoreToken();
+        token = await secureStorage.read(key: 'token');
+      }
       if (token == null) {
         return null;
       }
+
       String? storedDate = await secureStorage.read(key: 'tokenDate');
       if (storedDate == null) {
         return null;

@@ -9,14 +9,16 @@ import 'package:sampleflutter/app/categories/edit/page.dart';
 import 'package:sampleflutter/app/items/id/page.dart';
 import 'package:sampleflutter/app/items/new/page.dart';
 import 'package:sampleflutter/app/login/page.dart';
+import 'package:sampleflutter/app/cart/page.dart';
 import 'package:sampleflutter/utils/graphql.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
                 iconTheme: IconThemeData(color: Colors.white)),
             scaffoldBackgroundColor: Colors.transparent,
           ),
-          home: const MyHomePage(),
+          home: AuthWrapper(),
           onGenerateRoute: (settings) {
             switch (settings.name) {
               case '/categories/new':
@@ -92,6 +94,12 @@ class MyApp extends StatelessWidget {
                   type: PageTransitionType.rightToLeft,
                   settings: settings,
                 );
+              case '/cart':
+                return PageTransition(
+                  child: const Cart(),
+                  type: PageTransitionType.rightToLeft,
+                  settings: settings,
+                );
             }
 
             final Uri uri = Uri.parse(settings.name ?? "");
@@ -115,5 +123,27 @@ class MyApp extends StatelessWidget {
             Locale('ja'), // 日本語
           ],
         ));
+  }
+}
+
+class AuthWrapper extends ConsumerWidget {
+  const AuthWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, authSnapshot) {
+        print('authSnapshot: $authSnapshot');
+        if (authSnapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (authSnapshot.hasData) {
+          return const MyHomePage();
+        } else {
+          return const Login();
+        }
+      },
+    );
   }
 }

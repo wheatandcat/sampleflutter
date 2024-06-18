@@ -51,3 +51,6 @@ firebase_options.dart
 firebase.json
 firepit-log.txt
 AppFrameworkInfo.plist
+
+# web
+web/index.html

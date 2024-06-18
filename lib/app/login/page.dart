@@ -26,6 +26,8 @@ class Login extends HookConsumerWidget {
       await authService.deleteToken();
 
       await FirebaseAuth.instance.signOut();
+      if (!context.mounted) return;
+      Navigator.pop(context);
     }
 
     final mutationHookResult =
@@ -58,6 +60,7 @@ class Login extends HookConsumerWidget {
             await FirebaseAuth.instance.signInWithCredential(credential);
 
         final AuthService authService = AuthService();
+
         await authService.refreshAndStoreToken();
 
         if (userCredential.additionalUserInfo!.isNewUser) {
@@ -65,9 +68,6 @@ class Login extends HookConsumerWidget {
           mutationHookResult.runMutation();
           return;
         }
-
-        if (!context.mounted) return;
-        Navigator.pop(context);
       } on FirebaseException catch (e) {
         debugPrint(e.message);
       } catch (e) {
@@ -85,7 +85,7 @@ class Login extends HookConsumerWidget {
                         (BuildContext context, AsyncSnapshot<User?> snapshot) {
                       if (!snapshot.hasData) {
                         return Button(
-                            title: "Google ログイン",
+                            title: "Googleでログイン",
                             width: 300,
                             onPressed: onPressed);
                       } else {
@@ -93,7 +93,7 @@ class Login extends HookConsumerWidget {
                           ListTile(
                             title: const Text("ログイン中のユーザー"),
                             subtitle:
-                                Text("ID:${userDataAsyncValue?.value?.id}"),
+                                Text("ID:${userDataAsyncValue.value?.id}"),
                           ),
                           Button(
                               title: "ログアウト", width: 300, onPressed: onLogout)
