@@ -1,4 +1,4 @@
-package com.example.stockkeeper
+package com.unicorn.stockkeeper
 
 import io.flutter.embedding.android.FlutterActivity
 
