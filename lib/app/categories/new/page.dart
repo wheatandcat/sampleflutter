@@ -37,6 +37,7 @@ class CategoryNew extends HookWidget {
       body: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Input(
+            loading: mutationHookResult.result.isLoading,
             onPressed: onPressed,
           )),
     ));

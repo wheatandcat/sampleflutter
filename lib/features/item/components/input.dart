@@ -1,14 +1,12 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/services.dart';
 import 'package:sampleflutter/components/button/button.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:sampleflutter/utils/image.dart';
 
 class InputItem {
   late final String name;
@@ -27,12 +25,17 @@ class InputItem {
 class Input extends HookWidget {
   final String? buttonText;
   final InputItem? defaultValue;
+  final bool loading;
   final void Function(InputItem) onPressed;
 
   final picker = ImagePicker();
 
   Input(
-      {super.key, required this.onPressed, this.defaultValue, this.buttonText});
+      {super.key,
+      required this.onPressed,
+      required this.loading,
+      this.defaultValue,
+      this.buttonText});
 
   @override
   Widget build(BuildContext context) {
@@ -44,48 +47,27 @@ class Input extends HookWidget {
 
     final inputStock = useTextEditingController(text: defaultStock.toString());
     final inputName = useState('');
-    final image = useState<File?>(null);
+    final imageByte = useState<Uint8List?>(null);
     final imageURL = useState<String?>(defaultValue?.imageURL);
     final storageRef = FirebaseStorage.instance.ref();
 
-    Future<void> cropImage(String path) async {
-      final croppedFile = await ImageCropper().cropImage(
-        sourcePath: path,
-        uiSettings: [
-          AndroidUiSettings(
-              toolbarTitle: '画像を切り取る',
-              initAspectRatio: CropAspectRatioPreset.square,
-              lockAspectRatio: true,
-              aspectRatioPresets: [
-                CropAspectRatioPreset.square,
-              ]),
-          IOSUiSettings(
-            title: '画像を切り取る',
-            aspectRatioPresets: [
-              CropAspectRatioPreset.square,
-            ],
-            aspectRatioLockEnabled: true,
-          ),
-          WebUiSettings(
-            context: context,
-            initialAspectRatio: 1.0,
-          ),
-        ],
-      );
+    String getFileName() {
+      if (defaultValue?.imageURL == null) {
+        final uuid = const Uuid().v4();
+        return "item/$uuid.jpg";
+      } else {
+        Uri uri = Uri.parse(Uri.decodeFull(defaultValue!.imageURL!));
+        String path = uri.path;
+        List<String> segments = path.split('/');
+        String lastSegment = segments.last;
+        String fileName = Uri.decodeComponent(lastSegment);
 
-      if (croppedFile != null) {
-        if (kIsWeb) {
-          final bytes = await croppedFile.readAsBytes();
-          final uuid = const Uuid().v4();
-          final fileName = "$uuid.jpg";
-          final res =
-              await storageRef.child('category/$fileName').putData(bytes);
-          final imageUrl = await res.ref.getDownloadURL();
-          imageURL.value = imageUrl;
-        } else {
-          image.value = File(croppedFile.path);
-        }
+        return "item/$fileName";
       }
+    }
+
+    Future<void> cropImage(String path) async {
+      imageByte.value = await cropImageSetting(path, context);
     }
 
     void showPickImage() {
@@ -136,16 +118,13 @@ class Input extends HookWidget {
     }
 
     onInputPressed() async {
-      if (image.value != null) {
+      if (imageByte.value != null) {
         try {
-          final uuid = const Uuid().v4();
-          final fileName = "$uuid.${image.value!.path.split('.').last}";
+          final fileName = getFileName();
           final res =
-              await storageRef.child('item/$fileName}').putFile(image.value!);
+              await storageRef.child(fileName).putData(imageByte.value!);
           final imageUrl = await res.ref.getDownloadURL();
           imageURL.value = imageUrl;
-
-          //print("imageURL: $imageUrl");
         } catch (e) {
           //print("error: $e");
           showDialog(
@@ -181,8 +160,8 @@ class Input extends HookWidget {
       children: [
         InkWell(
             onTap: showPickImage,
-            child: image.value != null
-                ? Image.file(image.value!, width: 250, height: 250)
+            child: imageByte.value != null
+                ? Image.memory(imageByte.value!, width: 250, height: 250)
                 : imageURL.value != null
                     ? Image.network(imageURL.value!, width: 250, height: 250)
                     : Card(
@@ -293,6 +272,7 @@ class Input extends HookWidget {
             child: Padding(
           padding: const EdgeInsets.only(top: 30),
           child: Button(
+            loading: loading,
             title: buttonText ?? "登録する",
             onPressed: onInputPressed,
           ),
