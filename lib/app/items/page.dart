@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:sampleflutter/components/background/background.dart';
-import 'package:sampleflutter/components/appBar/common.dart';
-import 'package:sampleflutter/features/category/components/card.dart';
-import 'package:sampleflutter/features/item/components/card.dart';
-import 'package:sampleflutter/features/item/components/addButton.dart';
-import 'package:sampleflutter/graphql/category.gql.dart';
+import 'package:stockkeeper/components/background/background.dart';
+import 'package:stockkeeper/components/appBar/common.dart';
+import 'package:stockkeeper/features/category/components/card.dart';
+import 'package:stockkeeper/features/item/components/card.dart';
+import 'package:stockkeeper/features/item/components/addButton.dart';
+import 'package:stockkeeper/graphql/category.gql.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:sampleflutter/graphql/deleteItem.gql.dart';
-import 'package:sampleflutter/utils/graphql.dart';
-import 'package:sampleflutter/app/items/new/page.dart';
+import 'package:stockkeeper/graphql/deleteItem.gql.dart';
+import 'package:stockkeeper/utils/graphql.dart';
+import 'package:stockkeeper/app/items/new/page.dart';
 
 class Items extends HookWidget {
   final int id;

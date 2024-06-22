@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sampleflutter/app/categories/edit/page.dart';
+import 'package:stockkeeper/app/categories/edit/page.dart';
 
 class CategoryMenu extends StatelessWidget {
   final String id;

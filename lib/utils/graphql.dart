@@ -1,5 +1,5 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:sampleflutter/utils/auth.dart';
+import 'package:stockkeeper/utils/auth.dart';
 
 List<T> extractGraphQLDataList<T>({
   required Map<String, dynamic>? data,

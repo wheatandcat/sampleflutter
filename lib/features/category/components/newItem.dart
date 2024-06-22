@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sampleflutter/app/items/new/page.dart';
-import 'package:sampleflutter/components/icon/add.dart';
+import 'package:stockkeeper/app/items/new/page.dart';
+import 'package:stockkeeper/components/icon/add.dart';
 
 class CategoryNewItem extends StatelessWidget {
   final int categoryId;
