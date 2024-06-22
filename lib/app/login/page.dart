@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:sampleflutter/components/appBar/common.dart';
-import 'package:sampleflutter/components/button/button.dart';
+import 'package:stockkeeper/components/appBar/common.dart';
+import 'package:stockkeeper/components/button/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sampleflutter/utils/auth.dart';
-import 'package:sampleflutter/graphql/createUser.gql.dart';
+import 'package:stockkeeper/utils/auth.dart';
+import 'package:stockkeeper/graphql/createUser.gql.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sampleflutter/providers/user.dart';
-import 'package:sampleflutter/components/background/background.dart';
+import 'package:stockkeeper/providers/user.dart';
+import 'package:stockkeeper/components/background/background.dart';
 
 class Login extends HookConsumerWidget {
   const Login({super.key});

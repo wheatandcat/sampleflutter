@@ -1,13 +1,13 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:sampleflutter/components/button/button.dart';
+import 'package:stockkeeper/components/button/button.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:sampleflutter/utils/image.dart';
+import 'package:stockkeeper/utils/image.dart';
 
 class InputCategory {
   late final String name;

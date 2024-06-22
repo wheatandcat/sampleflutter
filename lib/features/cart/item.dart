@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sampleflutter/features/cart/itemImage.dart';
+import 'package:stockkeeper/features/cart/itemImage.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class Item extends HookWidget {

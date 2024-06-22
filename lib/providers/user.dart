@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sampleflutter/providers/graphql.dart';
-import 'package:sampleflutter/graphql/me.gql.dart';
+import 'package:stockkeeper/providers/graphql.dart';
+import 'package:stockkeeper/graphql/me.gql.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserData {

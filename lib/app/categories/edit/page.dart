@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:sampleflutter/components/appBar/common.dart';
-import 'package:sampleflutter/graphql/updateCategory.gql.dart';
-import 'package:sampleflutter/graphql/schema.graphql.dart';
-import 'package:sampleflutter/components/background/background.dart';
-import 'package:sampleflutter/features/category/components/input.dart';
-import 'package:sampleflutter/graphql/category.gql.dart';
-import 'package:sampleflutter/utils/graphql.dart';
+import 'package:stockkeeper/components/appBar/common.dart';
+import 'package:stockkeeper/graphql/updateCategory.gql.dart';
+import 'package:stockkeeper/graphql/schema.graphql.dart';
+import 'package:stockkeeper/components/background/background.dart';
+import 'package:stockkeeper/features/category/components/input.dart';
+import 'package:stockkeeper/graphql/category.gql.dart';
+import 'package:stockkeeper/utils/graphql.dart';
 
 class CategoryEdit extends HookWidget {
   final int id;

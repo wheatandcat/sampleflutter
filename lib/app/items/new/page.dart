@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:sampleflutter/components/background/background.dart';
-import 'package:sampleflutter/components/appBar/common.dart';
-import 'package:sampleflutter/graphql/createItem.gql.dart';
-import 'package:sampleflutter/features/item/components/input.dart';
-import 'package:sampleflutter/graphql/schema.graphql.dart';
+import 'package:stockkeeper/components/background/background.dart';
+import 'package:stockkeeper/components/appBar/common.dart';
+import 'package:stockkeeper/graphql/createItem.gql.dart';
+import 'package:stockkeeper/features/item/components/input.dart';
+import 'package:stockkeeper/graphql/schema.graphql.dart';
 
 class NewItem extends HookWidget {
   final int categoryId;

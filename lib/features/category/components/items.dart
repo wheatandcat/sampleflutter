@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sampleflutter/graphql/category.gql.dart';
-import 'package:sampleflutter/features/category/components/card.dart';
-import 'package:sampleflutter/features/category/components/newItem.dart';
-import 'package:sampleflutter/features/item/components/card.dart';
+import 'package:stockkeeper/graphql/category.gql.dart';
+import 'package:stockkeeper/features/category/components/card.dart';
+import 'package:stockkeeper/features/category/components/newItem.dart';
+import 'package:stockkeeper/features/item/components/card.dart';
 
 class CategoryItems extends StatelessWidget {
   final List<Query$Category$items> items;

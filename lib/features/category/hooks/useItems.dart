@@ -1,8 +1,8 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:sampleflutter/utils/graphql.dart';
-import 'package:sampleflutter/graphql/category.gql.dart';
-import 'package:sampleflutter/providers/graphql.dart';
+import 'package:stockkeeper/utils/graphql.dart';
+import 'package:stockkeeper/graphql/category.gql.dart';
+import 'package:stockkeeper/providers/graphql.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 UseItems useItems(WidgetRef ref) {

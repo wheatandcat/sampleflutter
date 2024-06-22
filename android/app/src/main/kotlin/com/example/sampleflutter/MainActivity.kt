@@ -1,4 +1,4 @@
-package com.example.sampleflutter
+package com.example.stockkeeper
 
 import io.flutter.embedding.android.FlutterActivity
 

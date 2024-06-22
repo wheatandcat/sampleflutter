@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sampleflutter/components/background/background.dart';
+import 'package:stockkeeper/components/background/background.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:sampleflutter/graphql/itemAll.gql.dart';
-import 'package:sampleflutter/components/appBar/common.dart';
-import 'package:sampleflutter/utils/graphql.dart';
-import 'package:sampleflutter/features/cart/item.dart';
-import 'package:sampleflutter/components/button/button.dart';
+import 'package:stockkeeper/graphql/itemAll.gql.dart';
+import 'package:stockkeeper/components/appBar/common.dart';
+import 'package:stockkeeper/utils/graphql.dart';
+import 'package:stockkeeper/features/cart/item.dart';
+import 'package:stockkeeper/components/button/button.dart';
 
 class CategoryItem {
   String name;

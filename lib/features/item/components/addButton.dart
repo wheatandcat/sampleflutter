@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sampleflutter/components/icon/add.dart';
+import 'package:stockkeeper/components/icon/add.dart';
 
 class ItemAddButton extends StatelessWidget {
   final void Function() onAdd;

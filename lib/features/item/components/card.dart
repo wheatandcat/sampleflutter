@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:sampleflutter/app/items/id/page.dart';
+import 'package:stockkeeper/app/items/id/page.dart';
 
 class ItemCard extends StatelessWidget {
   final String id;

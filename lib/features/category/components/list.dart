@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sampleflutter/graphql/categories.gql.dart';
-import 'package:sampleflutter/utils/style.dart';
-import 'package:sampleflutter/components/icon/add.dart';
-import 'package:sampleflutter/features/category/components/icon.dart';
-import 'package:sampleflutter/components/appBar/menu.dart';
+import 'package:stockkeeper/graphql/categories.gql.dart';
+import 'package:stockkeeper/utils/style.dart';
+import 'package:stockkeeper/components/icon/add.dart';
+import 'package:stockkeeper/features/category/components/icon.dart';
+import 'package:stockkeeper/components/appBar/menu.dart';
 
 class CategoryList extends StatelessWidget {
   final List<Query$Categories$categories> categories;

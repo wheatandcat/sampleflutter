@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sampleflutter/utils/style.dart';
+import 'package:stockkeeper/utils/style.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:sampleflutter/components/background/background.dart';
-import 'package:sampleflutter/features/category/components/list.dart';
-import 'package:sampleflutter/features/category/components/menu.dart';
-import 'package:sampleflutter/graphql/categories.gql.dart';
-import 'package:sampleflutter/graphql/deleteCategory.gql.dart';
-import 'package:sampleflutter/graphql/deleteItem.gql.dart';
-import 'package:sampleflutter/utils/graphql.dart';
-import 'package:sampleflutter/app/categories/new/page.dart';
-import 'package:sampleflutter/providers/user.dart';
-import 'package:sampleflutter/features/category/hooks/useItems.dart';
-import 'package:sampleflutter/features/category/components/items.dart';
+import 'package:stockkeeper/components/background/background.dart';
+import 'package:stockkeeper/features/category/components/list.dart';
+import 'package:stockkeeper/features/category/components/menu.dart';
+import 'package:stockkeeper/graphql/categories.gql.dart';
+import 'package:stockkeeper/graphql/deleteCategory.gql.dart';
+import 'package:stockkeeper/graphql/deleteItem.gql.dart';
+import 'package:stockkeeper/utils/graphql.dart';
+import 'package:stockkeeper/app/categories/new/page.dart';
+import 'package:stockkeeper/providers/user.dart';
+import 'package:stockkeeper/features/category/hooks/useItems.dart';
+import 'package:stockkeeper/features/category/components/items.dart';
 
 class MyHomePage extends HookConsumerWidget {
   const MyHomePage({super.key});
