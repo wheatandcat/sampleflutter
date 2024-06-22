@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class Button extends StatelessWidget {
   final String title;
   final double? width;
+  final bool loading;
   final void Function() onPressed;
 
   const Button(
       {super.key,
+      this.loading = false,
       required this.title,
       required this.onPressed,
       this.width = 210});
@@ -27,10 +29,18 @@ class Button extends StatelessWidget {
                     ),
                 backgroundColor: Colors.white),
             onPressed: onPressed,
-            child: Text(title,
-                style: const TextStyle(
-                    color: Colors.brown,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold))));
+            child: loading
+                ? const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                      color: Colors.brown,
+                    ),
+                  )
+                : Text(title,
+                    style: const TextStyle(
+                        color: Colors.brown,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold))));
   }
 }

@@ -64,6 +64,7 @@ class ItemDetail extends HookWidget {
         child: Scaffold(
       appBar: const CommonAppBar(title: ""),
       body: Input(
+          loading: mutationHookResult.result.isLoading,
           onPressed: onPressed,
           buttonText: "保存",
           defaultValue: InputItem(

@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
                 iconTheme: IconThemeData(color: Colors.white)),
             scaffoldBackgroundColor: Colors.transparent,
           ),
-          home: AuthWrapper(),
+          home: const AuthWrapper(),
           onGenerateRoute: (settings) {
             switch (settings.name) {
               case '/categories/new':

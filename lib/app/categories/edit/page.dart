@@ -68,6 +68,7 @@ class CategoryEdit extends HookWidget {
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Input(
+          loading: mutationHookResult.result.isLoading,
           defaultValue:
               InputCategory(name: category.name, imageURL: category.imageURL),
           onPressed: onPressed,

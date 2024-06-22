@@ -42,6 +42,7 @@ class NewItem extends HookWidget {
         child: Scaffold(
       appBar: const CommonAppBar(title: ""),
       body: Input(
+        loading: mutationHookResult.result.isLoading,
         onPressed: onPressed,
       ),
     ));
