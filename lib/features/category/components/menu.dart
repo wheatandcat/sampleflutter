@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stockkeeper/app/categories/edit/page.dart';
+import 'package:flutter/cupertino.dart';
 
 class CategoryMenu extends StatelessWidget {
   final String id;
@@ -48,22 +49,24 @@ class CategoryMenu extends StatelessWidget {
               leading: const Icon(Icons.delete),
               title: const Text('カテゴリーを削除する'),
               onTap: () {
-                showDialog(
+                showCupertinoDialog(
                   context: context,
                   builder: (BuildContext contextDialog) {
-                    return AlertDialog(
+                    return CupertinoAlertDialog(
                       title: const Text('確認'),
                       content: Text('$nameを削除しますか？'),
                       actions: <Widget>[
-                        TextButton(
+                        CupertinoDialogAction(
                           child: const Text('キャンセル'),
                           onPressed: () {
                             Navigator.of(contextDialog).pop();
                           },
                         ),
-                        TextButton(
-                          child: const Text('削除',
-                              style: TextStyle(color: Colors.red)),
+                        CupertinoDialogAction(
+                          child: const Text(
+                            '削除',
+                            style: TextStyle(color: Colors.red),
+                          ),
                           onPressed: () {
                             onDelete(id);
                             Navigator.of(contextDialog).pop();

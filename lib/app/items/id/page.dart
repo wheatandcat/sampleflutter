@@ -7,6 +7,7 @@ import 'package:stockkeeper/features/item/components/input.dart';
 import 'package:stockkeeper/utils/graphql.dart';
 import 'package:stockkeeper/graphql/updateItem.gql.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';
+import 'package:stockkeeper/components/loading/loading.dart';
 
 class ItemDetail extends HookWidget {
   final int id;
@@ -22,12 +23,7 @@ class ItemDetail extends HookWidget {
     final result = queryResult.result;
 
     if (result.isLoading) {
-      return const Scaffold(
-        appBar: CommonAppBar(title: ""),
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return const Loading();
     }
 
     final Query$Item$item item = extractGraphQLData(

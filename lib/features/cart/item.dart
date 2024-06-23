@@ -4,13 +4,22 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class Item extends HookWidget {
   final int stock;
+  final int? addCount;
   final String? imageURL;
+  final bool? disabled;
+  void Function(int) onPressed;
 
-  const Item({super.key, this.imageURL, required this.stock});
+  Item(
+      {super.key,
+      this.imageURL,
+      this.addCount = 0,
+      this.disabled = false,
+      required this.stock,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    final quantity = useState<int>(0);
+    final quantity = useState<int>(addCount ?? 0);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,9 +52,17 @@ class Item extends HookWidget {
                   ],
                 ),
           onTap: () {
+            if (disabled == true) {
+              return;
+            }
             quantity.value++;
+            onPressed(quantity.value);
           },
           onLongPress: () {
+            if (disabled == true) {
+              return;
+            }
+
             if (quantity.value > 0) {
               quantity.value = 0;
             }
@@ -59,7 +76,7 @@ class Item extends HookWidget {
                 left: 30,
               ),
               child: Text(
-                '${stock}個',
+                '$stock個',
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

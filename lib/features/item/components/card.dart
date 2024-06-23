@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:stockkeeper/app/items/id/page.dart';
+import 'package:flutter/cupertino.dart';
 
 class ItemCard extends StatelessWidget {
   final String id;
@@ -37,27 +37,28 @@ class ItemCard extends StatelessWidget {
                     leading: const Icon(Icons.delete),
                     title: const Text('アイテムを削除する'),
                     onTap: () {
-                      showDialog(
+                      showCupertinoDialog(
                         context: context,
                         builder: (BuildContext contextDialog) {
-                          return AlertDialog(
+                          return CupertinoAlertDialog(
                             title: const Text('確認'),
                             content: const Text('本当に削除しますか？'),
                             actions: <Widget>[
-                              TextButton(
+                              CupertinoDialogAction(
                                 child: const Text('キャンセル'),
                                 onPressed: () {
                                   Navigator.of(contextDialog).pop();
-                                  Navigator.of(context).pop();
                                 },
                               ),
-                              TextButton(
-                                child: const Text('削除',
-                                    style: TextStyle(color: Colors.red)),
+                              CupertinoDialogAction(
+                                child: const Text(
+                                  '削除',
+                                  style: TextStyle(color: Colors.red),
+                                ),
                                 onPressed: () {
+                                  onDelete();
                                   Navigator.of(contextDialog).pop();
                                   Navigator.of(context).pop();
-                                  onDelete();
                                 },
                               ),
                             ],

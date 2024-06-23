@@ -205,6 +205,20 @@ const documentNodeQueryCarts = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
+                name: NameNode(value: 'categoryId'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'stock'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: 'category'),
                 alias: null,
                 arguments: [],
@@ -579,6 +593,8 @@ class Query$Carts$carts$item {
   Query$Carts$carts$item({
     required this.id,
     this.imageURL,
+    required this.categoryId,
+    required this.stock,
     this.category,
     this.$__typename = 'Item',
   });
@@ -586,11 +602,15 @@ class Query$Carts$carts$item {
   factory Query$Carts$carts$item.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$imageURL = json['imageURL'];
+    final l$categoryId = json['categoryId'];
+    final l$stock = json['stock'];
     final l$category = json['category'];
     final l$$__typename = json['__typename'];
     return Query$Carts$carts$item(
       id: (l$id as String),
       imageURL: (l$imageURL as String?),
+      categoryId: (l$categoryId as String),
+      stock: (l$stock as int),
       category: l$category == null
           ? null
           : Query$Carts$carts$item$category.fromJson(
@@ -603,6 +623,10 @@ class Query$Carts$carts$item {
 
   final String? imageURL;
 
+  final String categoryId;
+
+  final int stock;
+
   final Query$Carts$carts$item$category? category;
 
   final String $__typename;
@@ -613,6 +637,10 @@ class Query$Carts$carts$item {
     _resultData['id'] = l$id;
     final l$imageURL = imageURL;
     _resultData['imageURL'] = l$imageURL;
+    final l$categoryId = categoryId;
+    _resultData['categoryId'] = l$categoryId;
+    final l$stock = stock;
+    _resultData['stock'] = l$stock;
     final l$category = category;
     _resultData['category'] = l$category?.toJson();
     final l$$__typename = $__typename;
@@ -624,11 +652,15 @@ class Query$Carts$carts$item {
   int get hashCode {
     final l$id = id;
     final l$imageURL = imageURL;
+    final l$categoryId = categoryId;
+    final l$stock = stock;
     final l$category = category;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$imageURL,
+      l$categoryId,
+      l$stock,
       l$category,
       l$$__typename,
     ]);
@@ -651,6 +683,16 @@ class Query$Carts$carts$item {
     final l$imageURL = imageURL;
     final lOther$imageURL = other.imageURL;
     if (l$imageURL != lOther$imageURL) {
+      return false;
+    }
+    final l$categoryId = categoryId;
+    final lOther$categoryId = other.categoryId;
+    if (l$categoryId != lOther$categoryId) {
+      return false;
+    }
+    final l$stock = stock;
+    final lOther$stock = other.stock;
+    if (l$stock != lOther$stock) {
       return false;
     }
     final l$category = category;
@@ -687,6 +729,8 @@ abstract class CopyWith$Query$Carts$carts$item<TRes> {
   TRes call({
     String? id,
     String? imageURL,
+    String? categoryId,
+    int? stock,
     Query$Carts$carts$item$category? category,
     String? $__typename,
   });
@@ -709,6 +753,8 @@ class _CopyWithImpl$Query$Carts$carts$item<TRes>
   TRes call({
     Object? id = _undefined,
     Object? imageURL = _undefined,
+    Object? categoryId = _undefined,
+    Object? stock = _undefined,
     Object? category = _undefined,
     Object? $__typename = _undefined,
   }) =>
@@ -716,6 +762,12 @@ class _CopyWithImpl$Query$Carts$carts$item<TRes>
         id: id == _undefined || id == null ? _instance.id : (id as String),
         imageURL:
             imageURL == _undefined ? _instance.imageURL : (imageURL as String?),
+        categoryId: categoryId == _undefined || categoryId == null
+            ? _instance.categoryId
+            : (categoryId as String),
+        stock: stock == _undefined || stock == null
+            ? _instance.stock
+            : (stock as int),
         category: category == _undefined
             ? _instance.category
             : (category as Query$Carts$carts$item$category?),
@@ -742,6 +794,8 @@ class _CopyWithStubImpl$Query$Carts$carts$item<TRes>
   call({
     String? id,
     String? imageURL,
+    String? categoryId,
+    int? stock,
     Query$Carts$carts$item$category? category,
     String? $__typename,
   }) =>

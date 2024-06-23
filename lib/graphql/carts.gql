@@ -5,6 +5,8 @@ query Carts {
     item {
       id
       imageURL
+      categoryId
+      stock
       category {
         id
         name

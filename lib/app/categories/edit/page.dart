@@ -7,6 +7,7 @@ import 'package:stockkeeper/components/background/background.dart';
 import 'package:stockkeeper/features/category/components/input.dart';
 import 'package:stockkeeper/graphql/category.gql.dart';
 import 'package:stockkeeper/utils/graphql.dart';
+import 'package:stockkeeper/components/loading/loading.dart';
 
 class CategoryEdit extends HookWidget {
   final int id;
@@ -27,12 +28,7 @@ class CategoryEdit extends HookWidget {
     final result = queryResult.result;
 
     if (result.isLoading) {
-      return const Scaffold(
-        appBar: CommonAppBar(title: ""),
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return const Loading();
     }
 
     final Query$Category$category category = extractGraphQLData(
@@ -51,8 +47,6 @@ class CategoryEdit extends HookWidget {
     ));
 
     onPressed(InputCategory item) async {
-      print("imageURL2: $item.imageUrl");
-
       mutationHookResult.runMutation(Variables$Mutation$UpdateCategory(
           input: Input$UpdateCategory(
         id: id,
