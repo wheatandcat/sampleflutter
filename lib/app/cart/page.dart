@@ -9,6 +9,7 @@ import 'package:stockkeeper/utils/graphql.dart';
 import 'package:stockkeeper/features/cart/item.dart';
 import 'package:stockkeeper/graphql/buying.gql.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:stockkeeper/components/loading/loading.dart';
 
 class Cart extends HookWidget {
   const Cart({super.key});
@@ -16,14 +17,8 @@ class Cart extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final qc = useQuery$Carts(Options$Query$Carts());
-
     if (qc.result.isLoading) {
-      return const Scaffold(
-        appBar: CommonAppBar(title: ""),
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return const Loading();
     }
 
     final List<Query$Carts$carts> carts = extractGraphQLDataList(

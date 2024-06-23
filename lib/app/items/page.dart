@@ -9,6 +9,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stockkeeper/graphql/deleteItem.gql.dart';
 import 'package:stockkeeper/utils/graphql.dart';
 import 'package:stockkeeper/app/items/new/page.dart';
+import 'package:stockkeeper/components/loading/loading.dart';
 
 class Items extends HookWidget {
   final int id;
@@ -30,12 +31,7 @@ class Items extends HookWidget {
     ));
 
     if (result.isLoading) {
-      return const Scaffold(
-        appBar: CommonAppBar(title: ""),
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return const Loading();
     }
 
     final Query$Category$category category = extractGraphQLData(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stockkeeper/graphql/itemAll.gql.dart';
-import 'package:stockkeeper/components/appBar/common.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';
 import 'package:stockkeeper/utils/graphql.dart';
 import 'package:stockkeeper/features/cart/item.dart';
 import 'package:stockkeeper/components/button/button.dart';
 import 'package:stockkeeper/graphql/addCarts.gql.dart';
+import 'package:stockkeeper/components/loading/loading.dart';
 
 class CategoryItemDetail {
   String id;
@@ -48,12 +48,7 @@ class CreateList extends HookWidget {
     final cartItems = useState<List<CartItem>>([]);
 
     if (qia.result.isLoading) {
-      return const Scaffold(
-        appBar: CommonAppBar(title: ""),
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return const Loading();
     }
 
     final List<Query$ItemAll$itemAll> items = extractGraphQLDataList(
