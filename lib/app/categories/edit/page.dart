@@ -51,8 +51,6 @@ class CategoryEdit extends HookWidget {
     ));
 
     onPressed(InputCategory item) async {
-      print("imageURL2: $item.imageUrl");
-
       mutationHookResult.runMutation(Variables$Mutation$UpdateCategory(
           input: Input$UpdateCategory(
         id: id,
