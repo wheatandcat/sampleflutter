@@ -68,9 +68,9 @@ class CategoryItems extends StatelessWidget {
                     if (index == items.length) {
                       return Container(
                           padding: const EdgeInsets.only(
-                            right: 33,
+                            right: 24,
                             left: 10,
-                            bottom: 43,
+                            bottom: 32,
                           ),
                           margin: const EdgeInsets.only(top: 0),
                           width: 50,
