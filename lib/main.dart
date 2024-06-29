@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Stock Keeper',
           theme: ThemeData(
+            fontFamily: 'NotoSansJP',
             useMaterial3: true,
             appBarTheme: const AppBarTheme(
                 iconTheme: IconThemeData(color: Colors.white)),
