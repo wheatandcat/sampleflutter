@@ -30,3 +30,15 @@ $ http-server -p 5000
 $ cd android
 $ ./gradlew signingReport
 ```
+
+## アプリ icon 作り直し
+
+```bash
+$ flutter pub run flutter_launcher_icons
+```
+
+## アプリ スプラッシュスクリーン 作り直し
+
+```bash
+$ flutter pub run flutter_native_splash:create
+```
