@@ -79,26 +79,48 @@ class Login extends HookConsumerWidget {
         child: Scaffold(
             appBar: const CommonAppBar(title: "ログイン"),
             body: Center(
-                child: StreamBuilder(
-                    stream: FirebaseAuth.instance.authStateChanges(),
-                    builder:
-                        (BuildContext context, AsyncSnapshot<User?> snapshot) {
-                      if (!snapshot.hasData) {
-                        return Button(
-                            title: "Googleでログイン",
-                            width: 300,
-                            onPressed: onPressed);
-                      } else {
-                        return Column(children: [
-                          ListTile(
-                            title: const Text("ログイン中のユーザー"),
-                            subtitle:
-                                Text("ID:${userDataAsyncValue.value?.id}"),
-                          ),
-                          Button(
-                              title: "ログアウト", width: 300, onPressed: onLogout)
-                        ]);
-                      }
-                    }))));
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start, // 垂直方向の中央
+                    crossAxisAlignment: CrossAxisAlignment.center, // 水平方向の中央
+                    children: [
+                  Container(
+                      height: 300,
+                      margin: const EdgeInsets.only(bottom: 150),
+                      child: Image.asset(
+                        'images/splash.png',
+                        width: 280,
+                      )),
+                  StreamBuilder(
+                      stream: FirebaseAuth.instance.authStateChanges(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<User?> snapshot) {
+                        if (!snapshot.hasData) {
+                          return Column(children: [
+                            Button(
+                                title: "Googleでログイン",
+                                width: 280,
+                                height: 50,
+                                onPressed: onPressed),
+                            const Padding(
+                                padding: EdgeInsets.only(top: 25),
+                                child: Text("ログインしないで進む",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold))),
+                          ]);
+                        } else {
+                          return Column(children: [
+                            ListTile(
+                              title: const Text("ログイン中のユーザー"),
+                              subtitle:
+                                  Text("ID:${userDataAsyncValue.value?.id}"),
+                            ),
+                            Button(
+                                title: "ログアウト", width: 300, onPressed: onLogout)
+                          ]);
+                        }
+                      }),
+                ]))));
   }
 }
