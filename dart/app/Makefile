@@ -1,7 +1,7 @@
 .PHONY: Flutter
 
 graphdownload_schemaql:
-	cd lib/graphql && curl -L -O https://raw.githubusercontent.com/wheatandcat/stock-keeper-backend/main/src/schema.graphql
+	cd lib/graphql && cp ../../../../typescript/backend/src/schema.graphql schema.graphql
 codegen: graphdownload_schemaql
 	dart run build_runner build
 xcode:

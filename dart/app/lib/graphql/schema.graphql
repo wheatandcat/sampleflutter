@@ -1,0 +1,135 @@
+type Query {
+  hello: String
+  categories: [Category]
+  category(id: Int!): Category
+  items(categoryId: Int!): [Item]
+  item(id: Int!): Item
+  me: User
+  itemAll: [Item]
+  carts: [Cart]
+}
+
+type User {
+  "ユーザーID"
+  id: ID!
+  "UID"
+  uid: String!
+}
+
+type Category {
+  "カテゴリーID"
+  id: ID!
+  "カテゴリー名"
+  name: String!
+  "画像URL"
+  imageURL: String
+  "順番"
+  order: Int!
+  "アイテム数"
+  itemCount: Int
+}
+
+type Item {
+  "アイテムID"
+  id: ID!
+  "カテゴリーID"
+  categoryId: ID!
+  "アイテム名"
+  name: String!
+  "画像URL"
+  imageURL: String
+  "在庫数"
+  stock: Int!
+  "消費期限"
+  expirationDate: Time
+  "順番"
+  order: Int!
+  "カテゴリー"
+  category: Category
+}
+
+type Cart {
+  "カートID"
+  id: ID!
+  "ユーザーID"
+  userId: ID!
+  "アイテムID"
+  itemId: ID!
+  "数量"
+  quantity: Int!
+  "アイテム"
+  item: Item
+}
+
+input NewCategory {
+  "カテゴリー名"
+  name: String!
+  "画像URL"
+  imageURL: String
+  "順番"
+  order: Int!
+}
+
+input UpdateCategory {
+  "アイテムID"
+  id: Int!
+  "カテゴリー名"
+  name: String!
+  "画像URL"
+  imageURL: String
+  "順番"
+  order: Int!
+}
+
+input NewItem {
+  "カテゴリーID"
+  categoryId: Int!
+  "アイテム名"
+  name: String!
+  "画像URL"
+  imageURL: String
+  "在庫数"
+  stock: Int!
+  "消費期限"
+  expirationDate: Time
+  "順番"
+  order: Int!
+}
+
+input UpdateItem {
+  "アイテムID"
+  id: Int!
+  "カテゴリーID"
+  categoryId: Int!
+  "アイテム名"
+  name: String!
+  "画像URL"
+  imageURL: String
+  "在庫数"
+  stock: Int!
+  "消費期限"
+  expirationDate: Time
+  "順番"
+  order: Int!
+}
+
+input NewCart {
+  "アイテムID"
+  itemId: Int!
+  "数量"
+  quantity: Int!
+}
+
+type Mutation {
+  createUser: User!
+  createCategory(input: NewCategory!): Category!
+  updateCategory(input: UpdateCategory!): Category!
+  deleteCategory(id: Int!): Category!
+  createItem(input: NewItem!): Item!
+  updateItem(input: UpdateItem!): Item!
+  deleteItem(id: Int!): Item!
+  addCarts(input: [NewCart]!): Boolean!
+  buying: Boolean!
+}
+
+scalar Time
