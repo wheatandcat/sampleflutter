@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @default(0)
+  name      String   @db.VarChar(20)
+  imageURL  String?  @db.VarChar(1024)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  items     Item[]
+
+  @@index([userId])
+  @@index([order])
+}
+
+model Item {
+  id             Int       @id @default(autoincrement())
+  userId         Int       @default(0)
+  categoryId     Int       @default(0)
+  name           String    @db.VarChar(100)
+  imageURL       String?   @db.VarChar(1024)
+  order          Int       @default(0)
+  stock          Int       @default(0)
+  expirationDate DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  category       Category  @relation(fields: [categoryId], references: [id])
+  cart           Cart[]
+
+  @@index([categoryId])
+  @@index([order])
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @db.VarChar(100)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @default(0)
+  itemId    Int      @default(0)
+  quantity  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  item      Item     @relation(fields: [itemId], references: [id])
+
+  @@index([userId])
+}
