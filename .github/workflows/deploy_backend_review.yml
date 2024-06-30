@@ -31,7 +31,7 @@ jobs:
         uses: "google-github-actions/auth@v2"
         with:
           workload_identity_provider: ${{ secrets.REVIEW_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: github@${{ secrets.REVIEW_GCP_PROJECT_ID }}.iam.gserviceaccount.com
+          service_account: github2@${{ secrets.REVIEW_GCP_PROJECT_ID }}.iam.gserviceaccount.com
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
