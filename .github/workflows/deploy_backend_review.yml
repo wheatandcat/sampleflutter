@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "typescript/backend/**"
 env:
   PROJECT_ID: ${{ secrets.REVIEW_GCP_PROJECT_ID }}
   SERVICE_NAME: ${{ secrets.REVIEW_SERVICE_NAME }}
