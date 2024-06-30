@@ -1,0 +1,59 @@
+name: Deploy Backend Review
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "typescript/backend/**"
+env:
+  PROJECT_ID: ${{ secrets.REVIEW_GCP_PROJECT_ID }}
+  SERVICE_NAME: ${{ secrets.REVIEW_SERVICE_NAME }}
+  DATABASE_URL: ${{ secrets.REVIEW_DATABASE_URL }}
+  REVIEW_FIREBASE_SERVICE: ${{ secrets.REVIEW_FIREBASE_SERVICE }}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: typescript/backend
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: "actions/checkout@v4"
+
+      - name: Create firebase.json file
+        run: echo $REVIEW_FIREBASE_SERVICE | base64 --decode -i > ./src/firebase.json
+
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
+        with:
+          workload_identity_provider: ${{ secrets.REVIEW_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: github@${{ secrets.REVIEW_GCP_PROJECT_ID }}.iam.gserviceaccount.com
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: ">= 363.0.0"
+
+      - name: Authorize Docker push
+        run: gcloud auth configure-docker
+
+      - name: Build Docker image
+        run: docker build -t asia.gcr.io/$PROJECT_ID/$SERVICE_NAME:latest .
+
+      - name: Push Docker Image
+        run: docker push asia.gcr.io/$PROJECT_ID/$SERVICE_NAME:latest
+
+      - name: Deploy to Cloud Run
+        run: |-
+          gcloud run deploy stock-keeper  \
+            --project=$PROJECT_ID  \
+            --image=asia.gcr.io/$PROJECT_ID/$SERVICE_NAME:latest \
+            --platform managed \
+            --region asia-northeast1 \
+            --allow-unauthenticated \
+            --service-account=github@$PROJECT_ID.iam.gserviceaccount.com \
+            --set-env-vars DATABASE_URL="$DATABASE_URL"
