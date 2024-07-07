@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stockkeeper/utils/image.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class InputCategory {
   late final String name;
@@ -160,23 +161,24 @@ class Input extends HookWidget {
         Center(
             child: TextField(
                 controller: inputText,
-                cursorColor: Colors.white,
+                cursorColor: AppColors.text,
                 style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
+                    color: AppColors.text,
+                    fontSize: FontSize.lg,
                     fontWeight: FontWeight.bold),
                 decoration: const InputDecoration(
                   labelText: "部屋の名前",
-                  labelStyle: TextStyle(color: Colors.white, fontSize: 16),
+                  labelStyle:
+                      TextStyle(color: AppColors.text, fontSize: FontSize.md),
                   enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: AppColors.bg),
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: BorderSide(color: AppColors.bg),
                   ),
                 ))),
         Container(
-          padding: const EdgeInsets.only(top: 30),
+          padding: const EdgeInsets.only(top: Spacing.xl),
           child: InkWell(
               onTap: showPickImage,
               child: imageByte.value != null
@@ -198,7 +200,7 @@ class Input extends HookWidget {
                                 padding: const EdgeInsets.all(2), // ボーダーの幅を調整
                                 child: const Icon(
                                   Icons.camera_alt,
-                                  color: Colors.white,
+                                  color: AppColors.text,
                                   size: 40,
                                 ),
                               )))),

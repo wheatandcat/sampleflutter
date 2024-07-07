@@ -10,6 +10,7 @@ import 'package:stockkeeper/features/cart/item.dart';
 import 'package:stockkeeper/graphql/buying.gql.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stockkeeper/components/loading/loading.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class Cart extends HookWidget {
   const Cart({super.key});
@@ -75,7 +76,7 @@ class Cart extends HookWidget {
             content: const Text('ストックに追加されます'),
             actions: <Widget>[
               CupertinoDialogAction(
-                child: Text('キャンセル'),
+                child: const Text('キャンセル'),
                 onPressed: () {
                   Navigator.of(contextDialog).pop();
                 },
@@ -83,7 +84,7 @@ class Cart extends HookWidget {
               CupertinoDialogAction(
                 child: const Text(
                   'OK',
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: AppColors.error),
                 ),
                 onPressed: () {
                   mutationHookResult.runMutation();
@@ -103,29 +104,29 @@ class Cart extends HookWidget {
           body: Stack(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(bottom: 60.0),
+                padding: const EdgeInsets.only(bottom: Spacing.xl2),
                 // ボタンの高さ分のパディングを追加
                 child: ListView.builder(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).padding.top, bottom: 70),
+                      top: MediaQuery.of(context).padding.top,
+                      bottom: Spacing.xl2),
                   itemCount: categoryItems.length,
                   itemBuilder: (context, index) {
                     return Column(
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: Spacing.md),
                           child: Text(
                             categoryItems[index].name,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
+                              fontSize: FontSize.lg,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                         GridView.builder(
-                          padding: const EdgeInsets.only(top: 20),
+                          padding: const EdgeInsets.only(top: Spacing.xl),
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
@@ -159,7 +160,8 @@ class Cart extends HookWidget {
                 child: Container(
                   decoration: const BoxDecoration(
                     border: Border(
-                      top: BorderSide(color: Colors.white, width: 2.0),
+                      top: BorderSide(
+                          color: AppColors.bg, width: BorderWidth.sm),
                     ),
                     image: DecorationImage(
                       image: AssetImage('images/background.png'),
@@ -167,7 +169,7 @@ class Cart extends HookWidget {
                     ),
                   ),
                   height: 120,
-                  padding: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.only(bottom: Spacing.md),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -177,12 +179,11 @@ class Cart extends HookWidget {
                           onPressed: onBuying,
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(top: 10),
+                          padding: EdgeInsets.only(top: Spacing.md),
                           child: Text(
                             "ストックに追加されます",
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
+                              fontSize: FontSize.sm,
                             ),
                           ),
                         )

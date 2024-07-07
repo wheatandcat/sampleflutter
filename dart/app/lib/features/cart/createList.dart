@@ -7,6 +7,7 @@ import 'package:stockkeeper/features/cart/item.dart';
 import 'package:stockkeeper/components/button/button.dart';
 import 'package:stockkeeper/graphql/addCarts.gql.dart';
 import 'package:stockkeeper/components/loading/loading.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class CategoryItemDetail {
   String id;
@@ -117,29 +118,28 @@ class CreateList extends HookWidget {
     return Stack(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(bottom: 60.0),
+          padding: const EdgeInsets.only(bottom: Spacing.xl2),
           // ボタンの高さ分のパディングを追加
           child: ListView.builder(
             padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top, bottom: 70),
+                top: MediaQuery.of(context).padding.top, bottom: Spacing.xl2),
             itemCount: categoryItems.length,
             itemBuilder: (context, index) {
               return Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: Spacing.md),
                     child: Text(
                       categoryItems[index].name,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
+                        fontSize: FontSize.lg,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                   GridView.builder(
-                    padding: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: Spacing.lg),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate:
@@ -174,7 +174,7 @@ class CreateList extends HookWidget {
           child: Container(
             decoration: const BoxDecoration(
               border: Border(
-                top: BorderSide(color: Colors.white, width: 2.0),
+                top: BorderSide(color: AppColors.bg, width: BorderWidth.sm),
               ),
               image: DecorationImage(
                 image: AssetImage('images/background.png'),
@@ -182,7 +182,7 @@ class CreateList extends HookWidget {
               ),
             ),
             height: 70,
-            padding: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.only(bottom: Spacing.md),
             child: Center(
                 child: Button(
               title: "リストを作成する",

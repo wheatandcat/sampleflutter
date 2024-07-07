@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:stockkeeper/utils/style.dart';
 
 class ItemImage extends StatelessWidget {
   final String? imageURL;
@@ -30,7 +31,6 @@ class ItemImage extends StatelessWidget {
       );
     } else {
       return Card(
-          color: Colors.black26,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero, // Cardの角を直角にする
           ),
@@ -44,7 +44,7 @@ class ItemImage extends StatelessWidget {
                 padding: const EdgeInsets.all(2), // ボーダーの幅を調整
                 child: const Icon(
                   Icons.camera_alt,
-                  color: Colors.white,
+                  color: AppColors.text,
                   size: 40,
                 ),
               )));

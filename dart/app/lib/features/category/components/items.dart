@@ -3,6 +3,7 @@ import 'package:stockkeeper/graphql/category.gql.dart';
 import 'package:stockkeeper/features/category/components/card.dart';
 import 'package:stockkeeper/features/category/components/newItem.dart';
 import 'package:stockkeeper/features/item/components/card.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class CategoryItems extends StatelessWidget {
   final List<Query$Category$items> items;
@@ -27,19 +28,19 @@ class CategoryItems extends StatelessWidget {
     return Column(
       children: [
         Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
+            padding: const EdgeInsets.only(left: Spacing.md, right: Spacing.md),
             child: CategoryCard(name: categoryName)),
         Expanded(
           child: (items.isEmpty)
               ? Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(Spacing.md),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
                             padding: const EdgeInsets.only(
-                              left: 10,
+                              left: Spacing.md,
                             ),
                             margin: const EdgeInsets.all(0),
                             width: 110,
@@ -49,19 +50,19 @@ class CategoryItems extends StatelessWidget {
                               onCallback: () => onNewItem(),
                             )),
                         const Padding(
-                            padding: EdgeInsets.only(left: 10, top: 20),
+                            padding: EdgeInsets.only(
+                                left: Spacing.md, top: Spacing.lg),
                             child: Text(
                               'OK！\n次は部屋のアイテムを\n登録してみましょう。',
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: FontSize.lg,
                                   fontWeight: FontWeight.bold),
                             )),
                       ]))
               : GridView.count(
                   crossAxisCount: 2,
                   childAspectRatio: 1.0,
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(Spacing.md),
                   mainAxisSpacing: 4.0,
                   crossAxisSpacing: 4.0,
                   children: List.generate(items.length + 1, (index) {
@@ -69,8 +70,8 @@ class CategoryItems extends StatelessWidget {
                       return Container(
                           padding: const EdgeInsets.only(
                             right: 24,
-                            left: 10,
-                            bottom: 32,
+                            left: Spacing.md,
+                            bottom: Spacing.xl,
                           ),
                           margin: const EdgeInsets.only(top: 0),
                           width: 50,
@@ -84,7 +85,8 @@ class CategoryItems extends StatelessWidget {
                     final item = items[index];
 
                     return Container(
-                        padding: const EdgeInsets.only(right: 10, left: 10),
+                        padding: const EdgeInsets.only(
+                            right: Spacing.md, left: Spacing.md),
                         child: ItemCard(
                           id: item.id,
                           name: item.name,

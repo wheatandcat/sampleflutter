@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class AddIcon extends StatelessWidget {
   const AddIcon({super.key});
@@ -11,11 +12,11 @@ class AddIcon extends StatelessWidget {
       padding: const EdgeInsets.all(2), // ボーダーの幅を調整
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.white, width: 4)),
+          border: Border.all(color: AppColors.bg, width: BorderWidth.md)),
       child: const CircleAvatar(
         radius: 12,
         backgroundColor: Colors.transparent,
-        child: Icon(Icons.add, color: Colors.white),
+        child: Icon(Icons.add, color: AppColors.bg),
       ),
     );
   }

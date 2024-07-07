@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stockkeeper/utils/image.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class InputItem {
   late final String name;
@@ -76,16 +77,17 @@ class Input extends HookWidget {
         builder: (BuildContext context) {
           return Padding(
               padding: const EdgeInsets.only(
-                  top: 10.0,
-                  bottom: 40.0,
-                  left: 10.0,
-                  right: 10.0), // 上に20、下に10の余白を追加
+                  top: Spacing.md,
+                  bottom: Spacing.xl,
+                  left: Spacing.md,
+                  right: Spacing.md), // 上に20、下に10の余白を追加
               child: Wrap(
                 children: <Widget>[
                   const ListTile(
                     title: Text("画像をアップロード",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
+                            fontSize: FontSize.lg,
+                            fontWeight: FontWeight.bold)),
                   ),
                   ListTile(
                     leading: const Icon(Icons.camera_alt),
@@ -176,10 +178,11 @@ class Input extends HookWidget {
                             child: Container(
                               width: 40,
                               height: 40,
-                              padding: const EdgeInsets.all(2), // ボーダーの幅を調整
+                              padding:
+                                  const EdgeInsets.all(Spacing.xs), // ボーダーの幅を調整
                               child: const Icon(
                                 Icons.camera_alt,
-                                color: Colors.white,
+                                color: AppColors.text,
                                 size: 40,
                               ),
                             )))),
@@ -194,16 +197,14 @@ class Input extends HookWidget {
                   width: 150,
                   child: Text("ストック数",
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold)),
+                          fontSize: FontSize.md, fontWeight: FontWeight.bold)),
                 ),
                 Flexible(
                     child: SizedBox(
                   width: 68,
                   height: 40,
                   child: Padding(
-                      padding: const EdgeInsets.only(top: 20),
+                      padding: const EdgeInsets.only(top: Spacing.lg),
                       child: TextField(
                           controller: inputStock,
                           inputFormatters: <TextInputFormatter>[
@@ -211,19 +212,19 @@ class Input extends HookWidget {
                           ],
                           maxLength: 3,
                           textAlign: TextAlign.center,
-                          cursorColor: Colors.white,
+                          cursorColor: AppColors.text,
                           keyboardType: TextInputType.number,
                           style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 26,
+                              color: AppColors.text,
+                              fontSize: FontSize.lg,
                               fontWeight: FontWeight.bold),
                           decoration: const InputDecoration(
                             labelText: '',
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: BorderSide(color: AppColors.bg),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: BorderSide(color: AppColors.bg),
                             ),
                             counterText: "",
                           ))),
@@ -239,8 +240,7 @@ class Input extends HookWidget {
                     width: 300,
                     child: Text("MEMO",
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
+                            fontSize: FontSize.md,
                             fontWeight: FontWeight.bold))),
                 SizedBox(
                     width: 300,
@@ -251,17 +251,17 @@ class Input extends HookWidget {
                             onChanged: (value) => inputName.value = value,
                             maxLines: null, // 複数行入力可能
                             minLines: 3,
-                            cursorColor: Colors.white,
+                            cursorColor: AppColors.text,
                             style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
+                                color: AppColors.text,
+                                fontSize: FontSize.md,
                                 fontWeight: FontWeight.bold),
                             decoration: InputDecoration(
                               filled: true,
                               hintText: "備考",
                               hintStyle: TextStyle(
-                                  color: Colors.white.withOpacity(0.6),
-                                  fontSize: 16,
+                                  color: AppColors.text.withOpacity(0.6),
+                                  fontSize: FontSize.md,
                                   fontWeight: FontWeight.bold),
                               fillColor: Colors.black26,
                               border: InputBorder.none,
@@ -270,7 +270,7 @@ class Input extends HookWidget {
             )),
         Center(
             child: Padding(
-          padding: const EdgeInsets.only(top: 30),
+          padding: const EdgeInsets.only(top: Spacing.xl),
           child: Button(
             loading: loading,
             title: buttonText ?? "登録する",

@@ -124,16 +124,16 @@ class MyHomePage extends HookConsumerWidget {
               width: deviceWidth - 100,
               height: deviceHeight,
               color: Colors.transparent,
-              margin: const EdgeInsets.symmetric(vertical: AppSpacing.large),
+              margin: const EdgeInsets.symmetric(vertical: Spacing.lg),
               child: categories.isEmpty
                   ? const SafeArea(
                       child: Padding(
-                          padding: EdgeInsets.only(left: 20, top: 10),
+                          padding: EdgeInsets.only(
+                              left: Spacing.lg, top: Spacing.md),
                           child: Text(
                             'まずは部屋を作りましょう！\n左の＋マークを\nタップしてください。',
                             style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
+                                fontSize: FontSize.lg,
                                 fontWeight: FontWeight.bold),
                           )))
                   : CategoryItems(

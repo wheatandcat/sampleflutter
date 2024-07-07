@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class CategoryIcon extends StatelessWidget {
   final String? imageURL;
@@ -25,17 +26,16 @@ class CategoryIcon extends StatelessWidget {
           child: Container(
             width: 4, // 縦線の幅
             decoration: BoxDecoration(
-              color: Colors.white, // 縦線の色
+              color: AppColors.bg, // 縦線の色
               borderRadius: BorderRadius.circular(2), // 角を丸くする
             ),
-// 縦線の色
           ),
         ),
         Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: Spacing.md),
             child: ClipOval(
                 child: Container(
-                    color: Colors.white,
+                    color: AppColors.bg,
                     width: 80,
                     height: 80,
                     child: imageURL != null
@@ -69,7 +69,7 @@ class CategoryIcon extends StatelessWidget {
         ),
       ),
       Padding(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: Spacing.md),
           child: InkWell(
               onTap: () {
                 onPressed();
@@ -77,7 +77,7 @@ class CategoryIcon extends StatelessWidget {
               onLongPress: () => onLongPressed(),
               child: ClipOval(
                   child: Container(
-                      color: Colors.white,
+                      color: AppColors.bg,
                       width: 80,
                       height: 80,
                       child: imageURL != null

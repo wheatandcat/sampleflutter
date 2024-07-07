@@ -8,6 +8,7 @@ import 'package:stockkeeper/graphql/createUser.gql.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stockkeeper/providers/user.dart';
 import 'package:stockkeeper/components/background/background.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class Login extends HookConsumerWidget {
   const Login({super.key});
@@ -85,7 +86,7 @@ class Login extends HookConsumerWidget {
                     children: [
                   Container(
                       height: 300,
-                      margin: const EdgeInsets.only(bottom: 150),
+                      margin: const EdgeInsets.only(bottom: Spacing.xl3),
                       child: Image.asset(
                         'images/splash.png',
                         width: 280,
@@ -102,11 +103,10 @@ class Login extends HookConsumerWidget {
                                 height: 50,
                                 onPressed: onPressed),
                             const Padding(
-                                padding: EdgeInsets.only(top: 25),
+                                padding: EdgeInsets.only(top: Spacing.lg),
                                 child: Text("ログインしないで進む",
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
+                                        fontSize: FontSize.md,
                                         fontWeight: FontWeight.bold))),
                           ]);
                         } else {
