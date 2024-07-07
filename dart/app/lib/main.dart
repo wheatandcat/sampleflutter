@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -41,12 +42,16 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Stock Keeper',
           theme: ThemeData(
-            fontFamily: 'NotoSansJP',
-            useMaterial3: true,
-            appBarTheme: const AppBarTheme(
-                iconTheme: IconThemeData(color: Colors.white)),
-            scaffoldBackgroundColor: Colors.transparent,
-          ),
+              fontFamily: 'NotoSansJP',
+              useMaterial3: true,
+              appBarTheme: const AppBarTheme(
+                  iconTheme: IconThemeData(color: Colors.white)),
+              scaffoldBackgroundColor: Colors.transparent,
+              textTheme: const TextTheme(
+                bodyMedium: TextStyle(color: Colors.white, fontSize: 14),
+                bodyLarge: TextStyle(color: Colors.white, fontSize: 16),
+                bodySmall: TextStyle(color: Colors.white, fontSize: 14),
+              )),
           home: const AuthWrapper(),
           onGenerateRoute: (settings) {
             switch (settings.name) {

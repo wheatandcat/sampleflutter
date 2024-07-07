@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stockkeeper/app/categories/edit/page.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class CategoryMenu extends StatelessWidget {
   final String id;
@@ -19,16 +20,16 @@ class CategoryMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.only(
-            top: 10.0,
-            bottom: 40.0,
-            left: 10.0,
-            right: 10.0), // 上に20、下に10の余白を追加
+            top: Spacing.md,
+            bottom: Spacing.xl,
+            left: Spacing.md,
+            right: Spacing.md), // 上に20、下に10の余白を追加
         child: Wrap(
           children: <Widget>[
             ListTile(
               title: Text(name,
                   style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold)),
+                      fontSize: FontSize.lg, fontWeight: FontWeight.bold)),
             ),
             ListTile(
               leading: const Icon(Icons.edit),
@@ -65,7 +66,7 @@ class CategoryMenu extends StatelessWidget {
                         CupertinoDialogAction(
                           child: const Text(
                             '削除',
-                            style: TextStyle(color: Colors.red),
+                            style: TextStyle(color: AppColors.error),
                           ),
                           onPressed: () {
                             onDelete(id);

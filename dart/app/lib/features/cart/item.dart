@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stockkeeper/features/cart/itemImage.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class Item extends HookWidget {
   final int stock;
@@ -42,8 +43,7 @@ class Item extends HookWidget {
                         child: Text(
                           '+${quantity.value}',
                           style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
+                            fontSize: FontSize.lg,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -72,15 +72,14 @@ class Item extends HookWidget {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: const EdgeInsets.only(
-                top: 5,
-                left: 30,
+                top: Spacing.sm,
+                left: Spacing.xl,
               ),
               child: Text(
                 '$stock個',
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: FontSize.lg,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
                 ),
               ),
             )),

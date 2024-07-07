@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class AppBarMenu extends StatelessWidget {
   const AppBarMenu({super.key});
@@ -12,7 +13,10 @@ class AppBarMenu extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.only(
-                  top: 20, bottom: 40, right: 20, left: 20),
+                  top: Spacing.lg,
+                  bottom: Spacing.xl,
+                  right: Spacing.lg,
+                  left: Spacing.lg),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -21,7 +25,8 @@ class AppBarMenu extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Text("設定",
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                              fontSize: FontSize.lg,
+                              fontWeight: FontWeight.bold)),
                     ),
                   ),
                   InkWell(
@@ -40,7 +45,7 @@ class AppBarMenu extends StatelessWidget {
                           title: Text("ログイン",
                               style: TextStyle(
                                   color: Colors.black54,
-                                  fontSize: 16,
+                                  fontSize: FontSize.md,
                                   fontWeight: FontWeight.bold)),
                         ),
                       )),
@@ -54,7 +59,7 @@ class AppBarMenu extends StatelessWidget {
                       title: Text("利用規約",
                           style: TextStyle(
                               color: Colors.black54,
-                              fontSize: 16,
+                              fontSize: FontSize.md,
                               fontWeight: FontWeight.bold)),
                     ),
                   ),

@@ -8,6 +8,7 @@ import 'package:stockkeeper/features/category/components/input.dart';
 import 'package:stockkeeper/graphql/category.gql.dart';
 import 'package:stockkeeper/utils/graphql.dart';
 import 'package:stockkeeper/components/loading/loading.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class CategoryEdit extends HookWidget {
   final int id;
@@ -60,7 +61,7 @@ class CategoryEdit extends HookWidget {
         child: Scaffold(
       appBar: const CommonAppBar(title: ""),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: Spacing.lg, right: Spacing.lg),
         child: Input(
           loading: mutationHookResult.result.isLoading,
           defaultValue:

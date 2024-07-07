@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stockkeeper/app/items/id/page.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class ItemCard extends StatelessWidget {
   final String id;
@@ -27,10 +28,10 @@ class ItemCard extends StatelessWidget {
         builder: (BuildContext context) {
           return Padding(
               padding: const EdgeInsets.only(
-                  top: 10.0,
-                  bottom: 40.0,
-                  left: 10.0,
-                  right: 10.0), // 上に20、下に10の余白を追加
+                  top: Spacing.md,
+                  bottom: Spacing.xl,
+                  left: Spacing.md,
+                  right: Spacing.md), // 上に20、下に10の余白を追加
               child: Wrap(
                 children: <Widget>[
                   ListTile(
@@ -53,7 +54,7 @@ class ItemCard extends StatelessWidget {
                               CupertinoDialogAction(
                                 child: const Text(
                                   '削除',
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(color: AppColors.error),
                                 ),
                                 onPressed: () {
                                   onDelete();
@@ -86,7 +87,7 @@ class ItemCard extends StatelessWidget {
                   })),
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                color: AppColors.bg, borderRadius: BorderRadius.circular(10)),
             width: 100,
             height: 100,
             child: imageURL != null
@@ -112,9 +113,7 @@ class ItemCard extends StatelessWidget {
         ),
         Text('$stock個',
             style: const TextStyle(
-                fontSize: 21,
-                color: Colors.white,
-                fontWeight: FontWeight.bold)),
+                fontSize: FontSize.lg, fontWeight: FontWeight.bold)),
         const SizedBox(width: 20),
       ],
     );

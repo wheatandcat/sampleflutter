@@ -27,8 +27,8 @@ class CategoryList extends StatelessWidget {
     return Container(
         width: 100,
         height: deviceHeight,
-        color: Colors.brown.withOpacity(0.5),
-        padding: const EdgeInsets.only(top: 10),
+        color: AppColors.primary.withOpacity(0.5),
+        padding: const EdgeInsets.only(top: Spacing.md),
         alignment: Alignment.topCenter,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -56,8 +56,7 @@ class CategoryList extends StatelessWidget {
                     }
 
                     return Padding(
-                        padding:
-                            const EdgeInsets.only(bottom: AppSpacing.large),
+                        padding: const EdgeInsets.only(bottom: Spacing.lg),
                         child: CategoryIcon(
                           selected:
                               categoryId == int.parse(categories[index].id),
@@ -70,7 +69,7 @@ class CategoryList extends StatelessWidget {
                   }),
             )),
             Padding(
-                padding: const EdgeInsets.only(bottom: 5),
+                padding: const EdgeInsets.only(bottom: Spacing.sm),
                 child: FloatingActionButton(
                   heroTag: "cart",
                   backgroundColor: Colors.transparent,
@@ -81,12 +80,12 @@ class CategoryList extends StatelessWidget {
                   tooltip: 'Increment',
                   child: const Icon(
                     Icons.shopping_basket_sharp,
-                    color: Colors.white,
+                    color: AppColors.text,
                     size: 40,
                   ),
                 )),
             Padding(
-                padding: const EdgeInsets.only(bottom: 30),
+                padding: const EdgeInsets.only(bottom: Spacing.xl),
                 child: FloatingActionButton(
                   heroTag: "setting",
                   backgroundColor: Colors.transparent,
@@ -97,7 +96,7 @@ class CategoryList extends StatelessWidget {
                   tooltip: 'Increment',
                   child: const Icon(
                     Icons.settings,
-                    color: Colors.white,
+                    color: AppColors.text,
                     size: 40,
                   ),
                 )),

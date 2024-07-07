@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class Button extends StatelessWidget {
   final String title;
@@ -13,7 +14,7 @@ class Button extends StatelessWidget {
       required this.title,
       required this.onPressed,
       this.width = 210,
-      this.height = 40});
+      this.height = 42});
 
   @override
   Widget build(BuildContext context) {
@@ -23,26 +24,27 @@ class Button extends StatelessWidget {
         child: OutlinedButton(
             style: OutlinedButton.styleFrom(
                 side: const BorderSide(
-                  color: Colors.white,
+                  color: AppColors.bg,
                   width: 0,
                 ),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50) //こちらを適用
-                    ),
-                backgroundColor: Colors.white),
+                    borderRadius: BorderRadius.circular(50)),
+                backgroundColor: AppColors.bg),
             onPressed: onPressed,
-            child: loading
-                ? const SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircularProgressIndicator(
-                      color: Color(0xFFC39669),
-                    ),
-                  )
-                : Text(title,
-                    style: const TextStyle(
-                        color: Color(0xFFC39669),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold))));
+            child: Padding(
+                padding: const EdgeInsets.only(bottom: Spacing.xs),
+                child: loading
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          color: AppColors.secondary,
+                        ),
+                      )
+                    : Text(title,
+                        style: const TextStyle(
+                            color: AppColors.secondary,
+                            fontSize: FontSize.lg,
+                            fontWeight: FontWeight.bold)))));
   }
 }
