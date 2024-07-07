@@ -72,8 +72,8 @@ class Item extends HookWidget {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: const EdgeInsets.only(
-                top: 5,
-                left: 30,
+                top: Spacing.sm,
+                left: Spacing.xl,
               ),
               child: Text(
                 '$stock個',

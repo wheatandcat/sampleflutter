@@ -32,7 +32,7 @@ class ItemImage extends StatelessWidget {
     } else {
       return Card(
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.zero, // Cardの角を直角にする
+            borderRadius: BorderRadius.zero,
           ),
           elevation: 0,
           child: SizedBox(
@@ -41,7 +41,7 @@ class ItemImage extends StatelessWidget {
               child: Container(
                 width: 40,
                 height: 40,
-                padding: const EdgeInsets.all(2), // ボーダーの幅を調整
+                padding: const EdgeInsets.all(Spacing.xs),
                 child: const Icon(
                   Icons.camera_alt,
                   color: AppColors.text,

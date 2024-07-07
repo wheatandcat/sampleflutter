@@ -10,6 +10,7 @@ import 'package:stockkeeper/graphql/deleteItem.gql.dart';
 import 'package:stockkeeper/utils/graphql.dart';
 import 'package:stockkeeper/app/items/new/page.dart';
 import 'package:stockkeeper/components/loading/loading.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class Items extends HookWidget {
   final int id;
@@ -52,13 +53,14 @@ class Items extends HookWidget {
       body: Column(
         children: [
           Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              padding:
+                  const EdgeInsets.only(left: Spacing.md, right: Spacing.md),
               child: CategoryCard(name: category.name)),
           Expanded(
             child: GridView.count(
                 crossAxisCount: 2,
                 childAspectRatio: 1.0,
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(Spacing.md),
                 mainAxisSpacing: 4.0,
                 crossAxisSpacing: 4.0,
                 children: List.generate(items.length + 1, (index) {

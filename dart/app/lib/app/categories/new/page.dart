@@ -5,6 +5,7 @@ import 'package:stockkeeper/graphql/createCategory.gql.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';
 import 'package:stockkeeper/components/background/background.dart';
 import 'package:stockkeeper/features/category/components/input.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class CategoryNew extends HookWidget {
   final void Function() onCallback;
@@ -35,7 +36,7 @@ class CategoryNew extends HookWidget {
         child: Scaffold(
       appBar: const CommonAppBar(title: ""),
       body: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20),
+          padding: const EdgeInsets.only(left: Spacing.lg, right: Spacing.lg),
           child: Input(
             loading: mutationHookResult.result.isLoading,
             onPressed: onPressed,

@@ -9,7 +9,7 @@ class AddIcon extends StatelessWidget {
     return Container(
       width: 40,
       height: 40,
-      padding: const EdgeInsets.all(2), // ボーダーの幅を調整
+      padding: const EdgeInsets.all(Spacing.xs),
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(color: AppColors.bg, width: BorderWidth.md)),

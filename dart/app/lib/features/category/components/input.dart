@@ -65,16 +65,17 @@ class Input extends HookWidget {
         builder: (BuildContext context) {
           return Padding(
               padding: const EdgeInsets.only(
-                  top: 10.0,
-                  bottom: 40.0,
-                  left: 10.0,
-                  right: 10.0), // 上に20、下に10の余白を追加
+                  top: Spacing.md,
+                  bottom: Spacing.lg,
+                  left: Spacing.md,
+                  right: Spacing.md), // 上に20、下に10の余白を追加
               child: Wrap(
                 children: <Widget>[
                   const ListTile(
                     title: Text("画像をアップロード",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
+                            fontSize: FontSize.lg,
+                            fontWeight: FontWeight.bold)),
                   ),
                   ListTile(
                     leading: const Icon(Icons.camera_alt),
@@ -188,7 +189,7 @@ class Input extends HookWidget {
                       : Card(
                           color: Colors.black26,
                           shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero, // Cardの角を直角にする
+                            borderRadius: BorderRadius.zero,
                           ),
                           elevation: 0,
                           child: SizedBox(
@@ -197,7 +198,7 @@ class Input extends HookWidget {
                               child: Container(
                                 width: 40,
                                 height: 40,
-                                padding: const EdgeInsets.all(2), // ボーダーの幅を調整
+                                padding: const EdgeInsets.all(Spacing.xs),
                                 child: const Icon(
                                   Icons.camera_alt,
                                   color: AppColors.text,

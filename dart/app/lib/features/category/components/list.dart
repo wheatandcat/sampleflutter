@@ -69,7 +69,7 @@ class CategoryList extends StatelessWidget {
                   }),
             )),
             Padding(
-                padding: const EdgeInsets.only(bottom: 5),
+                padding: const EdgeInsets.only(bottom: Spacing.sm),
                 child: FloatingActionButton(
                   heroTag: "cart",
                   backgroundColor: Colors.transparent,
