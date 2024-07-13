@@ -5,13 +5,13 @@ default_platform(:ios)
 platform :ios do
   desc "Build and distribute iOS app for Adhoc"
   lane :adhoc do    
-    p12_base64 = ENV['REVIEW_CERTIFICATES']
-    p12_password = ENV['REVIEW_CERTIFICATES_PASSWORD']
+    p12_base64 = ENV['CERTIFICATES']
+    p12_password = ENV['CERTIFICATES_PASSWORD']
     File.write("../certificate.p12", Base64.decode64(p12_base64))
 
     provisioning_profile_base64 = ENV['REVIEW_PROVISIONING_PROFILE']
     provisioning_profile_path = "Adhoc.mobileprovision"
-    File.write("../#{provisioning_profile_path}", Base64.decode64(provisioning_profile_base64))
+    File.write("#{provisioning_profile_path}", Base64.decode64(provisioning_profile_base64))
 
     sh("mkdir -p ~/Library/MobileDevice/Provisioning\\ Profiles/")
     sh("cp #{provisioning_profile_path} ~/Library/MobileDevice/Provisioning\\ Profiles/Adhoc.mobileprovision")
