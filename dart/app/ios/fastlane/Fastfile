@@ -20,8 +20,6 @@ platform :ios do
     google_service_info_plist_path = "GoogleService-Info.plist"
     File.write(google_service_info_plist_path, Base64.decode64(google_service_info_plist_base64))
 
-    sh("mv #{google_service_info_plist_path} ../#{google_service_info_plist_path}")
-
     create_keychain(
       name: "build.keychain",
       password: "",
