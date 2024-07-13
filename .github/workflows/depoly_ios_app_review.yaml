@@ -21,18 +21,18 @@ jobs:
         with:
           ruby-version: "2.7"
 
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
       - name: Install dependencies
         run: |
           cd ios
           bundle install
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "latest"
-
-      - name: Install Flutter dependencies
-        run: flutter pub get
 
       - name: Build and distribute with Fastlane
         env:
