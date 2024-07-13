@@ -33,7 +33,6 @@ jobs:
         run: |
           cd ios
           bundle install
-          bundle exec pod install
 
       - name: Build and distribute with Fastlane
         env:
