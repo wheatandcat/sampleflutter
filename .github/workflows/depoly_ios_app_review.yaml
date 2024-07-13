@@ -5,7 +5,13 @@ on:
     branches:
       - main
       - "28"
-
+env:
+  REVIEW_FIREBASE_APP_ID: ${{ secrets.REVIEW_FIREBASE_APP_ID }}
+  REVIEW_FIREBASE_CLI_TOKEN: ${{ secrets.REVIEW_FIREBASE_CLI_TOKEN }}
+  CERTIFICATES: ${{ secrets.CERTIFICATES }}
+  CERTIFICATES_PASSWORD: ${{ secrets.CERTIFICATES_PASSWORD }}
+  REVIEW_PROVISIONING_PROFILE: ${{ secrets.REVIEW_PROVISIONING_PROFILE }}
+  REVIEW_GOOGLE_SERVICE_INFO_PLIST: ${{ secrets.REVIEW_GOOGLE_SERVICE_INFO_PLIST }}
 jobs:
   build:
     runs-on: macos-latest
@@ -44,18 +50,10 @@ jobs:
           cd ios
           pod install
 
-      - name: Create firebase.json file
-        run: |
-          echo $REVIEW_GOOGLE_SERVICE_INFO_PLIST | base64 --decode -i > ./ios/GoogleService-Info.plist
+      - name: Create GoogleService-Info.plist
+        run: echo $REVIEW_GOOGLE_SERVICE_INFO_PLIST | base64 --decode -i > ./ios/GoogleService-Info.plist
 
       - name: Build and distribute with Fastlane
-        env:
-          REVIEW_FIREBASE_APP_ID: ${{ secrets.REVIEW_FIREBASE_APP_ID }}
-          REVIEW_FIREBASE_CLI_TOKEN: ${{ secrets.REVIEW_FIREBASE_CLI_TOKEN }}
-          CERTIFICATES: ${{ secrets.CERTIFICATES }}
-          CERTIFICATES_PASSWORD: ${{ secrets.CERTIFICATES_PASSWORD }}
-          REVIEW_PROVISIONING_PROFILE: ${{ secrets.REVIEW_PROVISIONING_PROFILE }}
-          REVIEW_GOOGLE_SERVICE_INFO_PLIST: ${{ secrets.REVIEW_GOOGLE_SERVICE_INFO_PLIST }}
         run: |
           cd ios
           bundle exec fastlane adhoc
