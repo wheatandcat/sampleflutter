@@ -14,7 +14,13 @@ platform :ios do
     File.write("#{provisioning_profile_path}", Base64.decode64(provisioning_profile_base64))
 
     sh("mkdir -p ~/Library/MobileDevice/Provisioning\\ Profiles/")
-    sh("cp #{provisioning_profile_path} ~/Library/MobileDevice/Provisioning\\ Profiles/Adhoc.mobileprovision")
+    sh("cp #{provisioning_profile_path} ~/Library/MobileDevice/Provisioning\\ Profiles/stockkeeper-adhok.mobileprovision")
+
+    google_service_info_plist_base64 = ENV['GOOGLE_SERVICE_INFO_PLIST_BASE64']
+    google_service_info_plist_path = "GoogleService-Info.plist"
+    File.write(google_service_info_plist_path, Base64.decode64(google_service_info_plist_base64))
+
+    sh("mv #{google_service_info_plist_path} ../#{google_service_info_plist_path}")
 
     create_keychain(
       name: "build.keychain",
