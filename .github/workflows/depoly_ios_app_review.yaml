@@ -22,6 +22,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: "actions/checkout@v4"
+
+      - name: Create GoogleService-Info.plist
+        run: echo $REVIEW_GOOGLE_SERVICE_INFO_PLIST | base64 --decode > ./ios/GoogleService-Info.plist
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -49,9 +53,6 @@ jobs:
         run: |
           cd ios
           pod install
-
-      - name: Create GoogleService-Info.plist
-        run: echo $REVIEW_GOOGLE_SERVICE_INFO_PLIST | base64 --decode -i > ./ios/GoogleService-Info.plist
 
       - name: Build and distribute with Fastlane
         run: |
