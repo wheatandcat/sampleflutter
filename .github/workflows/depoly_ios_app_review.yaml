@@ -34,6 +34,11 @@ jobs:
           cd ios
           bundle install
 
+      - name: Install CocoaPods dependencies
+        run: |
+          cd ios
+          pod install
+
       - name: Build and distribute with Fastlane
         env:
           REVIEW_FIREBASE_APP_ID: ${{ secrets.REVIEW_FIREBASE_APP_ID }}
