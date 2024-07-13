@@ -18,8 +18,16 @@ platform :ios do
       password: "",
       default_keychain: true,
       unlock: true,
-      timeout: 3600,
+      timeout: 36000,
       lock_when_sleeps: false
+    )
+
+   `curl -OL https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer`
+
+    import_certificate(
+      keychain_name: "build.keychain",
+      keychain_password: "",
+      certificate_path: "fastlane/AppleWWDRCAG3.cer",
     )
 
     import_certificate(
@@ -62,7 +70,7 @@ platform :ios do
       firebase_cli_token: ENV['REVIEW_FIREBASE_CLI_TOKEN'],
       ipa_path: "build/app.ipa",
       groups: "testers"
-    )
+    ) 
 
     delete_keychain(name: "build.keychain")
   end
