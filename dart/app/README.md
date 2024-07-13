@@ -42,3 +42,29 @@ $ flutter pub run flutter_launcher_icons
 ```bash
 $ flutter pub run flutter_native_splash:create
 ```
+
+## iOS
+
+### 開発ビルド
+
+```bash
+$ flutter build ipa  --export-method ad-hoc
+```
+
+## Android
+
+### 開発ビルド
+
+```bash
+$ flutter build apk
+```
+
+## 環境変数
+
+### 開発
+
+```bash
+$ base64 -i keeper_review.p12 | pbcopy
+$ base64 -i keeper_adhok.mobileprovision | pbcopy
+$ base64 -i ./ios/GoogleService-Info.plist | pbcopy
+```

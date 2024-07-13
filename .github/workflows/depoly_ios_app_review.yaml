@@ -1,0 +1,46 @@
+name: レビュー環境のiOSアプリをFirebase App Distributionにデプロイする
+
+on:
+  push:
+    branches:
+      - main
+      - "28"
+
+jobs:
+  build:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: dart/app
+
+    steps:
+      - uses: actions/checkout
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "2.7"
+
+      - name: Install dependencies
+        run: |
+          cd ios
+          bundle install
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "latest"
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Build and distribute with Fastlane
+        env:
+          REVIEW_FIREBASE_APP_ID: ${{ secrets.REVIEW_FIREBASE_APP_ID }}
+          REVIEW_FIREBASE_CLI_TOKEN: ${{ secrets.REVIEW_FIREBASE_CLI_TOKEN }}
+          REVIEW_CERTIFICATES: ${{ secrets.REVIEW_CERTIFICATES }}
+          REVIEW_CERTIFICATES_PASSWORD: ${{ secrets.REVIEW_CERTIFICATES_PASSWORD }}
+          REVIEW_PROVISIONING_PROFILE: ${{ secrets.REVIEW_PROVISIONING_PROFILE }}
+          REVIEW_GOOGLE_SERVICE_INFO_PLIST: ${{ secrets.REVIEW_GOOGLE_SERVICE_INFO_PLIST }}
+        run: |
+          cd ios
+          bundle exec fastlane adhoc
