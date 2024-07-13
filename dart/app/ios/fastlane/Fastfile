@@ -13,9 +13,6 @@ platform :ios do
     provisioning_profile_path = "Adhoc.mobileprovision"
     File.write("#{provisioning_profile_path}", Base64.decode64(provisioning_profile_base64))
 
-    sh("mkdir -p ~/Library/MobileDevice/Provisioning\\ Profiles/")
-    sh("cp #{provisioning_profile_path} ~/Library/MobileDevice/Provisioning\\ Profiles/stockkeeper-adhok.mobileprovision")
-
     create_keychain(
       name: "build.keychain",
       password: "",
@@ -32,6 +29,10 @@ platform :ios do
       certificate_password: p12_password
     )
 
+    provisioning_profile_uuid = sh("uuidgen").strip
+    sh("mkdir -p ~/Library/MobileDevice/Provisioning\\ Profiles/")
+    sh("cp #{provisioning_profile_path} ~/Library/MobileDevice/Provisioning\\ Profiles/#{provisioning_profile_uuid}.mobileprovision")
+
     current_time = Time.now.strftime("%Y%m%d%H%M")
 
     increment_build_number(
@@ -46,7 +47,7 @@ platform :ios do
       export_options: {
         method: "ad-hoc",
         provisioningProfiles: {
-          "com.unicorn.stockkeeper" => "stockkeeper-adhok"
+          "com.unicorn.stockkeeper" => provisioning_profile_uuid
         },
         signingStyle: "manual"
       },
