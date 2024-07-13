@@ -7,12 +7,11 @@ platform :ios do
   lane :adhoc do    
     p12_base64 = ENV['REVIEW_CERTIFICATES']
     p12_password = ENV['REVIEW_CERTIFICATES_PASSWORD']
-    File.write("certificate.p12", Base64.decode64(p12_base64))
-
+    File.write("../certificate.p12", Base64.decode64(p12_base64))
 
     provisioning_profile_base64 = ENV['REVIEW_PROVISIONING_PROFILE']
     provisioning_profile_path = "Adhoc.mobileprovision"
-    File.write(provisioning_profile_path, Base64.decode64(provisioning_profile_base64))
+    File.write("../#{provisioning_profile_path}", Base64.decode64(provisioning_profile_base64))
 
     sh("mkdir -p ~/Library/MobileDevice/Provisioning\\ Profiles/")
     sh("cp #{provisioning_profile_path} ~/Library/MobileDevice/Provisioning\\ Profiles/Adhoc.mobileprovision")
@@ -26,17 +25,18 @@ platform :ios do
       lock_when_sleeps: false
     )
 
+    import_certificate(
+      keychain_name: "build.keychain",
+      keychain_password: "",
+      certificate_path: "certificate.p12",
+      certificate_password: p12_password
+    )
+
     current_time = Time.now.strftime("%Y%m%d%H%M")
 
     increment_build_number(
       build_number: current_time,
       xcodeproj: "Runner.xcodeproj"
-    )
-
-    import_certificate(
-      certificate_path: "certificate.p12",
-      certificate_password: p12_password,
-      keychain_name: "build.keychain"
     )
 
     # iOSビルド
