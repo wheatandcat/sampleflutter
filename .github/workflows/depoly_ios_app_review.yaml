@@ -14,7 +14,8 @@ jobs:
         working-directory: dart/app
 
     steps:
-      - uses: actions/checkout
+      - name: Checkout repository
+        uses: "actions/checkout@v4"
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
