@@ -7,7 +7,7 @@ platform :ios do
   lane :adhoc do    
     p12_base64 = ENV['CERTIFICATES']
     p12_password = ENV['CERTIFICATES_PASSWORD']
-    File.write("../certificate.p12", Base64.decode64(p12_base64))
+    File.write("certificate.p12", Base64.decode64(p12_base64)) 
 
     provisioning_profile_base64 = ENV['REVIEW_PROVISIONING_PROFILE']
     provisioning_profile_path = "Adhoc.mobileprovision"
@@ -28,7 +28,7 @@ platform :ios do
     import_certificate(
       keychain_name: "build.keychain",
       keychain_password: "",
-      certificate_path: "certificate.p12",
+      certificate_path: "fastlane/certificate.p12",
       certificate_password: p12_password
     )
 
