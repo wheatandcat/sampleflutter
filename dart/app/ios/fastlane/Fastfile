@@ -46,7 +46,7 @@ platform :ios do
       export_options: {
         method: "ad-hoc",
         provisioningProfiles: {
-          "com.unicorn.stockkeeper" => "Adhoc"
+          "com.unicorn.stockkeeper" => "stockkeeper-adhok"
         },
         signingStyle: "manual"
       },
