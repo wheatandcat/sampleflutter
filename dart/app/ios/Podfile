@@ -37,24 +37,8 @@ target 'Runner' do
   end
 end
 
-
 post_install do |installer|
   installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
-    end
-
-    # Skip the ruby scripts for flutter_config
-    if target.name == 'flutter_config'
-      target.build_phases.each do |build_phase|
-        if build_phase.respond_to?(:remove_file_reference)
-          build_phase.files.each do |build_file|
-            if build_file.file_ref && build_file.file_ref.path.include?('.rb')
-              build_phase.remove_file_reference(build_file.file_ref)
-            end
-          end
-        end
-      end
-    end
+    flutter_additional_ios_build_settings(target)
   end
 end

@@ -39,6 +39,15 @@ jobs:
           cd ios
           pod install
 
+      - name: Install CocoaPods dependencies
+        run: |
+          cd ios
+          pod install
+
+      - name: Create firebase.json file
+        run: |
+          echo $REVIEW_GOOGLE_SERVICE_INFO_PLIST | base64 --decode -i > ./ios/GoogleService-Info.plist
+
       - name: Build and distribute with Fastlane
         env:
           REVIEW_FIREBASE_APP_ID: ${{ secrets.REVIEW_FIREBASE_APP_ID }}

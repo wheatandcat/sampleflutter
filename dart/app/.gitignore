@@ -36,6 +36,10 @@ migrate_working_dir/
 keeper.p12
 keeper_review.p12
 keeper_adhok.mobileprovision
+ios/fastlane/Adhoc.mobileprovision
+ios/fastlane/AppleWWDRCAG3.cer
+ios/fastlane/certificate.p12
+fastlane/report.xml
 
 # Symbolication related
 app.*.symbols
