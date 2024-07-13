@@ -44,8 +44,8 @@ platform :ios do
     build_app(
       workspace: "Runner.xcworkspace",
       scheme: "Runner",
+      export_method: "ad-hoc",
       export_options: {
-        method: "ad-hoc",
         provisioningProfiles: {
           "com.unicorn.stockkeeper" => provisioning_profile_uuid
         },

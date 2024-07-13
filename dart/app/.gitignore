@@ -33,6 +33,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+keeper.p12
 keeper_review.p12
 keeper_adhok.mobileprovision
 
@@ -54,6 +55,10 @@ firebase_options.dart
 firebase.json
 firepit-log.txt
 AppFrameworkInfo.plist
+ios_distribution.cer
+adc.csr
+private.key
+ios_distribution.pem
 
 # web
 web/index.html
