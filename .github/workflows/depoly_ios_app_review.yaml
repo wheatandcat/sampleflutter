@@ -29,7 +29,8 @@ jobs:
       - name: Create GoogleService-Info.plist
         run: |
           mkdir -pv ~/Library/MobileDevice/Provisioning\ Profiles/
-          base64 -D -o ~/Library/MobileDevice/Provisioning\ Profiles/keeper-adhoc.mobileprovision \<<< $REVIEW_PROVISIONING_PROFILE
+          cd ~/Library/MobileDevice/Provisioning\ Profiles/
+          echo $REVIEW_PROVISIONING_PROFILE | base64 --decode > ./keeper-adhoc.mobileprovision
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
