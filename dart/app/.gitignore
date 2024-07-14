@@ -63,6 +63,7 @@ distribution.cer
 adc.csr
 private.key
 distribution.pem
+csr.pem
 
 # web
 web/index.html

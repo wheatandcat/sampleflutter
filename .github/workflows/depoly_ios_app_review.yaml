@@ -26,6 +26,11 @@ jobs:
       - name: Create GoogleService-Info.plist
         run: echo $REVIEW_GOOGLE_SERVICE_INFO_PLIST | base64 --decode > ./ios/GoogleService-Info.plist
 
+      - name: Create GoogleService-Info.plist
+        run: |
+          mkdir -pv ~/Library/MobileDevice/Provisioning\ Profiles/
+          base64 -D -o ~/Library/MobileDevice/Provisioning\ Profiles/keeper-adhoc.mobileprovision \<<< $REVIEW_PROVISIONING_PROFILE
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -43,11 +48,6 @@ jobs:
         run: |
           cd ios
           bundle install
-
-      - name: Install CocoaPods dependencies
-        run: |
-          cd ios
-          pod install
 
       - name: Install CocoaPods dependencies
         run: |
