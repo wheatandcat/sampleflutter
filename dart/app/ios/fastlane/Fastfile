@@ -55,13 +55,14 @@ platform :ios do
       export_method: "ad-hoc",
       export_options: {
         provisioningProfiles: {
-          "com.unicorn.stockkeeper" => provisioning_profile_uuid
+          "com.unicorn.stockkeeper" => "stockkeeper-adhoc"
         },
         signingStyle: "manual"
       },
       clean: true,
       output_name: "app.ipa",
-      output_directory: "build"
+      output_directory: "build",
+      xcargs: "-allowProvisioningUpdates"
     )
 
     # Firebase App Distributionにアップロード

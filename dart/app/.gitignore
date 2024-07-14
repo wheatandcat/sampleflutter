@@ -39,7 +39,7 @@ keeper_adhok.mobileprovision
 ios/fastlane/Adhoc.mobileprovision
 ios/fastlane/AppleWWDRCAG3.cer
 ios/fastlane/certificate.p12
-fastlane/report.xml
+ios/fastlane/report.xml
 
 # Symbolication related
 app.*.symbols
@@ -59,10 +59,10 @@ firebase_options.dart
 firebase.json
 firepit-log.txt
 AppFrameworkInfo.plist
-ios_distribution.cer
+distribution.cer
 adc.csr
 private.key
-ios_distribution.pem
+distribution.pem
 
 # web
 web/index.html
