@@ -26,11 +26,14 @@ jobs:
       - name: Create GoogleService-Info.plist
         run: echo $REVIEW_GOOGLE_SERVICE_INFO_PLIST | base64 --decode > ./ios/GoogleService-Info.plist
 
-      - name: Create GoogleService-Info.plist
+      - name: Create Provisioning File
         run: |
           mkdir -pv ~/Library/MobileDevice/Provisioning\ Profiles/
           cd ~/Library/MobileDevice/Provisioning\ Profiles/
           echo $REVIEW_PROVISIONING_PROFILE | base64 --decode > ./keeper-adhoc.mobileprovision
+
+      - name: Create lib/firebase_options.dart
+        run: echo $REVIEW_DART_FIREBASE_OPTIONS | base64 --decode > ./lib/firebase_options.dart
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1

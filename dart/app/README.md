@@ -67,4 +67,5 @@ $ flutter build apk
 $ base64 -i keeper.p12 | pbcopy
 $ base64 -i keeper_adhok.mobileprovision | pbcopy
 $ base64 -i ./ios/GoogleService-Info.plist | pbcopy
+$ base64 -i ./lib/firebase_options.dart | pbcopy
 ```
