@@ -9,10 +9,18 @@ platform :ios do
     p12_password = ENV['CERTIFICATES_PASSWORD']
     File.write("certificate.p12", Base64.decode64(p12_base64)) 
 
+    provisioning_profile_uuid = sh("uuidgen").strip
     provisioning_profile_base64 = ENV['REVIEW_PROVISIONING_PROFILE']
-    provisioning_profile_path = "Adhoc.mobileprovision"
-    File.write("#{provisioning_profile_path}", Base64.decode64(provisioning_profile_base64))
+    provisioning_profile_path = "#{provisioning_profile_uuid}.mobileprovision"
+    provisioning_profile_directory = "#{Dir.home}/Library/MobileDevice/Provisioning Profiles"
 
+    temp_provisioning_profile_path = File.join(Dir.pwd, provisioning_profile_path)
+    File.write(temp_provisioning_profile_path, Base64.decode64(provisioning_profile_base64))
+    UI.message("Temporary provisioning profile created at: #{temp_provisioning_profile_path}")
+    FileUtils.mv(temp_provisioning_profile_path, File.join(provisioning_profile_directory, provisioning_profile_path))
+    UI.message("Provisioning profile moved to: #{provisioning_profile_directory}")
+    sh("cd ~/Library/MobileDevice/Provisioning\\ Profiles/ && pwd && ls -al")
+    
     create_keychain(
       name: "build.keychain",
       password: "",
@@ -37,10 +45,6 @@ platform :ios do
       certificate_password: p12_password
     )
 
-    provisioning_profile_uuid = sh("uuidgen").strip
-    sh("mkdir -p ~/Library/MobileDevice/Provisioning\\ Profiles/")
-    sh("cp #{provisioning_profile_path} ~/Library/MobileDevice/Provisioning\\ Profiles/#{provisioning_profile_uuid}.mobileprovision")
-
     current_time = Time.now.strftime("%Y%m%d%H%M")
 
     increment_build_number(
@@ -55,14 +59,13 @@ platform :ios do
       export_method: "ad-hoc",
       export_options: {
         provisioningProfiles: {
-          "com.unicorn.stockkeeper" => "stockkeeper-adhoc"
+          "com.unicorn.stockkeeper" => provisioning_profile_uuid
         },
         signingStyle: "manual"
       },
       clean: true,
       output_name: "app.ipa",
       output_directory: "build",
-      xcargs: "-allowProvisioningUpdates"
     )
 
     # Firebase App Distributionにアップロード
@@ -74,5 +77,6 @@ platform :ios do
     ) 
 
     delete_keychain(name: "build.keychain")
+
   end
 end
