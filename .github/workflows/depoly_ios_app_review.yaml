@@ -38,7 +38,7 @@ jobs:
         run: echo $REVIEW_DART_FIREBASE_OPTIONS | base64 --decode > ./lib/firebase_options.dart
 
       - name: Create dart/app/ios/Runner/Info.plist
-        run: echo $REVIEW_RUNNER_INFOPLIST | base64 --decode > ./dart/app/ios/Runner/Info.plist
+        run: echo $REVIEW_RUNNER_INFOPLIST | base64 --decode > ./ios/Runner/Info.plist
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
