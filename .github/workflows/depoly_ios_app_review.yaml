@@ -13,6 +13,7 @@ env:
   REVIEW_PROVISIONING_PROFILE: ${{ secrets.REVIEW_PROVISIONING_PROFILE }}
   REVIEW_GOOGLE_SERVICE_INFO_PLIST: ${{ secrets.REVIEW_GOOGLE_SERVICE_INFO_PLIST }}
   REVIEW_DART_FIREBASE_OPTIONS: ${{ secrets.REVIEW_DART_FIREBASE_OPTIONS }}
+  REVIEW_RUNNER_INFOPLIST: ${{ secrets.REVIEW_RUNNER_INFOPLIST }}
 jobs:
   build:
     runs-on: macos-latest
@@ -25,7 +26,7 @@ jobs:
         uses: "actions/checkout@v4"
 
       - name: Create GoogleService-Info.plist
-        run: echo $REVIEW_GOOGLE_SERVICE_INFO_PLIST | base64 --decode > ./ios/GoogleService-Info.plist
+        run: echo $REVIEW_GOOGLE_SERVICE_INFO_PLIST | base64 --decod  e > ./ios/GoogleService-Info.plist
 
       - name: Create Provisioning File
         run: |
@@ -35,6 +36,9 @@ jobs:
 
       - name: Create lib/firebase_options.dart
         run: echo $REVIEW_DART_FIREBASE_OPTIONS | base64 --decode > ./lib/firebase_options.dart
+
+      - name: Create dart/app/ios/Runner/Info.plist
+        run: echo $REVIEW_RUNNER_INFOPLIST | base64 --decode > ./dart/app/ios/Runner/Info.plist
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1

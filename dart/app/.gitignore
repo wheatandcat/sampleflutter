@@ -58,7 +58,6 @@ GoogleService-Info.plist
 firebase_options.dart
 firebase.json
 firepit-log.txt
-AppFrameworkInfo.plist
 distribution.cer
 adc.csr
 private.key
