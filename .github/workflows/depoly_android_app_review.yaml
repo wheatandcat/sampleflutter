@@ -86,4 +86,6 @@ jobs:
           mv ./build/app/outputs/flutter-apk/app-release.apk ./android/build/app/outputs/app-release.apk
 
       - name: distribution apk
-        run: flutter build distribution
+        run: |
+          cd android
+          bundle exec fastlane distribution

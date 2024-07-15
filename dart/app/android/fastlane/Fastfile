@@ -12,7 +12,6 @@ platform :android do
       android_artifact_type: "APK",
       android_artifact_path: "build/app/outputs/app-release.apk",
       groups: "testers",
-      debug: true
     ) 
   end
 end
