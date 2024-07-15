@@ -58,7 +58,7 @@ platform :ios do
 
     # Firebase App Distributionにアップロード
     firebase_app_distribution(
-      app: ENV['REVIEW_FIREBASE_APP_ID'],
+      app: ENV['REVIEW_IOS_FIREBASE_APP_ID'],
       firebase_cli_token: ENV['REVIEW_FIREBASE_CLI_TOKEN'],
       ipa_path: "build/app.ipa",
       groups: "testers"
