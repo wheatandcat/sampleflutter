@@ -66,11 +66,6 @@ jobs:
           cd android
           bundle install
 
-      - name: setup new app
-        run: |
-          cd android
-          bundle exec fastlane setup
-
       - name: build apk
         run: |
           BUILD_NUMBER=$(date +%s)
