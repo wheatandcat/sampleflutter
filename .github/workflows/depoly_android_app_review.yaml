@@ -1,0 +1,86 @@
+name: レビュー環境のAndroidアプリをFirebase App Distributionにデプロイする
+
+on:
+  push:
+    branches:
+      - main
+      - "28-2"
+env:
+  REVIEW_FIREBASE_APP_ID: ${{ secrets.REVIEW_ANDROID_FIREBASE_APP_ID }}
+  REVIEW_FIREBASE_CLI_TOKEN: ${{ secrets.REVIEW_FIREBASE_CLI_TOKEN }}
+  REVIEW_GOOGLE_SERVICE_JSON: ${{ secrets.REVIEW_GOOGLE_SERVICE_JSON }}
+  REVIEW_DART_FIREBASE_OPTIONS: ${{ secrets.REVIEW_DART_FIREBASE_OPTIONS }}
+jobs:
+  build:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: dart/app
+
+    steps:
+      - name: Checkout repository
+        uses: "actions/checkout@v4"
+
+      - name: Create google-services.json
+        run: echo $REVIEW_GOOGLE_SERVICE_JSON | base64 --decode > ./android/app/google-services.json
+
+      - name: Create lib/firebase_options.dart
+        run: echo $REVIEW_DART_FIREBASE_OPTIONS | base64 --decode > ./lib/firebase_options.dart
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "2.7"
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.FLUTTER_HOME }}/.pub-cache
+            **/.flutter-plugins
+            **/.flutter-plugin-dependencies
+            **/.dart_tool/package_config.json
+          key: ${{ runner.os }}-flutter-${{ hashFiles('dart/app/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+
+      - name: Cache Bundler dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-bundler-${{ hashFiles('dart/app/android/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Install dependencies
+        run: |
+          cd android
+          bundle install
+
+      - name: setup new app
+        run: |
+          cd android
+          bundle exec fastlane setup
+
+      - name: build apk
+        run: |
+          BUILD_NUMBER=$(date +"%Y%m%d%H%M")
+          echo "Current build number is $BUILD_NUMBER"
+          flutter build apk --release --build-number=$BUILD_NUMBER
+
+      - name: mv apk
+        run: |
+          mkdir -p android/build/app/outputs
+          mv ./build/app/outputs/flutter-apk/app-release.apk ./android/build/app/outputs/app-release.apk
+
+      - name: distribution apk
+        run: flutter build distribution

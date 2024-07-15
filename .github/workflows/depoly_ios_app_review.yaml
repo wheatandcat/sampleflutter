@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "dart/app/**"
 env:
-  REVIEW_FIREBASE_APP_ID: ${{ secrets.REVIEW_FIREBASE_APP_ID }}
+  REVIEW_FIREBASE_APP_ID: ${{ secrets.REVIEW_IOS_FIREBASE_APP_ID }}
   REVIEW_FIREBASE_CLI_TOKEN: ${{ secrets.REVIEW_FIREBASE_CLI_TOKEN }}
   CERTIFICATES: ${{ secrets.CERTIFICATES }}
   CERTIFICATES_PASSWORD: ${{ secrets.CERTIFICATES_PASSWORD }}

@@ -1,0 +1,33 @@
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Setup new app"
+  lane :setup do
+    current_time = Time.now.strftime("%Y%m%d%H%M")
+
+    android_set_version_code(
+      version_code: current_time,
+      gradle_file: "./app/build.gradle"
+    )
+  end
+
+  desc "Upload an apk to Firebase App Distribution"
+  lane :distribution do
+
+    # Firebase App Distributionにアップロード
+    firebase_app_distribution(
+      app: ENV['REVIEW_ANDROID_FIREBASE_APP_ID'],
+      firebase_cli_token: ENV['REVIEW_FIREBASE_CLI_TOKEN'],
+      android_artifact_type: "APK",
+      android_artifact_path: "build/app/outputs/app-release.apk",
+      groups: "testers",
+      debug: true
+    ) 
+  end
+end
