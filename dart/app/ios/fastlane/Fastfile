@@ -1,0 +1,70 @@
+# Fastfile
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Build and distribute iOS app for Adhoc"
+  lane :adhoc do    
+    p12_base64 = ENV['CERTIFICATES']
+    p12_password = ENV['CERTIFICATES_PASSWORD']
+    File.write("certificate.p12", Base64.decode64(p12_base64)) 
+    
+    create_keychain(
+      name: "build.keychain",
+      password: "keeper",
+      default_keychain: true,
+      unlock: true,
+      timeout: 36000,
+      lock_when_sleeps: false
+    )
+
+   `curl -OL https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer`
+
+    import_certificate(
+      keychain_name: "build.keychain",
+      keychain_password: "keeper",
+      certificate_path: "fastlane/AppleWWDRCAG3.cer",
+    )
+
+    import_certificate(
+      keychain_name: "build.keychain",
+      keychain_password: "keeper",
+      certificate_path: "fastlane/certificate.p12",
+      certificate_password: p12_password
+    )
+
+    current_time = Time.now.strftime("%Y%m%d%H%M")
+
+    increment_build_number(
+      build_number: current_time,
+      xcodeproj: "Runner.xcodeproj"
+    )
+
+
+    build_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "Runner",
+      export_options: {
+        method: "ad-hoc",
+        provisioningProfiles: {
+          "com.unicorn.stockkeeper" => "keeper-adhoc"
+        },
+        signingStyle: "manual"
+      },
+      clean: true,
+      output_name: "app.ipa",
+      output_directory: "build"
+    )
+
+    # Firebase App Distributionにアップロード
+    firebase_app_distribution(
+      app: ENV['REVIEW_FIREBASE_APP_ID'],
+      firebase_cli_token: ENV['REVIEW_FIREBASE_CLI_TOKEN'],
+      ipa_path: "build/app.ipa",
+      groups: "testers"
+    ) 
+
+    delete_keychain(name: "build.keychain")
+
+  end
+end

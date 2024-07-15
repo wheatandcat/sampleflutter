@@ -1,0 +1,98 @@
+name: レビュー環境のiOSアプリをFirebase App Distributionにデプロイする
+
+on:
+  push:
+    branches:
+      - main
+env:
+  REVIEW_FIREBASE_APP_ID: ${{ secrets.REVIEW_FIREBASE_APP_ID }}
+  REVIEW_FIREBASE_CLI_TOKEN: ${{ secrets.REVIEW_FIREBASE_CLI_TOKEN }}
+  CERTIFICATES: ${{ secrets.CERTIFICATES }}
+  CERTIFICATES_PASSWORD: ${{ secrets.CERTIFICATES_PASSWORD }}
+  REVIEW_PROVISIONING_PROFILE: ${{ secrets.REVIEW_PROVISIONING_PROFILE }}
+  REVIEW_GOOGLE_SERVICE_INFO_PLIST: ${{ secrets.REVIEW_GOOGLE_SERVICE_INFO_PLIST }}
+  REVIEW_DART_FIREBASE_OPTIONS: ${{ secrets.REVIEW_DART_FIREBASE_OPTIONS }}
+  REVIEW_RUNNER_INFOPLIST: ${{ secrets.REVIEW_RUNNER_INFOPLIST }}
+jobs:
+  build:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: dart/app
+
+    steps:
+      - name: Checkout repository
+        uses: "actions/checkout@v4"
+
+      - name: Create GoogleService-Info.plist
+        run: echo $REVIEW_GOOGLE_SERVICE_INFO_PLIST | base64 --decode > ./ios/Runner/GoogleService-Info.plist
+
+      - name: Create Provisioning File
+        run: |
+          mkdir -pv ~/Library/MobileDevice/Provisioning\ Profiles/
+          cd ~/Library/MobileDevice/Provisioning\ Profiles/
+          echo $REVIEW_PROVISIONING_PROFILE | base64 --decode > ./keeper-adhoc.mobileprovision
+
+      - name: Create lib/firebase_options.dart
+        run: echo $REVIEW_DART_FIREBASE_OPTIONS | base64 --decode > ./lib/firebase_options.dart
+
+      - name: Create dart/app/ios/Runner/Info.plist
+        run: echo $REVIEW_RUNNER_INFOPLIST | base64 --decode > ./ios/Runner/Info.plist
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "2.7"
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.FLUTTER_HOME }}/.pub-cache
+            **/.flutter-plugins
+            **/.flutter-plugin-dependencies
+            **/.dart_tool/package_config.json
+          key: ${{ runner.os }}-flutter-${{ hashFiles('dart/app/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+
+      - name: Cache Bundler dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-bundler-${{ hashFiles('dart/app/ios/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: |
+            dart/app/ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('dart/app/ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Install dependencies
+        run: |
+          cd ios
+          bundle install
+
+      - name: Install CocoaPods dependencies
+        run: |
+          cd ios
+          pod install
+
+      - name: Build and distribute with Fastlane
+        run: |
+          cd ios
+          bundle exec fastlane adhoc

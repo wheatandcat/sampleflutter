@@ -9,6 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
+.env
 
 # IntelliJ related
 *.iml
@@ -32,6 +33,13 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+keeper.p12
+keeper_review.p12
+keeper_adhok.mobileprovision
+ios/fastlane/Adhoc.mobileprovision
+ios/fastlane/AppleWWDRCAG3.cer
+ios/fastlane/certificate.p12
+ios/fastlane/report.xml
 
 # Symbolication related
 app.*.symbols
@@ -50,7 +58,11 @@ GoogleService-Info.plist
 firebase_options.dart
 firebase.json
 firepit-log.txt
-AppFrameworkInfo.plist
+distribution.cer
+adc.csr
+private.key
+distribution.pem
+csr.pem
 
 # web
 web/index.html
