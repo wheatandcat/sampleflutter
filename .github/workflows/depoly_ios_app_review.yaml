@@ -16,7 +16,7 @@ env:
   REVIEW_DART_FIREBASE_OPTIONS: ${{ secrets.REVIEW_DART_FIREBASE_OPTIONS }}
   REVIEW_RUNNER_INFOPLIST: ${{ secrets.REVIEW_RUNNER_INFOPLIST }}
 jobs:
-  build:
+  deploy:
     runs-on: macos-latest
     defaults:
       run:
