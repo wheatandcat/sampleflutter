@@ -89,3 +89,5 @@ jobs:
         run: |
           cd android
           bundle exec fastlane distribution
+        env:
+          RUBYOPT: "-rostruct"
