@@ -88,8 +88,6 @@ class Login extends HookConsumerWidget {
             );
           },
         );
-
-        debugPrint(e.message);
       } catch (e) {
         showCupertinoDialog(
           context: context,
@@ -108,8 +106,6 @@ class Login extends HookConsumerWidget {
             );
           },
         );
-
-        print(e);
       }
     }
 
