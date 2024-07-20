@@ -68,4 +68,6 @@ $ base64 -i ./ios/GoogleService-Info.plist | pbcopy
 $ base64 -i ./lib/firebase_options.dart | pbcopy
 $ base64 -i ./ios/Runner/Info.plist | pbcopy
 $ base64 -i ./android/app/google-services.json | pbcopy
+$ base64 -i ./android/key.jks | pbcopy
+$ base64 -i ./android/local.properties | pbcopy
 ```

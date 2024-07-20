@@ -29,6 +29,12 @@ jobs:
       - name: Create google-services.json
         run: echo $REVIEW_GOOGLE_SERVICE_JSON | base64 --decode > ./android/app/google-services.json
 
+      - name: Create key.jks
+        run: echo $REVIEW_JKS | base64 --decode > ./android/key.jks
+
+      - name: Create local.properties
+        run: echo $REVIEW_ANDROID_PROPERTIES | base64 --decode > ./android/local.properties
+
       - name: Create lib/firebase_options.dart
         run: echo $REVIEW_DART_FIREBASE_OPTIONS | base64 --decode > ./lib/firebase_options.dart
 
