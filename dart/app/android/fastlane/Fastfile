@@ -1,0 +1,17 @@
+
+default_platform(:android)
+
+platform :android do
+  desc "Upload an apk to Firebase App Distribution"
+  lane :distribution do
+
+    # Firebase App Distributionにアップロード
+    firebase_app_distribution(
+      app: ENV['REVIEW_ANDROID_FIREBASE_APP_ID'],
+      firebase_cli_token: ENV['REVIEW_FIREBASE_CLI_TOKEN'],
+      android_artifact_type: "APK",
+      android_artifact_path: "build/app/outputs/app-release.apk",
+      groups: "testers",
+    ) 
+  end
+end

@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stockkeeper/providers/user.dart';
 import 'package:stockkeeper/components/background/background.dart';
 import 'package:stockkeeper/utils/style.dart';
+import 'package:flutter/cupertino.dart';
 
 class Login extends HookConsumerWidget {
   const Login({super.key});
@@ -70,9 +71,41 @@ class Login extends HookConsumerWidget {
           return;
         }
       } on FirebaseException catch (e) {
-        debugPrint(e.message);
+        showCupertinoDialog(
+          context: context,
+          builder: (BuildContext contextDialog) {
+            return CupertinoAlertDialog(
+              title: const Text('エラー発生'),
+              content: Text(e.message ?? "エラーが発生しました"),
+              actions: <Widget>[
+                CupertinoDialogAction(
+                  child: const Text('閉じる'),
+                  onPressed: () {
+                    Navigator.of(contextDialog).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
       } catch (e) {
-        print(e);
+        showCupertinoDialog(
+          context: context,
+          builder: (BuildContext contextDialog) {
+            return CupertinoAlertDialog(
+              title: const Text('エラー発生'),
+              content: Text(e.toString()),
+              actions: <Widget>[
+                CupertinoDialogAction(
+                  child: const Text('閉じる'),
+                  onPressed: () {
+                    Navigator.of(contextDialog).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
       }
     }
 

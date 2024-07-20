@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "dart/app/**"
 env:
-  REVIEW_FIREBASE_APP_ID: ${{ secrets.REVIEW_FIREBASE_APP_ID }}
+  REVIEW_IOS_FIREBASE_APP_ID: ${{ secrets.REVIEW_IOS_FIREBASE_APP_ID }}
   REVIEW_FIREBASE_CLI_TOKEN: ${{ secrets.REVIEW_FIREBASE_CLI_TOKEN }}
   CERTIFICATES: ${{ secrets.CERTIFICATES }}
   CERTIFICATES_PASSWORD: ${{ secrets.CERTIFICATES_PASSWORD }}
@@ -14,7 +16,7 @@ env:
   REVIEW_DART_FIREBASE_OPTIONS: ${{ secrets.REVIEW_DART_FIREBASE_OPTIONS }}
   REVIEW_RUNNER_INFOPLIST: ${{ secrets.REVIEW_RUNNER_INFOPLIST }}
 jobs:
-  build:
+  deploy:
     runs-on: macos-latest
     defaults:
       run:

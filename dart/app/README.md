@@ -11,9 +11,7 @@ $ flutter run
 ## GraphQL のスキーマを更新
 
 ```bash
-
 $ flutter pub run build_runner build
-
 ```
 
 ## web ビルド
@@ -69,4 +67,7 @@ $ base64 -i keeper_adhok.mobileprovision | pbcopy
 $ base64 -i ./ios/GoogleService-Info.plist | pbcopy
 $ base64 -i ./lib/firebase_options.dart | pbcopy
 $ base64 -i ./ios/Runner/Info.plist | pbcopy
+$ base64 -i ./android/app/google-services.json | pbcopy
+$ base64 -i ./android/key.jks | pbcopy
+$ base64 -i ./android/local.properties | pbcopy
 ```
