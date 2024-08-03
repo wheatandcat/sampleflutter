@@ -7,6 +7,7 @@ type Query {
   me: User
   itemAll: [Item]
   carts: [Cart]
+  invite: Invite
 }
 
 type User {
@@ -59,6 +60,13 @@ type Cart {
   quantity: Int!
   "アイテム"
   item: Item
+}
+
+type Invite {
+  "ユーザーID"
+  userId: ID!
+  "招待コード"
+  code: String!
 }
 
 input NewCategory {
@@ -120,6 +128,11 @@ input NewCart {
   quantity: Int!
 }
 
+input NewGuest {
+  "招待コード"
+  code: String!
+}
+
 type Mutation {
   createUser: User!
   createCategory(input: NewCategory!): Category!
@@ -130,6 +143,11 @@ type Mutation {
   deleteItem(id: Int!): Item!
   addCarts(input: [NewCart]!): Boolean!
   buying: Boolean!
+  createInvite: Invite!
+  updateInviteCode: Invite!
+  deleteInvite: Boolean!
+  createGuest(input: NewGuest!): User!
+  deleteGuest: User!
 }
 
 scalar Time

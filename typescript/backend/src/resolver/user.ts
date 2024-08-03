@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Context } from '@nestjs/graphql'
 import { UseGuards } from '@nestjs/common'
-import {
+import type {
   Query as QueryType,
   Mutation as MutationType,
 } from '@src/generated/graphql'
@@ -29,7 +29,7 @@ export class UserResolver {
 
   @Mutation('createUser')
   async createUser(@Context() context): Promise<MutationType['createUser']> {
-    const token = context.reply.request.headers['authorization']
+    const token = context.reply.request.headers.authorization
     const result = await admin.auth().verifyIdToken(token)
     try {
       const r = await this.prisma.user.create({
