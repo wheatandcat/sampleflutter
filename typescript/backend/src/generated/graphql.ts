@@ -43,6 +43,22 @@ export type Category = {
   order: Scalars['Int']['output'];
 };
 
+export type Guest = {
+  __typename?: 'Guest';
+  /** uid */
+  uid: Scalars['String']['output'];
+  /** ユーザーID */
+  userId: Scalars['ID']['output'];
+};
+
+export type Invite = {
+  __typename?: 'Invite';
+  /** 招待コード */
+  code: Scalars['String']['output'];
+  /** ユーザーID */
+  userId: Scalars['ID']['output'];
+};
+
 export type Item = {
   __typename?: 'Item';
   /** カテゴリー */
@@ -68,11 +84,16 @@ export type Mutation = {
   addCarts: Scalars['Boolean']['output'];
   buying: Scalars['Boolean']['output'];
   createCategory: Category;
+  createGuest: Guest;
+  createInvite: Invite;
   createItem: Item;
   createUser: User;
   deleteCategory: Category;
+  deleteGuest: Scalars['Boolean']['output'];
+  deleteInvite: Scalars['Boolean']['output'];
   deleteItem: Item;
   updateCategory: Category;
+  updateInviteCode: Invite;
   updateItem: Item;
 };
 
@@ -84,6 +105,11 @@ export type MutationAddCartsArgs = {
 
 export type MutationCreateCategoryArgs = {
   input: NewCategory;
+};
+
+
+export type MutationCreateGuestArgs = {
+  input: NewGuest;
 };
 
 
@@ -127,6 +153,11 @@ export type NewCategory = {
   order: Scalars['Int']['input'];
 };
 
+export type NewGuest = {
+  /** 招待コード */
+  code: Scalars['String']['input'];
+};
+
 export type NewItem = {
   /** カテゴリーID */
   categoryId: Scalars['Int']['input'];
@@ -148,6 +179,7 @@ export type Query = {
   categories?: Maybe<Array<Maybe<Category>>>;
   category?: Maybe<Category>;
   hello?: Maybe<Scalars['String']['output']>;
+  invite?: Maybe<Invite>;
   item?: Maybe<Item>;
   itemAll?: Maybe<Array<Maybe<Item>>>;
   items?: Maybe<Array<Maybe<Item>>>;

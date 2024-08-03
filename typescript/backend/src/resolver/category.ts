@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql'
 import { UseGuards } from '@nestjs/common'
-import {
+import type {
   Query as QueryType,
   Mutation as MutationType,
   MutationCreateCategoryArgs,
