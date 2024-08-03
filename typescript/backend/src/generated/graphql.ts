@@ -43,6 +43,14 @@ export type Category = {
   order: Scalars['Int']['output'];
 };
 
+export type Guest = {
+  __typename?: 'Guest';
+  /** uid */
+  uid: Scalars['String']['output'];
+  /** ユーザーID */
+  userId: Scalars['ID']['output'];
+};
+
 export type Invite = {
   __typename?: 'Invite';
   /** 招待コード */
@@ -76,12 +84,12 @@ export type Mutation = {
   addCarts: Scalars['Boolean']['output'];
   buying: Scalars['Boolean']['output'];
   createCategory: Category;
-  createGuest: User;
+  createGuest: Guest;
   createInvite: Invite;
   createItem: Item;
   createUser: User;
   deleteCategory: Category;
-  deleteGuest: User;
+  deleteGuest: Scalars['Boolean']['output'];
   deleteInvite: Scalars['Boolean']['output'];
   deleteItem: Item;
   updateCategory: Category;

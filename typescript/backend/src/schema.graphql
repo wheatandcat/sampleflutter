@@ -69,6 +69,13 @@ type Invite {
   code: String!
 }
 
+type Guest {
+  "uid"
+  uid: String!
+  "ユーザーID"
+  userId: ID!
+}
+
 input NewCategory {
   "カテゴリー名"
   name: String!
@@ -146,8 +153,8 @@ type Mutation {
   createInvite: Invite!
   updateInviteCode: Invite!
   deleteInvite: Boolean!
-  createGuest(input: NewGuest!): User!
-  deleteGuest: User!
+  createGuest(input: NewGuest!): Guest!
+  deleteGuest: Boolean!
 }
 
 scalar Time

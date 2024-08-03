@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core'
 import {
   FastifyAdapter,
-  NestFastifyApplication,
+  type NestFastifyApplication,
 } from '@nestjs/platform-fastify'
 import admin from 'firebase-admin'
 import * as serviceAccount from './firebase.json'
