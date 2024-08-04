@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - "48"
     paths:
       - "typescript/backend/**"
   workflow_dispatch:

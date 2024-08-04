@@ -23,6 +23,12 @@ export class InviteResolver {
         userId: user.userId,
       },
     })
+
+    if (!r) {
+      // レコードが存在しない場合はnullを返す
+      return null
+    }
+
     return format(r)
   }
 
