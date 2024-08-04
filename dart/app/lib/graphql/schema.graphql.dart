@@ -907,6 +907,100 @@ class _CopyWithStubImpl$Input$NewCart<TRes>
       _res;
 }
 
+class Input$NewGuest {
+  factory Input$NewGuest({required String code}) => Input$NewGuest._({
+        r'code': code,
+      });
+
+  Input$NewGuest._(this._$data);
+
+  factory Input$NewGuest.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$code = data['code'];
+    result$data['code'] = (l$code as String);
+    return Input$NewGuest._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get code => (_$data['code'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$code = code;
+    result$data['code'] = l$code;
+    return result$data;
+  }
+
+  CopyWith$Input$NewGuest<Input$NewGuest> get copyWith =>
+      CopyWith$Input$NewGuest(
+        this,
+        (i) => i,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Input$NewGuest) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$code = code;
+    final lOther$code = other.code;
+    if (l$code != lOther$code) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$code = code;
+    return Object.hashAll([l$code]);
+  }
+}
+
+abstract class CopyWith$Input$NewGuest<TRes> {
+  factory CopyWith$Input$NewGuest(
+    Input$NewGuest instance,
+    TRes Function(Input$NewGuest) then,
+  ) = _CopyWithImpl$Input$NewGuest;
+
+  factory CopyWith$Input$NewGuest.stub(TRes res) =
+      _CopyWithStubImpl$Input$NewGuest;
+
+  TRes call({String? code});
+}
+
+class _CopyWithImpl$Input$NewGuest<TRes>
+    implements CopyWith$Input$NewGuest<TRes> {
+  _CopyWithImpl$Input$NewGuest(
+    this._instance,
+    this._then,
+  );
+
+  final Input$NewGuest _instance;
+
+  final TRes Function(Input$NewGuest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? code = _undefined}) => _then(Input$NewGuest._({
+        ..._instance._$data,
+        if (code != _undefined && code != null) 'code': (code as String),
+      }));
+}
+
+class _CopyWithStubImpl$Input$NewGuest<TRes>
+    implements CopyWith$Input$NewGuest<TRes> {
+  _CopyWithStubImpl$Input$NewGuest(this._res);
+
+  TRes _res;
+
+  call({String? code}) => _res;
+}
+
 enum Enum$__TypeKind {
   SCALAR,
   OBJECT,

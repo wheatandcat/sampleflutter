@@ -1,6 +1,3 @@
-mutation CreateInvite {
-  createInvite {
-    userId
-    code
-  }
+mutation AddCarts($input: [NewCart]!) {
+  addCarts(input: $input)
 }

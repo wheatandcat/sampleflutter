@@ -1,0 +1,6 @@
+mutation UpdateInviteCode {
+  updateInviteCode {
+    userId
+    code
+  }
+}

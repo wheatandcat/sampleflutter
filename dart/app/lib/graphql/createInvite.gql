@@ -1,0 +1,6 @@
+mutation CreateInvite {
+  createInvite {
+    userId
+    code
+  }
+}
