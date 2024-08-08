@@ -69,10 +69,24 @@ PODS:
     - FlutterMacOS
     - GoogleSignIn (~> 7.1)
     - GTMSessionFetcher (>= 3.4.0)
+  - GoogleDataTransport (9.4.1):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleMLKit/BarcodeScanning (6.0.0):
+    - GoogleMLKit/MLKitCore
+    - MLKitBarcodeScanning (~> 5.0.0)
+  - GoogleMLKit/MLKitCore (6.0.0):
+    - MLKitCommon (~> 11.0.0)
   - GoogleSignIn (7.1.0):
     - AppAuth (< 2.0, >= 1.7.3)
     - GTMAppAuth (< 5.0, >= 4.1.1)
     - GTMSessionFetcher/Core (~> 3.3)
+  - GoogleToolboxForMac/Defines (4.2.1)
+  - GoogleToolboxForMac/Logger (4.2.1):
+    - GoogleToolboxForMac/Defines (= 4.2.1)
+  - "GoogleToolboxForMac/NSData+zlib (4.2.1)":
+    - GoogleToolboxForMac/Defines (= 4.2.1)
   - GoogleUtilities/AppDelegateSwizzler (7.13.3):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -95,6 +109,11 @@ PODS:
   - GoogleUtilities/Reachability (7.13.3):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
+  - GoogleUtilities/UserDefaults (7.13.3):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GoogleUtilitiesComponents (1.1.0):
+    - GoogleUtilities/Logger
   - GTMAppAuth (4.1.1):
     - AppAuth/Core (~> 1.7)
     - GTMSessionFetcher/Core (< 4.0, >= 3.3)
@@ -123,6 +142,31 @@ PODS:
   - Mantle (2.2.0):
     - Mantle/extobjc (= 2.2.0)
   - Mantle/extobjc (2.2.0)
+  - MLImage (1.0.0-beta5)
+  - MLKitBarcodeScanning (5.0.0):
+    - MLKitCommon (~> 11.0)
+    - MLKitVision (~> 7.0)
+  - MLKitCommon (11.0.0):
+    - GoogleDataTransport (< 10.0, >= 9.4.1)
+    - GoogleToolboxForMac/Logger (< 5.0, >= 4.2.1)
+    - "GoogleToolboxForMac/NSData+zlib (< 5.0, >= 4.2.1)"
+    - GoogleUtilities/UserDefaults (< 8.0, >= 7.13.0)
+    - GoogleUtilitiesComponents (~> 1.0)
+    - GTMSessionFetcher/Core (< 4.0, >= 3.3.2)
+  - MLKitVision (7.0.0):
+    - GoogleToolboxForMac/Logger (< 5.0, >= 4.2.1)
+    - "GoogleToolboxForMac/NSData+zlib (< 5.0, >= 4.2.1)"
+    - GTMSessionFetcher/Core (< 4.0, >= 3.3.2)
+    - MLImage (= 1.0.0-beta5)
+    - MLKitCommon (~> 11.0)
+  - mobile_scanner (5.1.1):
+    - Flutter
+    - GoogleMLKit/BarcodeScanning (~> 6.0.0)
+  - nanopb (2.30910.0):
+    - nanopb/decode (= 2.30910.0)
+    - nanopb/encode (= 2.30910.0)
+  - nanopb/decode (2.30910.0)
+  - nanopb/encode (2.30910.0)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -150,6 +194,7 @@ DEPENDENCIES:
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - mobile_scanner (from `.symlinks/plugins/mobile_scanner/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
 
 SPEC REPOS:
@@ -163,12 +208,21 @@ SPEC REPOS:
     - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseStorage
+    - GoogleDataTransport
+    - GoogleMLKit
     - GoogleSignIn
+    - GoogleToolboxForMac
     - GoogleUtilities
+    - GoogleUtilitiesComponents
     - GTMAppAuth
     - GTMSessionFetcher
     - libwebp
     - Mantle
+    - MLImage
+    - MLKitBarcodeScanning
+    - MLKitCommon
+    - MLKitVision
+    - nanopb
     - PromisesObjC
     - ReachabilitySwift
     - RecaptchaInterop
@@ -201,6 +255,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_cropper/ios"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
+  mobile_scanner:
+    :path: ".symlinks/plugins/mobile_scanner/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
 
@@ -224,14 +280,24 @@ SPEC CHECKSUMS:
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
   flutter_secure_storage: d33dac7ae2ea08509be337e775f6b59f1ff45f12
   google_sign_in_ios: 07375bfbf2620bc93a602c0e27160d6afc6ead38
+  GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
+  GoogleMLKit: 97ac7af399057e99182ee8edfa8249e3226a4065
   GoogleSignIn: d4281ab6cf21542b1cfaff85c191f230b399d2db
+  GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
+  GoogleUtilitiesComponents: 679b2c881db3b615a2777504623df6122dd20afe
   GTMAppAuth: f69bd07d68cd3b766125f7e072c45d7340dea0de
   GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   image_cropper: 37d40f62177c101ff4c164906d259ea2c3aa70cf
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
   Mantle: c5aa8794a29a022dfbbfc9799af95f477a69b62d
+  MLImage: 1824212150da33ef225fbd3dc49f184cf611046c
+  MLKitBarcodeScanning: 10ca0845a6d15f2f6e911f682a1998b68b973e8b
+  MLKitCommon: afec63980417d29ffbb4790529a1b0a2291699e1
+  MLKitVision: e858c5f125ecc288e4a31127928301eaba9ae0c1
+  mobile_scanner: 8564358885a9253c43f822435b70f9345c87224f
+  nanopb: 438bc412db1928dac798aa6fd75726007be04262
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   ReachabilitySwift: 7f151ff156cea1481a8411701195ac6a984f4979

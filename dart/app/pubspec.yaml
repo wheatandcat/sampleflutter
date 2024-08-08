@@ -80,6 +80,8 @@ dependencies:
   image_picker_for_web: ^3.0.4
   image_cropper_for_web: ^5.0.4
   flutter_image_compress: ^2.3.0
+  qr_flutter: ^4.1.0
+  mobile_scanner: ^5.1.1
 
 dev_dependencies:
   flutter_test:

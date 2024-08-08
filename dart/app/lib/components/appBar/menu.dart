@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:stockkeeper/utils/style.dart';
+import 'package:stockkeeper/features/category/components/share/bottomSheet.dart';
 
 class AppBarMenu extends StatelessWidget {
   const AppBarMenu({super.key});
+
+  void showCustomMenu(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return const ShareBottomSheet();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +39,26 @@ class AppBarMenu extends StatelessWidget {
                               fontWeight: FontWeight.bold)),
                     ),
                   ),
+                  InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                        showCustomMenu(context);
+                      },
+                      child: const Card(
+                        margin: EdgeInsets.zero,
+                        color: Colors.transparent,
+                        elevation: 0,
+                        shape: Border(
+                            bottom:
+                                BorderSide(color: Colors.black26, width: 0.0)),
+                        child: ListTile(
+                          title: Text("リストを共有する",
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: FontSize.md,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                      )),
                   InkWell(
                       onTap: () {
                         Navigator.pop(context);
