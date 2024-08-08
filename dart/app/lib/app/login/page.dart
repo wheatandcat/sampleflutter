@@ -10,6 +10,8 @@ import 'package:stockkeeper/providers/user.dart';
 import 'package:stockkeeper/components/background/background.dart';
 import 'package:stockkeeper/utils/style.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:stockkeeper/features/login/components/bottomSheet.dart';
+import 'package:stockkeeper/utils/error.dart';
 
 class Login extends HookConsumerWidget {
   const Login({super.key});
@@ -71,42 +73,19 @@ class Login extends HookConsumerWidget {
           return;
         }
       } on FirebaseException catch (e) {
-        showCupertinoDialog(
-          context: context,
-          builder: (BuildContext contextDialog) {
-            return CupertinoAlertDialog(
-              title: const Text('エラー発生'),
-              content: Text(e.message ?? "エラーが発生しました"),
-              actions: <Widget>[
-                CupertinoDialogAction(
-                  child: const Text('閉じる'),
-                  onPressed: () {
-                    Navigator.of(contextDialog).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
+        showErrorDialog(context, e.message);
       } catch (e) {
-        showCupertinoDialog(
-          context: context,
-          builder: (BuildContext contextDialog) {
-            return CupertinoAlertDialog(
-              title: const Text('エラー発生'),
-              content: Text(e.toString()),
-              actions: <Widget>[
-                CupertinoDialogAction(
-                  child: const Text('閉じる'),
-                  onPressed: () {
-                    Navigator.of(contextDialog).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
+        showErrorDialog(context, e.toString());
       }
+    }
+
+    void showReader(BuildContext context) {
+      showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return const ShareBottomSheet();
+        },
+      );
     }
 
     return BackgroundImage(
@@ -135,12 +114,16 @@ class Login extends HookConsumerWidget {
                                 width: 280,
                                 height: 50,
                                 onPressed: onPressed),
-                            const Padding(
-                                padding: EdgeInsets.only(top: Spacing.lg),
-                                child: Text("ログインしないで進む",
-                                    style: TextStyle(
-                                        fontSize: FontSize.md,
-                                        fontWeight: FontWeight.bold))),
+                            Padding(
+                                padding: const EdgeInsets.only(top: Spacing.lg),
+                                child: InkWell(
+                                    onTap: () {
+                                      showReader(context);
+                                    },
+                                    child: const Text("リストの共有からログイン",
+                                        style: TextStyle(
+                                            fontSize: FontSize.md,
+                                            fontWeight: FontWeight.bold)))),
                           ]);
                         } else {
                           return Column(children: [
