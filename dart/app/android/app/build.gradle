@@ -52,6 +52,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        // resValue "string", "host_name", (dartEnvironmentVariables.FLAVOR == 'production' ? "sample.com" : "hoge.com")
     }
 
     signingConfigs {

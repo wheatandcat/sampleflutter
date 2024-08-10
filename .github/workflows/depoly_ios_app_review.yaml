@@ -79,6 +79,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: 3.24.0
           cache: true
 
       - name: Install Flutter dependencies
