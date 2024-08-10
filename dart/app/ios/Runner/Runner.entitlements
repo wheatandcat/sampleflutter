@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>stock-keeper-review.web.app</string>
+		<string>applinks:stock-keeper-review.web.app</string>
 	</array>
 </dict>
 </plist>
