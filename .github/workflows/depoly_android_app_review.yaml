@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+      - "50"
+#    paths:
+#      - "dart/app/**"
 env:
   REVIEW_ANDROID_FIREBASE_APP_ID: ${{ secrets.REVIEW_ANDROID_FIREBASE_APP_ID }}
   REVIEW_FIREBASE_CLI_TOKEN: ${{ secrets.REVIEW_FIREBASE_CLI_TOKEN }}

@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.unicorn.stockkeeper",
+      "sha256_cert_fingerprints": [
+        "B7:FA:3A:2D:DA:29:22:6B:FF:02:40:55:69:E8:6D:8D:54:40:89:CE:69:8C:E6:E3:7C:FF:1B:9B:8E:82:EF:A8"
+      ]
+    }
+  }
+]
