@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "7KWTGL2ZDY.com.unicorn.stockkeeper",
+        "paths": [
+          "*"
+        ]
+      }
+    ]
+  }
+}
