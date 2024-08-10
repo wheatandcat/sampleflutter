@@ -30,7 +30,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="@string/host_name" />
+                <data android:scheme="http" android:host="stock-keeper-review.web.app" />
                 <data android:scheme="https" />
             </intent-filter>
 

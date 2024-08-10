@@ -53,7 +53,6 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         // resValue "string", "host_name", (dartEnvironmentVariables.FLAVOR == 'production' ? "sample.com" : "hoge.com")
-        resValue "string", "host_name", "stock-keeper-review.web.app"
     }
 
     signingConfigs {
