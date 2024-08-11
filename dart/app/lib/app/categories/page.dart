@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stockkeeper/utils/style.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -58,7 +59,7 @@ class MyHomePage extends HookConsumerWidget {
         useMutation$DeleteCategory(WidgetOptions$Mutation$DeleteCategory(
       onCompleted:
           (Map<String, dynamic>? data, Mutation$DeleteCategory? result) {
-        Navigator.of(context).pop();
+        context.pop();
         qcrs.refetch();
       },
     ));
@@ -108,10 +109,11 @@ class MyHomePage extends HookConsumerWidget {
               categoryId: selectCategoryId.value,
               categories: categories,
               onAdd: () => {
-                Navigator.pushNamed(context, '/categories/new',
-                    arguments: CategoryNew(onCallback: () {
-                  qcrs.refetch();
-                }))
+                context.push("/categories/new", extra: CategoryNew(
+                  onCallback: () {
+                    qcrs.refetch();
+                  },
+                ))
               },
               onPassedItem: (categoryId) {
                 selectCategoryId.value = categoryId;

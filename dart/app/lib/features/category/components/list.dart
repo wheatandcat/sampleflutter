@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stockkeeper/graphql/categories.gql.dart';
 import 'package:stockkeeper/utils/style.dart';
 import 'package:stockkeeper/components/icon/add.dart';
@@ -75,7 +76,7 @@ class CategoryList extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   elevation: 0,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/cart');
+                    context.push('/cart');
                   },
                   tooltip: 'Increment',
                   child: const Icon(

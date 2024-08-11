@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stockkeeper/components/background/background.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stockkeeper/components/appBar/common.dart';
@@ -78,7 +79,7 @@ class Cart extends HookWidget {
               CupertinoDialogAction(
                 child: const Text('キャンセル'),
                 onPressed: () {
-                  Navigator.of(contextDialog).pop();
+                  contextDialog.pop();
                 },
               ),
               CupertinoDialogAction(
@@ -88,7 +89,7 @@ class Cart extends HookWidget {
                 ),
                 onPressed: () {
                   mutationHookResult.runMutation();
-                  Navigator.of(contextDialog).pop();
+                  contextDialog.pop();
                 },
               ),
             ],

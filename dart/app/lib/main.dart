@@ -14,6 +14,7 @@ import 'package:stockkeeper/utils/graphql.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_router/go_router.dart';
 import 'firebase_options.dart';
 import 'package:flutter/services.dart';
 
@@ -43,7 +44,10 @@ class MyApp extends StatelessWidget {
 
     return GraphQLProvider(
         client: client,
-        child: MaterialApp(
+        child: MaterialApp.router(
+          routerDelegate: goRouter.routerDelegate,
+          routeInformationParser: goRouter.routeInformationParser,
+          routeInformationProvider: goRouter.routeInformationProvider,
           title: 'Stock Keeper',
           theme: ThemeData(
               fontFamily: 'NotoSansJP',
@@ -56,74 +60,6 @@ class MyApp extends StatelessWidget {
                 bodyLarge: TextStyle(color: Colors.white, fontSize: 16),
                 bodySmall: TextStyle(color: Colors.white, fontSize: 14),
               )),
-          home: const AuthWrapper(),
-          onGenerateRoute: (settings) {
-            switch (settings.name) {
-              case '/categories/new':
-                final args = settings.arguments as CategoryNew;
-
-                return PageTransition(
-                  child: CategoryNew(
-                    onCallback: args.onCallback,
-                  ),
-                  type: PageTransitionType.rightToLeft,
-                  settings: settings,
-                );
-              case '/categories/edit':
-                final args = settings.arguments as CategoryEdit;
-
-                return PageTransition(
-                  child: CategoryEdit(
-                      id: args.id,
-                      name: args.name,
-                      onCallback: args.onCallback),
-                  type: PageTransitionType.leftToRight,
-                  settings: settings,
-                );
-              case '/items/new':
-                final args = settings.arguments as NewItem;
-
-                return PageTransition(
-                  child: NewItem(
-                      categoryId: args.categoryId, onCallback: args.onCallback),
-                  type: PageTransitionType.rightToLeft,
-                  settings: settings,
-                );
-              case '/items/id':
-                final args = settings.arguments as ItemDetail;
-
-                return PageTransition(
-                  child: ItemDetail(id: args.id, onCallback: args.onCallback),
-                  type: PageTransitionType.rightToLeft,
-                  settings: settings,
-                );
-
-              case '/login':
-                return PageTransition(
-                  child: const Login(),
-                  type: PageTransitionType.rightToLeft,
-                  settings: settings,
-                );
-              case '/cart':
-                return PageTransition(
-                  child: const Cart(),
-                  type: PageTransitionType.rightToLeft,
-                  settings: settings,
-                );
-            }
-
-            final Uri uri = Uri.parse(settings.name ?? "");
-            if (uri.pathSegments.length == 2 &&
-                uri.pathSegments.first == 'categories') {
-              final int? id = int.tryParse(uri.pathSegments[1]);
-              return MaterialPageRoute(
-                builder: (context) => Items(id: id ?? 0),
-                settings: settings,
-              );
-            }
-
-            return null;
-          },
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -157,3 +93,84 @@ class AuthWrapper extends ConsumerWidget {
     );
   }
 }
+
+final goRouter = GoRouter(
+  initialLocation: '/',
+  routes: [
+    GoRoute(
+        path: '/',
+        name: "home",
+        pageBuilder: (context, state) {
+          return MaterialPage(key: state.pageKey, child: const AuthWrapper());
+        }),
+    GoRoute(
+        path: '/categories/new',
+        name: "category_new",
+        pageBuilder: (context, state) {
+          final args = state.extra as CategoryNew;
+          return MaterialPage(
+              key: state.pageKey,
+              child: CategoryNew(
+                onCallback: args.onCallback,
+              ));
+        }),
+    GoRoute(
+        path: '/categories/edit',
+        name: "category_edit",
+        pageBuilder: (context, state) {
+          final args = state.extra as CategoryEdit;
+          return MaterialPage(
+              key: state.pageKey,
+              child: CategoryEdit(
+                  id: args.id, name: args.name, onCallback: args.onCallback));
+        }),
+    GoRoute(
+        path: '/items/new',
+        name: "item_new",
+        pageBuilder: (context, state) {
+          final args = state.extra as NewItem;
+          return MaterialPage(
+              key: state.pageKey,
+              child: NewItem(
+                  categoryId: args.categoryId, onCallback: args.onCallback));
+        }),
+    GoRoute(
+        path: '/items/:id',
+        name: "item_detail",
+        pageBuilder: (context, state) {
+          final args = state.extra as ItemDetail;
+          final id = int.tryParse(state.pathParameters['id']!)!;
+          return MaterialPage(
+              key: state.pageKey,
+              child: ItemDetail(id: id, onCallback: args.onCallback));
+        }),
+    GoRoute(
+        path: '/login',
+        name: "login",
+        pageBuilder: (context, state) {
+          return MaterialPage(key: state.pageKey, child: const Login());
+        }),
+    GoRoute(
+        path: '/cart',
+        name: "cart",
+        pageBuilder: (context, state) {
+          return MaterialPage(key: state.pageKey, child: const Cart());
+        }),
+    GoRoute(
+        path: '/categories/:id',
+        name: "category_id",
+        pageBuilder: (context, state) {
+          final id = int.tryParse(state.pathParameters['id']!)!;
+          return MaterialPage(key: state.pageKey, child: Items(id: id));
+        }),
+  ],
+  // 遷移ページがないなどのエラーが発生した時に、このページに行く
+  errorPageBuilder: (context, state) => MaterialPage(
+    key: state.pageKey,
+    child: Scaffold(
+      body: Center(
+        child: Text(state.error.toString()),
+      ),
+    ),
+  ),
+);
