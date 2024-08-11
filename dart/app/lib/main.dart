@@ -44,9 +44,7 @@ class MyApp extends StatelessWidget {
     return GraphQLProvider(
         client: client,
         child: MaterialApp.router(
-          routerDelegate: goRouter.routerDelegate,
-          routeInformationParser: goRouter.routeInformationParser,
-          routeInformationProvider: goRouter.routeInformationProvider,
+          routerConfig: goRouter,
           title: 'Stock Keeper',
           theme: ThemeData(
               fontFamily: 'NotoSansJP',
