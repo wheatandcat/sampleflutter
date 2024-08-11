@@ -6,8 +6,18 @@
         "appID": "7KWTGL2ZDY.com.unicorn.stockkeeper",
         "paths": [
           "*"
+        ],
+        "components": [
+          {
+            "/": "/*"
+          }
         ]
       }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "7KWTGL2ZDY.com.unicorn.stockkeeper"
     ]
   }
 }
