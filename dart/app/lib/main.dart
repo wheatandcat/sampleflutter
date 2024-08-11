@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:stockkeeper/app/items/page.dart';
 import 'package:stockkeeper/app/categories/page.dart';
@@ -102,67 +101,72 @@ final goRouter = GoRouter(
         name: "home",
         pageBuilder: (context, state) {
           return MaterialPage(key: state.pageKey, child: const AuthWrapper());
-        }),
-    GoRoute(
-        path: '/categories/new',
-        name: "category_new",
-        pageBuilder: (context, state) {
-          final args = state.extra as CategoryNew;
-          return MaterialPage(
-              key: state.pageKey,
-              child: CategoryNew(
-                onCallback: args.onCallback,
-              ));
-        }),
-    GoRoute(
-        path: '/categories/edit',
-        name: "category_edit",
-        pageBuilder: (context, state) {
-          final args = state.extra as CategoryEdit;
-          return MaterialPage(
-              key: state.pageKey,
-              child: CategoryEdit(
-                  id: args.id, name: args.name, onCallback: args.onCallback));
-        }),
-    GoRoute(
-        path: '/items/new',
-        name: "item_new",
-        pageBuilder: (context, state) {
-          final args = state.extra as NewItem;
-          return MaterialPage(
-              key: state.pageKey,
-              child: NewItem(
-                  categoryId: args.categoryId, onCallback: args.onCallback));
-        }),
-    GoRoute(
-        path: '/items/:id',
-        name: "item_detail",
-        pageBuilder: (context, state) {
-          final args = state.extra as ItemDetail;
-          final id = int.tryParse(state.pathParameters['id']!)!;
-          return MaterialPage(
-              key: state.pageKey,
-              child: ItemDetail(id: id, onCallback: args.onCallback));
-        }),
-    GoRoute(
-        path: '/login',
-        name: "login",
-        pageBuilder: (context, state) {
-          return MaterialPage(key: state.pageKey, child: const Login());
-        }),
-    GoRoute(
-        path: '/cart',
-        name: "cart",
-        pageBuilder: (context, state) {
-          return MaterialPage(key: state.pageKey, child: const Cart());
-        }),
-    GoRoute(
-        path: '/categories/:id',
-        name: "category_id",
-        pageBuilder: (context, state) {
-          final id = int.tryParse(state.pathParameters['id']!)!;
-          return MaterialPage(key: state.pageKey, child: Items(id: id));
-        }),
+        },
+        routes: [
+          GoRoute(
+              path: 'categories/:id',
+              name: "category_id",
+              pageBuilder: (context, state) {
+                final id = int.tryParse(state.pathParameters['id']!)!;
+                return MaterialPage(key: state.pageKey, child: Items(id: id));
+              }),
+          GoRoute(
+              path: 'categories/new',
+              name: "category_new",
+              pageBuilder: (context, state) {
+                final args = state.extra as CategoryNew;
+                return MaterialPage(
+                    key: state.pageKey,
+                    child: CategoryNew(
+                      onCallback: args.onCallback,
+                    ));
+              }),
+          GoRoute(
+              path: 'categories/edit',
+              name: "category_edit",
+              pageBuilder: (context, state) {
+                final args = state.extra as CategoryEdit;
+                return MaterialPage(
+                    key: state.pageKey,
+                    child: CategoryEdit(
+                        id: args.id,
+                        name: args.name,
+                        onCallback: args.onCallback));
+              }),
+          GoRoute(
+              path: 'items/new',
+              name: "item_new",
+              pageBuilder: (context, state) {
+                final args = state.extra as NewItem;
+                return MaterialPage(
+                    key: state.pageKey,
+                    child: NewItem(
+                        categoryId: args.categoryId,
+                        onCallback: args.onCallback));
+              }),
+          GoRoute(
+              path: 'items/:id',
+              name: "item_detail",
+              pageBuilder: (context, state) {
+                final args = state.extra as ItemDetail;
+                final id = int.tryParse(state.pathParameters['id']!)!;
+                return MaterialPage(
+                    key: state.pageKey,
+                    child: ItemDetail(id: id, onCallback: args.onCallback));
+              }),
+          GoRoute(
+              path: 'login',
+              name: "login",
+              pageBuilder: (context, state) {
+                return MaterialPage(key: state.pageKey, child: const Login());
+              }),
+          GoRoute(
+              path: 'cart',
+              name: "cart",
+              pageBuilder: (context, state) {
+                return MaterialPage(key: state.pageKey, child: const Cart());
+              }),
+        ]),
   ],
   // 遷移ページがないなどのエラーが発生した時に、このページに行く
   errorPageBuilder: (context, state) => MaterialPage(
