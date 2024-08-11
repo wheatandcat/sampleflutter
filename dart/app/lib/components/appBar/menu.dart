@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stockkeeper/utils/style.dart';
 import 'package:stockkeeper/features/category/components/share/bottomSheet.dart';
 
@@ -41,7 +42,7 @@ class AppBarMenu extends StatelessWidget {
                   ),
                   InkWell(
                       onTap: () {
-                        Navigator.pop(context);
+                        context.pop();
                         showCustomMenu(context);
                       },
                       child: const Card(
@@ -61,8 +62,8 @@ class AppBarMenu extends StatelessWidget {
                       )),
                   InkWell(
                       onTap: () {
-                        Navigator.pop(context);
-                        Navigator.pushNamed(context, '/login');
+                        context.pop();
+                        context.push('/login');
                       },
                       child: const Card(
                         margin: EdgeInsets.zero,
@@ -115,7 +116,7 @@ class AppBarMenu extends StatelessWidget {
               left: 8, // 位置を適切に調整
               child: IconButton(
                 icon: const Icon(Icons.close),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => context.pop(),
               ),
             ),
           ],

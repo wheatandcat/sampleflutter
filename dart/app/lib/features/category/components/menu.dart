@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stockkeeper/app/cart/page.dart';
 import 'package:stockkeeper/app/categories/edit/page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stockkeeper/utils/style.dart';
@@ -35,9 +37,9 @@ class CategoryMenu extends StatelessWidget {
               leading: const Icon(Icons.edit),
               title: const Text('カテゴリーを編集する'),
               onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/categories/edit',
-                    arguments: CategoryEdit(
+                context.pop();
+                context.push('/categories/edit',
+                    extra: CategoryEdit(
                       id: int.tryParse(id) ?? 0,
                       name: name,
                       onCallback: () {
@@ -60,7 +62,7 @@ class CategoryMenu extends StatelessWidget {
                         CupertinoDialogAction(
                           child: const Text('キャンセル'),
                           onPressed: () {
-                            Navigator.of(contextDialog).pop();
+                            contextDialog.pop();
                           },
                         ),
                         CupertinoDialogAction(
@@ -70,7 +72,7 @@ class CategoryMenu extends StatelessWidget {
                           ),
                           onPressed: () {
                             onDelete(id);
-                            Navigator.of(contextDialog).pop();
+                            contextDialog.pop();
                           },
                         ),
                       ],

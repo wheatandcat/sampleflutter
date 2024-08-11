@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stockkeeper/app/cart/page.dart';
 import 'package:stockkeeper/components/button/button.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -93,7 +95,7 @@ class Input extends HookWidget {
                     leading: const Icon(Icons.camera_alt),
                     title: const Text('カメラを起動する'),
                     onTap: () async {
-                      Navigator.pop(context);
+                      context.pop();
                       final pickedFile =
                           await picker.pickImage(source: ImageSource.camera);
                       if (pickedFile != null) {
@@ -105,7 +107,7 @@ class Input extends HookWidget {
                     leading: const Icon(Icons.image_search),
                     title: const Text('アルバムから選択する'),
                     onTap: () async {
-                      Navigator.pop(context);
+                      context.pop();
                       final pickedFile =
                           await picker.pickImage(source: ImageSource.gallery);
                       if (pickedFile != null) {
@@ -138,7 +140,7 @@ class Input extends HookWidget {
                   actions: [
                     CupertinoDialogAction(
                       child: const Text('OK'),
-                      onPressed: () => Navigator.pop(contextDialog),
+                      onPressed: () => contextDialog.pop(),
                     ),
                   ],
                 );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stockkeeper/app/items/id/page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stockkeeper/utils/style.dart';
@@ -48,7 +49,7 @@ class ItemCard extends StatelessWidget {
                               CupertinoDialogAction(
                                 child: const Text('キャンセル'),
                                 onPressed: () {
-                                  Navigator.of(contextDialog).pop();
+                                  contextDialog.pop();
                                 },
                               ),
                               CupertinoDialogAction(
@@ -58,8 +59,8 @@ class ItemCard extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   onDelete();
-                                  Navigator.of(contextDialog).pop();
-                                  Navigator.of(context).pop();
+                                  contextDialog.pop();
+                                  context.pop();
                                 },
                               ),
                             ],
@@ -79,8 +80,8 @@ class ItemCard extends StatelessWidget {
       children: <Widget>[
         InkWell(
           onLongPress: () => showCustomMenu(context),
-          onTap: () => Navigator.pushNamed(context, '/items/id',
-              arguments: ItemDetail(
+          onTap: () => context.push('/items/$id',
+              extra: ItemDetail(
                   id: int.parse(id),
                   onCallback: () {
                     onRefetch();

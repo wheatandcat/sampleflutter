@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stockkeeper/app/items/new/page.dart';
 import 'package:stockkeeper/components/icon/add.dart';
 
@@ -13,8 +14,8 @@ class CategoryNewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/items/new',
-            arguments: NewItem(
+        context.push('/items/new',
+            extra: NewItem(
               categoryId: categoryId,
               onCallback: () {
                 onCallback();

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 
 Future<void> showErrorDialog(BuildContext context, String? message) async {
   return showCupertinoDialog(
@@ -11,7 +12,7 @@ Future<void> showErrorDialog(BuildContext context, String? message) async {
           CupertinoDialogAction(
             child: const Text('閉じる'),
             onPressed: () {
-              Navigator.of(contextDialog).pop();
+              contextDialog.pop();
             },
           ),
         ],
