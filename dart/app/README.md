@@ -71,3 +71,20 @@ $ base64 -i ./android/app/google-services.json | pbcopy
 $ base64 -i ./android/key.jks | pbcopy
 $ base64 -i ./android/local.properties | pbcopy
 ```
+
+## Deep Link の検証
+
+### iOS
+
+```bash
+$ xcrun simctl openurl booted stockkeeper://stock-keeper-review.web.app/cart
+```
+
+### Android
+
+```bash
+$ adb shell 'am start -a android.intent.action.VIEW \
+    -c android.intent.category.BROWSABLE \
+    -d "https://stock-keeper-review.web.app/cart"' \
+    com.unicorn.stockkeeper
+```
