@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:stockkeeper/app/items/page.dart';
 import 'package:stockkeeper/app/categories/page.dart';
 import 'package:stockkeeper/app/categories/new/page.dart';
 import 'package:stockkeeper/app/categories/edit/page.dart';
@@ -101,13 +100,6 @@ final goRouter = GoRouter(
           return MaterialPage(key: state.pageKey, child: const AuthWrapper());
         },
         routes: [
-          GoRoute(
-              path: 'categories/:id',
-              name: "category_id",
-              pageBuilder: (context, state) {
-                final id = int.tryParse(state.pathParameters['id']!)!;
-                return MaterialPage(key: state.pageKey, child: Items(id: id));
-              }),
           GoRoute(
               path: 'categories/new',
               name: "category_new",
