@@ -14,10 +14,8 @@ export class GuestResolver {
   constructor(private prisma: PrismaService) {}
 
   @Mutation('createGuest')
-  @UseGuards(AuthGuard)
   async createGuest(
-    @Args('input') input: MutationCreateGuestArgs['input'],
-    @Context() context
+    @Args('input') input: MutationCreateGuestArgs['input']
   ): Promise<MutationType['createGuest']> {
     const invite = await this.prisma.invite.findFirst({
       where: {

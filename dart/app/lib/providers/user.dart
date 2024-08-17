@@ -4,7 +4,6 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stockkeeper/providers/graphql.dart';
 import 'package:stockkeeper/graphql/me.gql.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserData {
   late final String id;
@@ -30,27 +29,64 @@ final authStateChangesProvider = StreamProvider<User?>((ref) {
 
 final userDataProvider = FutureProvider.autoDispose<UserData?>((ref) async {
   final user = ref.watch(authStateChangesProvider).asData?.value;
-  if (user != null) {
-    final client = ref.read(graphqlClientProvider);
-
-    final result = await client.query<Query$Me>(
-      QueryOptions(
-        document: documentNodeQueryMe,
-      ),
-    );
-    if (result.hasException) {
-      return null;
-    }
-
-    final userData = result.data!['me'];
-    return UserData(
-      id: userData['id'],
-      uid: userData['uid'],
-    );
+  if (user == null) {
+    return null;
   }
-  return null;
+  final client = ref.read(graphqlClientProvider);
+  final result = await client.query<Query$Me>(
+    QueryOptions(
+      document: documentNodeQueryMe,
+    ),
+  );
+
+  if (result.hasException) {
+    return null;
+  }
+
+  final userData = result.data!['me'];
+  return UserData(
+    id: userData['id'],
+    uid: userData['uid'],
+  );
 });
 
-final secureStorageProvider = Provider<FlutterSecureStorage>((ref) {
-  return const FlutterSecureStorage();
+class GuestData {
+  late final String id;
+  late final String uid;
+
+  GuestData({
+    required this.id,
+    required this.uid,
+  });
+
+  void update(GuestData newUser) {
+    id = newUser.id;
+    uid = newUser.uid;
+  }
+}
+
+final guestStateProvider =
+    StateProvider<GuestData>((ref) => GuestData(id: '', uid: ''));
+
+final guestDataProvider = FutureProvider.autoDispose<GuestData?>((ref) async {
+  final guest = ref.watch(guestStateProvider);
+  if (guest.id.isEmpty || guest.id == '') {
+    return null;
+  }
+  final client = ref.read(graphqlClientProvider);
+
+  final result = await client.query<Query$Me>(
+    QueryOptions(
+      document: documentNodeQueryMe,
+    ),
+  );
+  if (result.hasException) {
+    return null;
+  }
+
+  final userData = result.data!['me'];
+  return GuestData(
+    id: userData['id'],
+    uid: userData['uid'],
+  );
 });

@@ -1,4 +1,4 @@
-name: Deploy Backend Review
+name: レビュー環境のbackendをデプロイする
 
 on:
   push:

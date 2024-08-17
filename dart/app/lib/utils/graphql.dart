@@ -46,7 +46,9 @@ graphqlClient() {
       return "Guest $uid";
     }
 
-    return "Bearer $authService.getToken()";
+    final token = await authService.getToken();
+
+    return "Bearer $token";
   });
   final link = authLink.concat(httpLink);
 

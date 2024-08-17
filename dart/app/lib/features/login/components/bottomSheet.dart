@@ -1,29 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_codegen/builder.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stockkeeper/utils/style.dart';
+import 'package:stockkeeper/utils/guest.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:stockkeeper/graphql/createGuest.gql.dart';
+import 'package:stockkeeper/providers/user.dart';
 
-class ShareBottomSheet extends HookWidget {
+class ShareBottomSheet extends HookConsumerWidget {
   final String code;
 
   const ShareBottomSheet({super.key, required this.code});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final g = Guest();
+    final guestDataAsyncValue = ref.watch(guestDataProvider);
+
     final cgMhr = useMutation$CreateGuest(WidgetOptions$Mutation$CreateGuest(
       onCompleted:
-          (Map<String, dynamic>? data, Mutation$CreateGuest? result) async {},
+          (Map<String, dynamic>? data, Mutation$CreateGuest? result) async {
+        final uid = result?.createGuest.uid;
+        if (uid == null) {
+          return;
+        }
+        await g.setUid(uid);
+        ref.read(guestStateProvider).uid = uid;
+      },
     ));
 
     useEffect(() {
+      print('code: $code');
       cgMhr.runMutation(Variables$Mutation$CreateGuest(
           input: Input$NewGuest(
         code: code,
       )));
       return null;
     }, const []);
+
+    useEffect(() {
+      if (guestDataAsyncValue.asData?.value?.uid != null) {
+        Navigator.pop(context);
+      }
+      return null;
+    }, [guestDataAsyncValue.asData?.value?.uid]);
 
     return Padding(
       padding: const EdgeInsets.only(

@@ -14,8 +14,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stockkeeper/features/login/components/bottomSheet.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
-import 'firebase_options.dart';
 import 'package:flutter/services.dart';
+import 'firebase_options.dart';
+import 'authWrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,8 +70,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AuthWrapper extends ConsumerWidget {
-  const AuthWrapper({super.key});
+class AuthWrapper2 extends ConsumerWidget {
+  const AuthWrapper2({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
