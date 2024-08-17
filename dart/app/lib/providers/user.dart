@@ -51,8 +51,8 @@ final userDataProvider = FutureProvider.autoDispose<UserData?>((ref) async {
 });
 
 class GuestData {
-  late final String id;
-  late final String uid;
+  String id;
+  String uid;
 
   GuestData({
     required this.id,
@@ -70,7 +70,7 @@ final guestStateProvider =
 
 final guestDataProvider = FutureProvider.autoDispose<GuestData?>((ref) async {
   final guest = ref.watch(guestStateProvider);
-  if (guest.id.isEmpty || guest.id == '') {
+  if (guest.uid.isEmpty || guest.uid == '') {
     return null;
   }
   final client = ref.read(graphqlClientProvider);
@@ -87,6 +87,6 @@ final guestDataProvider = FutureProvider.autoDispose<GuestData?>((ref) async {
   final userData = result.data!['me'];
   return GuestData(
     id: userData['id'],
-    uid: userData['uid'],
+    uid: guest.uid,
   );
 });

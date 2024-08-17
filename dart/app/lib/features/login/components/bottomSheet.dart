@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:graphql_codegen/builder.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stockkeeper/utils/style.dart';
@@ -27,12 +26,12 @@ class ShareBottomSheet extends HookConsumerWidget {
           return;
         }
         await g.setUid(uid);
-        ref.read(guestStateProvider).uid = uid;
+        ref.read(guestStateProvider.notifier).state =
+            GuestData(id: "", uid: uid);
       },
     ));
 
     useEffect(() {
-      print('code: $code');
       cgMhr.runMutation(Variables$Mutation$CreateGuest(
           input: Input$NewGuest(
         code: code,
@@ -42,7 +41,7 @@ class ShareBottomSheet extends HookConsumerWidget {
 
     useEffect(() {
       if (guestDataAsyncValue.asData?.value?.uid != null) {
-        Navigator.pop(context);
+        //Navigator.pop(context);
       }
       return null;
     }, [guestDataAsyncValue.asData?.value?.uid]);
