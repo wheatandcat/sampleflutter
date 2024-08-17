@@ -11,14 +11,17 @@ import 'package:stockkeeper/app/cart/page.dart';
 import 'package:stockkeeper/utils/graphql.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stockkeeper/features/login/components/bottomSheet.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
-import 'firebase_options.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'firebase_options.dart';
+import 'authWrapper.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -68,8 +71,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AuthWrapper extends ConsumerWidget {
-  const AuthWrapper({super.key});
+class AuthWrapper2 extends ConsumerWidget {
+  const AuthWrapper2({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -100,6 +103,23 @@ final goRouter = GoRouter(
           return MaterialPage(key: state.pageKey, child: const AuthWrapper());
         },
         routes: [
+          GoRoute(
+            path: "guest/scan",
+            name: "guest_scan",
+            pageBuilder: (context, state) {
+              return BottomSheetPage(
+                  builder: (_) => const ShareBottomSheet(code: ""));
+            },
+          ),
+          GoRoute(
+            path: "guest/login/:code",
+            name: "guest_login",
+            pageBuilder: (context, state) {
+              final code = state.pathParameters['code']!;
+              return BottomSheetPage(
+                  builder: (_) => ShareBottomSheet(code: code));
+            },
+          ),
           GoRoute(
               path: 'categories/new',
               name: "category_new",
@@ -168,3 +188,35 @@ final goRouter = GoRouter(
     ),
   ),
 );
+
+class BottomSheetPage<T> extends Page<T> {
+  final WidgetBuilder builder;
+  final Offset? anchorPoint;
+  final String? barrierLabel;
+  final CapturedThemes? themes;
+
+  const BottomSheetPage({
+    required this.builder,
+    this.anchorPoint,
+    this.barrierLabel,
+    this.themes,
+  });
+
+  @override
+  Route<T> createRoute(BuildContext context) {
+    return ModalBottomSheetRoute(
+      settings: this,
+      builder: builder,
+      anchorPoint: anchorPoint,
+      barrierLabel: barrierLabel,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.sizeOf(context).height,
+      ),
+      useSafeArea: true,
+      showDragHandle: true,
+      elevation: 1.0,
+    );
+  }
+}

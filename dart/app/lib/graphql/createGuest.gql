@@ -1,0 +1,6 @@
+mutation CreateGuest($input: NewGuest!) {
+  createGuest(input: $input) {
+    uid
+    userId
+  }
+}

@@ -23,9 +23,13 @@ export class AuthGuard implements CanActivate {
     const ctx = GqlExecutionContext.create(context)
     const request = ctx.getContext().req
 
-    const token = request.headers.authorization
-    const guestUid = request.headers.guest
-    if (token) {
+    const authorization = request.headers.authorization
+    if (!authorization) {
+      throw new Error('Unauthorized')
+    }
+
+    if (authorization?.startsWith('Bearer ')) {
+      const token = authorization.split('Bearer ')[1]
       const result = await admin.auth().verifyIdToken(token)
 
       const user = await this.prisma.user.findFirst({
@@ -37,14 +41,14 @@ export class AuthGuard implements CanActivate {
       if (!user) {
         throw new Error('User not found')
       }
-
       request.auth = {
         guest: false,
         uid: user.uid,
         userId: user.id,
         user: user,
       } as Auth
-    } else if (guestUid) {
+    } else if (authorization?.startsWith('Guest ')) {
+      const guestUid = authorization.split('Guest ')[1]
       const guest = await this.prisma.guest.findFirst({
         where: {
           uid: guestUid,
@@ -71,8 +75,6 @@ export class AuthGuard implements CanActivate {
         userId: user.id,
         user: user,
       } as Auth
-    } else {
-      throw new Error('Unauthorized')
     }
 
     return true

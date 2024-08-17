@@ -1,5 +1,6 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:stockkeeper/utils/auth.dart';
+import 'package:stockkeeper/utils/guest.dart';
 
 List<T> extractGraphQLDataList<T>({
   required Map<String, dynamic>? data,
@@ -36,8 +37,19 @@ T extractGraphQLData<T>({
 graphqlClient() {
   final HttpLink httpLink =
       HttpLink('https://stock-keeper-voytob3xvq-an.a.run.app/graphql');
+
   final AuthService authService = AuthService();
-  final authLink = AuthLink(getToken: () async => authService.getToken());
+  final Guest guest = Guest();
+  final authLink = AuthLink(getToken: () async {
+    final uid = await guest.getUid();
+    if (uid != null) {
+      return "Guest $uid";
+    }
+
+    final token = await authService.getToken();
+
+    return "Bearer $token";
+  });
   final link = authLink.concat(httpLink);
 
   return GraphQLClient(
