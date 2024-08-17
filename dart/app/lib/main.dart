@@ -15,12 +15,13 @@ import 'package:stockkeeper/features/login/components/bottomSheet.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'firebase_options.dart';
 import 'authWrapper.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stockkeeper/utils/style.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stockkeeper/features/category/components/share/bottomSheet.dart';
+import 'package:stockkeeper/providers/guest.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:stockkeeper/utils/auth.dart';
+import 'package:stockkeeper/utils/guest.dart';
 
-class AppBarMenu extends StatelessWidget {
+class AppBarMenu extends HookConsumerWidget {
   const AppBarMenu({super.key});
 
   void showCustomMenu(BuildContext context) {
@@ -16,7 +21,30 @@ class AppBarMenu extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final guestDataAsyncValue = ref.watch(guestDataProvider);
+    final isGuest = guestDataAsyncValue.asData?.value?.uid != null;
+
+    onLogout() async {
+      if (!isGuest) {
+        final AuthService authService = AuthService();
+        await authService.deleteToken();
+
+        await FirebaseAuth.instance.signOut();
+
+        if (!context.mounted) return;
+        context.pop();
+      } else {
+        final g = Guest();
+        await g.deleteUid();
+        ref.read(guestStateProvider.notifier).state =
+            GuestData(id: "", uid: "");
+
+        if (!context.mounted) return;
+        context.pop();
+      }
+    }
+
     return GestureDetector(
       child: Dialog(
         child: Stack(
@@ -40,56 +68,39 @@ class AppBarMenu extends StatelessWidget {
                               fontWeight: FontWeight.bold)),
                     ),
                   ),
-                  InkWell(
-                      onTap: () {
-                        context.pop();
-                        showCustomMenu(context);
-                      },
-                      child: const Card(
-                        margin: EdgeInsets.zero,
-                        color: Colors.transparent,
-                        elevation: 0,
-                        shape: Border(
-                            bottom:
-                                BorderSide(color: Colors.black26, width: 0.0)),
-                        child: ListTile(
-                          title: Text("リストを共有する",
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: FontSize.md,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                      )),
-                  InkWell(
-                      onTap: () {
-                        context.pop();
-                        context.push('/login');
-                      },
-                      child: const Card(
-                        margin: EdgeInsets.zero,
-                        color: Colors.transparent,
-                        elevation: 0,
-                        shape: Border(
-                            bottom:
-                                BorderSide(color: Colors.black26, width: 0.0)),
-                        child: ListTile(
-                          title: Text("ログイン",
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: FontSize.md,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                      )),
+                  (!isGuest)
+                      ? InkWell(
+                          onTap: () {
+                            context.pop();
+                            showCustomMenu(context);
+                          },
+                          child: const Card(
+                            margin: EdgeInsets.zero,
+                            color: Colors.transparent,
+                            elevation: 0,
+                            shape: Border(
+                                bottom: BorderSide(
+                                    color: AppColors.textDark, width: 0.0)),
+                            child: ListTile(
+                              title: Text("リストを共有する",
+                                  style: TextStyle(
+                                      color: AppColors.textDark,
+                                      fontSize: FontSize.md,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          ))
+                      : const SizedBox(),
                   const Card(
                     margin: EdgeInsets.zero,
                     color: Colors.transparent,
                     elevation: 0,
                     shape: Border(
-                        bottom: BorderSide(color: Colors.black26, width: 0.0)),
+                        bottom:
+                            BorderSide(color: AppColors.textDark, width: 0.0)),
                     child: ListTile(
                       title: Text("利用規約",
                           style: TextStyle(
-                              color: Colors.black54,
+                              color: AppColors.textDark,
                               fontSize: FontSize.md,
                               fontWeight: FontWeight.bold)),
                     ),
@@ -99,15 +110,35 @@ class AppBarMenu extends StatelessWidget {
                     color: Colors.transparent,
                     elevation: 0,
                     shape: Border(
-                        bottom: BorderSide(color: Colors.black26, width: 0.0)),
+                        bottom:
+                            BorderSide(color: AppColors.textDark, width: 0.0)),
                     child: ListTile(
                       title: Text("プライバシー・ポリシー",
                           style: TextStyle(
-                              color: Colors.black54,
+                              color: AppColors.textDark,
                               fontSize: 16,
                               fontWeight: FontWeight.bold)),
                     ),
                   ),
+                  InkWell(
+                      onTap: () {
+                        onLogout();
+                      },
+                      child: const Card(
+                        margin: EdgeInsets.zero,
+                        color: Colors.transparent,
+                        elevation: 0,
+                        shape: Border(
+                            bottom: BorderSide(
+                                color: AppColors.textDark, width: 0.0)),
+                        child: ListTile(
+                          title: Text("ログアウト",
+                              style: TextStyle(
+                                  color: AppColors.error,
+                                  fontSize: FontSize.md,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                      )),
                 ],
               ),
             ),

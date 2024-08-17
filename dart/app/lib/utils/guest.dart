@@ -10,4 +10,8 @@ class Guest {
   Future<String?> getUid() async {
     return await secureStorage.read(key: "guest");
   }
+
+  Future<void> deleteUid() async {
+    await secureStorage.delete(key: "guest");
+  }
 }

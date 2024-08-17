@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:stockkeeper/app/categories/page.dart';
 import 'package:stockkeeper/app/login/page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stockkeeper/providers/user.dart';
+import 'package:stockkeeper/providers/guest.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stockkeeper/utils/guest.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class AuthWrapper extends HookConsumerWidget {
   const AuthWrapper({super.key});
@@ -15,12 +16,11 @@ class AuthWrapper extends HookConsumerWidget {
     final g = Guest();
     final userDataAsyncValue = ref.watch(userDataProvider);
     final guestDataAsyncValue = ref.watch(guestDataProvider);
-
+    final updateCount = useRef(0);
     final status = useState<String>("noLogin");
 
     void checkGuest() async {
       final guest = await g.getUid();
-      print("guest: $guest");
       if (guest != null) {
         ref.read(guestStateProvider.notifier).state =
             GuestData(id: "", uid: guest);
@@ -28,16 +28,19 @@ class AuthWrapper extends HookConsumerWidget {
     }
 
     useEffect(() {
-      debugPrint(
-          "userDataAsyncValue01: ${userDataAsyncValue.asData?.value?.id}");
-      debugPrint(
-          "guestDataAsyncValue01: ${guestDataAsyncValue.asData?.value?.id}");
       if (userDataAsyncValue.asData?.value?.id != null) {
         status.value = "login";
+        FlutterNativeSplash.remove();
       } else if (guestDataAsyncValue.asData?.value?.id != null) {
         status.value = "guest";
+        FlutterNativeSplash.remove();
       } else {
         status.value = "noLogin";
+      }
+      updateCount.value++;
+      if (updateCount.value >= 4) {
+        // 4回目の更新でスプラッシュ画面を削除
+        FlutterNativeSplash.remove();
       }
 
       return null;

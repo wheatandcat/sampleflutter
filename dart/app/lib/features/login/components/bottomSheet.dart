@@ -6,7 +6,9 @@ import 'package:stockkeeper/utils/guest.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:stockkeeper/graphql/createGuest.gql.dart';
-import 'package:stockkeeper/providers/user.dart';
+import 'package:stockkeeper/providers/guest.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stockkeeper/components/loading/progress.dart';
 
 class ShareBottomSheet extends HookConsumerWidget {
   final String code;
@@ -16,7 +18,8 @@ class ShareBottomSheet extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final g = Guest();
-    final guestDataAsyncValue = ref.watch(guestDataProvider);
+    final inputCode = useState<String>(code);
+    final loading = inputCode.value.isNotEmpty;
 
     final cgMhr = useMutation$CreateGuest(WidgetOptions$Mutation$CreateGuest(
       onCompleted:
@@ -28,6 +31,8 @@ class ShareBottomSheet extends HookConsumerWidget {
         await g.setUid(uid);
         ref.read(guestStateProvider.notifier).state =
             GuestData(id: "", uid: uid);
+        if (!context.mounted) return;
+        context.pop();
       },
     ));
 
@@ -39,65 +44,65 @@ class ShareBottomSheet extends HookConsumerWidget {
       return null;
     }, const []);
 
-    useEffect(() {
-      if (guestDataAsyncValue.asData?.value?.uid != null) {
-        //Navigator.pop(context);
-      }
-      return null;
-    }, [guestDataAsyncValue.asData?.value?.uid]);
-
     return Padding(
       padding: const EdgeInsets.only(
           top: Spacing.md,
           bottom: Spacing.xl,
           left: Spacing.md,
           right: Spacing.md), // 上に20、下に10の余白を追加
-      child: Wrap(
-        children: <Widget>[
-          const ListTile(
-            title: Text("リストを読み込む",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: FontSize.md,
-                  fontWeight: FontWeight.bold,
-                )),
-          ),
-          Container(
+      child: (loading)
+          ? Container(
               alignment: Alignment.center,
-              padding: const EdgeInsets.only(top: Spacing.lg),
-              child: Container(
-                alignment: Alignment.center,
-                width: 250,
-                height: 250,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: AppColors.borderDark,
-                  ),
+              height: 400,
+              child: const Progress(
+                color: AppColors.textDark,
+              ))
+          : Wrap(
+              children: <Widget>[
+                const ListTile(
+                  title: Text("リストを読み込む",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: FontSize.md,
+                        fontWeight: FontWeight.bold,
+                      )),
                 ),
-                child: SizedBox(
-                    height: 200,
-                    width: 200,
-                    child: MobileScanner(
-                      controller: MobileScannerController(
-                        detectionSpeed: DetectionSpeed
-                            .noDuplicates, // 同じ QR コードを連続でスキャンさせない
+                Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.only(top: Spacing.lg),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 250,
+                      height: 250,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.borderDark,
+                        ),
                       ),
-                      onDetect: (capture) {},
+                      child: SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: MobileScanner(
+                            controller: MobileScannerController(
+                              detectionSpeed: DetectionSpeed
+                                  .noDuplicates, // 同じ QR コードを連続でスキャンさせない
+                            ),
+                            onDetect: (capture) {},
+                          )),
                     )),
-              )),
-          Container(
-              alignment: Alignment.center,
-              padding:
-                  const EdgeInsets.only(top: Spacing.xl, bottom: Spacing.lg),
-              child: const Text('QRコードを\nスキャンしてください',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.textDark,
-                    fontSize: FontSize.md,
-                    fontWeight: FontWeight.bold,
-                  )))
-        ],
-      ),
+                Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.only(
+                        top: Spacing.xl, bottom: Spacing.lg),
+                    child: const Text('QRコードを\nスキャンしてください',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppColors.textDark,
+                          fontSize: FontSize.md,
+                          fontWeight: FontWeight.bold,
+                        )))
+              ],
+            ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stockkeeper/components/background/background.dart';
+import 'package:stockkeeper/components/loading/progres.dart';
 
 class Loading extends StatelessWidget {
   const Loading({super.key});
@@ -11,14 +12,7 @@ class Loading extends StatelessWidget {
       body: Stack(
         children: [
           // 背景の黒透過
-          Center(
-              child: SizedBox(
-            height: 60,
-            width: 60,
-            child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                strokeWidth: 6.0),
-          )),
+          Progress()
         ],
       ),
     ));
