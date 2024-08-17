@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:stockkeeper/graphql/schema.graphql.dart';
 import 'package:stockkeeper/utils/style.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:stockkeeper/graphql/createGuest.gql.dart';
 
 class ShareBottomSheet extends HookWidget {
-  const ShareBottomSheet({super.key});
+  final String code;
+
+  const ShareBottomSheet({super.key, required this.code});
 
   @override
   Widget build(BuildContext context) {
+    final cgMhr = useMutation$CreateGuest(WidgetOptions$Mutation$CreateGuest(
+      onCompleted:
+          (Map<String, dynamic>? data, Mutation$CreateGuest? result) async {},
+    ));
+
+    useEffect(() {
+      cgMhr.runMutation(Variables$Mutation$CreateGuest(
+          input: Input$NewGuest(
+        code: code,
+      )));
+      return null;
+    }, const []);
+
     return Padding(
       padding: const EdgeInsets.only(
           top: Spacing.md,

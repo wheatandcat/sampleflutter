@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stockkeeper/app/cart/page.dart';
 import 'package:stockkeeper/components/appBar/common.dart';
 import 'package:stockkeeper/components/button/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,7 +11,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stockkeeper/providers/user.dart';
 import 'package:stockkeeper/components/background/background.dart';
 import 'package:stockkeeper/utils/style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:stockkeeper/features/login/components/bottomSheet.dart';
 import 'package:stockkeeper/utils/error.dart';
 
@@ -80,12 +81,7 @@ class Login extends HookConsumerWidget {
     }
 
     void showReader(BuildContext context) {
-      showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return const ShareBottomSheet();
-        },
-      );
+      context.push('/guest/scan');
     }
 
     return BackgroundImage(
