@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "dart/app/**"
+  workflow_dispatch:
 env:
   REVIEW_ANDROID_FIREBASE_APP_ID: ${{ secrets.REVIEW_ANDROID_FIREBASE_APP_ID }}
   REVIEW_FIREBASE_CLI_TOKEN: ${{ secrets.REVIEW_FIREBASE_CLI_TOKEN }}
@@ -27,7 +28,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "temurin"
-          java-version: "11.x"
+          java-version: "17.x"
 
       - name: Create google-services.json
         run: echo $REVIEW_GOOGLE_SERVICE_JSON | base64 --decode > ./android/app/google-services.json
