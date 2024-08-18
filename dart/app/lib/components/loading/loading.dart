@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stockkeeper/components/background/background.dart';
-import 'package:stockkeeper/components/loading/progres.dart';
+import 'package:stockkeeper/components/loading/progress.dart';
 
 class Loading extends StatelessWidget {
   const Loading({super.key});
