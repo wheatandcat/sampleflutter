@@ -3,10 +3,9 @@ import 'package:stockkeeper/utils/style.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stockkeeper/graphql/invite.gql.dart';
-import 'package:stockkeeper/utils/graphql.dart';
 import 'package:stockkeeper/graphql/createInvite.gql.dart';
 import 'package:stockkeeper/graphql/updateInviteCode.gql.dart';
-import 'package:stockkeeper/components/loading/loading.dart';
+import 'package:stockkeeper/components/loading/progress.dart';
 
 class ShareBottomSheet extends HookWidget {
   const ShareBottomSheet({super.key});
@@ -44,23 +43,15 @@ class ShareBottomSheet extends HookWidget {
         }
       },
     ));
-    if (qri.result.isLoading) {
-      return const Loading();
-    }
 
-    if (qri.result.data?["invite"] == null) {
-      return const Loading();
-    }
-
-    final Query$Invite$invite invite = extractGraphQLData(
-      data: qri.result.data,
-      fieldName: "invite",
-      fromJson: Query$Invite$invite.fromJson,
-    );
+    final loading = qri.result.isLoading || qri.result.data?["invite"] == null;
 
     void onRefresh() {
       qri.refetch();
     }
+
+    final inviteURL =
+        "https://stock-keeper-review.web.app/guest/login/${code.value}";
 
     return Padding(
         padding: const EdgeInsets.only(
@@ -91,11 +82,15 @@ class ShareBottomSheet extends HookWidget {
                         color: AppColors.borderDark,
                       ),
                     ),
-                    child: QrImageView(
-                      data: code.value,
-                      version: QrVersions.auto,
-                      size: 125.0,
-                    ),
+                    child: loading
+                        ? const Progress(
+                            color: AppColors.textDark,
+                          )
+                        : QrImageView(
+                            data: inviteURL,
+                            version: QrVersions.auto,
+                            size: 125.0,
+                          ),
                   )),
               Container(
                   alignment: Alignment.center,

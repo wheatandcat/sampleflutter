@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,6 +11,8 @@ import 'package:stockkeeper/providers/guest.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stockkeeper/components/loading/progress.dart';
 
+const expectedHost = "stock-keeper-review.web.app";
+
 class ShareBottomSheet extends HookConsumerWidget {
   final String code;
 
@@ -20,6 +23,7 @@ class ShareBottomSheet extends HookConsumerWidget {
     final g = Guest();
     final inputCode = useState<String>(code);
     final loading = inputCode.value.isNotEmpty;
+    final invited = useState<bool>(false);
 
     final cgMhr = useMutation$CreateGuest(WidgetOptions$Mutation$CreateGuest(
       onCompleted:
@@ -28,11 +32,32 @@ class ShareBottomSheet extends HookConsumerWidget {
         if (uid == null) {
           return;
         }
-        await g.setUid(uid);
-        ref.read(guestStateProvider.notifier).state =
-            GuestData(id: "", uid: uid);
-        if (!context.mounted) return;
-        context.pop();
+
+        invited.value = true;
+
+        showDialog(
+            context: context,
+            builder: (BuildContext contextDialog) {
+              return CupertinoAlertDialog(
+                title: const Text("招待"),
+                content: const Text("正常にログインできました。"),
+                actions: [
+                  CupertinoDialogAction(
+                      child: const Text('OK'),
+                      onPressed: () async {
+                        inputCode.value = "";
+                        contextDialog.pop();
+
+                        await g.setUid(uid);
+                        ref.read(guestStateProvider.notifier).state =
+                            GuestData(id: "", uid: uid);
+
+                        if (!context.mounted) return;
+                        context.pop();
+                      }),
+                ],
+              );
+            });
       },
     ));
 
@@ -43,6 +68,40 @@ class ShareBottomSheet extends HookConsumerWidget {
       )));
       return null;
     }, const []);
+
+    void onScan(BarcodeCapture capture) {
+      final List<Barcode> barcodes = capture.barcodes;
+      final value = barcodes.first.rawValue;
+      if (value != null) {
+        if (Uri.tryParse(value)?.host != expectedHost) {
+          showDialog(
+              context: context,
+              builder: (BuildContext contextDialog) {
+                return CupertinoAlertDialog(
+                  title: const Text("エラーが発生しました"),
+                  content: Text("QRコードが不正です。err: $value"),
+                  actions: [
+                    CupertinoDialogAction(
+                        child: const Text('OK'),
+                        onPressed: () {
+                          inputCode.value = "";
+                          contextDialog.pop();
+                        }),
+                  ],
+                );
+              });
+        }
+        inputCode.value = value.split("/").last;
+        cgMhr.runMutation(Variables$Mutation$CreateGuest(
+            input: Input$NewGuest(
+          code: inputCode.value,
+        )));
+      }
+    }
+
+    if (invited.value) {
+      return const SizedBox();
+    }
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -87,7 +146,7 @@ class ShareBottomSheet extends HookConsumerWidget {
                               detectionSpeed: DetectionSpeed
                                   .noDuplicates, // 同じ QR コードを連続でスキャンさせない
                             ),
-                            onDetect: (capture) {},
+                            onDetect: onScan,
                           )),
                     )),
                 Container(

@@ -71,28 +71,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AuthWrapper2 extends ConsumerWidget {
-  const AuthWrapper2({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, authSnapshot) {
-        print('authSnapshot: $authSnapshot');
-        if (authSnapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (authSnapshot.hasData) {
-          return const MyHomePage();
-        } else {
-          return const Login();
-        }
-      },
-    );
-  }
-}
-
 final goRouter = GoRouter(
   initialLocation: '/',
   routes: [

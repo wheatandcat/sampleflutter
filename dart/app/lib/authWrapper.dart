@@ -51,6 +51,10 @@ class AuthWrapper extends HookConsumerWidget {
 
     useEffect(() {
       checkGuest();
+
+      Future.delayed(const Duration(seconds: 5), () {
+        FlutterNativeSplash.remove();
+      });
       return null;
     }, []);
 
