@@ -59,10 +59,13 @@ export class GuestResolver {
     if (!user.guest) {
       throw new Error('Not a guest user')
     }
+    if (!user.guestUid) {
+      throw new Error('Guest UID not found')
+    }
 
-    await this.prisma.guest.deleteMany({
+    await this.prisma.guest.delete({
       where: {
-        uid: user.uid,
+        uid: user.guestUid,
       },
     })
 

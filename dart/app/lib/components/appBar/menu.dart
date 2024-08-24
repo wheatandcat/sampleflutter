@@ -7,6 +7,7 @@ import 'package:stockkeeper/providers/guest.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stockkeeper/utils/auth.dart';
 import 'package:stockkeeper/utils/guest.dart';
+import 'package:stockkeeper/graphql/logoutGuest.gql.dart';
 
 class AppBarMenu extends HookConsumerWidget {
   const AppBarMenu({super.key});
@@ -25,6 +26,22 @@ class AppBarMenu extends HookConsumerWidget {
     final guestDataAsyncValue = ref.watch(guestDataProvider);
     final isGuest = guestDataAsyncValue.asData?.value?.uid != null;
 
+    final mlg = useMutation$LogoutGuest(WidgetOptions$Mutation$LogoutGuest(
+      onCompleted:
+          (Map<String, dynamic>? data, Mutation$LogoutGuest? result) async {
+        final g = Guest();
+        await g.deleteUid();
+        ref.read(guestStateProvider.notifier).state =
+            GuestData(id: "", uid: "");
+
+        if (!context.mounted) return;
+        context.pop();
+      },
+      onError: (error) {
+        debugPrint(error.toString());
+      },
+    ));
+
     onLogout() async {
       if (!isGuest) {
         final AuthService authService = AuthService();
@@ -35,13 +52,7 @@ class AppBarMenu extends HookConsumerWidget {
         if (!context.mounted) return;
         context.pop();
       } else {
-        final g = Guest();
-        await g.deleteUid();
-        ref.read(guestStateProvider.notifier).state =
-            GuestData(id: "", uid: "");
-
-        if (!context.mounted) return;
-        context.pop();
+        mlg.runMutation();
       }
     }
 

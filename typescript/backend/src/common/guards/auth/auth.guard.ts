@@ -12,6 +12,7 @@ export type Auth = {
   guest: boolean
   uid: string
   userId: number
+  guestUId?: string
   user: User
 }
 
@@ -71,6 +72,7 @@ export class AuthGuard implements CanActivate {
 
       request.auth = {
         guest: true,
+        guestUId: guest.uid,
         uid: user.uid,
         userId: user.id,
         user: user,

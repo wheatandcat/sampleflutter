@@ -92,7 +92,7 @@ class MyHomePage extends HookConsumerWidget {
     final double deviceWidth = MediaQuery.of(context).size.width;
 
     String categoryName = '';
-    if (categories.isNotEmpty) {
+    if (categories.isNotEmpty && selectCategoryId.value != 0) {
       categoryName = categories
           .firstWhere(
               (element) => element.id == selectCategoryId.value.toString())
