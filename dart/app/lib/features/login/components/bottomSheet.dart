@@ -51,18 +51,20 @@ class ShareBottomSheet extends HookConsumerWidget {
       final List<Barcode> barcodes = capture.barcodes;
       final value = barcodes.first.rawValue;
       if (value != null) {
-        if (Uri.tryParse(code)?.host != expectedHost) {
+        if (Uri.tryParse(value)?.host != expectedHost) {
           showDialog(
               context: context,
               builder: (BuildContext contextDialog) {
                 return CupertinoAlertDialog(
                   title: const Text("エラーが発生しました"),
-                  content: const Text("QRコードが不正です。"),
+                  content: Text("QRコードが不正です。err: $value"),
                   actions: [
                     CupertinoDialogAction(
-                      child: const Text('OK'),
-                      onPressed: () => contextDialog.pop(),
-                    ),
+                        child: const Text('OK'),
+                        onPressed: () {
+                          inputCode.value = "";
+                          contextDialog.pop();
+                        }),
                   ],
                 );
               });
