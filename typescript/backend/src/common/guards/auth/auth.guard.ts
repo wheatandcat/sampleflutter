@@ -72,7 +72,7 @@ export class AuthGuard implements CanActivate {
 
       request.auth = {
         guest: true,
-        guestUId: guest.uid,
+        guestUId: guestUid,
         uid: user.uid,
         userId: user.id,
         user: user,
