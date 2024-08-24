@@ -59,13 +59,13 @@ export class GuestResolver {
     if (!user.guest) {
       throw new Error('Not a guest user')
     }
-    if (!user.guestUid) {
+    if (!user.guestUId) {
       throw new Error('Guest UID not found')
     }
 
     await this.prisma.guest.delete({
       where: {
-        uid: user.guestUid,
+        uid: user.guestUId,
       },
     })
 
