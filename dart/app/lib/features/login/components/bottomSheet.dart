@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,6 +10,8 @@ import 'package:stockkeeper/graphql/createGuest.gql.dart';
 import 'package:stockkeeper/providers/guest.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stockkeeper/components/loading/progress.dart';
+
+const expectedHost = "stock-keeper-review.web.app";
 
 class ShareBottomSheet extends HookConsumerWidget {
   final String code;
@@ -43,6 +46,34 @@ class ShareBottomSheet extends HookConsumerWidget {
       )));
       return null;
     }, const []);
+
+    void onScan(BarcodeCapture capture) {
+      final List<Barcode> barcodes = capture.barcodes;
+      final value = barcodes.first.rawValue;
+      if (value != null) {
+        if (Uri.tryParse(code)?.host != expectedHost) {
+          showDialog(
+              context: context,
+              builder: (BuildContext contextDialog) {
+                return CupertinoAlertDialog(
+                  title: const Text("エラーが発生しました"),
+                  content: const Text("QRコードが不正です。"),
+                  actions: [
+                    CupertinoDialogAction(
+                      child: const Text('OK'),
+                      onPressed: () => contextDialog.pop(),
+                    ),
+                  ],
+                );
+              });
+        }
+        inputCode.value = value.split("/").last;
+        cgMhr.runMutation(Variables$Mutation$CreateGuest(
+            input: Input$NewGuest(
+          code: inputCode.value,
+        )));
+      }
+    }
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -87,7 +118,7 @@ class ShareBottomSheet extends HookConsumerWidget {
                               detectionSpeed: DetectionSpeed
                                   .noDuplicates, // 同じ QR コードを連続でスキャンさせない
                             ),
-                            onDetect: (capture) {},
+                            onDetect: onScan,
                           )),
                     )),
                 Container(
