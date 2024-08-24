@@ -92,6 +92,7 @@ export type Mutation = {
   deleteGuest: Scalars['Boolean']['output'];
   deleteInvite: Scalars['Boolean']['output'];
   deleteItem: Item;
+  logoutGuest: Scalars['Boolean']['output'];
   updateCategory: Category;
   updateInviteCode: Invite;
   updateItem: Item;

@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stockkeeper/graphql/invite.gql.dart';
 import 'package:stockkeeper/graphql/createInvite.gql.dart';
 import 'package:stockkeeper/graphql/updateInviteCode.gql.dart';
-import 'package:stockkeeper/components/loading/loading.dart';
+import 'package:stockkeeper/components/loading/progress.dart';
 
 class ShareBottomSheet extends HookWidget {
   const ShareBottomSheet({super.key});
@@ -43,13 +43,8 @@ class ShareBottomSheet extends HookWidget {
         }
       },
     ));
-    if (qri.result.isLoading) {
-      return const Loading();
-    }
 
-    if (qri.result.data?["invite"] == null) {
-      return const Loading();
-    }
+    final loading = qri.result.isLoading || qri.result.data?["invite"] == null;
 
     void onRefresh() {
       qri.refetch();
@@ -87,11 +82,15 @@ class ShareBottomSheet extends HookWidget {
                         color: AppColors.borderDark,
                       ),
                     ),
-                    child: QrImageView(
-                      data: inviteURL,
-                      version: QrVersions.auto,
-                      size: 125.0,
-                    ),
+                    child: loading
+                        ? const Progress(
+                            color: AppColors.textDark,
+                          )
+                        : QrImageView(
+                            data: inviteURL,
+                            version: QrVersions.auto,
+                            size: 125.0,
+                          ),
                   )),
               Container(
                   alignment: Alignment.center,

@@ -50,4 +50,22 @@ export class GuestResolver {
 
     return true
   }
+
+  @Mutation('logoutGuest')
+  @UseGuards(AuthGuard)
+  async logoutGuest(@Context() context): Promise<MutationType['logoutGuest']> {
+    const user = context.req.auth
+
+    if (!user.guest) {
+      throw new Error('Not a guest user')
+    }
+
+    await this.prisma.guest.deleteMany({
+      where: {
+        uid: user.uid,
+      },
+    })
+
+    return true
+  }
 }
