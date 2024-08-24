@@ -23,6 +23,7 @@ class ShareBottomSheet extends HookConsumerWidget {
     final g = Guest();
     final inputCode = useState<String>(code);
     final loading = inputCode.value.isNotEmpty;
+    final invited = useState<bool>(false);
 
     final cgMhr = useMutation$CreateGuest(WidgetOptions$Mutation$CreateGuest(
       onCompleted:
@@ -31,11 +32,32 @@ class ShareBottomSheet extends HookConsumerWidget {
         if (uid == null) {
           return;
         }
-        await g.setUid(uid);
-        ref.read(guestStateProvider.notifier).state =
-            GuestData(id: "", uid: uid);
-        if (!context.mounted) return;
-        context.pop();
+
+        invited.value = true;
+
+        showDialog(
+            context: context,
+            builder: (BuildContext contextDialog) {
+              return CupertinoAlertDialog(
+                title: const Text("招待"),
+                content: const Text("正常にログインできました。"),
+                actions: [
+                  CupertinoDialogAction(
+                      child: const Text('OK'),
+                      onPressed: () async {
+                        inputCode.value = "";
+                        contextDialog.pop();
+
+                        await g.setUid(uid);
+                        ref.read(guestStateProvider.notifier).state =
+                            GuestData(id: "", uid: uid);
+
+                        if (!context.mounted) return;
+                        context.pop();
+                      }),
+                ],
+              );
+            });
       },
     ));
 
@@ -75,6 +97,10 @@ class ShareBottomSheet extends HookConsumerWidget {
           code: inputCode.value,
         )));
       }
+    }
+
+    if (invited.value) {
+      return const SizedBox();
     }
 
     return Padding(
