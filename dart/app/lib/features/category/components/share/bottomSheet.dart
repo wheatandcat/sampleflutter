@@ -3,7 +3,6 @@ import 'package:stockkeeper/utils/style.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stockkeeper/graphql/invite.gql.dart';
-import 'package:stockkeeper/utils/graphql.dart';
 import 'package:stockkeeper/graphql/createInvite.gql.dart';
 import 'package:stockkeeper/graphql/updateInviteCode.gql.dart';
 import 'package:stockkeeper/components/loading/loading.dart';
@@ -52,15 +51,12 @@ class ShareBottomSheet extends HookWidget {
       return const Loading();
     }
 
-    final Query$Invite$invite invite = extractGraphQLData(
-      data: qri.result.data,
-      fieldName: "invite",
-      fromJson: Query$Invite$invite.fromJson,
-    );
-
     void onRefresh() {
       qri.refetch();
     }
+
+    final inviteURL =
+        "https://stock-keeper-review.web.app/guest/login/${code.value}";
 
     return Padding(
         padding: const EdgeInsets.only(
@@ -92,7 +88,7 @@ class ShareBottomSheet extends HookWidget {
                       ),
                     ),
                     child: QrImageView(
-                      data: code.value,
+                      data: inviteURL,
                       version: QrVersions.auto,
                       size: 125.0,
                     ),

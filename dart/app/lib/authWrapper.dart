@@ -38,7 +38,7 @@ class AuthWrapper extends HookConsumerWidget {
         status.value = "noLogin";
       }
       updateCount.value++;
-      if (updateCount.value >= 4) {
+      if (updateCount.value >= 2) {
         // 4回目の更新でスプラッシュ画面を削除
         FlutterNativeSplash.remove();
       }
@@ -51,6 +51,10 @@ class AuthWrapper extends HookConsumerWidget {
 
     useEffect(() {
       checkGuest();
+
+      Future.delayed(const Duration(seconds: 2), () {
+        FlutterNativeSplash.remove();
+      });
       return null;
     }, []);
 
