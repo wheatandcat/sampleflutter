@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:stockkeeper/app/categories/page.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:stockkeeper/app/categories/new/page.dart';
 import 'package:stockkeeper/app/categories/edit/page.dart';
 import 'package:stockkeeper/app/items/id/page.dart';
@@ -12,7 +14,6 @@ import 'package:stockkeeper/utils/graphql.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stockkeeper/features/login/components/bottomSheet.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -20,6 +21,7 @@ import 'firebase_options.dart';
 import 'authWrapper.dart';
 
 void main() async {
+  await dotenv.load(fileName: '.env');
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   SystemChrome.setPreferredOrientations([
@@ -28,6 +30,12 @@ void main() async {
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseAppCheck.instance.activate(
+    webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
+    androidProvider:
+        kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+    appleProvider: kReleaseMode ? AppleProvider.appAttest : AppleProvider.debug,
   );
   await initHiveForFlutter();
 
