@@ -3,10 +3,12 @@ import {
   type ExecutionContext,
   Injectable,
 } from '@nestjs/common'
+import { getAppCheck } from 'firebase-admin/app-check'
 import { GqlExecutionContext } from '@nestjs/graphql'
 import { PrismaService } from '@src/modules/prisma/prisma.service'
 import admin from 'firebase-admin'
 import type { User } from '@prisma/client'
+import { ConfigService } from '@nestjs/config'
 
 export type Auth = {
   guest: boolean
@@ -18,15 +20,31 @@ export type Auth = {
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly configService: ConfigService
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const ctx = GqlExecutionContext.create(context)
     const request = ctx.getContext().req
+    if (this.configService.get('NODE_ENV') === 'production') {
+      const appCheckToken = request.headers['x-firebase-appcheck']
+      if (!appCheckToken) {
+        throw new Error('App Check token not found')
+      }
+
+      try {
+        await getAppCheck().verifyToken(appCheckToken)
+      } catch (e) {
+        console.log('error', e)
+        throw new Error('Unauthorized (App Check)')
+      }
+    }
 
     const authorization = request.headers.authorization
     if (!authorization) {
-      throw new Error('Unauthorized')
+      throw new Error('Authorization header not found')
     }
 
     if (authorization?.startsWith('Bearer ')) {
