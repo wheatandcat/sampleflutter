@@ -114,7 +114,6 @@ flutter:
   assets:
     - images/
     - assets/
-    - .env
   #   - images/a_dot_ham.jpeg
 
   fonts:
