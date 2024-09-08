@@ -5,6 +5,10 @@ PODS:
   - AppAuth/Core (1.7.5)
   - AppAuth/ExternalUserAgent (1.7.5):
     - AppAuth/Core
+  - AppCheckCore (10.19.2):
+    - GoogleUtilities/Environment (~> 7.13)
+    - GoogleUtilities/UserDefaults (~> 7.13)
+    - PromisesObjC (~> 2.3)
   - connectivity_plus (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -16,6 +20,11 @@ PODS:
   - Firebase/Storage (10.25.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.25.0)
+  - firebase_app_check (0.2.2-7):
+    - Firebase/CoreOnly (~> 10.25.0)
+    - firebase_core
+    - FirebaseAppCheck (~> 10.25.0-beta)
+    - Flutter
   - firebase_auth (4.20.0):
     - Firebase/Auth (= 10.25.0)
     - firebase_core
@@ -27,6 +36,13 @@ PODS:
     - Firebase/Storage (= 10.25.0)
     - firebase_core
     - Flutter
+  - FirebaseAppCheck (10.25.0):
+    - AppCheckCore (~> 10.19)
+    - FirebaseAppCheckInterop (~> 10.17)
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.13)
+    - GoogleUtilities/UserDefaults (~> 7.13)
+    - PromisesObjC (~> 2.1)
   - FirebaseAppCheckInterop (10.28.0)
   - FirebaseAuth (10.25.0):
     - FirebaseAppCheckInterop (~> 10.17)
@@ -182,6 +198,7 @@ PODS:
 
 DEPENDENCIES:
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/darwin`)
+  - firebase_app_check (from `.symlinks/plugins/firebase_app_check/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
@@ -199,7 +216,9 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AppAuth
+    - AppCheckCore
     - Firebase
+    - FirebaseAppCheck
     - FirebaseAppCheckInterop
     - FirebaseAuth
     - FirebaseAuthInterop
@@ -231,6 +250,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   connectivity_plus:
     :path: ".symlinks/plugins/connectivity_plus/darwin"
+  firebase_app_check:
+    :path: ".symlinks/plugins/firebase_app_check/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
@@ -260,11 +281,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
+  AppCheckCore: 9feb4300caa596a36416cde10674dc5bec1e022e
   connectivity_plus: ddd7f30999e1faaef5967c23d5b6d503d10434db
   Firebase: 0312a2352584f782ea56f66d91606891d4607f06
+  firebase_app_check: 717089a2df93747620263dd6c8e444bde5699b7e
   firebase_auth: 5719ddc9f654b813405899480e84971bd8e61235
   firebase_core: a626d00494efa398e7c54f25f1454a64c8abf197
   firebase_storage: 5c0f552d6b27d621429d7fd16ebab4be94a3c954
+  FirebaseAppCheck: 148fa858b8070710c8f83d3f545b5f1e85d104a4
   FirebaseAppCheckInterop: 5315f40293191bfec04b2cfab0215760e441540a
   FirebaseAuth: c0f93dcc570c9da2bffb576969d793e95c344fbb
   FirebaseAuthInterop: cec40cbafa1f9a6e0c3334c5c750a0cae7c97f80

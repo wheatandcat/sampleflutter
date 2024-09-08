@@ -11,6 +11,7 @@ import { CartResolver } from '@src/resolver/cart'
 import { InviteResolver } from '@src/resolver/invite'
 import { GuestResolver } from '@src/resolver/guest'
 import { PrismaService } from '@src/modules/prisma/prisma.service'
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
   controllers: [AppController],
@@ -26,6 +27,9 @@ import { PrismaService } from '@src/modules/prisma/prisma.service'
     PrismaService,
   ],
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: `.env.${process.env.NODE_ENV}`, // 環境に応じて.envファイルを読み込む
+    }),
     GraphQLModule.forRoot<MercuriusDriverConfig>({
       driver: MercuriusDriver,
       graphiql: true,
