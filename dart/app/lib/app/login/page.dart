@@ -11,6 +11,7 @@ import 'package:stockkeeper/providers/user.dart';
 import 'package:stockkeeper/components/background/background.dart';
 import 'package:stockkeeper/utils/style.dart';
 import 'package:stockkeeper/utils/error.dart';
+import 'package:stockkeeper/components/loading/progress.dart';
 
 class Login extends HookConsumerWidget {
   const Login({super.key});
@@ -120,15 +121,7 @@ class Login extends HookConsumerWidget {
                                             fontWeight: FontWeight.bold)))),
                           ]);
                         } else {
-                          return Column(children: [
-                            ListTile(
-                              title: const Text("ログイン中のユーザー"),
-                              subtitle:
-                                  Text("ID:${userDataAsyncValue.value?.id}"),
-                            ),
-                            Button(
-                                title: "ログアウト", width: 300, onPressed: onLogout)
-                          ]);
+                          return const Progress();
                         }
                       }),
                 ]))));
