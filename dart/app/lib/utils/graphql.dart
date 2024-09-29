@@ -24,7 +24,7 @@ Future<String?> getAppCheckToken() async {
       return appCheckToken;
     }
   } catch (e) {
-    print('Error fetching App Check token: $e');
+    print('Error fetching App Check t oken: $e');
   }
 
   return "";

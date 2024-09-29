@@ -1,0 +1,7 @@
+query ItemFromQR($janCode: String!) {
+  itemFromQR(janCode: $janCode) {
+    name
+    imageURL
+    images
+  }
+}
