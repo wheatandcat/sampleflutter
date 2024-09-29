@@ -79,6 +79,16 @@ export type Item = {
   stock: Scalars['Int']['output'];
 };
 
+export type ItemFromQr = {
+  __typename?: 'ItemFromQR';
+  /** 画像URL */
+  imageURL?: Maybe<Scalars['String']['output']>;
+  /** 画像のリスト */
+  images?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** アイテム名 */
+  name: Scalars['String']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addCarts: Scalars['Boolean']['output'];
@@ -183,6 +193,7 @@ export type Query = {
   invite?: Maybe<Invite>;
   item?: Maybe<Item>;
   itemAll?: Maybe<Array<Maybe<Item>>>;
+  itemFromQR?: Maybe<ItemFromQr>;
   items?: Maybe<Array<Maybe<Item>>>;
   me?: Maybe<User>;
 };
@@ -195,6 +206,11 @@ export type QueryCategoryArgs = {
 
 export type QueryItemArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type QueryItemFromQrArgs = {
+  janCode: Scalars['String']['input'];
 };
 
 

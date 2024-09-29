@@ -12,6 +12,7 @@ env:
   SERVICE_NAME: ${{ secrets.REVIEW_SERVICE_NAME }}
   DATABASE_URL: ${{ secrets.REVIEW_DATABASE_URL }}
   REVIEW_FIREBASE_SERVICE: ${{ secrets.REVIEW_FIREBASE_SERVICE }}
+  YAHOO_APP_ID: ${{ secrets.YAHOO_APP_ID }}
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -57,4 +58,4 @@ jobs:
             --region asia-northeast1 \
             --allow-unauthenticated \
             --service-account=github@$PROJECT_ID.iam.gserviceaccount.com \
-            --set-env-vars DATABASE_URL="$DATABASE_URL"
+            --set-env-vars DATABASE_URL="$DATABASE_URL",YAHOO_APP_ID="$YAHOO_APP_ID"

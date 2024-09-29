@@ -6,6 +6,7 @@ import { AppService } from '@src/app.service'
 import { HelloResolver } from './hello.resolver'
 import { CategoryResolver } from '@src/resolver/category'
 import { ItemResolver } from '@src/resolver/item'
+import { ItemFromQRResolver } from '@src/resolver/itemFromQR'
 import { UserResolver } from '@src/resolver/user'
 import { CartResolver } from '@src/resolver/cart'
 import { InviteResolver } from '@src/resolver/invite'
@@ -21,6 +22,7 @@ import { ConfigModule } from '@nestjs/config'
     UserResolver,
     CategoryResolver,
     ItemResolver,
+    ItemFromQRResolver,
     CartResolver,
     InviteResolver,
     GuestResolver,
