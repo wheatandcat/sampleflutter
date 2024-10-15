@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stockkeeper/app/cart/page.dart';
 import 'package:stockkeeper/app/categories/edit/page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stockkeeper/utils/style.dart';

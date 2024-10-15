@@ -29,9 +29,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   await FirebaseAppCheck.instance.activate(
-    androidProvider:
-        kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+    androidProvider: AndroidProvider.debug,
     appleProvider:
         kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
   );
@@ -135,6 +135,7 @@ final goRouter = GoRouter(
                 return MaterialPage(
                     key: state.pageKey,
                     child: NewItem(
+                        scanBarcode: args.scanBarcode,
                         categoryId: args.categoryId,
                         onCallback: args.onCallback));
               }),
