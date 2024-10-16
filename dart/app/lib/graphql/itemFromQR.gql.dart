@@ -5,7 +5,8 @@ import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
 class Variables$Query$ItemFromQR {
-  factory Variables$Query$ItemFromQR({required String janCode}) =>
+  factory Variables$Query$ItemFromQR(
+          {required String janCode, required String code}) =>
       Variables$Query$ItemFromQR._({
         r'janCode': janCode,
       });
