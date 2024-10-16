@@ -9,6 +9,7 @@ import 'package:stockkeeper/graphql/createItem.gql.dart';
 import 'package:stockkeeper/graphql/itemFromQR.gql.dart';
 import 'package:stockkeeper/providers/graphql.dart';
 import 'package:stockkeeper/features/item/components/input.dart';
+import 'package:stockkeeper/features/item/new/components/barcodeScannerScreen.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -28,6 +29,7 @@ class NewItem extends HookConsumerWidget {
     final client = ref.read(graphqlClientProvider);
 
     final defaultValue = useState<InputItem?>(null);
+    final scan = useState<bool>(false);
 
     final mutationHookResult =
         useMutation$CreateItem(WidgetOptions$Mutation$CreateItem(
@@ -52,7 +54,7 @@ class NewItem extends HookConsumerWidget {
       mutationHookResult.runMutation(Variables$Mutation$CreateItem(input: p));
     }
 
-    void onScan(BarcodeCapture capture) async {
+    Future<void> onScan(BarcodeCapture capture) async {
       final List<Barcode> barcodes = capture.barcodes;
       final value = barcodes.first.rawValue;
 
@@ -66,8 +68,12 @@ class NewItem extends HookConsumerWidget {
 
         if (result.hasException) {
           debugPrint(result.exception.toString());
+          scan.value = true;
           return;
         }
+
+        print(result.data!['itemFromQR']['name']);
+        print(result.data!['itemFromQR']['imageURL']);
 
         defaultValue.value = InputItem(
           name: result.data!['itemFromQR']['name'],
@@ -75,23 +81,20 @@ class NewItem extends HookConsumerWidget {
           stock: 0,
           order: 0,
         );
+
+        scan.value = true;
       }
     }
 
-    if (scanBarcode) {
-      return MobileScanner(
-        fit: BoxFit.cover,
-        controller: MobileScannerController(
-          detectionSpeed: DetectionSpeed.noDuplicates, // 同じ QR コードを連続でスキャンさせない
-        ),
-        onDetect: onScan,
-      );
+    if (scanBarcode && !scan.value) {
+      return BarcodeScannerScreen(onScan: onScan);
     }
 
     return BackgroundImage(
         child: Scaffold(
       appBar: const CommonAppBar(title: ""),
       body: Input(
+        defaultValue: defaultValue.value,
         loading: mutationHookResult.result.isLoading,
         onPressed: onPressed,
       ),

@@ -30,7 +30,6 @@ class ScanBarcode extends StatelessWidget {
                   width: 300,
                   height: 300,
                   child: MobileScanner(
-                    fit: BoxFit.cover,
                     controller: MobileScannerController(
                       detectionSpeed:
                           DetectionSpeed.noDuplicates, // 同じ QR コードを連続でスキャンさせない
