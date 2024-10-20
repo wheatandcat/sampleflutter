@@ -25,12 +25,12 @@ class Mutation$UpdateInviteCode {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$updateInviteCode = updateInviteCode;
-    _resultData['updateInviteCode'] = l$updateInviteCode.toJson();
+    resultData['updateInviteCode'] = l$updateInviteCode.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -48,7 +48,7 @@ class Mutation$UpdateInviteCode {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateInviteCode) ||
+    if (other is! Mutation$UpdateInviteCode ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -105,6 +105,7 @@ class _CopyWithImpl$Mutation$UpdateInviteCode<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? updateInviteCode = _undefined,
     Object? $__typename = _undefined,
@@ -119,6 +120,7 @@ class _CopyWithImpl$Mutation$UpdateInviteCode<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$UpdateInviteCode$updateInviteCode<TRes>
       get updateInviteCode {
     final local$updateInviteCode = _instance.updateInviteCode;
@@ -131,14 +133,16 @@ class _CopyWithStubImpl$Mutation$UpdateInviteCode<TRes>
     implements CopyWith$Mutation$UpdateInviteCode<TRes> {
   _CopyWithStubImpl$Mutation$UpdateInviteCode(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$UpdateInviteCode$updateInviteCode? updateInviteCode,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$UpdateInviteCode$updateInviteCode<TRes>
       get updateInviteCode =>
           CopyWith$Mutation$UpdateInviteCode$updateInviteCode.stub(_res);
@@ -201,24 +205,19 @@ typedef OnMutationCompleted$Mutation$UpdateInviteCode = FutureOr<void> Function(
 class Options$Mutation$UpdateInviteCode
     extends graphql.MutationOptions<Mutation$UpdateInviteCode> {
   Options$Mutation$UpdateInviteCode({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$UpdateInviteCode? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$UpdateInviteCode? onCompleted,
-    graphql.OnMutationUpdate<Mutation$UpdateInviteCode>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
@@ -227,8 +226,6 @@ class Options$Mutation$UpdateInviteCode
                         ? null
                         : _parserFn$Mutation$UpdateInviteCode(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationUpdateInviteCode,
           parserFn: _parserFn$Mutation$UpdateInviteCode,
         );
@@ -247,29 +244,20 @@ class Options$Mutation$UpdateInviteCode
 class WatchOptions$Mutation$UpdateInviteCode
     extends graphql.WatchQueryOptions<Mutation$UpdateInviteCode> {
   WatchOptions$Mutation$UpdateInviteCode({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$UpdateInviteCode? typedOptimisticResult,
-    graphql.Context? context,
-    Duration? pollInterval,
-    bool? eagerlyFetchResults,
-    bool carryForwardDataOnException = true,
-    bool fetchResults = false,
+    super.context,
+    super.pollInterval,
+    super.eagerlyFetchResults,
+    super.carryForwardDataOnException,
+    super.fetchResults,
   }) : super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           document: documentNodeMutationUpdateInviteCode,
-          pollInterval: pollInterval,
-          eagerlyFetchResults: eagerlyFetchResults,
-          carryForwardDataOnException: carryForwardDataOnException,
-          fetchResults: fetchResults,
           parserFn: _parserFn$Mutation$UpdateInviteCode,
         );
 }
@@ -278,11 +266,11 @@ extension ClientExtension$Mutation$UpdateInviteCode on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$UpdateInviteCode>>
       mutate$UpdateInviteCode(
               [Options$Mutation$UpdateInviteCode? options]) async =>
-          await this.mutate(options ?? Options$Mutation$UpdateInviteCode());
-  graphql.ObservableQuery<
-      Mutation$UpdateInviteCode> watchMutation$UpdateInviteCode(
-          [WatchOptions$Mutation$UpdateInviteCode? options]) =>
-      this.watchMutation(options ?? WatchOptions$Mutation$UpdateInviteCode());
+          await mutate(options ?? Options$Mutation$UpdateInviteCode());
+  graphql.ObservableQuery<Mutation$UpdateInviteCode>
+      watchMutation$UpdateInviteCode(
+              [WatchOptions$Mutation$UpdateInviteCode? options]) =>
+          watchMutation(options ?? WatchOptions$Mutation$UpdateInviteCode());
 }
 
 class Mutation$UpdateInviteCode$HookResult {
@@ -318,24 +306,19 @@ graphql.ObservableQuery<Mutation$UpdateInviteCode>
 class WidgetOptions$Mutation$UpdateInviteCode
     extends graphql.MutationOptions<Mutation$UpdateInviteCode> {
   WidgetOptions$Mutation$UpdateInviteCode({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$UpdateInviteCode? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$UpdateInviteCode? onCompleted,
-    graphql.OnMutationUpdate<Mutation$UpdateInviteCode>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
@@ -344,8 +327,6 @@ class WidgetOptions$Mutation$UpdateInviteCode
                         ? null
                         : _parserFn$Mutation$UpdateInviteCode(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationUpdateInviteCode,
           parserFn: _parserFn$Mutation$UpdateInviteCode,
         );
@@ -374,11 +355,10 @@ typedef Builder$Mutation$UpdateInviteCode = widgets.Widget Function(
 class Mutation$UpdateInviteCode$Widget
     extends graphql_flutter.Mutation<Mutation$UpdateInviteCode> {
   Mutation$UpdateInviteCode$Widget({
-    widgets.Key? key,
+    super.key,
     WidgetOptions$Mutation$UpdateInviteCode? options,
     required Builder$Mutation$UpdateInviteCode builder,
   }) : super(
-          key: key,
           options: options ?? WidgetOptions$Mutation$UpdateInviteCode(),
           builder: (
             run,
@@ -425,14 +405,14 @@ class Mutation$UpdateInviteCode$updateInviteCode {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$userId = userId;
-    _resultData['userId'] = l$userId;
+    resultData['userId'] = l$userId;
     final l$code = code;
-    _resultData['code'] = l$code;
+    resultData['code'] = l$code;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -452,7 +432,7 @@ class Mutation$UpdateInviteCode$updateInviteCode {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateInviteCode$updateInviteCode) ||
+    if (other is! Mutation$UpdateInviteCode$updateInviteCode ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -514,6 +494,7 @@ class _CopyWithImpl$Mutation$UpdateInviteCode$updateInviteCode<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? userId = _undefined,
     Object? code = _undefined,
@@ -536,8 +517,9 @@ class _CopyWithStubImpl$Mutation$UpdateInviteCode$updateInviteCode<TRes>
     implements CopyWith$Mutation$UpdateInviteCode$updateInviteCode<TRes> {
   _CopyWithStubImpl$Mutation$UpdateInviteCode$updateInviteCode(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? userId,
     String? code,

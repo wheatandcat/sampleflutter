@@ -24,12 +24,12 @@ class Mutation$LogoutGuest {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$logoutGuest = logoutGuest;
-    _resultData['logoutGuest'] = l$logoutGuest;
+    resultData['logoutGuest'] = l$logoutGuest;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -47,7 +47,7 @@ class Mutation$LogoutGuest {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$LogoutGuest) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$LogoutGuest || runtimeType != other.runtimeType) {
       return false;
     }
     final l$logoutGuest = logoutGuest;
@@ -100,6 +100,7 @@ class _CopyWithImpl$Mutation$LogoutGuest<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? logoutGuest = _undefined,
     Object? $__typename = _undefined,
@@ -118,8 +119,9 @@ class _CopyWithStubImpl$Mutation$LogoutGuest<TRes>
     implements CopyWith$Mutation$LogoutGuest<TRes> {
   _CopyWithStubImpl$Mutation$LogoutGuest(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     bool? logoutGuest,
     String? $__typename,
@@ -162,32 +164,25 @@ typedef OnMutationCompleted$Mutation$LogoutGuest = FutureOr<void> Function(
 class Options$Mutation$LogoutGuest
     extends graphql.MutationOptions<Mutation$LogoutGuest> {
   Options$Mutation$LogoutGuest({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$LogoutGuest? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$LogoutGuest? onCompleted,
-    graphql.OnMutationUpdate<Mutation$LogoutGuest>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$LogoutGuest(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationLogoutGuest,
           parserFn: _parserFn$Mutation$LogoutGuest,
         );
@@ -206,29 +201,20 @@ class Options$Mutation$LogoutGuest
 class WatchOptions$Mutation$LogoutGuest
     extends graphql.WatchQueryOptions<Mutation$LogoutGuest> {
   WatchOptions$Mutation$LogoutGuest({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$LogoutGuest? typedOptimisticResult,
-    graphql.Context? context,
-    Duration? pollInterval,
-    bool? eagerlyFetchResults,
-    bool carryForwardDataOnException = true,
-    bool fetchResults = false,
+    super.context,
+    super.pollInterval,
+    super.eagerlyFetchResults,
+    super.carryForwardDataOnException,
+    super.fetchResults,
   }) : super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           document: documentNodeMutationLogoutGuest,
-          pollInterval: pollInterval,
-          eagerlyFetchResults: eagerlyFetchResults,
-          carryForwardDataOnException: carryForwardDataOnException,
-          fetchResults: fetchResults,
           parserFn: _parserFn$Mutation$LogoutGuest,
         );
 }
@@ -236,10 +222,10 @@ class WatchOptions$Mutation$LogoutGuest
 extension ClientExtension$Mutation$LogoutGuest on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$LogoutGuest>> mutate$LogoutGuest(
           [Options$Mutation$LogoutGuest? options]) async =>
-      await this.mutate(options ?? Options$Mutation$LogoutGuest());
+      await mutate(options ?? Options$Mutation$LogoutGuest());
   graphql.ObservableQuery<Mutation$LogoutGuest> watchMutation$LogoutGuest(
           [WatchOptions$Mutation$LogoutGuest? options]) =>
-      this.watchMutation(options ?? WatchOptions$Mutation$LogoutGuest());
+      watchMutation(options ?? WatchOptions$Mutation$LogoutGuest());
 }
 
 class Mutation$LogoutGuest$HookResult {
@@ -274,32 +260,25 @@ graphql.ObservableQuery<Mutation$LogoutGuest> useWatchMutation$LogoutGuest(
 class WidgetOptions$Mutation$LogoutGuest
     extends graphql.MutationOptions<Mutation$LogoutGuest> {
   WidgetOptions$Mutation$LogoutGuest({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$LogoutGuest? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$LogoutGuest? onCompleted,
-    graphql.OnMutationUpdate<Mutation$LogoutGuest>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$LogoutGuest(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationLogoutGuest,
           parserFn: _parserFn$Mutation$LogoutGuest,
         );
@@ -328,11 +307,10 @@ typedef Builder$Mutation$LogoutGuest = widgets.Widget Function(
 class Mutation$LogoutGuest$Widget
     extends graphql_flutter.Mutation<Mutation$LogoutGuest> {
   Mutation$LogoutGuest$Widget({
-    widgets.Key? key,
+    super.key,
     WidgetOptions$Mutation$LogoutGuest? options,
     required Builder$Mutation$LogoutGuest builder,
   }) : super(
-          key: key,
           options: options ?? WidgetOptions$Mutation$LogoutGuest(),
           builder: (
             run,

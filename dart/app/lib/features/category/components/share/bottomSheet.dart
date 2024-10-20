@@ -108,7 +108,7 @@ class ShareBottomSheet extends HookWidget {
           Positioned(
             top: 12,
             right: 20,
-            child: Container(
+            child: SizedBox(
                 width: 30,
                 height: 30,
                 child: FloatingActionButton(

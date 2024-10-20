@@ -46,7 +46,7 @@ class Variables$Mutation$AddCarts {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$AddCarts) ||
+    if (other is! Variables$Mutation$AddCarts ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -97,6 +97,7 @@ class _CopyWithImpl$Variables$Mutation$AddCarts<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({Object? input = _undefined}) =>
       _then(Variables$Mutation$AddCarts._({
         ..._instance._$data,
@@ -109,8 +110,9 @@ class _CopyWithStubImpl$Variables$Mutation$AddCarts<TRes>
     implements CopyWith$Variables$Mutation$AddCarts<TRes> {
   _CopyWithStubImpl$Variables$Mutation$AddCarts(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({List<Input$NewCart?>? input}) => _res;
 }
 
@@ -134,12 +136,12 @@ class Mutation$AddCarts {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$addCarts = addCarts;
-    _resultData['addCarts'] = l$addCarts;
+    resultData['addCarts'] = l$addCarts;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -157,7 +159,7 @@ class Mutation$AddCarts {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$AddCarts) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$AddCarts || runtimeType != other.runtimeType) {
       return false;
     }
     final l$addCarts = addCarts;
@@ -210,6 +212,7 @@ class _CopyWithImpl$Mutation$AddCarts<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? addCarts = _undefined,
     Object? $__typename = _undefined,
@@ -228,8 +231,9 @@ class _CopyWithStubImpl$Mutation$AddCarts<TRes>
     implements CopyWith$Mutation$AddCarts<TRes> {
   _CopyWithStubImpl$Mutation$AddCarts(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     bool? addCarts,
     String? $__typename,
@@ -289,34 +293,27 @@ typedef OnMutationCompleted$Mutation$AddCarts = FutureOr<void> Function(
 class Options$Mutation$AddCarts
     extends graphql.MutationOptions<Mutation$AddCarts> {
   Options$Mutation$AddCarts({
-    String? operationName,
+    super.operationName,
     required Variables$Mutation$AddCarts variables,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$AddCarts? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$AddCarts? onCompleted,
-    graphql.OnMutationUpdate<Mutation$AddCarts>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
           variables: variables.toJson(),
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$AddCarts(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationAddCarts,
           parserFn: _parserFn$Mutation$AddCarts,
         );
@@ -335,31 +332,22 @@ class Options$Mutation$AddCarts
 class WatchOptions$Mutation$AddCarts
     extends graphql.WatchQueryOptions<Mutation$AddCarts> {
   WatchOptions$Mutation$AddCarts({
-    String? operationName,
+    super.operationName,
     required Variables$Mutation$AddCarts variables,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$AddCarts? typedOptimisticResult,
-    graphql.Context? context,
-    Duration? pollInterval,
-    bool? eagerlyFetchResults,
-    bool carryForwardDataOnException = true,
-    bool fetchResults = false,
+    super.context,
+    super.pollInterval,
+    super.eagerlyFetchResults,
+    super.carryForwardDataOnException,
+    super.fetchResults,
   }) : super(
           variables: variables.toJson(),
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           document: documentNodeMutationAddCarts,
-          pollInterval: pollInterval,
-          eagerlyFetchResults: eagerlyFetchResults,
-          carryForwardDataOnException: carryForwardDataOnException,
-          fetchResults: fetchResults,
           parserFn: _parserFn$Mutation$AddCarts,
         );
 }
@@ -367,10 +355,10 @@ class WatchOptions$Mutation$AddCarts
 extension ClientExtension$Mutation$AddCarts on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$AddCarts>> mutate$AddCarts(
           Options$Mutation$AddCarts options) async =>
-      await this.mutate(options);
+      await mutate(options);
   graphql.ObservableQuery<Mutation$AddCarts> watchMutation$AddCarts(
           WatchOptions$Mutation$AddCarts options) =>
-      this.watchMutation(options);
+      watchMutation(options);
 }
 
 class Mutation$AddCarts$HookResult {
@@ -405,32 +393,25 @@ graphql.ObservableQuery<Mutation$AddCarts> useWatchMutation$AddCarts(
 class WidgetOptions$Mutation$AddCarts
     extends graphql.MutationOptions<Mutation$AddCarts> {
   WidgetOptions$Mutation$AddCarts({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$AddCarts? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$AddCarts? onCompleted,
-    graphql.OnMutationUpdate<Mutation$AddCarts>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$AddCarts(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationAddCarts,
           parserFn: _parserFn$Mutation$AddCarts,
         );
@@ -460,11 +441,10 @@ typedef Builder$Mutation$AddCarts = widgets.Widget Function(
 class Mutation$AddCarts$Widget
     extends graphql_flutter.Mutation<Mutation$AddCarts> {
   Mutation$AddCarts$Widget({
-    widgets.Key? key,
+    super.key,
     WidgetOptions$Mutation$AddCarts? options,
     required Builder$Mutation$AddCarts builder,
   }) : super(
-          key: key,
           options: options ?? WidgetOptions$Mutation$AddCarts(),
           builder: (
             run,
