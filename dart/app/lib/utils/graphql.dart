@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 Future<String?> getAppCheckToken() async {
   if (!kReleaseMode) {
     // シミュレータはデバッグトークンを使用
-
     try {
       final appCheckToken = await FirebaseAppCheck.instance.getToken(true);
       return appCheckToken;
@@ -24,7 +23,7 @@ Future<String?> getAppCheckToken() async {
       return appCheckToken;
     }
   } catch (e) {
-    print('Error fetching App Check t oken: $e');
+    print('Error fetching App Check token: $e');
   }
 
   return "";
