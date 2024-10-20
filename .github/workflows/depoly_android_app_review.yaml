@@ -93,7 +93,7 @@ jobs:
       - name: mv apk
         run: |
           mkdir -p android/build/app/outputs
-          mv ./ build/app/outputs/bundle/release/app-release.aab ./android/build/app/outputs/app-release.aab
+          mv ./build/app/outputs/bundle/release/app-release.aab ./android/build/app/outputs/app-release.aab
 
       - name: distribution apk
         run: |
