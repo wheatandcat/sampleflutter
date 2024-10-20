@@ -84,16 +84,16 @@ jobs:
           cd android
           bundle install
 
-      - name: build apk
+      - name: build aab
         run: |
           BUILD_NUMBER=$(date +%s)
           echo "Current build number is $BUILD_NUMBER"
-          flutter build apk --release --build-number=$BUILD_NUMBER
+          flutter build aab --release --build-number=$BUILD_NUMBER
 
       - name: mv apk
         run: |
           mkdir -p android/build/app/outputs
-          mv ./build/app/outputs/flutter-apk/app-release.apk ./android/build/app/outputs/app-release.apk
+          mv ./build/app/outputs/bundle/release/app-release.aab ./android/build/app/outputs/app-release.aab
 
       - name: distribution apk
         run: |

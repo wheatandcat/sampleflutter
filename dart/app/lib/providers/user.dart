@@ -40,7 +40,7 @@ final userDataProvider = FutureProvider.autoDispose<UserData?>((ref) async {
   );
 
   if (result.hasException) {
-    return null;
+    throw Exception('Error occurred while fetching data');
   }
 
   final userData = result.data!['me'];

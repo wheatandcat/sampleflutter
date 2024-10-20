@@ -45,7 +45,7 @@ class Variables$Mutation$CreateCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$CreateCategory) ||
+    if (other is! Variables$Mutation$CreateCategory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -89,6 +89,7 @@ class _CopyWithImpl$Variables$Mutation$CreateCategory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({Object? input = _undefined}) =>
       _then(Variables$Mutation$CreateCategory._({
         ..._instance._$data,
@@ -101,8 +102,9 @@ class _CopyWithStubImpl$Variables$Mutation$CreateCategory<TRes>
     implements CopyWith$Variables$Mutation$CreateCategory<TRes> {
   _CopyWithStubImpl$Variables$Mutation$CreateCategory(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({Input$NewCategory? input}) => _res;
 }
 
@@ -127,12 +129,12 @@ class Mutation$CreateCategory {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$createCategory = createCategory;
-    _resultData['createCategory'] = l$createCategory.toJson();
+    resultData['createCategory'] = l$createCategory.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -150,8 +152,7 @@ class Mutation$CreateCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateCategory) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Mutation$CreateCategory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$createCategory = createCategory;
@@ -205,6 +206,7 @@ class _CopyWithImpl$Mutation$CreateCategory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? createCategory = _undefined,
     Object? $__typename = _undefined,
@@ -218,6 +220,7 @@ class _CopyWithImpl$Mutation$CreateCategory<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$CreateCategory$createCategory<TRes> get createCategory {
     final local$createCategory = _instance.createCategory;
     return CopyWith$Mutation$CreateCategory$createCategory(
@@ -229,14 +232,16 @@ class _CopyWithStubImpl$Mutation$CreateCategory<TRes>
     implements CopyWith$Mutation$CreateCategory<TRes> {
   _CopyWithStubImpl$Mutation$CreateCategory(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$CreateCategory$createCategory? createCategory,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$CreateCategory$createCategory<TRes> get createCategory =>
       CopyWith$Mutation$CreateCategory$createCategory.stub(_res);
 }
@@ -327,26 +332,21 @@ typedef OnMutationCompleted$Mutation$CreateCategory = FutureOr<void> Function(
 class Options$Mutation$CreateCategory
     extends graphql.MutationOptions<Mutation$CreateCategory> {
   Options$Mutation$CreateCategory({
-    String? operationName,
+    super.operationName,
     required Variables$Mutation$CreateCategory variables,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateCategory? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$CreateCategory? onCompleted,
-    graphql.OnMutationUpdate<Mutation$CreateCategory>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
           variables: variables.toJson(),
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
@@ -355,8 +355,6 @@ class Options$Mutation$CreateCategory
                         ? null
                         : _parserFn$Mutation$CreateCategory(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationCreateCategory,
           parserFn: _parserFn$Mutation$CreateCategory,
         );
@@ -375,31 +373,22 @@ class Options$Mutation$CreateCategory
 class WatchOptions$Mutation$CreateCategory
     extends graphql.WatchQueryOptions<Mutation$CreateCategory> {
   WatchOptions$Mutation$CreateCategory({
-    String? operationName,
+    super.operationName,
     required Variables$Mutation$CreateCategory variables,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateCategory? typedOptimisticResult,
-    graphql.Context? context,
-    Duration? pollInterval,
-    bool? eagerlyFetchResults,
-    bool carryForwardDataOnException = true,
-    bool fetchResults = false,
+    super.context,
+    super.pollInterval,
+    super.eagerlyFetchResults,
+    super.carryForwardDataOnException,
+    super.fetchResults,
   }) : super(
           variables: variables.toJson(),
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           document: documentNodeMutationCreateCategory,
-          pollInterval: pollInterval,
-          eagerlyFetchResults: eagerlyFetchResults,
-          carryForwardDataOnException: carryForwardDataOnException,
-          fetchResults: fetchResults,
           parserFn: _parserFn$Mutation$CreateCategory,
         );
 }
@@ -407,10 +396,10 @@ class WatchOptions$Mutation$CreateCategory
 extension ClientExtension$Mutation$CreateCategory on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$CreateCategory>> mutate$CreateCategory(
           Options$Mutation$CreateCategory options) async =>
-      await this.mutate(options);
+      await mutate(options);
   graphql.ObservableQuery<Mutation$CreateCategory> watchMutation$CreateCategory(
           WatchOptions$Mutation$CreateCategory options) =>
-      this.watchMutation(options);
+      watchMutation(options);
 }
 
 class Mutation$CreateCategory$HookResult {
@@ -446,24 +435,19 @@ graphql.ObservableQuery<Mutation$CreateCategory>
 class WidgetOptions$Mutation$CreateCategory
     extends graphql.MutationOptions<Mutation$CreateCategory> {
   WidgetOptions$Mutation$CreateCategory({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateCategory? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$CreateCategory? onCompleted,
-    graphql.OnMutationUpdate<Mutation$CreateCategory>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
@@ -472,8 +456,6 @@ class WidgetOptions$Mutation$CreateCategory
                         ? null
                         : _parserFn$Mutation$CreateCategory(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationCreateCategory,
           parserFn: _parserFn$Mutation$CreateCategory,
         );
@@ -503,11 +485,10 @@ typedef Builder$Mutation$CreateCategory = widgets.Widget Function(
 class Mutation$CreateCategory$Widget
     extends graphql_flutter.Mutation<Mutation$CreateCategory> {
   Mutation$CreateCategory$Widget({
-    widgets.Key? key,
+    super.key,
     WidgetOptions$Mutation$CreateCategory? options,
     required Builder$Mutation$CreateCategory builder,
   }) : super(
-          key: key,
           options: options ?? WidgetOptions$Mutation$CreateCategory(),
           builder: (
             run,
@@ -565,18 +546,18 @@ class Mutation$CreateCategory$createCategory {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$name = name;
-    _resultData['name'] = l$name;
+    resultData['name'] = l$name;
     final l$imageURL = imageURL;
-    _resultData['imageURL'] = l$imageURL;
+    resultData['imageURL'] = l$imageURL;
     final l$order = order;
-    _resultData['order'] = l$order;
+    resultData['order'] = l$order;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -600,7 +581,7 @@ class Mutation$CreateCategory$createCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateCategory$createCategory) ||
+    if (other is! Mutation$CreateCategory$createCategory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -674,6 +655,7 @@ class _CopyWithImpl$Mutation$CreateCategory$createCategory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -701,8 +683,9 @@ class _CopyWithStubImpl$Mutation$CreateCategory$createCategory<TRes>
     implements CopyWith$Mutation$CreateCategory$createCategory<TRes> {
   _CopyWithStubImpl$Mutation$CreateCategory$createCategory(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? id,
     String? name,

@@ -43,7 +43,7 @@ class Variables$Mutation$CreateItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$CreateItem) ||
+    if (other is! Variables$Mutation$CreateItem ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -87,6 +87,7 @@ class _CopyWithImpl$Variables$Mutation$CreateItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({Object? input = _undefined}) =>
       _then(Variables$Mutation$CreateItem._({
         ..._instance._$data,
@@ -99,8 +100,9 @@ class _CopyWithStubImpl$Variables$Mutation$CreateItem<TRes>
     implements CopyWith$Variables$Mutation$CreateItem<TRes> {
   _CopyWithStubImpl$Variables$Mutation$CreateItem(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({Input$NewItem? input}) => _res;
 }
 
@@ -125,12 +127,12 @@ class Mutation$CreateItem {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$createItem = createItem;
-    _resultData['createItem'] = l$createItem.toJson();
+    resultData['createItem'] = l$createItem.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -148,7 +150,7 @@ class Mutation$CreateItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateItem) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$CreateItem || runtimeType != other.runtimeType) {
       return false;
     }
     final l$createItem = createItem;
@@ -202,6 +204,7 @@ class _CopyWithImpl$Mutation$CreateItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? createItem = _undefined,
     Object? $__typename = _undefined,
@@ -215,6 +218,7 @@ class _CopyWithImpl$Mutation$CreateItem<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$CreateItem$createItem<TRes> get createItem {
     final local$createItem = _instance.createItem;
     return CopyWith$Mutation$CreateItem$createItem(
@@ -226,14 +230,16 @@ class _CopyWithStubImpl$Mutation$CreateItem<TRes>
     implements CopyWith$Mutation$CreateItem<TRes> {
   _CopyWithStubImpl$Mutation$CreateItem(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$CreateItem$createItem? createItem,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$CreateItem$createItem<TRes> get createItem =>
       CopyWith$Mutation$CreateItem$createItem.stub(_res);
 }
@@ -344,34 +350,27 @@ typedef OnMutationCompleted$Mutation$CreateItem = FutureOr<void> Function(
 class Options$Mutation$CreateItem
     extends graphql.MutationOptions<Mutation$CreateItem> {
   Options$Mutation$CreateItem({
-    String? operationName,
+    super.operationName,
     required Variables$Mutation$CreateItem variables,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateItem? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$CreateItem? onCompleted,
-    graphql.OnMutationUpdate<Mutation$CreateItem>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
           variables: variables.toJson(),
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$CreateItem(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationCreateItem,
           parserFn: _parserFn$Mutation$CreateItem,
         );
@@ -390,31 +389,22 @@ class Options$Mutation$CreateItem
 class WatchOptions$Mutation$CreateItem
     extends graphql.WatchQueryOptions<Mutation$CreateItem> {
   WatchOptions$Mutation$CreateItem({
-    String? operationName,
+    super.operationName,
     required Variables$Mutation$CreateItem variables,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateItem? typedOptimisticResult,
-    graphql.Context? context,
-    Duration? pollInterval,
-    bool? eagerlyFetchResults,
-    bool carryForwardDataOnException = true,
-    bool fetchResults = false,
+    super.context,
+    super.pollInterval,
+    super.eagerlyFetchResults,
+    super.carryForwardDataOnException,
+    super.fetchResults,
   }) : super(
           variables: variables.toJson(),
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           document: documentNodeMutationCreateItem,
-          pollInterval: pollInterval,
-          eagerlyFetchResults: eagerlyFetchResults,
-          carryForwardDataOnException: carryForwardDataOnException,
-          fetchResults: fetchResults,
           parserFn: _parserFn$Mutation$CreateItem,
         );
 }
@@ -422,10 +412,10 @@ class WatchOptions$Mutation$CreateItem
 extension ClientExtension$Mutation$CreateItem on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$CreateItem>> mutate$CreateItem(
           Options$Mutation$CreateItem options) async =>
-      await this.mutate(options);
+      await mutate(options);
   graphql.ObservableQuery<Mutation$CreateItem> watchMutation$CreateItem(
           WatchOptions$Mutation$CreateItem options) =>
-      this.watchMutation(options);
+      watchMutation(options);
 }
 
 class Mutation$CreateItem$HookResult {
@@ -460,32 +450,25 @@ graphql.ObservableQuery<Mutation$CreateItem> useWatchMutation$CreateItem(
 class WidgetOptions$Mutation$CreateItem
     extends graphql.MutationOptions<Mutation$CreateItem> {
   WidgetOptions$Mutation$CreateItem({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateItem? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$CreateItem? onCompleted,
-    graphql.OnMutationUpdate<Mutation$CreateItem>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$CreateItem(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationCreateItem,
           parserFn: _parserFn$Mutation$CreateItem,
         );
@@ -515,11 +498,10 @@ typedef Builder$Mutation$CreateItem = widgets.Widget Function(
 class Mutation$CreateItem$Widget
     extends graphql_flutter.Mutation<Mutation$CreateItem> {
   Mutation$CreateItem$Widget({
-    widgets.Key? key,
+    super.key,
     WidgetOptions$Mutation$CreateItem? options,
     required Builder$Mutation$CreateItem builder,
   }) : super(
-          key: key,
           options: options ?? WidgetOptions$Mutation$CreateItem(),
           builder: (
             run,
@@ -591,24 +573,24 @@ class Mutation$CreateItem$createItem {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$name = name;
-    _resultData['name'] = l$name;
+    resultData['name'] = l$name;
     final l$categoryId = categoryId;
-    _resultData['categoryId'] = l$categoryId;
+    resultData['categoryId'] = l$categoryId;
     final l$imageURL = imageURL;
-    _resultData['imageURL'] = l$imageURL;
+    resultData['imageURL'] = l$imageURL;
     final l$order = order;
-    _resultData['order'] = l$order;
+    resultData['order'] = l$order;
     final l$stock = stock;
-    _resultData['stock'] = l$stock;
+    resultData['stock'] = l$stock;
     final l$expirationDate = expirationDate;
-    _resultData['expirationDate'] = l$expirationDate;
+    resultData['expirationDate'] = l$expirationDate;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -638,7 +620,7 @@ class Mutation$CreateItem$createItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateItem$createItem) ||
+    if (other is! Mutation$CreateItem$createItem ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -729,6 +711,7 @@ class _CopyWithImpl$Mutation$CreateItem$createItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -768,8 +751,9 @@ class _CopyWithStubImpl$Mutation$CreateItem$createItem<TRes>
     implements CopyWith$Mutation$CreateItem$createItem<TRes> {
   _CopyWithStubImpl$Mutation$CreateItem$createItem(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? id,
     String? name,

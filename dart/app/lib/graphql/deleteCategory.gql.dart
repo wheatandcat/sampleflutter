@@ -42,7 +42,7 @@ class Variables$Mutation$DeleteCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$DeleteCategory) ||
+    if (other is! Variables$Mutation$DeleteCategory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -86,6 +86,7 @@ class _CopyWithImpl$Variables$Mutation$DeleteCategory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Mutation$DeleteCategory._({
         ..._instance._$data,
@@ -97,8 +98,9 @@ class _CopyWithStubImpl$Variables$Mutation$DeleteCategory<TRes>
     implements CopyWith$Variables$Mutation$DeleteCategory<TRes> {
   _CopyWithStubImpl$Variables$Mutation$DeleteCategory(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({int? id}) => _res;
 }
 
@@ -123,12 +125,12 @@ class Mutation$DeleteCategory {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$deleteCategory = deleteCategory;
-    _resultData['deleteCategory'] = l$deleteCategory.toJson();
+    resultData['deleteCategory'] = l$deleteCategory.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -146,8 +148,7 @@ class Mutation$DeleteCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteCategory) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Mutation$DeleteCategory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteCategory = deleteCategory;
@@ -201,6 +202,7 @@ class _CopyWithImpl$Mutation$DeleteCategory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? deleteCategory = _undefined,
     Object? $__typename = _undefined,
@@ -214,6 +216,7 @@ class _CopyWithImpl$Mutation$DeleteCategory<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$DeleteCategory$deleteCategory<TRes> get deleteCategory {
     final local$deleteCategory = _instance.deleteCategory;
     return CopyWith$Mutation$DeleteCategory$deleteCategory(
@@ -225,14 +228,16 @@ class _CopyWithStubImpl$Mutation$DeleteCategory<TRes>
     implements CopyWith$Mutation$DeleteCategory<TRes> {
   _CopyWithStubImpl$Mutation$DeleteCategory(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$DeleteCategory$deleteCategory? deleteCategory,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$DeleteCategory$deleteCategory<TRes> get deleteCategory =>
       CopyWith$Mutation$DeleteCategory$deleteCategory.stub(_res);
 }
@@ -302,26 +307,21 @@ typedef OnMutationCompleted$Mutation$DeleteCategory = FutureOr<void> Function(
 class Options$Mutation$DeleteCategory
     extends graphql.MutationOptions<Mutation$DeleteCategory> {
   Options$Mutation$DeleteCategory({
-    String? operationName,
+    super.operationName,
     required Variables$Mutation$DeleteCategory variables,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$DeleteCategory? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$DeleteCategory? onCompleted,
-    graphql.OnMutationUpdate<Mutation$DeleteCategory>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
           variables: variables.toJson(),
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
@@ -330,8 +330,6 @@ class Options$Mutation$DeleteCategory
                         ? null
                         : _parserFn$Mutation$DeleteCategory(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationDeleteCategory,
           parserFn: _parserFn$Mutation$DeleteCategory,
         );
@@ -350,31 +348,22 @@ class Options$Mutation$DeleteCategory
 class WatchOptions$Mutation$DeleteCategory
     extends graphql.WatchQueryOptions<Mutation$DeleteCategory> {
   WatchOptions$Mutation$DeleteCategory({
-    String? operationName,
+    super.operationName,
     required Variables$Mutation$DeleteCategory variables,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$DeleteCategory? typedOptimisticResult,
-    graphql.Context? context,
-    Duration? pollInterval,
-    bool? eagerlyFetchResults,
-    bool carryForwardDataOnException = true,
-    bool fetchResults = false,
+    super.context,
+    super.pollInterval,
+    super.eagerlyFetchResults,
+    super.carryForwardDataOnException,
+    super.fetchResults,
   }) : super(
           variables: variables.toJson(),
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           document: documentNodeMutationDeleteCategory,
-          pollInterval: pollInterval,
-          eagerlyFetchResults: eagerlyFetchResults,
-          carryForwardDataOnException: carryForwardDataOnException,
-          fetchResults: fetchResults,
           parserFn: _parserFn$Mutation$DeleteCategory,
         );
 }
@@ -382,10 +371,10 @@ class WatchOptions$Mutation$DeleteCategory
 extension ClientExtension$Mutation$DeleteCategory on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$DeleteCategory>> mutate$DeleteCategory(
           Options$Mutation$DeleteCategory options) async =>
-      await this.mutate(options);
+      await mutate(options);
   graphql.ObservableQuery<Mutation$DeleteCategory> watchMutation$DeleteCategory(
           WatchOptions$Mutation$DeleteCategory options) =>
-      this.watchMutation(options);
+      watchMutation(options);
 }
 
 class Mutation$DeleteCategory$HookResult {
@@ -421,24 +410,19 @@ graphql.ObservableQuery<Mutation$DeleteCategory>
 class WidgetOptions$Mutation$DeleteCategory
     extends graphql.MutationOptions<Mutation$DeleteCategory> {
   WidgetOptions$Mutation$DeleteCategory({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$DeleteCategory? typedOptimisticResult,
-    graphql.Context? context,
+    super.context,
     OnMutationCompleted$Mutation$DeleteCategory? onCompleted,
-    graphql.OnMutationUpdate<Mutation$DeleteCategory>? update,
-    graphql.OnError? onError,
+    super.update,
+    super.onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
@@ -447,8 +431,6 @@ class WidgetOptions$Mutation$DeleteCategory
                         ? null
                         : _parserFn$Mutation$DeleteCategory(data),
                   ),
-          update: update,
-          onError: onError,
           document: documentNodeMutationDeleteCategory,
           parserFn: _parserFn$Mutation$DeleteCategory,
         );
@@ -478,11 +460,10 @@ typedef Builder$Mutation$DeleteCategory = widgets.Widget Function(
 class Mutation$DeleteCategory$Widget
     extends graphql_flutter.Mutation<Mutation$DeleteCategory> {
   Mutation$DeleteCategory$Widget({
-    widgets.Key? key,
+    super.key,
     WidgetOptions$Mutation$DeleteCategory? options,
     required Builder$Mutation$DeleteCategory builder,
   }) : super(
-          key: key,
           options: options ?? WidgetOptions$Mutation$DeleteCategory(),
           builder: (
             run,
@@ -525,12 +506,12 @@ class Mutation$DeleteCategory$deleteCategory {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -548,7 +529,7 @@ class Mutation$DeleteCategory$deleteCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteCategory$deleteCategory) ||
+    if (other is! Mutation$DeleteCategory$deleteCategory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -604,6 +585,7 @@ class _CopyWithImpl$Mutation$DeleteCategory$deleteCategory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? $__typename = _undefined,
@@ -620,8 +602,9 @@ class _CopyWithStubImpl$Mutation$DeleteCategory$deleteCategory<TRes>
     implements CopyWith$Mutation$DeleteCategory$deleteCategory<TRes> {
   _CopyWithStubImpl$Mutation$DeleteCategory$deleteCategory(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? id,
     String? $__typename,

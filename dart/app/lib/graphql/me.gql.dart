@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
@@ -26,12 +25,12 @@ class Query$Me {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$me = me;
-    _resultData['me'] = l$me?.toJson();
+    resultData['me'] = l$me?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -49,7 +48,7 @@ class Query$Me {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Me) || runtimeType != other.runtimeType) {
+    if (other is! Query$Me || runtimeType != other.runtimeType) {
       return false;
     }
     final l$me = me;
@@ -100,6 +99,7 @@ class _CopyWithImpl$Query$Me<TRes> implements CopyWith$Query$Me<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? me = _undefined,
     Object? $__typename = _undefined,
@@ -111,6 +111,7 @@ class _CopyWithImpl$Query$Me<TRes> implements CopyWith$Query$Me<TRes> {
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$Me$me<TRes> get me {
     final local$me = _instance.me;
     return local$me == null
@@ -122,14 +123,16 @@ class _CopyWithImpl$Query$Me<TRes> implements CopyWith$Query$Me<TRes> {
 class _CopyWithStubImpl$Query$Me<TRes> implements CopyWith$Query$Me<TRes> {
   _CopyWithStubImpl$Query$Me(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$Me$me? me,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Me$me<TRes> get me => CopyWith$Query$Me$me.stub(_res);
 }
 
@@ -188,32 +191,25 @@ typedef OnQueryComplete$Query$Me = FutureOr<void> Function(
 
 class Options$Query$Me extends graphql.QueryOptions<Query$Me> {
   Options$Query$Me({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Query$Me? typedOptimisticResult,
-    Duration? pollInterval,
-    graphql.Context? context,
+    super.pollInterval,
+    super.context,
     OnQueryComplete$Query$Me? onComplete,
-    graphql.OnQueryError? onError,
+    super.onError,
   })  : onCompleteWithParsed = onComplete,
         super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          pollInterval: pollInterval,
-          context: context,
           onComplete: onComplete == null
               ? null
               : (data) => onComplete(
                     data,
                     data == null ? null : _parserFn$Query$Me(data),
                   ),
-          onError: onError,
           document: documentNodeQueryMe,
           parserFn: _parserFn$Query$Me,
         );
@@ -231,37 +227,27 @@ class Options$Query$Me extends graphql.QueryOptions<Query$Me> {
 
 class WatchOptions$Query$Me extends graphql.WatchQueryOptions<Query$Me> {
   WatchOptions$Query$Me({
-    String? operationName,
-    graphql.FetchPolicy? fetchPolicy,
-    graphql.ErrorPolicy? errorPolicy,
-    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    super.operationName,
+    super.fetchPolicy,
+    super.errorPolicy,
+    super.cacheRereadPolicy,
     Object? optimisticResult,
     Query$Me? typedOptimisticResult,
-    graphql.Context? context,
-    Duration? pollInterval,
-    bool? eagerlyFetchResults,
-    bool carryForwardDataOnException = true,
-    bool fetchResults = false,
+    super.context,
+    super.pollInterval,
+    super.eagerlyFetchResults,
+    super.carryForwardDataOnException,
+    super.fetchResults,
   }) : super(
-          operationName: operationName,
-          fetchPolicy: fetchPolicy,
-          errorPolicy: errorPolicy,
-          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
-          context: context,
           document: documentNodeQueryMe,
-          pollInterval: pollInterval,
-          eagerlyFetchResults: eagerlyFetchResults,
-          carryForwardDataOnException: carryForwardDataOnException,
-          fetchResults: fetchResults,
           parserFn: _parserFn$Query$Me,
         );
 }
 
 class FetchMoreOptions$Query$Me extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$Me({required graphql.UpdateQuery updateQuery})
+  FetchMoreOptions$Query$Me({required super.updateQuery})
       : super(
-          updateQuery: updateQuery,
           document: documentNodeQueryMe,
         );
 }
@@ -269,23 +255,23 @@ class FetchMoreOptions$Query$Me extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$Me on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$Me>> query$Me(
           [Options$Query$Me? options]) async =>
-      await this.query(options ?? Options$Query$Me());
+      await query(options ?? Options$Query$Me());
   graphql.ObservableQuery<Query$Me> watchQuery$Me(
           [WatchOptions$Query$Me? options]) =>
-      this.watchQuery(options ?? WatchOptions$Query$Me());
+      watchQuery(options ?? WatchOptions$Query$Me());
   void writeQuery$Me({
     required Query$Me data,
     bool broadcast = true,
   }) =>
-      this.writeQuery(
-        graphql.Request(
+      writeQuery(
+        const graphql.Request(
             operation: graphql.Operation(document: documentNodeQueryMe)),
         data: data.toJson(),
         broadcast: broadcast,
       );
   Query$Me? readQuery$Me({bool optimistic = true}) {
-    final result = this.readQuery(
-      graphql.Request(
+    final result = readQuery(
+      const graphql.Request(
           operation: graphql.Operation(document: documentNodeQueryMe)),
       optimistic: optimistic,
     );
@@ -302,13 +288,11 @@ graphql.ObservableQuery<Query$Me> useWatchQuery$Me(
 
 class Query$Me$Widget extends graphql_flutter.Query<Query$Me> {
   Query$Me$Widget({
-    widgets.Key? key,
+    super.key,
     Options$Query$Me? options,
-    required graphql_flutter.QueryBuilder<Query$Me> builder,
+    required super.builder,
   }) : super(
-          key: key,
           options: options ?? Options$Query$Me(),
-          builder: builder,
         );
 }
 
@@ -337,14 +321,14 @@ class Query$Me$me {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$uid = uid;
-    _resultData['uid'] = l$uid;
+    resultData['uid'] = l$uid;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -364,7 +348,7 @@ class Query$Me$me {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Me$me) || runtimeType != other.runtimeType) {
+    if (other is! Query$Me$me || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -420,6 +404,7 @@ class _CopyWithImpl$Query$Me$me<TRes> implements CopyWith$Query$Me$me<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? uid = _undefined,
@@ -438,8 +423,9 @@ class _CopyWithStubImpl$Query$Me$me<TRes>
     implements CopyWith$Query$Me$me<TRes> {
   _CopyWithStubImpl$Query$Me$me(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? id,
     String? uid,
