@@ -6,7 +6,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<String?> getAppCheckToken() async {
   final appEnv = dotenv.env['APP_ENV'];
-
   if (appEnv != 'production') {
     // 本番アプリ以外はデバッグトークンを使用
     try {
