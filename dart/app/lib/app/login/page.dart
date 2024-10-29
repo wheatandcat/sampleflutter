@@ -11,6 +11,7 @@ import 'package:stockkeeper/components/background/background.dart';
 import 'package:stockkeeper/utils/style.dart';
 import 'package:stockkeeper/utils/error.dart';
 import 'package:stockkeeper/components/loading/progress.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Login extends HookConsumerWidget {
   const Login({super.key});
@@ -82,45 +83,51 @@ class Login extends HookConsumerWidget {
 
     return BackgroundImage(
         child: Scaffold(
-            appBar: const CommonAppBar(title: "ログイン"),
-            body: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start, // 垂直方向の中央
-                    crossAxisAlignment: CrossAxisAlignment.center, // 水平方向の中央
-                    children: [
-                  Container(
-                      height: 300,
-                      margin: const EdgeInsets.only(bottom: Spacing.xl3),
-                      child: Image.asset(
-                        'images/splash.png',
-                        width: 280,
-                      )),
-                  StreamBuilder(
-                      stream: FirebaseAuth.instance.authStateChanges(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<User?> snapshot) {
-                        if (!snapshot.hasData) {
-                          return Column(children: [
-                            Button(
-                                title: "Googleでログイン",
-                                width: 280,
-                                height: 50,
-                                onPressed: onPressed),
-                            Padding(
-                                padding: const EdgeInsets.only(top: Spacing.lg),
-                                child: InkWell(
-                                    onTap: () {
-                                      showReader(context);
-                                    },
-                                    child: const Text("リストの共有からログイン",
-                                        style: TextStyle(
-                                            fontSize: FontSize.md,
-                                            fontWeight: FontWeight.bold)))),
-                          ]);
-                        } else {
-                          return const Progress();
-                        }
-                      }),
-                ]))));
+      appBar: const CommonAppBar(title: "ログイン"),
+      body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start, // 垂直方向の中央
+              crossAxisAlignment: CrossAxisAlignment.center, // 水平方向の中央
+              children: [
+            Container(
+                height: 300,
+                margin: const EdgeInsets.only(bottom: Spacing.xl3),
+                child: Image.asset(
+                  'images/splash.png',
+                  width: 280,
+                )),
+            StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Column(children: [
+                      Button(
+                          title: "Googleでログイン",
+                          width: 280,
+                          height: 50,
+                          onPressed: onPressed),
+                      Padding(
+                          padding: const EdgeInsets.only(top: Spacing.lg),
+                          child: InkWell(
+                              onTap: () {
+                                showReader(context);
+                              },
+                              child: const Text("リストの共有からログイン",
+                                  style: TextStyle(
+                                      fontSize: FontSize.md,
+                                      fontWeight: FontWeight.bold)))),
+                    ]);
+                  } else {
+                    return const Progress();
+                  }
+                }),
+          ])),
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(bottom: Spacing.lg),
+          child: Text("v 1.0.0 (${dotenv.env['APP_ENV']})",
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  fontSize: FontSize.sm, fontWeight: FontWeight.bold))),
+    ));
   }
 }
