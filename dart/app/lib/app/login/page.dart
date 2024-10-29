@@ -7,7 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stockkeeper/utils/auth.dart';
 import 'package:stockkeeper/graphql/createUser.gql.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:stockkeeper/providers/user.dart';
 import 'package:stockkeeper/components/background/background.dart';
 import 'package:stockkeeper/utils/style.dart';
 import 'package:stockkeeper/utils/error.dart';
@@ -23,8 +22,6 @@ class Login extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userDataAsyncValue = ref.watch(userDataProvider);
-
     onLogout() async {
       final AuthService authService = AuthService();
       await authService.deleteToken();
