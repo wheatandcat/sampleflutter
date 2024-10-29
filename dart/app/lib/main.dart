@@ -10,13 +10,14 @@ import 'package:stockkeeper/app/items/new/page.dart';
 import 'package:stockkeeper/app/login/page.dart';
 import 'package:stockkeeper/app/cart/page.dart';
 import 'package:stockkeeper/utils/graphql.dart';
+import 'package:stockkeeper/providers/user.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stockkeeper/features/login/components/bottomSheet.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'firebase_options.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'authWrapper.dart';
 
 void main() async {
@@ -41,19 +42,21 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends HookConsumerWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final ValueNotifier<GraphQLClient> client =
         ValueNotifier<GraphQLClient>(graphqlClient());
+
+    final navigatorKey = ref.read(navigatorKeyProvider);
 
     return GraphQLProvider(
         client: client,
         child: MaterialApp.router(
-          routerConfig: goRouter,
+          routerConfig: goRouter(navigatorKey),
           title: 'Stock Keeper',
           theme: ThemeData(
               fontFamily: 'NotoSansJP',
@@ -78,102 +81,105 @@ class MyApp extends StatelessWidget {
   }
 }
 
-final goRouter = GoRouter(
-  initialLocation: '/',
-  routes: [
-    GoRoute(
-        path: '/',
-        name: "home",
-        pageBuilder: (context, state) {
-          return MaterialPage(key: state.pageKey, child: const AuthWrapper());
-        },
-        routes: [
-          GoRoute(
-            path: "guest/scan",
-            name: "guest_scan",
-            pageBuilder: (context, state) {
-              return BottomSheetPage(
-                  builder: (_) => const ShareBottomSheet(code: ""));
-            },
-          ),
-          GoRoute(
-            path: "guest/login/:code",
-            name: "guest_login",
-            pageBuilder: (context, state) {
-              final code = state.pathParameters['code']!;
-              return BottomSheetPage(
-                  builder: (_) => ShareBottomSheet(code: code));
-            },
-          ),
-          GoRoute(
-              path: 'categories/new',
-              name: "category_new",
+GoRouter goRouter(navigatorKey) {
+  return GoRouter(
+    navigatorKey: navigatorKey,
+    initialLocation: '/',
+    routes: [
+      GoRoute(
+          path: '/',
+          name: "home",
+          pageBuilder: (context, state) {
+            return MaterialPage(key: state.pageKey, child: const AuthWrapper());
+          },
+          routes: [
+            GoRoute(
+              path: "guest/scan",
+              name: "guest_scan",
               pageBuilder: (context, state) {
-                final args = state.extra as CategoryNew;
-                return MaterialPage(
-                    key: state.pageKey,
-                    child: CategoryNew(
-                      onCallback: args.onCallback,
-                    ));
-              }),
-          GoRoute(
-              path: 'categories/edit',
-              name: "category_edit",
+                return BottomSheetPage(
+                    builder: (_) => const ShareBottomSheet(code: ""));
+              },
+            ),
+            GoRoute(
+              path: "guest/login/:code",
+              name: "guest_login",
               pageBuilder: (context, state) {
-                final args = state.extra as CategoryEdit;
-                return MaterialPage(
-                    key: state.pageKey,
-                    child: CategoryEdit(
-                        id: args.id,
-                        name: args.name,
-                        onCallback: args.onCallback));
-              }),
-          GoRoute(
-              path: 'items/new',
-              name: "item_new",
-              pageBuilder: (context, state) {
-                final args = state.extra as NewItem;
-                return MaterialPage(
-                    key: state.pageKey,
-                    child: NewItem(
-                        scanBarcode: args.scanBarcode,
-                        categoryId: args.categoryId,
-                        onCallback: args.onCallback));
-              }),
-          GoRoute(
-              path: 'items/:id',
-              name: "item_detail",
-              pageBuilder: (context, state) {
-                final args = state.extra as ItemDetail;
-                final id = int.tryParse(state.pathParameters['id']!)!;
-                return MaterialPage(
-                    key: state.pageKey,
-                    child: ItemDetail(id: id, onCallback: args.onCallback));
-              }),
-          GoRoute(
-              path: 'login',
-              name: "login",
-              pageBuilder: (context, state) {
-                return MaterialPage(key: state.pageKey, child: const Login());
-              }),
-          GoRoute(
-              path: 'cart',
-              name: "cart",
-              pageBuilder: (context, state) {
-                return MaterialPage(key: state.pageKey, child: const Cart());
-              }),
-        ]),
-  ],
-  // 遷移ページがないなどのエラーが発生した時に、このページに行く
-  errorPageBuilder: (context, state) => MaterialPage(
-    key: state.pageKey,
-    child: Scaffold(
-      body: Center(
-        child: Text(state.error.toString()),
+                final code = state.pathParameters['code']!;
+                return BottomSheetPage(
+                    builder: (_) => ShareBottomSheet(code: code));
+              },
+            ),
+            GoRoute(
+                path: 'categories/new',
+                name: "category_new",
+                pageBuilder: (context, state) {
+                  final args = state.extra as CategoryNew;
+                  return MaterialPage(
+                      key: state.pageKey,
+                      child: CategoryNew(
+                        onCallback: args.onCallback,
+                      ));
+                }),
+            GoRoute(
+                path: 'categories/edit',
+                name: "category_edit",
+                pageBuilder: (context, state) {
+                  final args = state.extra as CategoryEdit;
+                  return MaterialPage(
+                      key: state.pageKey,
+                      child: CategoryEdit(
+                          id: args.id,
+                          name: args.name,
+                          onCallback: args.onCallback));
+                }),
+            GoRoute(
+                path: 'items/new',
+                name: "item_new",
+                pageBuilder: (context, state) {
+                  final args = state.extra as NewItem;
+                  return MaterialPage(
+                      key: state.pageKey,
+                      child: NewItem(
+                          scanBarcode: args.scanBarcode,
+                          categoryId: args.categoryId,
+                          onCallback: args.onCallback));
+                }),
+            GoRoute(
+                path: 'items/:id',
+                name: "item_detail",
+                pageBuilder: (context, state) {
+                  final args = state.extra as ItemDetail;
+                  final id = int.tryParse(state.pathParameters['id']!)!;
+                  return MaterialPage(
+                      key: state.pageKey,
+                      child: ItemDetail(id: id, onCallback: args.onCallback));
+                }),
+            GoRoute(
+                path: 'login',
+                name: "login",
+                pageBuilder: (context, state) {
+                  return MaterialPage(key: state.pageKey, child: const Login());
+                }),
+            GoRoute(
+                path: 'cart',
+                name: "cart",
+                pageBuilder: (context, state) {
+                  return MaterialPage(key: state.pageKey, child: const Cart());
+                }),
+          ]),
+    ],
+    // 遷移ページがないなどのエラーが発生した時に、このページに行く
+    errorPageBuilder: (context, state) => MaterialPage(
+      key: state.pageKey,
+      child: Scaffold(
+        body: Center(
+          child: Text(state.error.toString()),
+        ),
       ),
     ),
-  ),
-);
+  );
+}
 
 class BottomSheetPage<T> extends Page<T> {
   final WidgetBuilder builder;
