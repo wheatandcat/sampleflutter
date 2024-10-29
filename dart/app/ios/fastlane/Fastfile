@@ -40,7 +40,6 @@ platform :ios do
       xcodeproj: "Runner.xcodeproj"
     )
 
-
     build_app(
       workspace: "Runner.xcworkspace",
       scheme: "Runner",

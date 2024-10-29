@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stockkeeper/providers/graphql.dart';
 import 'package:stockkeeper/graphql/me.gql.dart';
 import 'package:flutter/material.dart';
+import 'package:stockkeeper/utils/style.dart';
 
 class UserData {
   late final String id;
@@ -60,7 +61,11 @@ final userDataProvider = FutureProvider.autoDispose<UserData?>((ref) async {
           return AlertDialog(
             title: const Text('エラー'),
             content: SingleChildScrollView(
-              child: Text('データの取得に失敗しました。\n$errorMessage'),
+              child: Text(
+                'データの取得に失敗しました。\n$errorMessage',
+                style: const TextStyle(
+                    fontSize: FontSize.sm, color: AppColors.textDark),
+              ),
             ),
             actions: [
               TextButton(
