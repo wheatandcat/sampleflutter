@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stockkeeper/utils/auth.dart';
 import 'package:stockkeeper/utils/guest.dart';
 import 'package:stockkeeper/graphql/logoutGuest.gql.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AppBarMenu extends HookConsumerWidget {
   const AppBarMenu({super.key});
@@ -150,6 +151,19 @@ class AppBarMenu extends HookConsumerWidget {
                                   fontWeight: FontWeight.bold)),
                         ),
                       )),
+                  Card(
+                    margin: EdgeInsets.zero,
+                    color: Colors.transparent,
+                    elevation: 0,
+                    child: ListTile(
+                      title: Text("v 1.0.0 (${dotenv.env['APP_ENV']})",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: AppColors.textDark,
+                            fontSize: FontSize.sm,
+                          )),
+                    ),
+                  ),
                 ],
               ),
             ),

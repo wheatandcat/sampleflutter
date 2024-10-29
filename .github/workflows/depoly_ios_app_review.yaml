@@ -99,4 +99,4 @@ jobs:
       - name: Build and distribute with Fastlane
         run: |
           cd ios
-          bundle exec fastlane adhoc
+          ENV=development bundle exec fastlane adhoc

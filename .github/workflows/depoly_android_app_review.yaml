@@ -88,7 +88,7 @@ jobs:
         run: |
           BUILD_NUMBER=$(date +%s)
           echo "Current build number is $BUILD_NUMBER"
-          flutter build aab --release --build-number=$BUILD_NUMBER
+          flutter build aab --release --build-number=$BUILD_NUMBER --dart-define=ENV=development
 
       - name: mv apk
         run: |

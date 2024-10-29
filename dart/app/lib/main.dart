@@ -18,9 +18,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'firebase_options.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'authWrapper.dart';
 
 void main() async {
+  const env = String.fromEnvironment('ENV', defaultValue: 'local');
+  print('env:.env.$env');
+  await dotenv.load(fileName: '.env.$env');
+
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   SystemChrome.setPreferredOrientations([
@@ -31,9 +36,13 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  final appEnv = dotenv.env['APP_ENV'];
+
   await FirebaseAppCheck.instance.activate(
-    androidProvider:
-        kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+    // Androidの場合はApp Distributionを使用する Play Integrityの認証が成功しないのでdebugの方で実装
+    androidProvider: appEnv == 'production'
+        ? AndroidProvider.playIntegrity
+        : AndroidProvider.debug,
     appleProvider:
         kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
   );

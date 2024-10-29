@@ -2,11 +2,12 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:stockkeeper/utils/auth.dart';
 import 'package:stockkeeper/utils/guest.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<String?> getAppCheckToken() async {
-  if (!kReleaseMode) {
-    // シミュレータはデバッグトークンを使用
+  final appEnv = dotenv.env['APP_ENV'];
+  if (appEnv != 'production') {
+    // 本番アプリ以外はデバッグトークンを使用
     try {
       final appCheckToken = await FirebaseAppCheck.instance.getToken(true);
       return appCheckToken;
