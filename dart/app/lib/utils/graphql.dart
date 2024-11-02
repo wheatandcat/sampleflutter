@@ -43,7 +43,7 @@ List<T> extractGraphQLDataList<T>({
   required T Function(Map<String, dynamic>) fromJson,
 }) {
   if (data == null || data[fieldName] == null) {
-    // データまたはフィー���ドがnullの場合は空のリストを返す
+    // データまたはフィールドがnullの場合は空のリストを返す
     return <T>[];
   }
 
