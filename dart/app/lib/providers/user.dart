@@ -38,7 +38,7 @@ final userDataProvider = FutureProvider.autoDispose<UserData?>((ref) async {
 
   int retryCount = 0;
   QueryResult? result;
-  while (retryCount < 2) {
+  while (retryCount < 4) {
     result = await client.query<Query$Me>(
       QueryOptions(
         document: documentNodeQueryMe,
