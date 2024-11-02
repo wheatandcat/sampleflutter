@@ -2,25 +2,32 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:stockkeeper/utils/auth.dart';
 import 'package:stockkeeper/utils/guest.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+const FlutterSecureStorage secureStorage = FlutterSecureStorage();
 
 Future<String?> getAppCheckToken() async {
-  final appEnv = dotenv.env['APP_ENV'];
-  if (appEnv != 'production') {
-    // 本番アプリ以外はデバッグトークンを使用
-    try {
-      final appCheckToken = await FirebaseAppCheck.instance.getToken(true);
-      return appCheckToken;
-    } catch (e) {
-      print('Error fetching App Check token: $e');
-    }
-
-    return "";
-  }
+  const tokenKey = 'appCheckToken';
+  const tokenTimeKey = 'tokenFetchTime';
 
   try {
+    final cachedAppCheckToken = await secureStorage.read(key: tokenKey);
+    final tokenFetchTimeString = await secureStorage.read(key: tokenTimeKey);
+
+    if (cachedAppCheckToken != null && tokenFetchTimeString != null) {
+      final tokenFetchTime = DateTime.parse(tokenFetchTimeString);
+      final currentTime = DateTime.now();
+      final difference = currentTime.difference(tokenFetchTime);
+      if (difference.inHours < 1) {
+        return cachedAppCheckToken;
+      }
+    }
+
     final appCheckToken = await FirebaseAppCheck.instance.getToken();
     if (appCheckToken != null) {
+      await secureStorage.write(key: tokenKey, value: appCheckToken);
+      await secureStorage.write(
+          key: tokenTimeKey, value: DateTime.now().toIso8601String());
       return appCheckToken;
     }
   } catch (e) {
@@ -36,7 +43,7 @@ List<T> extractGraphQLDataList<T>({
   required T Function(Map<String, dynamic>) fromJson,
 }) {
   if (data == null || data[fieldName] == null) {
-    // データまたはフィールドがnullの場合は空のリストを返す
+    // データまたはフィー���ドがnullの場合は空のリストを返す
     return <T>[];
   }
 
