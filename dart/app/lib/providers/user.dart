@@ -38,16 +38,20 @@ final userDataProvider = FutureProvider.autoDispose<UserData?>((ref) async {
 
   int retryCount = 0;
   QueryResult? result;
-  while (retryCount < 2) {
+  while (retryCount < 4) {
     result = await client.query<Query$Me>(
       QueryOptions(
         document: documentNodeQueryMe,
+        fetchPolicy: FetchPolicy.networkOnly,
+        errorPolicy: ErrorPolicy.all,
+        pollInterval: const Duration(seconds: 5), // タイムアウトまでの時間を伸ばす
       ),
     );
 
     if (!result.hasException) {
       break;
     }
+    await Future.delayed(const Duration(seconds: 1));
     retryCount++;
   }
 
@@ -62,7 +66,7 @@ final userDataProvider = FutureProvider.autoDispose<UserData?>((ref) async {
             title: const Text('エラー'),
             content: SingleChildScrollView(
               child: Text(
-                'データの取得に失敗しました。\n$errorMessage',
+                'データの取得に失敗しました（リトライ:$retryCount回）。\n$errorMessage',
                 style: const TextStyle(
                     fontSize: FontSize.sm, color: AppColors.textDark),
               ),
