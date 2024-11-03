@@ -35,3 +35,15 @@ mainブランチにマージでデプロイされる。
 ```shell
 $ base64 -i ./src/firebase.json | pbcopy
 ```
+
+### GraphQLドキュメント生成
+
+```shell
+$ magidoc generate
+```
+
+プレビュー
+
+```shell
+$ magidoc preview
+```
