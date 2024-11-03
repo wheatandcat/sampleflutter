@@ -40,3 +40,4 @@ cors.json
 TEST.md
 src/firebase.json
 src/firebase.review.json
+docs/*

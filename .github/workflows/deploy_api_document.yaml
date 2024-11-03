@@ -1,0 +1,41 @@
+name: GraphQLドキュメントをデプロイ
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "typescript/backend/**"
+  workflow_dispatch:
+
+jobs:
+  publish-api-docs:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: typescript/backend
+    permissions:
+      contents: read
+      # actions/deploy-pages に必要な権限
+      # 参考: https://github.com/actions/deploy-pages#security-considerations
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # setup
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # build
+      - run: npx @magidoc/cli@latest generate
+
+      # publish
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./typescript/backend/docs
+      - uses: actions/deploy-pages@v4
+        id: deployment
