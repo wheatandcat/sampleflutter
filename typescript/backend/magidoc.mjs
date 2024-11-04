@@ -11,7 +11,7 @@ export default {
     // Web サイトのルートパスを指定する
     // Public な GitHub Pages の URL は https://<オーナー名>.github.io/<リポジトリ名>/ のようになるので、
     // ここには "/<リポジトリ名>" を指定する必要がある
-    siteRoot: '/example-repository',
+    siteRoot: '/stock-keeper',
     options: {
       queryGenerationFactories: {
         Time: '2023-11-03T10:15:30Z', // 例としてISO 8601形式の日時
