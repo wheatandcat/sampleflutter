@@ -47,7 +47,7 @@ class Input extends HookWidget {
       defaultStock = defaultValue!.stock;
     }
 
-    final inputStock = useTextEditingController(text: defaultStock.toString());
+    final inputStock = useState<int>(defaultStock);
     final inputName = useState('');
     final imageByte = useState<Uint8List?>(null);
     final imageURL = useState<String?>(defaultValue?.imageURL);
@@ -148,12 +148,10 @@ class Input extends HookWidget {
         }
       }
 
-      final stock = int.tryParse(inputStock.text) ?? 0;
-
       onPressed(InputItem(
         name: inputName.value,
         imageURL: imageURL.value,
-        stock: stock.toInt(),
+        stock: inputStock.value,
         order: 0,
       ));
     }
@@ -174,8 +172,8 @@ class Input extends HookWidget {
                         ),
                         elevation: 0,
                         child: SizedBox(
-                            width: 250,
-                            height: 250,
+                            width: 300,
+                            height: 300,
                             child: Container(
                               width: 40,
                               height: 40,
@@ -187,88 +185,103 @@ class Input extends HookWidget {
                                 size: 40,
                               ),
                             )))),
-        SizedBox(
-            width: 300,
-            height: 60,
-            child: Center(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                const SizedBox(
-                  width: 150,
-                  child: Text("ストック数",
-                      style: TextStyle(
-                          fontSize: FontSize.md, fontWeight: FontWeight.bold)),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              child: Text("ストック数",
+                  style: TextStyle(
+                      fontSize: FontSize.sm, fontWeight: FontWeight.bold)),
+            ),
+            Container(
+                padding: const EdgeInsets.only(left: 4, right: 4),
+                width: 290,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(24),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 6,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
                 ),
-                Flexible(
-                    child: SizedBox(
-                  width: 68,
-                  height: 40,
-                  child: Padding(
-                      padding: const EdgeInsets.only(top: Spacing.lg),
-                      child: TextField(
-                          controller: inputStock,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly, // 数値のみを許可
-                          ],
-                          maxLength: 3,
-                          textAlign: TextAlign.center,
-                          cursorColor: AppColors.text,
-                          keyboardType: TextInputType.number,
-                          style: const TextStyle(
-                              color: AppColors.text,
-                              fontSize: FontSize.lg,
-                              fontWeight: FontWeight.bold),
-                          decoration: const InputDecoration(
-                            labelText: '',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: AppColors.bg),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: AppColors.bg),
-                            ),
-                            counterText: "",
-                          ))),
-                ))
-              ],
-            ))),
-        SizedBox(
-            width: 300,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                const SizedBox(
-                    width: 300,
-                    child: Text("MEMO",
-                        style: TextStyle(
-                            fontSize: FontSize.md,
-                            fontWeight: FontWeight.bold))),
-                SizedBox(
-                    width: 300,
-                    height: 100,
-                    child: Padding(
-                        padding: const EdgeInsets.only(top: 0),
-                        child: TextField(
-                            onChanged: (value) => inputName.value = value,
-                            maxLines: null, // 複数行入力可能
-                            minLines: 3,
-                            cursorColor: AppColors.text,
-                            style: const TextStyle(
-                                color: AppColors.text,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        if (inputStock.value > 0) {
+                          inputStock.value--;
+                        }
+                      },
+                      icon: const Icon(Icons.remove),
+                      color: AppColors.secondary,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Text(
+                        '${inputStock.value}',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.secondary,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        inputStock.value++;
+                      },
+                      icon: const Icon(Icons.add),
+                      color: AppColors.secondary,
+                    ),
+                  ],
+                )),
+          ],
+        ),
+        Padding(
+            padding: const EdgeInsets.only(top: Spacing.xl),
+            child: SizedBox(
+                width: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    const SizedBox(
+                        width: 300,
+                        child: Text("MEMO",
+                            style: TextStyle(
                                 fontSize: FontSize.md,
-                                fontWeight: FontWeight.bold),
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: "備考",
-                              hintStyle: TextStyle(
-                                  color: AppColors.text.withOpacity(0.6),
-                                  fontSize: FontSize.md,
-                                  fontWeight: FontWeight.bold),
-                              fillColor: Colors.black26,
-                              border: InputBorder.none,
-                            )))),
-              ],
-            )),
+                                fontWeight: FontWeight.bold))),
+                    SizedBox(
+                        width: 300,
+                        height: 100,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 0),
+                            child: TextField(
+                                onChanged: (value) => inputName.value = value,
+                                maxLines: null, // 複数行入力可能
+                                minLines: 5,
+                                cursorColor: AppColors.text,
+                                style: const TextStyle(
+                                    color: AppColors.text,
+                                    fontSize: FontSize.md,
+                                    fontWeight: FontWeight.bold),
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  hintText: "備考",
+                                  hintStyle: TextStyle(
+                                      color: AppColors.text.withOpacity(0.6),
+                                      fontSize: FontSize.md,
+                                      fontWeight: FontWeight.bold),
+                                  fillColor: Colors.black26,
+                                  border: InputBorder.none,
+                                )))),
+                  ],
+                ))),
         Center(
             child: Padding(
           padding: const EdgeInsets.only(top: Spacing.xl),
