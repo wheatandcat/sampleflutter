@@ -9,6 +9,17 @@ import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stockkeeper/utils/image.dart';
 import 'package:stockkeeper/utils/style.dart';
+import 'package:stockkeeper/components/image/selectImage.dart';
+
+const images = [
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fliving.png?alt=media&token=cdb8f191-7d6c-49f5-b250-e9b10e5dc20d',
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fdining.png?alt=media&token=ef4df1f3-c186-4a86-8090-a2be866dc2b1',
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fkitchen.png?alt=media&token=5a6ec0f2-7ae5-46b9-a068-24f41be5c5f2',
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fbathroom.png?alt=media&token=8c94662c-ce0a-48d8-944b-b25c4eb57478',
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fbedroom.png?alt=media&token=57aede80-3102-41f7-89df-5f0b9e1ce4ee',
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fgarage.png?alt=media&token=e6cd82fb-dac4-417e-95e1-97e67026c479',
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fstorage.png?alt=media&token=5f9ded09-410a-48b3-8d89-fe689261fe6b'
+];
 
 class InputCategory {
   late final String name;
@@ -60,6 +71,22 @@ class Input extends HookWidget {
       imageByte.value = await cropImageSetting(path, context);
     }
 
+    void showSampleImage() {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (BuildContext context) {
+          return SelectImages(
+            images: images,
+            onTap: (String url) {
+              context.pop();
+              imageURL.value = url;
+            },
+          );
+        },
+      );
+    }
+
     void showPickImage() {
       showModalBottomSheet(
         context: context,
@@ -73,10 +100,18 @@ class Input extends HookWidget {
               child: Wrap(
                 children: <Widget>[
                   const ListTile(
-                    title: Text("画像をアップロード",
+                    title: Text("画像を選択",
                         style: TextStyle(
                             fontSize: FontSize.lg,
                             fontWeight: FontWeight.bold)),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.image),
+                    title: const Text('サンプル画像を使用する'),
+                    onTap: () async {
+                      context.pop();
+                      showSampleImage();
+                    },
                   ),
                   ListTile(
                     leading: const Icon(Icons.camera_alt),

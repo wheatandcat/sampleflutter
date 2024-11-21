@@ -26,7 +26,7 @@ class CategoryList extends StatelessWidget {
     final double deviceHeight = MediaQuery.of(context).size.height;
 
     return Container(
-        width: 100,
+        width: 90,
         height: deviceHeight,
         color: AppColors.primary.withOpacity(0.5),
         padding: const EdgeInsets.only(top: Spacing.md),
