@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stockkeeper/utils/style.dart';
+import 'package:stockkeeper/features/category/components/shapeTransition.dart';
+
+const double iconSize = 70;
 
 class CategoryIcon extends StatelessWidget {
   final String? imageURL;
@@ -33,24 +36,12 @@ class CategoryIcon extends StatelessWidget {
         ),
         Padding(
             padding: const EdgeInsets.only(left: Spacing.md),
-            child: ClipOval(
-                child: Container(
-                    color: AppColors.bg,
-                    width: 80,
-                    height: 80,
-                    child: imageURL != null
-                        ? Image.network(
-                            imageURL!,
-                            width: 80,
-                            height: 80,
-                            fit: BoxFit.cover, // 画像を枠に合わせて調整
-                          )
-                        : Image.asset(
-                            'images/noimage.png',
-                            width: 80,
-                            height: 80,
-                            fit: BoxFit.cover, // 画像を枠に合わせて調整
-                          ))))
+            child: InkWell(
+                onLongPress: () => onLongPressed(),
+                child: ShapeTransitionIcon(
+                  imageURL: imageURL,
+                  size: iconSize,
+                )))
       ]);
     }
 
@@ -78,19 +69,19 @@ class CategoryIcon extends StatelessWidget {
               child: ClipOval(
                   child: Container(
                       color: AppColors.bg,
-                      width: 80,
-                      height: 80,
+                      width: iconSize,
+                      height: iconSize,
                       child: imageURL != null
                           ? Image.network(
                               imageURL!,
-                              width: 80,
-                              height: 80,
+                              width: iconSize,
+                              height: iconSize,
                               fit: BoxFit.cover, // 画像を枠に合わせて調整
                             )
                           : Image.asset(
                               'images/noimage.png',
-                              width: 80,
-                              height: 80,
+                              width: iconSize,
+                              height: iconSize,
                               fit: BoxFit.cover, // 画像を枠に合わせて調整
                             )))))
     ]);

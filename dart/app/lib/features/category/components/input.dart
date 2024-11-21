@@ -9,6 +9,7 @@ import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stockkeeper/utils/image.dart';
 import 'package:stockkeeper/utils/style.dart';
+import 'package:stockkeeper/features/category/components/sampleImages.dart';
 
 class InputCategory {
   late final String name;
@@ -60,6 +61,21 @@ class Input extends HookWidget {
       imageByte.value = await cropImageSetting(path, context);
     }
 
+    void showSampleImage() {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (BuildContext context) {
+          return SampleImages(
+            onTap: (String url) {
+              context.pop();
+              imageURL.value = url;
+            },
+          );
+        },
+      );
+    }
+
     void showPickImage() {
       showModalBottomSheet(
         context: context,
@@ -77,6 +93,14 @@ class Input extends HookWidget {
                         style: TextStyle(
                             fontSize: FontSize.lg,
                             fontWeight: FontWeight.bold)),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.image),
+                    title: const Text('サンプル画像を使用する'),
+                    onTap: () async {
+                      context.pop();
+                      showSampleImage();
+                    },
                   ),
                   ListTile(
                     leading: const Icon(Icons.camera_alt),
