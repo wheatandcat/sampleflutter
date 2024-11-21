@@ -14,7 +14,7 @@ class ShapeTransitionIcon extends HookWidget {
   Widget build(BuildContext context) {
     // AnimationController をフックで作成
     final controller = useAnimationController(
-      duration: const Duration(milliseconds: 750), // アニメーションの長さ
+      duration: const Duration(milliseconds: 500), // アニメーションの長さ
     );
 
     // 0.0 (完全な円形) から 16.0 (角丸) への補間を管理
