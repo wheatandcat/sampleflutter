@@ -28,7 +28,7 @@ export class ItemResolver {
         categoryId: categoryId,
       },
       orderBy: {
-        order: 'asc',
+        order: 'desc',
       },
     })
     return r.map((c) => format(c))
