@@ -37,6 +37,8 @@ class CategoryIcon extends StatelessWidget {
         Padding(
             padding: const EdgeInsets.only(left: Spacing.md),
             child: InkWell(
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
                 onLongPress: () => onLongPressed(),
                 child: ShapeTransitionIcon(
                   imageURL: imageURL,
@@ -62,6 +64,8 @@ class CategoryIcon extends StatelessWidget {
       Padding(
           padding: const EdgeInsets.only(left: Spacing.md),
           child: InkWell(
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
               onTap: () {
                 onPressed();
               },

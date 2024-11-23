@@ -49,7 +49,7 @@ class Input extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final client = ref.read(graphqlClientProvider);
-    int defaultStock = 0;
+    int defaultStock = 1;
 
     if (defaultValue != null) {
       defaultStock = defaultValue!.stock;
