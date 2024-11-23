@@ -66,7 +66,7 @@ class CategoryItems extends StatelessWidget {
                   mainAxisSpacing: 4.0,
                   crossAxisSpacing: 4.0,
                   children: List.generate(items.length + 1, (index) {
-                    if (index == items.length) {
+                    if (index == 0) {
                       return Container(
                           padding: const EdgeInsets.only(
                             right: 24,
@@ -82,7 +82,7 @@ class CategoryItems extends StatelessWidget {
                           ));
                     }
 
-                    final item = items[index];
+                    final item = items[index - 1];
 
                     return Container(
                         padding: const EdgeInsets.only(
