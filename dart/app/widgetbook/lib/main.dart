@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:mocktail/mocktail.dart';
 import 'firebase_options.dart';
 // This file does not exist yet,
 // it will be generated in the next step
 import 'main.directories.g.dart';
 
+class FakeQueryOptions extends Fake implements QueryOptions {}
+
 void main() async {
+  registerFallbackValue(FakeQueryOptions());
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(WidgetbookApp());
+  runApp(const WidgetbookApp());
 }
 
 @widgetbook.App()

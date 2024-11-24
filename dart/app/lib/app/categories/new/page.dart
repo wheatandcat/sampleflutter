@@ -4,7 +4,7 @@ import 'package:stockkeeper/components/appBar/common.dart';
 import 'package:stockkeeper/graphql/createCategory.gql.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';
 import 'package:stockkeeper/components/background/background.dart';
-import 'package:stockkeeper/features/category/components/input.dart';
+import 'package:stockkeeper/components/category/input.dart';
 import 'package:stockkeeper/utils/style.dart';
 
 class CategoryNew extends HookWidget {

@@ -8,8 +8,8 @@ import 'package:stockkeeper/components/appBar/common.dart';
 import 'package:stockkeeper/graphql/createItem.gql.dart';
 import 'package:stockkeeper/graphql/itemFromQR.gql.dart';
 import 'package:stockkeeper/providers/graphql.dart';
-import 'package:stockkeeper/features/item/components/input.dart';
-import 'package:stockkeeper/features/item/new/components/barcodeScannerScreen.dart';
+import 'package:stockkeeper/components/item/input.dart';
+import 'package:stockkeeper/components/item/barcodeScannerScreen.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
