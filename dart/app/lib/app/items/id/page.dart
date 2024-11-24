@@ -3,7 +3,7 @@ import 'package:stockkeeper/components/background/background.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stockkeeper/graphql/item.gql.dart';
 import 'package:stockkeeper/components/appBar/common.dart';
-import 'package:stockkeeper/features/item/components/input.dart';
+import 'package:stockkeeper/components/item/input.dart';
 import 'package:stockkeeper/utils/graphql.dart';
 import 'package:stockkeeper/graphql/updateItem.gql.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';

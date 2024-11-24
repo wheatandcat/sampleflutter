@@ -4,7 +4,7 @@ import 'package:stockkeeper/components/appBar/common.dart';
 import 'package:stockkeeper/graphql/updateCategory.gql.dart';
 import 'package:stockkeeper/graphql/schema.graphql.dart';
 import 'package:stockkeeper/components/background/background.dart';
-import 'package:stockkeeper/features/category/components/input.dart';
+import 'package:stockkeeper/components/category/input.dart';
 import 'package:stockkeeper/graphql/category.gql.dart';
 import 'package:stockkeeper/utils/graphql.dart';
 import 'package:stockkeeper/components/loading/loading.dart';

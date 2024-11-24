@@ -12,7 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:stockkeeper/utils/image.dart';
 import 'package:stockkeeper/utils/style.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:stockkeeper/features/item/new/components/barcodeScannerScreen.dart';
+import 'package:stockkeeper/components/item/barcodeScannerScreen.dart';
 import 'package:stockkeeper/graphql/itemFromQR.gql.dart';
 import 'package:stockkeeper/providers/graphql.dart';
 import 'package:stockkeeper/components/image/selectImage.dart';
