@@ -55,7 +55,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  graphql_codegen: ^0.14.0
+  graphql_codegen: ^1.1.0
   graphql: ^5.2.0-beta.7
   graphql_flutter: ^5.2.0-beta.6
   flutter_hooks: ^0.20.5
@@ -64,26 +64,26 @@ dependencies:
   intl: ^0.19.0
   flutter_localizations:
     sdk: flutter
-  firebase_auth: 5.0.0
+  firebase_auth: ^5.3.3
   google_sign_in: ^6.2.1
-  firebase_core: 3.3.0
+  firebase_core: ^3.8.0
   flutter_secure_storage: ^9.0.0
   flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5
   hooks_riverpod: ^2.5.1
-  firebase_storage: 12.0.0
+  firebase_storage: ^12.3.6
   image_picker: ^1.1.2
   uuid: ^4.4.0
-  image_cropper: ^7.0.4
-  flutter_launcher_icons: ^0.13.1
+  image_cropper: ^8.0.2
+  flutter_launcher_icons: ^0.14.1
   flutter_native_splash: ^2.4.0
   image_picker_for_web: ^3.0.4
-  image_cropper_for_web: ^5.0.4
+  image_cropper_for_web: ^6.0.2
   flutter_image_compress: ^2.3.0
   qr_flutter: ^4.1.0
-  mobile_scanner: ^5.1.1
+  mobile_scanner: ^6.0.2
   go_router: ^14.2.3
-  firebase_app_check: 0.3.0
+  firebase_app_check: ^0.3.1+6
   flutter_dotenv: ^5.2.1
 
 dev_dependencies:
@@ -95,10 +95,10 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
   build_runner: ^2.4.9
   riverpod_generator: ^2.4.0
-  custom_lint: ^0.6.4
+  custom_lint: ^0.7.0
   riverpod_lint: ^2.3.10
 
 # For information on the generic Dart part of this file, see the
