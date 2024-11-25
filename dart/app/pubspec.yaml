@@ -85,6 +85,7 @@ dependencies:
   go_router: ^14.2.3
   firebase_app_check: ^0.3.1+6
   flutter_dotenv: ^5.2.1
+  google_mlkit_text_recognition: ^0.14.0
 
 dev_dependencies:
   flutter_test:

@@ -16,6 +16,8 @@ import 'package:stockkeeper/components/item/barcodeScannerScreen.dart';
 import 'package:stockkeeper/graphql/itemFromQR.gql.dart';
 import 'package:stockkeeper/providers/graphql.dart';
 import 'package:stockkeeper/components/image/selectImage.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'dart:io';
 
 class InputItem {
   late final String name;
@@ -154,6 +156,17 @@ class Input extends HookConsumerWidget {
       );
     }
 
+    Future<void> imageTextRecognizer(File image) async {
+      final inputImage = InputImage.fromFile(image);
+      final textRecognizer =
+          TextRecognizer(script: TextRecognitionScript.japanese);
+      final RecognizedText recognizedText =
+          await textRecognizer.processImage(inputImage);
+      final texts = recognizedText.blocks.map((block) => block.text).toList();
+
+      print("texts: $texts");
+    }
+
     void showPickImage() {
       showModalBottomSheet(
         context: context,
@@ -178,6 +191,18 @@ class Input extends HookConsumerWidget {
                     onTap: () {
                       context.pop();
                       showScanBarcode();
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.qr_code_scanner),
+                    title: const Text('商品名を検索'),
+                    onTap: () async {
+                      context.pop();
+                      final pickedFile =
+                          await picker.pickImage(source: ImageSource.camera);
+                      if (pickedFile != null) {
+                        imageTextRecognizer(File(pickedFile.path));
+                      }
                     },
                   ),
                   ListTile(
