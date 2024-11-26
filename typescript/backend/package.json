@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@firebase/app-check": "^0.8.7",
+    "@google-cloud/language": "^6.5.0",
     "@mercuriusjs/federation": "^2.0.0",
     "@mercuriusjs/gateway": "^2.2.0",
     "@nestjs/common": "^10.0.0",
