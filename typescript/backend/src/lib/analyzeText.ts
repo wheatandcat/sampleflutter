@@ -11,13 +11,22 @@ export const analyzeText = async (text: string) => {
   const [result] = await client.analyzeEntities({ document })
   const { entities } = result
 
-  console.log('抽出されたエンティティ:')
+  const entityList = entities.filter(
+    (entity) => entity.type === 'CONSUMER_GOOD'
+  )
 
-  for (const entity of entities) {
-    if (entity.type === 'CONSUMER_GOOD') {
-      console.log(
-        `名前: ${entity.name}, 種類: ${entity.type}, スコア: ${entity.salience}`
-      )
-    }
+  const topEntities = entityList
+    .sort((a, b) => b.salience - a.salience)
+    .slice(0, 3)
+    .map((entity) => entity.name)
+
+  // 抽出して単語を全て取得
+  const extractedWords = entities
+    .map((entity) => entity.name)
+    .filter((name) => !topEntities.includes(name))
+
+  return {
+    productNames: topEntities,
+    extractedWords,
   }
 }
