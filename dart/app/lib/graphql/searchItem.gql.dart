@@ -4,34 +4,34 @@ import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
-class Variables$Query$ItemFromQR {
-  factory Variables$Query$ItemFromQR({required String janCode}) =>
-      Variables$Query$ItemFromQR._({
-        r'janCode': janCode,
+class Variables$Query$SearchItem {
+  factory Variables$Query$SearchItem({required String name}) =>
+      Variables$Query$SearchItem._({
+        r'name': name,
       });
 
-  Variables$Query$ItemFromQR._(this._$data);
+  Variables$Query$SearchItem._(this._$data);
 
-  factory Variables$Query$ItemFromQR.fromJson(Map<String, dynamic> data) {
+  factory Variables$Query$SearchItem.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    final l$janCode = data['janCode'];
-    result$data['janCode'] = (l$janCode as String);
-    return Variables$Query$ItemFromQR._(result$data);
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    return Variables$Query$SearchItem._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  String get janCode => (_$data['janCode'] as String);
+  String get name => (_$data['name'] as String);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$janCode = janCode;
-    result$data['janCode'] = l$janCode;
+    final l$name = name;
+    result$data['name'] = l$name;
     return result$data;
   }
 
-  CopyWith$Variables$Query$ItemFromQR<Variables$Query$ItemFromQR>
-      get copyWith => CopyWith$Variables$Query$ItemFromQR(
+  CopyWith$Variables$Query$SearchItem<Variables$Query$SearchItem>
+      get copyWith => CopyWith$Variables$Query$SearchItem(
             this,
             (i) => i,
           );
@@ -41,13 +41,13 @@ class Variables$Query$ItemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$ItemFromQR) ||
+    if (!(other is Variables$Query$SearchItem) ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$janCode = janCode;
-    final lOther$janCode = other.janCode;
-    if (l$janCode != lOther$janCode) {
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
       return false;
     }
     return true;
@@ -55,79 +55,77 @@ class Variables$Query$ItemFromQR {
 
   @override
   int get hashCode {
-    final l$janCode = janCode;
-    return Object.hashAll([l$janCode]);
+    final l$name = name;
+    return Object.hashAll([l$name]);
   }
 }
 
-abstract class CopyWith$Variables$Query$ItemFromQR<TRes> {
-  factory CopyWith$Variables$Query$ItemFromQR(
-    Variables$Query$ItemFromQR instance,
-    TRes Function(Variables$Query$ItemFromQR) then,
-  ) = _CopyWithImpl$Variables$Query$ItemFromQR;
+abstract class CopyWith$Variables$Query$SearchItem<TRes> {
+  factory CopyWith$Variables$Query$SearchItem(
+    Variables$Query$SearchItem instance,
+    TRes Function(Variables$Query$SearchItem) then,
+  ) = _CopyWithImpl$Variables$Query$SearchItem;
 
-  factory CopyWith$Variables$Query$ItemFromQR.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$ItemFromQR;
+  factory CopyWith$Variables$Query$SearchItem.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$SearchItem;
 
-  TRes call({String? janCode});
+  TRes call({String? name});
 }
 
-class _CopyWithImpl$Variables$Query$ItemFromQR<TRes>
-    implements CopyWith$Variables$Query$ItemFromQR<TRes> {
-  _CopyWithImpl$Variables$Query$ItemFromQR(
+class _CopyWithImpl$Variables$Query$SearchItem<TRes>
+    implements CopyWith$Variables$Query$SearchItem<TRes> {
+  _CopyWithImpl$Variables$Query$SearchItem(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$ItemFromQR _instance;
+  final Variables$Query$SearchItem _instance;
 
-  final TRes Function(Variables$Query$ItemFromQR) _then;
+  final TRes Function(Variables$Query$SearchItem) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? janCode = _undefined}) =>
-      _then(Variables$Query$ItemFromQR._({
+  TRes call({Object? name = _undefined}) => _then(Variables$Query$SearchItem._({
         ..._instance._$data,
-        if (janCode != _undefined && janCode != null)
-          'janCode': (janCode as String),
+        if (name != _undefined && name != null) 'name': (name as String),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$ItemFromQR<TRes>
-    implements CopyWith$Variables$Query$ItemFromQR<TRes> {
-  _CopyWithStubImpl$Variables$Query$ItemFromQR(this._res);
+class _CopyWithStubImpl$Variables$Query$SearchItem<TRes>
+    implements CopyWith$Variables$Query$SearchItem<TRes> {
+  _CopyWithStubImpl$Variables$Query$SearchItem(this._res);
 
   TRes _res;
 
-  call({String? janCode}) => _res;
+  call({String? name}) => _res;
 }
 
-class Query$ItemFromQR {
-  Query$ItemFromQR({
-    this.itemFromQR,
+class Query$SearchItem {
+  Query$SearchItem({
+    this.searchItem,
     this.$__typename = 'Query',
   });
 
-  factory Query$ItemFromQR.fromJson(Map<String, dynamic> json) {
-    final l$itemFromQR = json['itemFromQR'];
+  factory Query$SearchItem.fromJson(Map<String, dynamic> json) {
+    final l$searchItem = json['searchItem'];
     final l$$__typename = json['__typename'];
-    return Query$ItemFromQR(
-      itemFromQR: l$itemFromQR == null
+    return Query$SearchItem(
+      searchItem: l$searchItem == null
           ? null
-          : Query$ItemFromQR$itemFromQR.fromJson(
-              (l$itemFromQR as Map<String, dynamic>)),
+          : Query$SearchItem$searchItem.fromJson(
+              (l$searchItem as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$ItemFromQR$itemFromQR? itemFromQR;
+  final Query$SearchItem$searchItem? searchItem;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$itemFromQR = itemFromQR;
-    _resultData['itemFromQR'] = l$itemFromQR?.toJson();
+    final l$searchItem = searchItem;
+    _resultData['searchItem'] = l$searchItem?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -135,10 +133,10 @@ class Query$ItemFromQR {
 
   @override
   int get hashCode {
-    final l$itemFromQR = itemFromQR;
+    final l$searchItem = searchItem;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$itemFromQR,
+      l$searchItem,
       l$$__typename,
     ]);
   }
@@ -148,12 +146,12 @@ class Query$ItemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ItemFromQR) || runtimeType != other.runtimeType) {
+    if (!(other is Query$SearchItem) || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$itemFromQR = itemFromQR;
-    final lOther$itemFromQR = other.itemFromQR;
-    if (l$itemFromQR != lOther$itemFromQR) {
+    final l$searchItem = searchItem;
+    final lOther$searchItem = other.searchItem;
+    if (l$searchItem != lOther$searchItem) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -165,88 +163,88 @@ class Query$ItemFromQR {
   }
 }
 
-extension UtilityExtension$Query$ItemFromQR on Query$ItemFromQR {
-  CopyWith$Query$ItemFromQR<Query$ItemFromQR> get copyWith =>
-      CopyWith$Query$ItemFromQR(
+extension UtilityExtension$Query$SearchItem on Query$SearchItem {
+  CopyWith$Query$SearchItem<Query$SearchItem> get copyWith =>
+      CopyWith$Query$SearchItem(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith$Query$ItemFromQR<TRes> {
-  factory CopyWith$Query$ItemFromQR(
-    Query$ItemFromQR instance,
-    TRes Function(Query$ItemFromQR) then,
-  ) = _CopyWithImpl$Query$ItemFromQR;
+abstract class CopyWith$Query$SearchItem<TRes> {
+  factory CopyWith$Query$SearchItem(
+    Query$SearchItem instance,
+    TRes Function(Query$SearchItem) then,
+  ) = _CopyWithImpl$Query$SearchItem;
 
-  factory CopyWith$Query$ItemFromQR.stub(TRes res) =
-      _CopyWithStubImpl$Query$ItemFromQR;
+  factory CopyWith$Query$SearchItem.stub(TRes res) =
+      _CopyWithStubImpl$Query$SearchItem;
 
   TRes call({
-    Query$ItemFromQR$itemFromQR? itemFromQR,
+    Query$SearchItem$searchItem? searchItem,
     String? $__typename,
   });
-  CopyWith$Query$ItemFromQR$itemFromQR<TRes> get itemFromQR;
+  CopyWith$Query$SearchItem$searchItem<TRes> get searchItem;
 }
 
-class _CopyWithImpl$Query$ItemFromQR<TRes>
-    implements CopyWith$Query$ItemFromQR<TRes> {
-  _CopyWithImpl$Query$ItemFromQR(
+class _CopyWithImpl$Query$SearchItem<TRes>
+    implements CopyWith$Query$SearchItem<TRes> {
+  _CopyWithImpl$Query$SearchItem(
     this._instance,
     this._then,
   );
 
-  final Query$ItemFromQR _instance;
+  final Query$SearchItem _instance;
 
-  final TRes Function(Query$ItemFromQR) _then;
+  final TRes Function(Query$SearchItem) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? itemFromQR = _undefined,
+    Object? searchItem = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$ItemFromQR(
-        itemFromQR: itemFromQR == _undefined
-            ? _instance.itemFromQR
-            : (itemFromQR as Query$ItemFromQR$itemFromQR?),
+      _then(Query$SearchItem(
+        searchItem: searchItem == _undefined
+            ? _instance.searchItem
+            : (searchItem as Query$SearchItem$searchItem?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith$Query$ItemFromQR$itemFromQR<TRes> get itemFromQR {
-    final local$itemFromQR = _instance.itemFromQR;
-    return local$itemFromQR == null
-        ? CopyWith$Query$ItemFromQR$itemFromQR.stub(_then(_instance))
-        : CopyWith$Query$ItemFromQR$itemFromQR(
-            local$itemFromQR, (e) => call(itemFromQR: e));
+  CopyWith$Query$SearchItem$searchItem<TRes> get searchItem {
+    final local$searchItem = _instance.searchItem;
+    return local$searchItem == null
+        ? CopyWith$Query$SearchItem$searchItem.stub(_then(_instance))
+        : CopyWith$Query$SearchItem$searchItem(
+            local$searchItem, (e) => call(searchItem: e));
   }
 }
 
-class _CopyWithStubImpl$Query$ItemFromQR<TRes>
-    implements CopyWith$Query$ItemFromQR<TRes> {
-  _CopyWithStubImpl$Query$ItemFromQR(this._res);
+class _CopyWithStubImpl$Query$SearchItem<TRes>
+    implements CopyWith$Query$SearchItem<TRes> {
+  _CopyWithStubImpl$Query$SearchItem(this._res);
 
   TRes _res;
 
   call({
-    Query$ItemFromQR$itemFromQR? itemFromQR,
+    Query$SearchItem$searchItem? searchItem,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith$Query$ItemFromQR$itemFromQR<TRes> get itemFromQR =>
-      CopyWith$Query$ItemFromQR$itemFromQR.stub(_res);
+  CopyWith$Query$SearchItem$searchItem<TRes> get searchItem =>
+      CopyWith$Query$SearchItem$searchItem.stub(_res);
 }
 
-const documentNodeQueryItemFromQR = DocumentNode(definitions: [
+const documentNodeQuerySearchItem = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'ItemFromQR'),
+    name: NameNode(value: 'SearchItem'),
     variableDefinitions: [
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'janCode')),
+        variable: VariableNode(name: NameNode(value: 'name')),
         type: NamedTypeNode(
           name: NameNode(value: 'String'),
           isNonNull: true,
@@ -258,12 +256,12 @@ const documentNodeQueryItemFromQR = DocumentNode(definitions: [
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'itemFromQR'),
+        name: NameNode(value: 'searchItem'),
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'janCode'),
-            value: VariableNode(name: NameNode(value: 'janCode')),
+            name: NameNode(value: 'name'),
+            value: VariableNode(name: NameNode(value: 'name')),
           )
         ],
         directives: [],
@@ -308,25 +306,25 @@ const documentNodeQueryItemFromQR = DocumentNode(definitions: [
     ]),
   ),
 ]);
-Query$ItemFromQR _parserFn$Query$ItemFromQR(Map<String, dynamic> data) =>
-    Query$ItemFromQR.fromJson(data);
-typedef OnQueryComplete$Query$ItemFromQR = FutureOr<void> Function(
+Query$SearchItem _parserFn$Query$SearchItem(Map<String, dynamic> data) =>
+    Query$SearchItem.fromJson(data);
+typedef OnQueryComplete$Query$SearchItem = FutureOr<void> Function(
   Map<String, dynamic>?,
-  Query$ItemFromQR?,
+  Query$SearchItem?,
 );
 
-class Options$Query$ItemFromQR extends graphql.QueryOptions<Query$ItemFromQR> {
-  Options$Query$ItemFromQR({
+class Options$Query$SearchItem extends graphql.QueryOptions<Query$SearchItem> {
+  Options$Query$SearchItem({
     String? operationName,
-    required Variables$Query$ItemFromQR variables,
+    required Variables$Query$SearchItem variables,
     graphql.FetchPolicy? fetchPolicy,
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
-    Query$ItemFromQR? typedOptimisticResult,
+    Query$SearchItem? typedOptimisticResult,
     Duration? pollInterval,
     graphql.Context? context,
-    OnQueryComplete$Query$ItemFromQR? onComplete,
+    OnQueryComplete$Query$SearchItem? onComplete,
     graphql.OnQueryError? onError,
   })  : onCompleteWithParsed = onComplete,
         super(
@@ -342,14 +340,14 @@ class Options$Query$ItemFromQR extends graphql.QueryOptions<Query$ItemFromQR> {
               ? null
               : (data) => onComplete(
                     data,
-                    data == null ? null : _parserFn$Query$ItemFromQR(data),
+                    data == null ? null : _parserFn$Query$SearchItem(data),
                   ),
           onError: onError,
-          document: documentNodeQueryItemFromQR,
-          parserFn: _parserFn$Query$ItemFromQR,
+          document: documentNodeQuerySearchItem,
+          parserFn: _parserFn$Query$SearchItem,
         );
 
-  final OnQueryComplete$Query$ItemFromQR? onCompleteWithParsed;
+  final OnQueryComplete$Query$SearchItem? onCompleteWithParsed;
 
   @override
   List<Object?> get properties => [
@@ -360,16 +358,16 @@ class Options$Query$ItemFromQR extends graphql.QueryOptions<Query$ItemFromQR> {
       ];
 }
 
-class WatchOptions$Query$ItemFromQR
-    extends graphql.WatchQueryOptions<Query$ItemFromQR> {
-  WatchOptions$Query$ItemFromQR({
+class WatchOptions$Query$SearchItem
+    extends graphql.WatchQueryOptions<Query$SearchItem> {
+  WatchOptions$Query$SearchItem({
     String? operationName,
-    required Variables$Query$ItemFromQR variables,
+    required Variables$Query$SearchItem variables,
     graphql.FetchPolicy? fetchPolicy,
     graphql.ErrorPolicy? errorPolicy,
     graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
-    Query$ItemFromQR? typedOptimisticResult,
+    Query$SearchItem? typedOptimisticResult,
     graphql.Context? context,
     Duration? pollInterval,
     bool? eagerlyFetchResults,
@@ -383,73 +381,73 @@ class WatchOptions$Query$ItemFromQR
           cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
           context: context,
-          document: documentNodeQueryItemFromQR,
+          document: documentNodeQuerySearchItem,
           pollInterval: pollInterval,
           eagerlyFetchResults: eagerlyFetchResults,
           carryForwardDataOnException: carryForwardDataOnException,
           fetchResults: fetchResults,
-          parserFn: _parserFn$Query$ItemFromQR,
+          parserFn: _parserFn$Query$SearchItem,
         );
 }
 
-class FetchMoreOptions$Query$ItemFromQR extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$ItemFromQR({
+class FetchMoreOptions$Query$SearchItem extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$SearchItem({
     required graphql.UpdateQuery updateQuery,
-    required Variables$Query$ItemFromQR variables,
+    required Variables$Query$SearchItem variables,
   }) : super(
           updateQuery: updateQuery,
           variables: variables.toJson(),
-          document: documentNodeQueryItemFromQR,
+          document: documentNodeQuerySearchItem,
         );
 }
 
-extension ClientExtension$Query$ItemFromQR on graphql.GraphQLClient {
-  Future<graphql.QueryResult<Query$ItemFromQR>> query$ItemFromQR(
-          Options$Query$ItemFromQR options) async =>
+extension ClientExtension$Query$SearchItem on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$SearchItem>> query$SearchItem(
+          Options$Query$SearchItem options) async =>
       await this.query(options);
-  graphql.ObservableQuery<Query$ItemFromQR> watchQuery$ItemFromQR(
-          WatchOptions$Query$ItemFromQR options) =>
+  graphql.ObservableQuery<Query$SearchItem> watchQuery$SearchItem(
+          WatchOptions$Query$SearchItem options) =>
       this.watchQuery(options);
-  void writeQuery$ItemFromQR({
-    required Query$ItemFromQR data,
-    required Variables$Query$ItemFromQR variables,
+  void writeQuery$SearchItem({
+    required Query$SearchItem data,
+    required Variables$Query$SearchItem variables,
     bool broadcast = true,
   }) =>
       this.writeQuery(
         graphql.Request(
-          operation: graphql.Operation(document: documentNodeQueryItemFromQR),
+          operation: graphql.Operation(document: documentNodeQuerySearchItem),
           variables: variables.toJson(),
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
-  Query$ItemFromQR? readQuery$ItemFromQR({
-    required Variables$Query$ItemFromQR variables,
+  Query$SearchItem? readQuery$SearchItem({
+    required Variables$Query$SearchItem variables,
     bool optimistic = true,
   }) {
     final result = this.readQuery(
       graphql.Request(
-        operation: graphql.Operation(document: documentNodeQueryItemFromQR),
+        operation: graphql.Operation(document: documentNodeQuerySearchItem),
         variables: variables.toJson(),
       ),
       optimistic: optimistic,
     );
-    return result == null ? null : Query$ItemFromQR.fromJson(result);
+    return result == null ? null : Query$SearchItem.fromJson(result);
   }
 }
 
-graphql_flutter.QueryHookResult<Query$ItemFromQR> useQuery$ItemFromQR(
-        Options$Query$ItemFromQR options) =>
+graphql_flutter.QueryHookResult<Query$SearchItem> useQuery$SearchItem(
+        Options$Query$SearchItem options) =>
     graphql_flutter.useQuery(options);
-graphql.ObservableQuery<Query$ItemFromQR> useWatchQuery$ItemFromQR(
-        WatchOptions$Query$ItemFromQR options) =>
+graphql.ObservableQuery<Query$SearchItem> useWatchQuery$SearchItem(
+        WatchOptions$Query$SearchItem options) =>
     graphql_flutter.useWatchQuery(options);
 
-class Query$ItemFromQR$Widget extends graphql_flutter.Query<Query$ItemFromQR> {
-  Query$ItemFromQR$Widget({
+class Query$SearchItem$Widget extends graphql_flutter.Query<Query$SearchItem> {
+  Query$SearchItem$Widget({
     widgets.Key? key,
-    required Options$Query$ItemFromQR options,
-    required graphql_flutter.QueryBuilder<Query$ItemFromQR> builder,
+    required Options$Query$SearchItem options,
+    required graphql_flutter.QueryBuilder<Query$SearchItem> builder,
   }) : super(
           key: key,
           options: options,
@@ -457,20 +455,20 @@ class Query$ItemFromQR$Widget extends graphql_flutter.Query<Query$ItemFromQR> {
         );
 }
 
-class Query$ItemFromQR$itemFromQR {
-  Query$ItemFromQR$itemFromQR({
+class Query$SearchItem$searchItem {
+  Query$SearchItem$searchItem({
     required this.name,
     this.imageURL,
     this.images,
-    this.$__typename = 'ItemFromQR',
+    this.$__typename = 'SearchItem',
   });
 
-  factory Query$ItemFromQR$itemFromQR.fromJson(Map<String, dynamic> json) {
+  factory Query$SearchItem$searchItem.fromJson(Map<String, dynamic> json) {
     final l$name = json['name'];
     final l$imageURL = json['imageURL'];
     final l$images = json['images'];
     final l$$__typename = json['__typename'];
-    return Query$ItemFromQR$itemFromQR(
+    return Query$SearchItem$searchItem(
       name: (l$name as String),
       imageURL: (l$imageURL as String?),
       images: (l$images as List<dynamic>?)?.map((e) => (e as String?)).toList(),
@@ -518,7 +516,7 @@ class Query$ItemFromQR$itemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ItemFromQR$itemFromQR) ||
+    if (!(other is Query$SearchItem$searchItem) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -557,23 +555,23 @@ class Query$ItemFromQR$itemFromQR {
   }
 }
 
-extension UtilityExtension$Query$ItemFromQR$itemFromQR
-    on Query$ItemFromQR$itemFromQR {
-  CopyWith$Query$ItemFromQR$itemFromQR<Query$ItemFromQR$itemFromQR>
-      get copyWith => CopyWith$Query$ItemFromQR$itemFromQR(
+extension UtilityExtension$Query$SearchItem$searchItem
+    on Query$SearchItem$searchItem {
+  CopyWith$Query$SearchItem$searchItem<Query$SearchItem$searchItem>
+      get copyWith => CopyWith$Query$SearchItem$searchItem(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$ItemFromQR$itemFromQR<TRes> {
-  factory CopyWith$Query$ItemFromQR$itemFromQR(
-    Query$ItemFromQR$itemFromQR instance,
-    TRes Function(Query$ItemFromQR$itemFromQR) then,
-  ) = _CopyWithImpl$Query$ItemFromQR$itemFromQR;
+abstract class CopyWith$Query$SearchItem$searchItem<TRes> {
+  factory CopyWith$Query$SearchItem$searchItem(
+    Query$SearchItem$searchItem instance,
+    TRes Function(Query$SearchItem$searchItem) then,
+  ) = _CopyWithImpl$Query$SearchItem$searchItem;
 
-  factory CopyWith$Query$ItemFromQR$itemFromQR.stub(TRes res) =
-      _CopyWithStubImpl$Query$ItemFromQR$itemFromQR;
+  factory CopyWith$Query$SearchItem$searchItem.stub(TRes res) =
+      _CopyWithStubImpl$Query$SearchItem$searchItem;
 
   TRes call({
     String? name,
@@ -583,16 +581,16 @@ abstract class CopyWith$Query$ItemFromQR$itemFromQR<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$ItemFromQR$itemFromQR<TRes>
-    implements CopyWith$Query$ItemFromQR$itemFromQR<TRes> {
-  _CopyWithImpl$Query$ItemFromQR$itemFromQR(
+class _CopyWithImpl$Query$SearchItem$searchItem<TRes>
+    implements CopyWith$Query$SearchItem$searchItem<TRes> {
+  _CopyWithImpl$Query$SearchItem$searchItem(
     this._instance,
     this._then,
   );
 
-  final Query$ItemFromQR$itemFromQR _instance;
+  final Query$SearchItem$searchItem _instance;
 
-  final TRes Function(Query$ItemFromQR$itemFromQR) _then;
+  final TRes Function(Query$SearchItem$searchItem) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -602,7 +600,7 @@ class _CopyWithImpl$Query$ItemFromQR$itemFromQR<TRes>
     Object? images = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$ItemFromQR$itemFromQR(
+      _then(Query$SearchItem$searchItem(
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
@@ -617,9 +615,9 @@ class _CopyWithImpl$Query$ItemFromQR$itemFromQR<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$ItemFromQR$itemFromQR<TRes>
-    implements CopyWith$Query$ItemFromQR$itemFromQR<TRes> {
-  _CopyWithStubImpl$Query$ItemFromQR$itemFromQR(this._res);
+class _CopyWithStubImpl$Query$SearchItem$searchItem<TRes>
+    implements CopyWith$Query$SearchItem$searchItem<TRes> {
+  _CopyWithStubImpl$Query$SearchItem$searchItem(this._res);
 
   TRes _res;
 

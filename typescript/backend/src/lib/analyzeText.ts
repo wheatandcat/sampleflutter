@@ -20,6 +20,13 @@ export const analyzeText = async (text: string) => {
     .slice(0, 3)
     .map((entity) => entity.name)
 
+  if (topEntities.length === 0) {
+    return {
+      productNames: entities.slice(0, 3).map((entity) => entity.name),
+      extractedWords: [],
+    }
+  }
+
   // 抽出して単語を全て取得
   const extractedWords = entities
     .map((entity) => entity.name)

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
@@ -40,7 +41,7 @@ class Variables$Query$Category {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$Category ||
+    if (!(other is Variables$Query$Category) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -84,7 +85,6 @@ class _CopyWithImpl$Variables$Query$Category<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? id = _undefined}) => _then(Variables$Query$Category._({
         ..._instance._$data,
         if (id != _undefined && id != null) 'id': (id as int),
@@ -95,9 +95,8 @@ class _CopyWithStubImpl$Variables$Query$Category<TRes>
     implements CopyWith$Variables$Query$Category<TRes> {
   _CopyWithStubImpl$Variables$Query$Category(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({int? id}) => _res;
 }
 
@@ -133,14 +132,14 @@ class Query$Category {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$category = category;
-    resultData['category'] = l$category?.toJson();
+    _resultData['category'] = l$category?.toJson();
     final l$items = items;
-    resultData['items'] = l$items?.map((e) => e?.toJson()).toList();
+    _resultData['items'] = l$items?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -160,7 +159,7 @@ class Query$Category {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Category || runtimeType != other.runtimeType) {
+    if (!(other is Query$Category) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$category = category;
@@ -219,7 +218,7 @@ abstract class CopyWith$Query$Category<TRes> {
   TRes items(
       Iterable<Query$Category$items?>? Function(
               Iterable<CopyWith$Query$Category$items<Query$Category$items>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$Category<TRes>
@@ -235,7 +234,6 @@ class _CopyWithImpl$Query$Category<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? category = _undefined,
     Object? items = _undefined,
@@ -253,7 +251,6 @@ class _CopyWithImpl$Query$Category<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Category$category<TRes> get category {
     final local$category = _instance.category;
     return local$category == null
@@ -262,14 +259,13 @@ class _CopyWithImpl$Query$Category<TRes>
             local$category, (e) => call(category: e));
   }
 
-  @override
   TRes items(
           Iterable<Query$Category$items?>? Function(
                   Iterable<
                       CopyWith$Query$Category$items<Query$Category$items>?>?)
-              fn) =>
+              _fn) =>
       call(
-          items: fn(_instance.items?.map((e) => e == null
+          items: _fn(_instance.items?.map((e) => e == null
               ? null
               : CopyWith$Query$Category$items(
                   e,
@@ -281,9 +277,8 @@ class _CopyWithStubImpl$Query$Category<TRes>
     implements CopyWith$Query$Category<TRes> {
   _CopyWithStubImpl$Query$Category(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$Category$category? category,
     List<Query$Category$items?>? items,
@@ -291,12 +286,10 @@ class _CopyWithStubImpl$Query$Category<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Category$category<TRes> get category =>
       CopyWith$Query$Category$category.stub(_res);
 
-  @override
-  items(fn) => _res;
+  items(_fn) => _res;
 }
 
 const documentNodeQueryCategory = DocumentNode(definitions: [
@@ -445,27 +438,34 @@ typedef OnQueryComplete$Query$Category = FutureOr<void> Function(
 
 class Options$Query$Category extends graphql.QueryOptions<Query$Category> {
   Options$Query$Category({
-    super.operationName,
+    String? operationName,
     required Variables$Query$Category variables,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Query$Category? typedOptimisticResult,
-    super.pollInterval,
-    super.context,
+    Duration? pollInterval,
+    graphql.Context? context,
     OnQueryComplete$Query$Category? onComplete,
-    super.onError,
+    graphql.OnQueryError? onError,
   })  : onCompleteWithParsed = onComplete,
         super(
           variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
           onComplete: onComplete == null
               ? null
               : (data) => onComplete(
                     data,
                     data == null ? null : _parserFn$Query$Category(data),
                   ),
+          onError: onError,
           document: documentNodeQueryCategory,
           parserFn: _parserFn$Query$Category,
         );
@@ -484,31 +484,41 @@ class Options$Query$Category extends graphql.QueryOptions<Query$Category> {
 class WatchOptions$Query$Category
     extends graphql.WatchQueryOptions<Query$Category> {
   WatchOptions$Query$Category({
-    super.operationName,
+    String? operationName,
     required Variables$Query$Category variables,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Query$Category? typedOptimisticResult,
-    super.context,
-    super.pollInterval,
-    super.eagerlyFetchResults,
-    super.carryForwardDataOnException,
-    super.fetchResults,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
   }) : super(
           variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           document: documentNodeQueryCategory,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
           parserFn: _parserFn$Query$Category,
         );
 }
 
 class FetchMoreOptions$Query$Category extends graphql.FetchMoreOptions {
   FetchMoreOptions$Query$Category({
-    required super.updateQuery,
+    required graphql.UpdateQuery updateQuery,
     required Variables$Query$Category variables,
   }) : super(
+          updateQuery: updateQuery,
           variables: variables.toJson(),
           document: documentNodeQueryCategory,
         );
@@ -517,19 +527,18 @@ class FetchMoreOptions$Query$Category extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$Category on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$Category>> query$Category(
           Options$Query$Category options) async =>
-      await query(options);
+      await this.query(options);
   graphql.ObservableQuery<Query$Category> watchQuery$Category(
           WatchOptions$Query$Category options) =>
-      watchQuery(options);
+      this.watchQuery(options);
   void writeQuery$Category({
     required Query$Category data,
     required Variables$Query$Category variables,
     bool broadcast = true,
   }) =>
-      writeQuery(
+      this.writeQuery(
         graphql.Request(
-          operation:
-              const graphql.Operation(document: documentNodeQueryCategory),
+          operation: graphql.Operation(document: documentNodeQueryCategory),
           variables: variables.toJson(),
         ),
         data: data.toJson(),
@@ -539,9 +548,9 @@ extension ClientExtension$Query$Category on graphql.GraphQLClient {
     required Variables$Query$Category variables,
     bool optimistic = true,
   }) {
-    final result = readQuery(
+    final result = this.readQuery(
       graphql.Request(
-        operation: const graphql.Operation(document: documentNodeQueryCategory),
+        operation: graphql.Operation(document: documentNodeQueryCategory),
         variables: variables.toJson(),
       ),
       optimistic: optimistic,
@@ -558,11 +567,15 @@ graphql.ObservableQuery<Query$Category> useWatchQuery$Category(
     graphql_flutter.useWatchQuery(options);
 
 class Query$Category$Widget extends graphql_flutter.Query<Query$Category> {
-  const Query$Category$Widget({
-    super.key,
-    required Options$Query$Category super.options,
-    required super.builder,
-  });
+  Query$Category$Widget({
+    widgets.Key? key,
+    required Options$Query$Category options,
+    required graphql_flutter.QueryBuilder<Query$Category> builder,
+  }) : super(
+          key: key,
+          options: options,
+          builder: builder,
+        );
 }
 
 class Query$Category$category {
@@ -600,18 +613,18 @@ class Query$Category$category {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$imageURL = imageURL;
-    resultData['imageURL'] = l$imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$order = order;
-    resultData['order'] = l$order;
+    _resultData['order'] = l$order;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -635,7 +648,8 @@ class Query$Category$category {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Category$category || runtimeType != other.runtimeType) {
+    if (!(other is Query$Category$category) ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -706,7 +720,6 @@ class _CopyWithImpl$Query$Category$category<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -734,9 +747,8 @@ class _CopyWithStubImpl$Query$Category$category<TRes>
     implements CopyWith$Query$Category$category<TRes> {
   _CopyWithStubImpl$Query$Category$category(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? id,
     String? name,
@@ -792,22 +804,22 @@ class Query$Category$items {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$imageURL = imageURL;
-    resultData['imageURL'] = l$imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$order = order;
-    resultData['order'] = l$order;
+    _resultData['order'] = l$order;
     final l$stock = stock;
-    resultData['stock'] = l$stock;
+    _resultData['stock'] = l$stock;
     final l$expirationDate = expirationDate;
-    resultData['expirationDate'] = l$expirationDate;
+    _resultData['expirationDate'] = l$expirationDate;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -835,7 +847,7 @@ class Query$Category$items {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Category$items || runtimeType != other.runtimeType) {
+    if (!(other is Query$Category$items) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -918,7 +930,6 @@ class _CopyWithImpl$Query$Category$items<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -954,9 +965,8 @@ class _CopyWithStubImpl$Query$Category$items<TRes>
     implements CopyWith$Query$Category$items<TRes> {
   _CopyWithStubImpl$Query$Category$items(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? id,
     String? name,

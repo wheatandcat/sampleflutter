@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
@@ -25,12 +26,12 @@ class Query$Invite {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$invite = invite;
-    resultData['invite'] = l$invite?.toJson();
+    _resultData['invite'] = l$invite?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -48,7 +49,7 @@ class Query$Invite {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Invite || runtimeType != other.runtimeType) {
+    if (!(other is Query$Invite) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$invite = invite;
@@ -99,7 +100,6 @@ class _CopyWithImpl$Query$Invite<TRes> implements CopyWith$Query$Invite<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? invite = _undefined,
     Object? $__typename = _undefined,
@@ -113,7 +113,6 @@ class _CopyWithImpl$Query$Invite<TRes> implements CopyWith$Query$Invite<TRes> {
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Invite$invite<TRes> get invite {
     final local$invite = _instance.invite;
     return local$invite == null
@@ -126,16 +125,14 @@ class _CopyWithStubImpl$Query$Invite<TRes>
     implements CopyWith$Query$Invite<TRes> {
   _CopyWithStubImpl$Query$Invite(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$Invite$invite? invite,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Invite$invite<TRes> get invite =>
       CopyWith$Query$Invite$invite.stub(_res);
 }
@@ -195,25 +192,32 @@ typedef OnQueryComplete$Query$Invite = FutureOr<void> Function(
 
 class Options$Query$Invite extends graphql.QueryOptions<Query$Invite> {
   Options$Query$Invite({
-    super.operationName,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Query$Invite? typedOptimisticResult,
-    super.pollInterval,
-    super.context,
+    Duration? pollInterval,
+    graphql.Context? context,
     OnQueryComplete$Query$Invite? onComplete,
-    super.onError,
+    graphql.OnQueryError? onError,
   })  : onCompleteWithParsed = onComplete,
         super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
           onComplete: onComplete == null
               ? null
               : (data) => onComplete(
                     data,
                     data == null ? null : _parserFn$Query$Invite(data),
                   ),
+          onError: onError,
           document: documentNodeQueryInvite,
           parserFn: _parserFn$Query$Invite,
         );
@@ -232,27 +236,37 @@ class Options$Query$Invite extends graphql.QueryOptions<Query$Invite> {
 class WatchOptions$Query$Invite
     extends graphql.WatchQueryOptions<Query$Invite> {
   WatchOptions$Query$Invite({
-    super.operationName,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Query$Invite? typedOptimisticResult,
-    super.context,
-    super.pollInterval,
-    super.eagerlyFetchResults,
-    super.carryForwardDataOnException,
-    super.fetchResults,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
   }) : super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           document: documentNodeQueryInvite,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
           parserFn: _parserFn$Query$Invite,
         );
 }
 
 class FetchMoreOptions$Query$Invite extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$Invite({required super.updateQuery})
+  FetchMoreOptions$Query$Invite({required graphql.UpdateQuery updateQuery})
       : super(
+          updateQuery: updateQuery,
           document: documentNodeQueryInvite,
         );
 }
@@ -260,23 +274,23 @@ class FetchMoreOptions$Query$Invite extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$Invite on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$Invite>> query$Invite(
           [Options$Query$Invite? options]) async =>
-      await query(options ?? Options$Query$Invite());
+      await this.query(options ?? Options$Query$Invite());
   graphql.ObservableQuery<Query$Invite> watchQuery$Invite(
           [WatchOptions$Query$Invite? options]) =>
-      watchQuery(options ?? WatchOptions$Query$Invite());
+      this.watchQuery(options ?? WatchOptions$Query$Invite());
   void writeQuery$Invite({
     required Query$Invite data,
     bool broadcast = true,
   }) =>
-      writeQuery(
-        const graphql.Request(
+      this.writeQuery(
+        graphql.Request(
             operation: graphql.Operation(document: documentNodeQueryInvite)),
         data: data.toJson(),
         broadcast: broadcast,
       );
   Query$Invite? readQuery$Invite({bool optimistic = true}) {
-    final result = readQuery(
-      const graphql.Request(
+    final result = this.readQuery(
+      graphql.Request(
           operation: graphql.Operation(document: documentNodeQueryInvite)),
       optimistic: optimistic,
     );
@@ -293,11 +307,13 @@ graphql.ObservableQuery<Query$Invite> useWatchQuery$Invite(
 
 class Query$Invite$Widget extends graphql_flutter.Query<Query$Invite> {
   Query$Invite$Widget({
-    super.key,
+    widgets.Key? key,
     Options$Query$Invite? options,
-    required super.builder,
+    required graphql_flutter.QueryBuilder<Query$Invite> builder,
   }) : super(
+          key: key,
           options: options ?? Options$Query$Invite(),
+          builder: builder,
         );
 }
 
@@ -326,14 +342,14 @@ class Query$Invite$invite {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$code = code;
-    resultData['code'] = l$code;
+    _resultData['code'] = l$code;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -353,7 +369,7 @@ class Query$Invite$invite {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Invite$invite || runtimeType != other.runtimeType) {
+    if (!(other is Query$Invite$invite) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$userId = userId;
@@ -412,7 +428,6 @@ class _CopyWithImpl$Query$Invite$invite<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? userId = _undefined,
     Object? code = _undefined,
@@ -435,9 +450,8 @@ class _CopyWithStubImpl$Query$Invite$invite<TRes>
     implements CopyWith$Query$Invite$invite<TRes> {
   _CopyWithStubImpl$Query$Invite$invite(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? userId,
     String? code,

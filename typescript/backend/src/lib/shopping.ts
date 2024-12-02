@@ -40,6 +40,7 @@ export const searchShoppingItem = async (
     params.append('jan_code', request.janCode)
   }
   if (request.query) {
+    console.log('query:', request.query)
     params.append('query', request.query)
   }
 

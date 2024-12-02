@@ -24,12 +24,12 @@ class Mutation$Buying {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$buying = buying;
-    resultData['buying'] = l$buying;
+    _resultData['buying'] = l$buying;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -47,7 +47,7 @@ class Mutation$Buying {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$Buying || runtimeType != other.runtimeType) {
+    if (!(other is Mutation$Buying) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$buying = buying;
@@ -100,7 +100,6 @@ class _CopyWithImpl$Mutation$Buying<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? buying = _undefined,
     Object? $__typename = _undefined,
@@ -119,9 +118,8 @@ class _CopyWithStubImpl$Mutation$Buying<TRes>
     implements CopyWith$Mutation$Buying<TRes> {
   _CopyWithStubImpl$Mutation$Buying(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     bool? buying,
     String? $__typename,
@@ -162,25 +160,32 @@ typedef OnMutationCompleted$Mutation$Buying = FutureOr<void> Function(
 
 class Options$Mutation$Buying extends graphql.MutationOptions<Mutation$Buying> {
   Options$Mutation$Buying({
-    super.operationName,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$Buying? typedOptimisticResult,
-    super.context,
+    graphql.Context? context,
     OnMutationCompleted$Mutation$Buying? onCompleted,
-    super.update,
-    super.onError,
+    graphql.OnMutationUpdate<Mutation$Buying>? update,
+    graphql.OnError? onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$Buying(data),
                   ),
+          update: update,
+          onError: onError,
           document: documentNodeMutationBuying,
           parserFn: _parserFn$Mutation$Buying,
         );
@@ -199,20 +204,29 @@ class Options$Mutation$Buying extends graphql.MutationOptions<Mutation$Buying> {
 class WatchOptions$Mutation$Buying
     extends graphql.WatchQueryOptions<Mutation$Buying> {
   WatchOptions$Mutation$Buying({
-    super.operationName,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$Buying? typedOptimisticResult,
-    super.context,
-    super.pollInterval,
-    super.eagerlyFetchResults,
-    super.carryForwardDataOnException,
-    super.fetchResults,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
   }) : super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           document: documentNodeMutationBuying,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
           parserFn: _parserFn$Mutation$Buying,
         );
 }
@@ -220,10 +234,10 @@ class WatchOptions$Mutation$Buying
 extension ClientExtension$Mutation$Buying on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$Buying>> mutate$Buying(
           [Options$Mutation$Buying? options]) async =>
-      await mutate(options ?? Options$Mutation$Buying());
+      await this.mutate(options ?? Options$Mutation$Buying());
   graphql.ObservableQuery<Mutation$Buying> watchMutation$Buying(
           [WatchOptions$Mutation$Buying? options]) =>
-      watchMutation(options ?? WatchOptions$Mutation$Buying());
+      this.watchMutation(options ?? WatchOptions$Mutation$Buying());
 }
 
 class Mutation$Buying$HookResult {
@@ -257,25 +271,32 @@ graphql.ObservableQuery<Mutation$Buying> useWatchMutation$Buying(
 class WidgetOptions$Mutation$Buying
     extends graphql.MutationOptions<Mutation$Buying> {
   WidgetOptions$Mutation$Buying({
-    super.operationName,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$Buying? typedOptimisticResult,
-    super.context,
+    graphql.Context? context,
     OnMutationCompleted$Mutation$Buying? onCompleted,
-    super.update,
-    super.onError,
+    graphql.OnMutationUpdate<Mutation$Buying>? update,
+    graphql.OnError? onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$Buying(data),
                   ),
+          update: update,
+          onError: onError,
           document: documentNodeMutationBuying,
           parserFn: _parserFn$Mutation$Buying,
         );
@@ -303,10 +324,11 @@ typedef Builder$Mutation$Buying = widgets.Widget Function(
 
 class Mutation$Buying$Widget extends graphql_flutter.Mutation<Mutation$Buying> {
   Mutation$Buying$Widget({
-    super.key,
+    widgets.Key? key,
     WidgetOptions$Mutation$Buying? options,
     required Builder$Mutation$Buying builder,
   }) : super(
+          key: key,
           options: options ?? WidgetOptions$Mutation$Buying(),
           builder: (
             run,

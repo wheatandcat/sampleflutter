@@ -1,0 +1,7 @@
+query SearchItem($name: String!) {
+  searchItem(name: $name) {
+    name
+    imageURL
+    images
+  }
+}

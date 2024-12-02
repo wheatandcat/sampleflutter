@@ -14,6 +14,7 @@ import 'package:stockkeeper/utils/style.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:stockkeeper/components/item/barcodeScannerScreen.dart';
 import 'package:stockkeeper/graphql/itemFromQR.gql.dart';
+import 'package:stockkeeper/graphql/searchItem.gql.dart';
 import 'package:stockkeeper/providers/graphql.dart';
 import 'package:stockkeeper/components/image/selectImage.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
@@ -82,6 +83,120 @@ class Input extends HookConsumerWidget {
       imageByte.value = await cropImageSetting(path, context);
     }
 
+    Future<void> imageTextRecognizer(File image) async {
+      final inputImage = InputImage.fromFile(image);
+      final textRecognizer =
+          TextRecognizer(script: TextRecognitionScript.japanese);
+      final RecognizedText recognizedText =
+          await textRecognizer.processImage(inputImage);
+      final texts = recognizedText.blocks
+          .map((block) => block.text.replaceAll('\n', '').replaceAll(' ', ''))
+          .toList()
+          .join(',');
+
+      print("texts: $texts");
+
+      final result = await client.query<Query$SearchItem>(QueryOptions(
+          document: documentNodeQuerySearchItem, variables: {'name': texts}));
+
+      print(result.data);
+
+      if (result.hasException || result.data!['searchItem'] == null) {
+        context.pop();
+
+        showDialog(
+            context: context,
+            builder: (BuildContext contextDialog) {
+              return CupertinoAlertDialog(
+                title: const Text("エラー"),
+                content: const Text("対象の商品が見つけられませんでした。"),
+                actions: [
+                  CupertinoDialogAction(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      contextDialog.pop();
+                    },
+                  ),
+                ],
+              );
+            });
+
+        return;
+      }
+      context.pop();
+
+      final List<String> images =
+          (result.data!['searchItem']['images'] as List).cast<String>();
+
+      showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SelectImages(
+              images: images,
+              onTap: (String url) {
+                context.pop();
+                imageURL.value = url;
+              });
+        },
+      );
+    }
+
+    Future<void> setupCamera() async {
+      final pickedFile = await picker.pickImage(source: ImageSource.camera);
+      if (pickedFile != null) {
+        showDialog(
+            context: context,
+            builder: (BuildContext contextDialog) {
+              return CupertinoAlertDialog(
+                title: const Text("写真を解析中"),
+                content: const Text("商品を検索します？"),
+                actions: [
+                  CupertinoDialogAction(
+                    child: const Text('検索する'),
+                    onPressed: () {
+                      imageTextRecognizer(File(pickedFile.path));
+                    },
+                  ),
+                  CupertinoDialogAction(
+                    child: const Text('写真をそのまま使用する'),
+                    onPressed: () {
+                      cropImage(pickedFile.path);
+                    },
+                  ),
+                ],
+              );
+            });
+      }
+    }
+
+    Future<void> setupGallery() async {
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        showDialog(
+            context: context,
+            builder: (BuildContext contextDialog) {
+              return CupertinoAlertDialog(
+                title: const Text("写真を解析中"),
+                content: const Text("商品を検索します？"),
+                actions: [
+                  CupertinoDialogAction(
+                    child: const Text('検索する'),
+                    onPressed: () {
+                      imageTextRecognizer(File(pickedFile.path));
+                    },
+                  ),
+                  CupertinoDialogAction(
+                    child: const Text('写真をそのまま使用する'),
+                    onPressed: () {
+                      cropImage(pickedFile.path);
+                    },
+                  ),
+                ],
+              );
+            });
+      }
+    }
+
     Future<void> onScan(BarcodeCapture capture, BuildContext context) async {
       final List<Barcode> barcodes = capture.barcodes;
       final value = barcodes.first.rawValue;
@@ -107,7 +222,14 @@ class Input extends HookConsumerWidget {
                   content: const Text("対象のバーコードから画像が見つけられませんでした。"),
                   actions: [
                     CupertinoDialogAction(
-                      child: const Text('OK'),
+                      child: const Text('画像で検索'),
+                      onPressed: () {
+                        contextDialog.pop();
+                        setupCamera();
+                      },
+                    ),
+                    CupertinoDialogAction(
+                      child: const Text('閉じる'),
                       onPressed: () {
                         contextDialog.pop();
                       },
@@ -156,17 +278,6 @@ class Input extends HookConsumerWidget {
       );
     }
 
-    Future<void> imageTextRecognizer(File image) async {
-      final inputImage = InputImage.fromFile(image);
-      final textRecognizer =
-          TextRecognizer(script: TextRecognitionScript.japanese);
-      final RecognizedText recognizedText =
-          await textRecognizer.processImage(inputImage);
-      final texts = recognizedText.blocks.map((block) => block.text).toList();
-
-      print("texts: $texts");
-    }
-
     void showPickImage() {
       showModalBottomSheet(
         context: context,
@@ -194,27 +305,11 @@ class Input extends HookConsumerWidget {
                     },
                   ),
                   ListTile(
-                    leading: const Icon(Icons.qr_code_scanner),
-                    title: const Text('商品名を検索'),
-                    onTap: () async {
-                      context.pop();
-                      final pickedFile =
-                          await picker.pickImage(source: ImageSource.camera);
-                      if (pickedFile != null) {
-                        imageTextRecognizer(File(pickedFile.path));
-                      }
-                    },
-                  ),
-                  ListTile(
                     leading: const Icon(Icons.camera_alt),
                     title: const Text('カメラを起動する'),
                     onTap: () async {
                       context.pop();
-                      final pickedFile =
-                          await picker.pickImage(source: ImageSource.camera);
-                      if (pickedFile != null) {
-                        cropImage(pickedFile.path);
-                      }
+                      setupCamera();
                     },
                   ),
                   ListTile(
@@ -222,11 +317,7 @@ class Input extends HookConsumerWidget {
                     title: const Text('アルバムから選択する'),
                     onTap: () async {
                       context.pop();
-                      final pickedFile =
-                          await picker.pickImage(source: ImageSource.gallery);
-                      if (pickedFile != null) {
-                        cropImage(pickedFile.path);
-                      }
+                      setupGallery();
                     },
                   ),
                 ],
