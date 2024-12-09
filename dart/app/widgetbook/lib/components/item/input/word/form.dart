@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 // Import the widget from your app
-import 'package:stockkeeper/components/item/input/word/select.dart';
+import 'package:stockkeeper/components/item/input/word/form.dart';
 
-@widgetbook.UseCase(name: 'Default', type: SelectWords)
-Widget buildSelectWordsUseCase(BuildContext context) {
-  return SelectWords(
-    onWord: (String word) {},
+@widgetbook.UseCase(name: 'Default', type: InputWordForm)
+Widget buildInputWordFormUseCase(BuildContext context) {
+  return InputWordForm(
     words: const [
       'テスト1',
       'テスト2',

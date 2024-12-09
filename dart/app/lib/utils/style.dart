@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const Color primary = Colors.brown;
   static const Color secondary = Color(0xFFC39669);
+  static const Color success = Color(0xFF007AFF);
   static const Color bg = Color(0xFFF0F0F0);
   static const Color error = Color(0xFFE93581);
   static const Color errorDark = Color(0xFFb22222);

@@ -15,7 +15,7 @@ import 'package:widgetbook_workspace/components/category/input.dart' as _i3;
 import 'package:widgetbook_workspace/components/item/input.dart' as _i4;
 import 'package:widgetbook_workspace/components/item/input/image/select.dart'
     as _i5;
-import 'package:widgetbook_workspace/components/item/input/word/select.dart'
+import 'package:widgetbook_workspace/components/item/input/word/form.dart'
     as _i6;
 import 'package:widgetbook_workspace/features/cart/page.dart' as _i7;
 
@@ -76,10 +76,10 @@ final directories = <_i1.WidgetbookNode>[
                 name: 'word',
                 children: [
                   _i1.WidgetbookLeafComponent(
-                    name: 'SelectWords',
+                    name: 'InputWordForm',
                     useCase: _i1.WidgetbookUseCase(
                       name: 'Default',
-                      builder: _i6.buildSelectWordsUseCase,
+                      builder: _i6.buildInputWordFormUseCase,
                     ),
                   )
                 ],

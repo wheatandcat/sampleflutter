@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/services.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stockkeeper/components/button/button.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,7 +23,7 @@ class InputItem {
   });
 }
 
-class Input extends HookConsumerWidget {
+class Input extends HookWidget {
   final String? buttonText;
   final InputItem? defaultValue;
   final bool loading;
@@ -40,7 +39,7 @@ class Input extends HookConsumerWidget {
       this.buttonText});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     int defaultStock = 1;
 
     if (defaultValue != null) {
