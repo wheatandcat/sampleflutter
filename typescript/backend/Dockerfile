@@ -26,6 +26,9 @@ RUN pnpm run build
 FROM node:22-alpine AS production
 WORKDIR /usr/src/app
 
+RUN apt-get update -y && apt-get install -y openssl
+RUN apt-get upgrade openssl -y
+
 # 環境変数 NODE_ENV を production に設定
 ENV NODE_ENV=production
 
