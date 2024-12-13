@@ -11,19 +11,39 @@ export class SearchItemResolver {
 
   @Query('searchItem')
   @UseGuards(AuthGuard)
-  async items(@Args('name') name: string): Promise<QueryType['searchItem']> {
-    const { productNames, extractedWords } = await analyzeText(name)
+  async items(
+    @Args('name') name: string,
+    @Args('isAnalyze') isAnalyze: boolean
+  ): Promise<QueryType['searchItem']> {
+    if (isAnalyze) {
+      const { productNames, extractedWords } = await analyzeText(name)
 
-    const shoppingItems = await Promise.all(
-      productNames.map((v) => searchShoppingItem({ query: v }))
-    )
+      const shoppingItems = await Promise.all(
+        productNames.map((v) => searchShoppingItem({ query: v }))
+      )
 
-    const hit = shoppingItems[0]?.hits[0]
-    if (!hit) {
+      const hit = shoppingItems[0]?.hits[0]
+      if (!hit) {
+        return null
+      }
+
+      const images = this.extractImages(shoppingItems, extractedWords)
+
+      return {
+        name: hit.name,
+        imageURL: hit.exImage.url,
+        images,
+      }
+    }
+
+    const data = await searchShoppingItem({ query: name })
+
+    if (!data) {
       return null
     }
 
-    const images = this.extractImages(shoppingItems, extractedWords)
+    const hit = data.hits[0]
+    const images = data.hits.map((hit) => hit.exImage.url)
 
     return {
       name: hit.name,

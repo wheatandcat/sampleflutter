@@ -5,7 +5,7 @@ type Query {
   items(categoryId: Int!): [Item]
   item(id: Int!): Item
   itemFromQR(janCode: String!): ItemFromQR
-  searchItem(name: String!): SearchItem
+  searchItem(name: String!, isAnalyze: Boolean = false): SearchItem
   me: User
   itemAll: [Item]
   carts: [Cart]

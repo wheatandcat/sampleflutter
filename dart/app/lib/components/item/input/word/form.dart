@@ -6,6 +6,7 @@ import 'package:stockkeeper/components/item/input/word/text.dart';
 
 const screenSelectWords = 1;
 const screenInputText = 2;
+const screenSelectImage = 3;
 
 class InputWordForm extends HookWidget {
   final List<String> words;

@@ -221,6 +221,7 @@ export type QueryItemsArgs = {
 
 
 export type QuerySearchItemArgs = {
+  isAnalyze?: InputMaybe<Scalars['Boolean']['input']>;
   name: Scalars['String']['input'];
 };
 

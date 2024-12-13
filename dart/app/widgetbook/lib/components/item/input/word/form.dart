@@ -15,5 +15,6 @@ Widget buildInputWordFormUseCase(BuildContext context) {
       'テスト5',
     ],
     onPrev: () {},
+    onSearch: (word) {},
   );
 }
