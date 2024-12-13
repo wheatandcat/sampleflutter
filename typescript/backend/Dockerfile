@@ -2,7 +2,6 @@
 FROM node:22 AS builder
 WORKDIR /usr/src/app
 
-RUN apt-get upgrade openssl -y
 # pnpmのインストール
 RUN npm install -g pnpm
 
@@ -27,7 +26,6 @@ RUN pnpm run build
 FROM node:22-alpine AS production
 WORKDIR /usr/src/app
 
-RUN apt-get upgrade openssl -y
 # 環境変数 NODE_ENV を production に設定
 ENV NODE_ENV=production
 
