@@ -5,9 +5,13 @@ import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
 class Variables$Query$SearchItem {
-  factory Variables$Query$SearchItem({required String name}) =>
+  factory Variables$Query$SearchItem({
+    required String name,
+    bool? isAnalyze,
+  }) =>
       Variables$Query$SearchItem._({
         r'name': name,
+        if (isAnalyze != null) r'isAnalyze': isAnalyze,
       });
 
   Variables$Query$SearchItem._(this._$data);
@@ -16,6 +20,10 @@ class Variables$Query$SearchItem {
     final result$data = <String, dynamic>{};
     final l$name = data['name'];
     result$data['name'] = (l$name as String);
+    if (data.containsKey('isAnalyze')) {
+      final l$isAnalyze = data['isAnalyze'];
+      result$data['isAnalyze'] = (l$isAnalyze as bool?);
+    }
     return Variables$Query$SearchItem._(result$data);
   }
 
@@ -23,10 +31,16 @@ class Variables$Query$SearchItem {
 
   String get name => (_$data['name'] as String);
 
+  bool? get isAnalyze => (_$data['isAnalyze'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$name = name;
     result$data['name'] = l$name;
+    if (_$data.containsKey('isAnalyze')) {
+      final l$isAnalyze = isAnalyze;
+      result$data['isAnalyze'] = l$isAnalyze;
+    }
     return result$data;
   }
 
@@ -50,13 +64,26 @@ class Variables$Query$SearchItem {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$isAnalyze = isAnalyze;
+    final lOther$isAnalyze = other.isAnalyze;
+    if (_$data.containsKey('isAnalyze') !=
+        other._$data.containsKey('isAnalyze')) {
+      return false;
+    }
+    if (l$isAnalyze != lOther$isAnalyze) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$name = name;
-    return Object.hashAll([l$name]);
+    final l$isAnalyze = isAnalyze;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('isAnalyze') ? l$isAnalyze : const {},
+    ]);
   }
 }
 
@@ -69,7 +96,10 @@ abstract class CopyWith$Variables$Query$SearchItem<TRes> {
   factory CopyWith$Variables$Query$SearchItem.stub(TRes res) =
       _CopyWithStubImpl$Variables$Query$SearchItem;
 
-  TRes call({String? name});
+  TRes call({
+    String? name,
+    bool? isAnalyze,
+  });
 }
 
 class _CopyWithImpl$Variables$Query$SearchItem<TRes>
@@ -85,9 +115,14 @@ class _CopyWithImpl$Variables$Query$SearchItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? name = _undefined}) => _then(Variables$Query$SearchItem._({
+  TRes call({
+    Object? name = _undefined,
+    Object? isAnalyze = _undefined,
+  }) =>
+      _then(Variables$Query$SearchItem._({
         ..._instance._$data,
         if (name != _undefined && name != null) 'name': (name as String),
+        if (isAnalyze != _undefined) 'isAnalyze': (isAnalyze as bool?),
       }));
 }
 
@@ -97,7 +132,11 @@ class _CopyWithStubImpl$Variables$Query$SearchItem<TRes>
 
   TRes _res;
 
-  call({String? name}) => _res;
+  call({
+    String? name,
+    bool? isAnalyze,
+  }) =>
+      _res;
 }
 
 class Query$SearchItem {
@@ -251,7 +290,16 @@ const documentNodeQuerySearchItem = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      )
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'isAnalyze')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
+        directives: [],
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -262,7 +310,11 @@ const documentNodeQuerySearchItem = DocumentNode(definitions: [
           ArgumentNode(
             name: NameNode(value: 'name'),
             value: VariableNode(name: NameNode(value: 'name')),
-          )
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'isAnalyze'),
+            value: VariableNode(name: NameNode(value: 'isAnalyze')),
+          ),
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [

@@ -39,6 +39,6 @@ Future<Uint8List?> cropImageSetting(String path, BuildContext context) async {
   );
 }
 
-Future<String> imageTextRecognizer(File image) async {
-  return '';
+Future<List<String>> imageTextRecognizer(File image) async {
+  return [];
 }

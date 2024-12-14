@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 class InputWordText extends HookWidget {
   final String defaultValue;
   final void Function() onPrev;
-  final void Function(String) onSearch;
+  final void Function(String, bool) onSearch;
 
   const InputWordText({
     super.key,
@@ -49,7 +49,7 @@ class InputWordText extends HookWidget {
                   backgroundColor: AppColors.success,
                   minimumSize: Size(130, 50),
                 ),
-                onPressed: () => onSearch(inputText.text),
+                onPressed: () => onSearch(inputText.text, false),
                 child: Text("検索",
                     style: TextStyle(
                         color: AppColors.text,

@@ -12,7 +12,7 @@ import 'package:stockkeeper/components/item/barcodeScannerScreen.dart';
 import 'package:stockkeeper/graphql/itemFromQR.gql.dart';
 import 'package:stockkeeper/graphql/searchItem.gql.dart';
 import 'package:stockkeeper/providers/graphql.dart';
-import 'package:stockkeeper/components/item/input/image/select.dart';
+import 'package:stockkeeper/components/item/input/word/form.dart';
 import 'package:stockkeeper/utils/error.dart';
 import 'dart:io';
 
@@ -40,7 +40,8 @@ class InputImage extends HookConsumerWidget {
       if (!context.mounted) return;
 
       final result = await client.query<Query$SearchItem>(QueryOptions(
-          document: documentNodeQuerySearchItem, variables: {'name': texts}));
+          document: documentNodeQuerySearchItem,
+          variables: {'name': texts.join(','), 'isAnalyze': true}));
 
       if (!context.mounted) return;
       if (result.hasException || result.data!['searchItem'] == null) {
@@ -57,15 +58,15 @@ class InputImage extends HookConsumerWidget {
       showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return SelectItems(
-            images: images,
+          return InputWordForm(
+            defaultImages: images,
+            defaultScreen: screenSelectImageAnalyze,
+            words: [],
             onImage: (String url) {
               context.pop();
               onChangeImageURL(url);
             },
-            nextText: 'テキストで検索',
-            onNext: () {},
-            onPrev: () {
+            onCancel: () {
               context.pop();
             },
           );

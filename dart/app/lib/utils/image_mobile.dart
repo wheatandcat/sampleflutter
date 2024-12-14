@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'dart:io';
 
 Future<Uint8List?> cropImageSetting(String path, BuildContext context) async {
@@ -39,6 +40,11 @@ Future<Uint8List?> cropImageSetting(String path, BuildContext context) async {
   );
 }
 
-Future<String> imageTextRecognizer(File image) async {
-  return '';
+Future<List<String>> imageTextRecognizer(File image) async {
+  final inputImage = InputImage.fromFile(image);
+  final textRecognizer = TextRecognizer(script: TextRecognitionScript.japanese);
+  final RecognizedText recognizedText =
+      await textRecognizer.processImage(inputImage);
+  final texts = recognizedText.blocks.map((block) => block.text).toList();
+  return texts;
 }

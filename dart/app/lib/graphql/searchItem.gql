@@ -1,5 +1,5 @@
-query SearchItem($name: String!) {
-  searchItem(name: $name) {
+query SearchItem($name: String!, $isAnalyze: Boolean = false) {
+  searchItem(name: $name, isAnalyze: $isAnalyze) {
     name
     imageURL
     images

@@ -6,6 +6,8 @@ class SelectItems extends StatelessWidget {
   final void Function(String) onImage;
   final String? prevText;
   final void Function()? onPrev;
+  final String? nextText;
+  final void Function()? onNext;
 
   const SelectItems({
     super.key,
@@ -13,13 +15,14 @@ class SelectItems extends StatelessWidget {
     required this.images,
     this.prevText,
     this.onPrev,
+    this.nextText,
+    this.onNext,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // グリッドビュー部分
         Expanded(
           child: GridView.count(
             crossAxisCount: 2, // 2列に設定
@@ -36,11 +39,21 @@ class SelectItems extends StatelessWidget {
         ),
         Container(
           color: Colors.white, // 背景色を設定（オプション）
-          padding: const EdgeInsets.all(Spacing.md), // フッターの余白
-          child: ElevatedButton(
-            onPressed: onPrev,
-            child:
-                const Text('戻る', style: TextStyle(color: AppColors.textDark)),
+          padding: const EdgeInsets.all(16.0), // フッターの余白
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (onPrev != null)
+                ElevatedButton(
+                  onPressed: onPrev,
+                  child: Text(prevText ?? 'キャンセル'),
+                ),
+              if (onNext != null)
+                ElevatedButton(
+                  onPressed: onNext,
+                  child: Text(nextText ?? '次へ'),
+                ),
+            ],
           ),
         ),
       ],
