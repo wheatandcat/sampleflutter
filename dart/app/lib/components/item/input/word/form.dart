@@ -17,7 +17,7 @@ const screenInputText = 3;
 const screenSelectImage = 4;
 
 class InputWordForm extends HookConsumerWidget {
-  final File scanImage;
+  final File? scanImage;
   final int defaultScreen;
   final List<String> defaultImages;
   final List<String> words;
@@ -27,7 +27,7 @@ class InputWordForm extends HookConsumerWidget {
 
   const InputWordForm({
     super.key,
-    required this.scanImage,
+    this.scanImage,
     required this.defaultScreen,
     required this.defaultImages,
     required this.words,

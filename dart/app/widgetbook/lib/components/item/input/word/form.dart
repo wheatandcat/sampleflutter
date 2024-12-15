@@ -17,14 +17,17 @@ Widget buildInputWordFormUseCase(BuildContext context) {
 
   when(() => mockGraphQLClient.query(any())).thenAnswer(
     (_) async => QueryResult(
-        options: QueryOptions(document: gql('')),
-        source: QueryResultSource.network,
-        data: null),
+      options: QueryOptions(document: gql('')),
+      source: QueryResultSource.network,
+      data: null,
+    ),
   );
 
   return ProviderScope(
     overrides: [graphqlClientProvider.overrideWithValue(mockGraphQLClient)],
     child: InputWordForm(
+      scanImage: null,
+      defaultImages: const [],
       words: const [
         'テスト1',
         'テスト2',
@@ -32,7 +35,10 @@ Widget buildInputWordFormUseCase(BuildContext context) {
         'テスト4',
         'テスト5',
       ],
-      onPrev: () {},
+      defaultScreen: screenSelectWords,
+      onImage: (url) {},
+      onCropImage: () {},
+      onCancel: () {},
     ),
   );
 }
