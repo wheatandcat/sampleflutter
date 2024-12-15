@@ -45,6 +45,10 @@ Future<List<String>> imageTextRecognizer(File image) async {
   final textRecognizer = TextRecognizer(script: TextRecognitionScript.japanese);
   final RecognizedText recognizedText =
       await textRecognizer.processImage(inputImage);
-  final texts = recognizedText.blocks.map((block) => block.text).toList();
+  final texts = recognizedText.blocks
+      .map((block) => block.text)
+      .where((text) => text.length > 1 && !RegExp(r'^\d+$').hasMatch(text))
+      .toList();
+
   return texts;
 }

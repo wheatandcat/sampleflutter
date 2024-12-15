@@ -45,23 +45,22 @@ class InputImage extends HookConsumerWidget {
           variables: {'name': texts.join(','), 'isAnalyze': true}));
 
       if (!context.mounted) return;
+
+      List<String> images = [];
+      int defaultScreen = screenSelectImageAnalyze;
+
       if (result.hasException || result.data!['searchItem'] == null) {
-        context.pop();
-
-        showErrorDialog(context, "対象の商品が見つけられませんでした。");
-        return;
+        defaultScreen = screenSelectWords;
+      } else {
+        images = (result.data!['searchItem']['images'] as List).cast<String>();
       }
-      context.pop();
-
-      final List<String> images =
-          (result.data!['searchItem']['images'] as List).cast<String>();
 
       showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
           return InputWordForm(
             defaultImages: images,
-            defaultScreen: screenSelectImageAnalyze,
+            defaultScreen: defaultScreen,
             words: texts,
             onImage: (String url) {
               context.pop();

@@ -4,6 +4,7 @@ import 'package:stockkeeper/utils/style.dart';
 class SelectWords extends StatelessWidget {
   final List<String> words;
   final void Function(String) onWord;
+  final String? prevText;
   final void Function() onPrev;
 
   const SelectWords({
@@ -11,6 +12,7 @@ class SelectWords extends StatelessWidget {
     required this.onWord,
     required this.words,
     required this.onPrev,
+    this.prevText,
   });
 
   @override
@@ -25,20 +27,23 @@ class SelectWords extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(top: Spacing.xl),
-            child: Wrap(
-              spacing: Spacing.sm,
-              runSpacing: Spacing.sm,
-              children: List.generate(words.length, (index) {
-                return Padding(
-                  padding: const EdgeInsets.all(Spacing.sm),
-                  child: ElevatedButton(
-                    onPressed: () => onWord(words[index]),
-                    child: Text(words[index],
-                        style: TextStyle(
-                            fontSize: FontSize.md, color: AppColors.textDark)),
-                  ),
-                );
-              }),
+            child: SingleChildScrollView(
+              child: Wrap(
+                spacing: Spacing.sm,
+                runSpacing: Spacing.sm,
+                children: List.generate(words.length, (index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(Spacing.sm),
+                    child: ElevatedButton(
+                      onPressed: () => onWord(words[index]),
+                      child: Text(words[index],
+                          style: TextStyle(
+                              fontSize: FontSize.md,
+                              color: AppColors.textDark)),
+                    ),
+                  );
+                }),
+              ),
             ),
           ),
         ),
@@ -50,7 +55,8 @@ class SelectWords extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: onPrev,
-                child: Text("戻る", style: TextStyle(color: AppColors.textDark)),
+                child: Text(prevText ?? '戻る',
+                    style: TextStyle(color: AppColors.textDark)),
               ),
             ],
           ),

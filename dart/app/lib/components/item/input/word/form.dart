@@ -76,7 +76,10 @@ class InputWordForm extends HookConsumerWidget {
                   screen.value = screenInputText,
                 },
                 words: words,
-                onPrev: () => screen.value = screenSelectImageAnalyze,
+                prevText: defaultScreen == screenSelectWords ? 'キャンセル' : '戻る',
+                onPrev: () => defaultScreen == screenSelectWords
+                    ? onCancel()
+                    : screen.value = screenSelectImageAnalyze,
               );
             case screenInputText:
               return InputWordText(
