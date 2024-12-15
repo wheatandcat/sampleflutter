@@ -196,6 +196,7 @@ export type Query = {
   itemFromQR?: Maybe<ItemFromQr>;
   items?: Maybe<Array<Maybe<Item>>>;
   me?: Maybe<User>;
+  searchItem?: Maybe<SearchItem>;
 };
 
 
@@ -216,6 +217,22 @@ export type QueryItemFromQrArgs = {
 
 export type QueryItemsArgs = {
   categoryId: Scalars['Int']['input'];
+};
+
+
+export type QuerySearchItemArgs = {
+  isAnalyze?: InputMaybe<Scalars['Boolean']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type SearchItem = {
+  __typename?: 'SearchItem';
+  /** 画像URL */
+  imageURL?: Maybe<Scalars['String']['output']>;
+  /** 画像のリスト */
+  images?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** アイテム名 */
+  name: Scalars['String']['output'];
 };
 
 export type UpdateCategory = {

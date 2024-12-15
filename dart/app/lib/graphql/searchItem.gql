@@ -1,0 +1,7 @@
+query SearchItem($name: String!, $isAnalyze: Boolean = false) {
+  searchItem(name: $name, isAnalyze: $isAnalyze) {
+    name
+    imageURL
+    images
+  }
+}

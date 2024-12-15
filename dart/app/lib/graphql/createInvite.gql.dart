@@ -25,12 +25,12 @@ class Mutation$CreateInvite {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$createInvite = createInvite;
-    resultData['createInvite'] = l$createInvite.toJson();
+    _resultData['createInvite'] = l$createInvite.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -48,7 +48,7 @@ class Mutation$CreateInvite {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$CreateInvite || runtimeType != other.runtimeType) {
+    if (!(other is Mutation$CreateInvite) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$createInvite = createInvite;
@@ -102,7 +102,6 @@ class _CopyWithImpl$Mutation$CreateInvite<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? createInvite = _undefined,
     Object? $__typename = _undefined,
@@ -116,7 +115,6 @@ class _CopyWithImpl$Mutation$CreateInvite<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$CreateInvite$createInvite<TRes> get createInvite {
     final local$createInvite = _instance.createInvite;
     return CopyWith$Mutation$CreateInvite$createInvite(
@@ -128,16 +126,14 @@ class _CopyWithStubImpl$Mutation$CreateInvite<TRes>
     implements CopyWith$Mutation$CreateInvite<TRes> {
   _CopyWithStubImpl$Mutation$CreateInvite(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$CreateInvite$createInvite? createInvite,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$CreateInvite$createInvite<TRes> get createInvite =>
       CopyWith$Mutation$CreateInvite$createInvite.stub(_res);
 }
@@ -199,25 +195,32 @@ typedef OnMutationCompleted$Mutation$CreateInvite = FutureOr<void> Function(
 class Options$Mutation$CreateInvite
     extends graphql.MutationOptions<Mutation$CreateInvite> {
   Options$Mutation$CreateInvite({
-    super.operationName,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateInvite? typedOptimisticResult,
-    super.context,
+    graphql.Context? context,
     OnMutationCompleted$Mutation$CreateInvite? onCompleted,
-    super.update,
-    super.onError,
+    graphql.OnMutationUpdate<Mutation$CreateInvite>? update,
+    graphql.OnError? onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$CreateInvite(data),
                   ),
+          update: update,
+          onError: onError,
           document: documentNodeMutationCreateInvite,
           parserFn: _parserFn$Mutation$CreateInvite,
         );
@@ -236,20 +239,29 @@ class Options$Mutation$CreateInvite
 class WatchOptions$Mutation$CreateInvite
     extends graphql.WatchQueryOptions<Mutation$CreateInvite> {
   WatchOptions$Mutation$CreateInvite({
-    super.operationName,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateInvite? typedOptimisticResult,
-    super.context,
-    super.pollInterval,
-    super.eagerlyFetchResults,
-    super.carryForwardDataOnException,
-    super.fetchResults,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
   }) : super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           document: documentNodeMutationCreateInvite,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
           parserFn: _parserFn$Mutation$CreateInvite,
         );
 }
@@ -257,10 +269,10 @@ class WatchOptions$Mutation$CreateInvite
 extension ClientExtension$Mutation$CreateInvite on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$CreateInvite>> mutate$CreateInvite(
           [Options$Mutation$CreateInvite? options]) async =>
-      await mutate(options ?? Options$Mutation$CreateInvite());
+      await this.mutate(options ?? Options$Mutation$CreateInvite());
   graphql.ObservableQuery<Mutation$CreateInvite> watchMutation$CreateInvite(
           [WatchOptions$Mutation$CreateInvite? options]) =>
-      watchMutation(options ?? WatchOptions$Mutation$CreateInvite());
+      this.watchMutation(options ?? WatchOptions$Mutation$CreateInvite());
 }
 
 class Mutation$CreateInvite$HookResult {
@@ -295,25 +307,32 @@ graphql.ObservableQuery<Mutation$CreateInvite> useWatchMutation$CreateInvite(
 class WidgetOptions$Mutation$CreateInvite
     extends graphql.MutationOptions<Mutation$CreateInvite> {
   WidgetOptions$Mutation$CreateInvite({
-    super.operationName,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateInvite? typedOptimisticResult,
-    super.context,
+    graphql.Context? context,
     OnMutationCompleted$Mutation$CreateInvite? onCompleted,
-    super.update,
-    super.onError,
+    graphql.OnMutationUpdate<Mutation$CreateInvite>? update,
+    graphql.OnError? onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$CreateInvite(data),
                   ),
+          update: update,
+          onError: onError,
           document: documentNodeMutationCreateInvite,
           parserFn: _parserFn$Mutation$CreateInvite,
         );
@@ -342,10 +361,11 @@ typedef Builder$Mutation$CreateInvite = widgets.Widget Function(
 class Mutation$CreateInvite$Widget
     extends graphql_flutter.Mutation<Mutation$CreateInvite> {
   Mutation$CreateInvite$Widget({
-    super.key,
+    widgets.Key? key,
     WidgetOptions$Mutation$CreateInvite? options,
     required Builder$Mutation$CreateInvite builder,
   }) : super(
+          key: key,
           options: options ?? WidgetOptions$Mutation$CreateInvite(),
           builder: (
             run,
@@ -392,14 +412,14 @@ class Mutation$CreateInvite$createInvite {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$code = code;
-    resultData['code'] = l$code;
+    _resultData['code'] = l$code;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -419,7 +439,7 @@ class Mutation$CreateInvite$createInvite {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$CreateInvite$createInvite ||
+    if (!(other is Mutation$CreateInvite$createInvite) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -481,7 +501,6 @@ class _CopyWithImpl$Mutation$CreateInvite$createInvite<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? userId = _undefined,
     Object? code = _undefined,
@@ -504,9 +523,8 @@ class _CopyWithStubImpl$Mutation$CreateInvite$createInvite<TRes>
     implements CopyWith$Mutation$CreateInvite$createInvite<TRes> {
   _CopyWithStubImpl$Mutation$CreateInvite$createInvite(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? userId,
     String? code,

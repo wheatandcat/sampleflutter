@@ -1,5 +1,5 @@
 # ステージ1: 依存関係のインストールとビルド
-FROM node:18 AS builder
+FROM node:22 AS builder
 WORKDIR /usr/src/app
 
 # pnpmのインストール
@@ -23,8 +23,10 @@ COPY . .
 RUN pnpm run build
 
 # ステージ2: 本番環境用イメージの作成
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 WORKDIR /usr/src/app
+
+RUN apk add --no-cache openssl
 
 # 環境変数 NODE_ENV を production に設定
 ENV NODE_ENV=production

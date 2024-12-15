@@ -41,7 +41,7 @@ class Variables$Mutation$DeleteItem {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$DeleteItem ||
+    if (!(other is Variables$Mutation$DeleteItem) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -85,7 +85,6 @@ class _CopyWithImpl$Variables$Mutation$DeleteItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? id = _undefined}) =>
       _then(Variables$Mutation$DeleteItem._({
         ..._instance._$data,
@@ -97,9 +96,8 @@ class _CopyWithStubImpl$Variables$Mutation$DeleteItem<TRes>
     implements CopyWith$Variables$Mutation$DeleteItem<TRes> {
   _CopyWithStubImpl$Variables$Mutation$DeleteItem(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({int? id}) => _res;
 }
 
@@ -124,12 +122,12 @@ class Mutation$DeleteItem {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$deleteItem = deleteItem;
-    resultData['deleteItem'] = l$deleteItem.toJson();
+    _resultData['deleteItem'] = l$deleteItem.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -147,7 +145,7 @@ class Mutation$DeleteItem {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$DeleteItem || runtimeType != other.runtimeType) {
+    if (!(other is Mutation$DeleteItem) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteItem = deleteItem;
@@ -201,7 +199,6 @@ class _CopyWithImpl$Mutation$DeleteItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? deleteItem = _undefined,
     Object? $__typename = _undefined,
@@ -215,7 +212,6 @@ class _CopyWithImpl$Mutation$DeleteItem<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$DeleteItem$deleteItem<TRes> get deleteItem {
     final local$deleteItem = _instance.deleteItem;
     return CopyWith$Mutation$DeleteItem$deleteItem(
@@ -227,16 +223,14 @@ class _CopyWithStubImpl$Mutation$DeleteItem<TRes>
     implements CopyWith$Mutation$DeleteItem<TRes> {
   _CopyWithStubImpl$Mutation$DeleteItem(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$DeleteItem$deleteItem? deleteItem,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$DeleteItem$deleteItem<TRes> get deleteItem =>
       CopyWith$Mutation$DeleteItem$deleteItem.stub(_res);
 }
@@ -305,27 +299,34 @@ typedef OnMutationCompleted$Mutation$DeleteItem = FutureOr<void> Function(
 class Options$Mutation$DeleteItem
     extends graphql.MutationOptions<Mutation$DeleteItem> {
   Options$Mutation$DeleteItem({
-    super.operationName,
+    String? operationName,
     required Variables$Mutation$DeleteItem variables,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$DeleteItem? typedOptimisticResult,
-    super.context,
+    graphql.Context? context,
     OnMutationCompleted$Mutation$DeleteItem? onCompleted,
-    super.update,
-    super.onError,
+    graphql.OnMutationUpdate<Mutation$DeleteItem>? update,
+    graphql.OnError? onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
           variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$DeleteItem(data),
                   ),
+          update: update,
+          onError: onError,
           document: documentNodeMutationDeleteItem,
           parserFn: _parserFn$Mutation$DeleteItem,
         );
@@ -344,22 +345,31 @@ class Options$Mutation$DeleteItem
 class WatchOptions$Mutation$DeleteItem
     extends graphql.WatchQueryOptions<Mutation$DeleteItem> {
   WatchOptions$Mutation$DeleteItem({
-    super.operationName,
+    String? operationName,
     required Variables$Mutation$DeleteItem variables,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$DeleteItem? typedOptimisticResult,
-    super.context,
-    super.pollInterval,
-    super.eagerlyFetchResults,
-    super.carryForwardDataOnException,
-    super.fetchResults,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
   }) : super(
           variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           document: documentNodeMutationDeleteItem,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
           parserFn: _parserFn$Mutation$DeleteItem,
         );
 }
@@ -367,10 +377,10 @@ class WatchOptions$Mutation$DeleteItem
 extension ClientExtension$Mutation$DeleteItem on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$DeleteItem>> mutate$DeleteItem(
           Options$Mutation$DeleteItem options) async =>
-      await mutate(options);
+      await this.mutate(options);
   graphql.ObservableQuery<Mutation$DeleteItem> watchMutation$DeleteItem(
           WatchOptions$Mutation$DeleteItem options) =>
-      watchMutation(options);
+      this.watchMutation(options);
 }
 
 class Mutation$DeleteItem$HookResult {
@@ -405,25 +415,32 @@ graphql.ObservableQuery<Mutation$DeleteItem> useWatchMutation$DeleteItem(
 class WidgetOptions$Mutation$DeleteItem
     extends graphql.MutationOptions<Mutation$DeleteItem> {
   WidgetOptions$Mutation$DeleteItem({
-    super.operationName,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$DeleteItem? typedOptimisticResult,
-    super.context,
+    graphql.Context? context,
     OnMutationCompleted$Mutation$DeleteItem? onCompleted,
-    super.update,
-    super.onError,
+    graphql.OnMutationUpdate<Mutation$DeleteItem>? update,
+    graphql.OnError? onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$DeleteItem(data),
                   ),
+          update: update,
+          onError: onError,
           document: documentNodeMutationDeleteItem,
           parserFn: _parserFn$Mutation$DeleteItem,
         );
@@ -453,10 +470,11 @@ typedef Builder$Mutation$DeleteItem = widgets.Widget Function(
 class Mutation$DeleteItem$Widget
     extends graphql_flutter.Mutation<Mutation$DeleteItem> {
   Mutation$DeleteItem$Widget({
-    super.key,
+    widgets.Key? key,
     WidgetOptions$Mutation$DeleteItem? options,
     required Builder$Mutation$DeleteItem builder,
   }) : super(
+          key: key,
           options: options ?? WidgetOptions$Mutation$DeleteItem(),
           builder: (
             run,
@@ -498,12 +516,12 @@ class Mutation$DeleteItem$deleteItem {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -521,7 +539,7 @@ class Mutation$DeleteItem$deleteItem {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$DeleteItem$deleteItem ||
+    if (!(other is Mutation$DeleteItem$deleteItem) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -576,7 +594,6 @@ class _CopyWithImpl$Mutation$DeleteItem$deleteItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? $__typename = _undefined,
@@ -593,9 +610,8 @@ class _CopyWithStubImpl$Mutation$DeleteItem$deleteItem<TRes>
     implements CopyWith$Mutation$DeleteItem$deleteItem<TRes> {
   _CopyWithStubImpl$Mutation$DeleteItem$deleteItem(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? id,
     String? $__typename,

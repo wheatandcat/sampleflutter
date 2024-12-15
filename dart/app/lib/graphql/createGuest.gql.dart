@@ -43,7 +43,7 @@ class Variables$Mutation$CreateGuest {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Mutation$CreateGuest ||
+    if (!(other is Variables$Mutation$CreateGuest) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -87,7 +87,6 @@ class _CopyWithImpl$Variables$Mutation$CreateGuest<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? input = _undefined}) =>
       _then(Variables$Mutation$CreateGuest._({
         ..._instance._$data,
@@ -100,9 +99,8 @@ class _CopyWithStubImpl$Variables$Mutation$CreateGuest<TRes>
     implements CopyWith$Variables$Mutation$CreateGuest<TRes> {
   _CopyWithStubImpl$Variables$Mutation$CreateGuest(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({Input$NewGuest? input}) => _res;
 }
 
@@ -127,12 +125,12 @@ class Mutation$CreateGuest {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$createGuest = createGuest;
-    resultData['createGuest'] = l$createGuest.toJson();
+    _resultData['createGuest'] = l$createGuest.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -150,7 +148,7 @@ class Mutation$CreateGuest {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$CreateGuest || runtimeType != other.runtimeType) {
+    if (!(other is Mutation$CreateGuest) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$createGuest = createGuest;
@@ -204,7 +202,6 @@ class _CopyWithImpl$Mutation$CreateGuest<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? createGuest = _undefined,
     Object? $__typename = _undefined,
@@ -218,7 +215,6 @@ class _CopyWithImpl$Mutation$CreateGuest<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$CreateGuest$createGuest<TRes> get createGuest {
     final local$createGuest = _instance.createGuest;
     return CopyWith$Mutation$CreateGuest$createGuest(
@@ -230,16 +226,14 @@ class _CopyWithStubImpl$Mutation$CreateGuest<TRes>
     implements CopyWith$Mutation$CreateGuest<TRes> {
   _CopyWithStubImpl$Mutation$CreateGuest(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$CreateGuest$createGuest? createGuest,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$CreateGuest$createGuest<TRes> get createGuest =>
       CopyWith$Mutation$CreateGuest$createGuest.stub(_res);
 }
@@ -316,27 +310,34 @@ typedef OnMutationCompleted$Mutation$CreateGuest = FutureOr<void> Function(
 class Options$Mutation$CreateGuest
     extends graphql.MutationOptions<Mutation$CreateGuest> {
   Options$Mutation$CreateGuest({
-    super.operationName,
+    String? operationName,
     required Variables$Mutation$CreateGuest variables,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateGuest? typedOptimisticResult,
-    super.context,
+    graphql.Context? context,
     OnMutationCompleted$Mutation$CreateGuest? onCompleted,
-    super.update,
-    super.onError,
+    graphql.OnMutationUpdate<Mutation$CreateGuest>? update,
+    graphql.OnError? onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
           variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$CreateGuest(data),
                   ),
+          update: update,
+          onError: onError,
           document: documentNodeMutationCreateGuest,
           parserFn: _parserFn$Mutation$CreateGuest,
         );
@@ -355,22 +356,31 @@ class Options$Mutation$CreateGuest
 class WatchOptions$Mutation$CreateGuest
     extends graphql.WatchQueryOptions<Mutation$CreateGuest> {
   WatchOptions$Mutation$CreateGuest({
-    super.operationName,
+    String? operationName,
     required Variables$Mutation$CreateGuest variables,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateGuest? typedOptimisticResult,
-    super.context,
-    super.pollInterval,
-    super.eagerlyFetchResults,
-    super.carryForwardDataOnException,
-    super.fetchResults,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
   }) : super(
           variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           document: documentNodeMutationCreateGuest,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
           parserFn: _parserFn$Mutation$CreateGuest,
         );
 }
@@ -378,10 +388,10 @@ class WatchOptions$Mutation$CreateGuest
 extension ClientExtension$Mutation$CreateGuest on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$CreateGuest>> mutate$CreateGuest(
           Options$Mutation$CreateGuest options) async =>
-      await mutate(options);
+      await this.mutate(options);
   graphql.ObservableQuery<Mutation$CreateGuest> watchMutation$CreateGuest(
           WatchOptions$Mutation$CreateGuest options) =>
-      watchMutation(options);
+      this.watchMutation(options);
 }
 
 class Mutation$CreateGuest$HookResult {
@@ -416,25 +426,32 @@ graphql.ObservableQuery<Mutation$CreateGuest> useWatchMutation$CreateGuest(
 class WidgetOptions$Mutation$CreateGuest
     extends graphql.MutationOptions<Mutation$CreateGuest> {
   WidgetOptions$Mutation$CreateGuest({
-    super.operationName,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Mutation$CreateGuest? typedOptimisticResult,
-    super.context,
+    graphql.Context? context,
     OnMutationCompleted$Mutation$CreateGuest? onCompleted,
-    super.update,
-    super.onError,
+    graphql.OnMutationUpdate<Mutation$CreateGuest>? update,
+    graphql.OnError? onError,
   })  : onCompletedWithParsed = onCompleted,
         super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           onCompleted: onCompleted == null
               ? null
               : (data) => onCompleted(
                     data,
                     data == null ? null : _parserFn$Mutation$CreateGuest(data),
                   ),
+          update: update,
+          onError: onError,
           document: documentNodeMutationCreateGuest,
           parserFn: _parserFn$Mutation$CreateGuest,
         );
@@ -464,10 +481,11 @@ typedef Builder$Mutation$CreateGuest = widgets.Widget Function(
 class Mutation$CreateGuest$Widget
     extends graphql_flutter.Mutation<Mutation$CreateGuest> {
   Mutation$CreateGuest$Widget({
-    super.key,
+    widgets.Key? key,
     WidgetOptions$Mutation$CreateGuest? options,
     required Builder$Mutation$CreateGuest builder,
   }) : super(
+          key: key,
           options: options ?? WidgetOptions$Mutation$CreateGuest(),
           builder: (
             run,
@@ -514,14 +532,14 @@ class Mutation$CreateGuest$createGuest {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$uid = uid;
-    resultData['uid'] = l$uid;
+    _resultData['uid'] = l$uid;
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -541,7 +559,7 @@ class Mutation$CreateGuest$createGuest {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$CreateGuest$createGuest ||
+    if (!(other is Mutation$CreateGuest$createGuest) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -602,7 +620,6 @@ class _CopyWithImpl$Mutation$CreateGuest$createGuest<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? uid = _undefined,
     Object? userId = _undefined,
@@ -623,9 +640,8 @@ class _CopyWithStubImpl$Mutation$CreateGuest$createGuest<TRes>
     implements CopyWith$Mutation$CreateGuest$createGuest<TRes> {
   _CopyWithStubImpl$Mutation$CreateGuest$createGuest(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? uid,
     String? userId,

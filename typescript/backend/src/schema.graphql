@@ -5,6 +5,7 @@ type Query {
   items(categoryId: Int!): [Item]
   item(id: Int!): Item
   itemFromQR(janCode: String!): ItemFromQR
+  searchItem(name: String!, isAnalyze: Boolean = false): SearchItem
   me: User
   itemAll: [Item]
   carts: [Cart]
@@ -51,6 +52,15 @@ type Item {
 }
 
 type ItemFromQR {
+  "アイテム名"
+  name: String!
+  "画像URL"
+  imageURL: String
+  "画像のリスト"
+  images: [String]
+}
+
+type SearchItem {
   "アイテム名"
   name: String!
   "画像URL"

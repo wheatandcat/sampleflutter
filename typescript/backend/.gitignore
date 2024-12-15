@@ -41,3 +41,4 @@ TEST.md
 src/firebase.json
 src/firebase.review.json
 docs/*
+service-account.json

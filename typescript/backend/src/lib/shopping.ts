@@ -1,12 +1,13 @@
 type Hit = {
   index: number
   name: string
+  headLine: string
   exImage: {
     url: string
   }
 }
 
-type SearchResult = {
+export type SearchResult = {
   totalResultsAvailable: number
   totalResultsReturned: number
   firstResultsPosition: number
@@ -22,11 +23,29 @@ type ShoppingItem = {
   images: string[]
 }
 
-export const getShoppingItem = async (
-  janCode: string
-): Promise<ShoppingItem | null> => {
+type SearchShoppingItemRequest = {
+  janCode?: string
+  query?: string
+}
+
+export const searchShoppingItem = async (
+  request: SearchShoppingItemRequest
+): Promise<SearchResult | null> => {
+  const params = new URLSearchParams({
+    appid: process.env.YAHOO_APP_ID || '',
+    image_size: IMAGE_SIZE.toString(),
+  })
+
+  if (request.janCode) {
+    params.append('jan_code', request.janCode)
+  }
+  if (request.query) {
+    console.log('query:', request.query)
+    params.append('query', request.query)
+  }
+
   const response = await fetch(
-    `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=${process.env.YAHOO_APP_ID}&jan_code=${janCode}&image_size=${IMAGE_SIZE}`
+    `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?${params.toString()}`
   )
   if (!response.ok) {
     return null
@@ -34,6 +53,18 @@ export const getShoppingItem = async (
   const data: SearchResult = await response.json()
 
   if (data.totalResultsReturned === 0) {
+    return null
+  }
+
+  return data
+}
+
+export const getShoppingItem = async (
+  janCode: string
+): Promise<ShoppingItem | null> => {
+  const data = await searchShoppingItem({ janCode })
+
+  if (!data) {
     return null
   }
 

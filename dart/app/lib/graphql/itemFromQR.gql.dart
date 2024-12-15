@@ -1,11 +1,11 @@
 import 'dart:async';
+import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
 class Variables$Query$ItemFromQR {
-  factory Variables$Query$ItemFromQR(
-          {required String janCode, required String code}) =>
+  factory Variables$Query$ItemFromQR({required String janCode}) =>
       Variables$Query$ItemFromQR._({
         r'janCode': janCode,
       });
@@ -41,7 +41,7 @@ class Variables$Query$ItemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables$Query$ItemFromQR ||
+    if (!(other is Variables$Query$ItemFromQR) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -85,7 +85,6 @@ class _CopyWithImpl$Variables$Query$ItemFromQR<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? janCode = _undefined}) =>
       _then(Variables$Query$ItemFromQR._({
         ..._instance._$data,
@@ -98,9 +97,8 @@ class _CopyWithStubImpl$Variables$Query$ItemFromQR<TRes>
     implements CopyWith$Variables$Query$ItemFromQR<TRes> {
   _CopyWithStubImpl$Variables$Query$ItemFromQR(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({String? janCode}) => _res;
 }
 
@@ -127,12 +125,12 @@ class Query$ItemFromQR {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$itemFromQR = itemFromQR;
-    resultData['itemFromQR'] = l$itemFromQR?.toJson();
+    _resultData['itemFromQR'] = l$itemFromQR?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -150,7 +148,7 @@ class Query$ItemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$ItemFromQR || runtimeType != other.runtimeType) {
+    if (!(other is Query$ItemFromQR) || runtimeType != other.runtimeType) {
       return false;
     }
     final l$itemFromQR = itemFromQR;
@@ -204,7 +202,6 @@ class _CopyWithImpl$Query$ItemFromQR<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? itemFromQR = _undefined,
     Object? $__typename = _undefined,
@@ -218,7 +215,6 @@ class _CopyWithImpl$Query$ItemFromQR<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$ItemFromQR$itemFromQR<TRes> get itemFromQR {
     final local$itemFromQR = _instance.itemFromQR;
     return local$itemFromQR == null
@@ -232,16 +228,14 @@ class _CopyWithStubImpl$Query$ItemFromQR<TRes>
     implements CopyWith$Query$ItemFromQR<TRes> {
   _CopyWithStubImpl$Query$ItemFromQR(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$ItemFromQR$itemFromQR? itemFromQR,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$ItemFromQR$itemFromQR<TRes> get itemFromQR =>
       CopyWith$Query$ItemFromQR$itemFromQR.stub(_res);
 }
@@ -323,27 +317,34 @@ typedef OnQueryComplete$Query$ItemFromQR = FutureOr<void> Function(
 
 class Options$Query$ItemFromQR extends graphql.QueryOptions<Query$ItemFromQR> {
   Options$Query$ItemFromQR({
-    super.operationName,
+    String? operationName,
     required Variables$Query$ItemFromQR variables,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Query$ItemFromQR? typedOptimisticResult,
-    super.pollInterval,
-    super.context,
+    Duration? pollInterval,
+    graphql.Context? context,
     OnQueryComplete$Query$ItemFromQR? onComplete,
-    super.onError,
+    graphql.OnQueryError? onError,
   })  : onCompleteWithParsed = onComplete,
         super(
           variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
           onComplete: onComplete == null
               ? null
               : (data) => onComplete(
                     data,
                     data == null ? null : _parserFn$Query$ItemFromQR(data),
                   ),
+          onError: onError,
           document: documentNodeQueryItemFromQR,
           parserFn: _parserFn$Query$ItemFromQR,
         );
@@ -362,31 +363,41 @@ class Options$Query$ItemFromQR extends graphql.QueryOptions<Query$ItemFromQR> {
 class WatchOptions$Query$ItemFromQR
     extends graphql.WatchQueryOptions<Query$ItemFromQR> {
   WatchOptions$Query$ItemFromQR({
-    super.operationName,
+    String? operationName,
     required Variables$Query$ItemFromQR variables,
-    super.fetchPolicy,
-    super.errorPolicy,
-    super.cacheRereadPolicy,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
     Object? optimisticResult,
     Query$ItemFromQR? typedOptimisticResult,
-    super.context,
-    super.pollInterval,
-    super.eagerlyFetchResults,
-    super.carryForwardDataOnException,
-    super.fetchResults,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
   }) : super(
           variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
           optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
           document: documentNodeQueryItemFromQR,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
           parserFn: _parserFn$Query$ItemFromQR,
         );
 }
 
 class FetchMoreOptions$Query$ItemFromQR extends graphql.FetchMoreOptions {
   FetchMoreOptions$Query$ItemFromQR({
-    required super.updateQuery,
+    required graphql.UpdateQuery updateQuery,
     required Variables$Query$ItemFromQR variables,
   }) : super(
+          updateQuery: updateQuery,
           variables: variables.toJson(),
           document: documentNodeQueryItemFromQR,
         );
@@ -395,19 +406,18 @@ class FetchMoreOptions$Query$ItemFromQR extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$ItemFromQR on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$ItemFromQR>> query$ItemFromQR(
           Options$Query$ItemFromQR options) async =>
-      await query(options);
+      await this.query(options);
   graphql.ObservableQuery<Query$ItemFromQR> watchQuery$ItemFromQR(
           WatchOptions$Query$ItemFromQR options) =>
-      watchQuery(options);
+      this.watchQuery(options);
   void writeQuery$ItemFromQR({
     required Query$ItemFromQR data,
     required Variables$Query$ItemFromQR variables,
     bool broadcast = true,
   }) =>
-      writeQuery(
+      this.writeQuery(
         graphql.Request(
-          operation:
-              const graphql.Operation(document: documentNodeQueryItemFromQR),
+          operation: graphql.Operation(document: documentNodeQueryItemFromQR),
           variables: variables.toJson(),
         ),
         data: data.toJson(),
@@ -417,10 +427,9 @@ extension ClientExtension$Query$ItemFromQR on graphql.GraphQLClient {
     required Variables$Query$ItemFromQR variables,
     bool optimistic = true,
   }) {
-    final result = readQuery(
+    final result = this.readQuery(
       graphql.Request(
-        operation:
-            const graphql.Operation(document: documentNodeQueryItemFromQR),
+        operation: graphql.Operation(document: documentNodeQueryItemFromQR),
         variables: variables.toJson(),
       ),
       optimistic: optimistic,
@@ -437,11 +446,15 @@ graphql.ObservableQuery<Query$ItemFromQR> useWatchQuery$ItemFromQR(
     graphql_flutter.useWatchQuery(options);
 
 class Query$ItemFromQR$Widget extends graphql_flutter.Query<Query$ItemFromQR> {
-  const Query$ItemFromQR$Widget({
-    super.key,
-    required Options$Query$ItemFromQR super.options,
-    required super.builder,
-  });
+  Query$ItemFromQR$Widget({
+    widgets.Key? key,
+    required Options$Query$ItemFromQR options,
+    required graphql_flutter.QueryBuilder<Query$ItemFromQR> builder,
+  }) : super(
+          key: key,
+          options: options,
+          builder: builder,
+        );
 }
 
 class Query$ItemFromQR$itemFromQR {
@@ -474,16 +487,16 @@ class Query$ItemFromQR$itemFromQR {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$imageURL = imageURL;
-    resultData['imageURL'] = l$imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$images = images;
-    resultData['images'] = l$images?.map((e) => e).toList();
+    _resultData['images'] = l$images?.map((e) => e).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -505,7 +518,7 @@ class Query$ItemFromQR$itemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$ItemFromQR$itemFromQR ||
+    if (!(other is Query$ItemFromQR$itemFromQR) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -583,7 +596,6 @@ class _CopyWithImpl$Query$ItemFromQR$itemFromQR<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? name = _undefined,
     Object? imageURL = _undefined,
@@ -609,9 +621,8 @@ class _CopyWithStubImpl$Query$ItemFromQR$itemFromQR<TRes>
     implements CopyWith$Query$ItemFromQR$itemFromQR<TRes> {
   _CopyWithStubImpl$Query$ItemFromQR$itemFromQR(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? name,
     String? imageURL,

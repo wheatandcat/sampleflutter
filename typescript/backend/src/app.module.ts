@@ -11,6 +11,7 @@ import { UserResolver } from '@src/resolver/user'
 import { CartResolver } from '@src/resolver/cart'
 import { InviteResolver } from '@src/resolver/invite'
 import { GuestResolver } from '@src/resolver/guest'
+import { SearchItemResolver } from '@src/resolver/searchItem'
 import { PrismaService } from '@src/modules/prisma/prisma.service'
 import { ConfigModule } from '@nestjs/config'
 
@@ -26,6 +27,7 @@ import { ConfigModule } from '@nestjs/config'
     CartResolver,
     InviteResolver,
     GuestResolver,
+    SearchItemResolver,
     PrismaService,
   ],
   imports: [
