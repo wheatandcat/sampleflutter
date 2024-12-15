@@ -62,7 +62,7 @@ class InputImage extends HookConsumerWidget {
           return InputWordForm(
             defaultImages: images,
             defaultScreen: screenSelectImageAnalyze,
-            words: [],
+            words: texts,
             onImage: (String url) {
               context.pop();
               onChangeImageURL(url);
