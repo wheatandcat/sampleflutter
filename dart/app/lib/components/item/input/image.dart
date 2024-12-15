@@ -13,6 +13,7 @@ import 'package:stockkeeper/graphql/itemFromQR.gql.dart';
 import 'package:stockkeeper/graphql/searchItem.gql.dart';
 import 'package:stockkeeper/providers/graphql.dart';
 import 'package:stockkeeper/components/item/input/word/form.dart';
+import 'package:stockkeeper/components/item/input/image/select.dart';
 import 'package:stockkeeper/utils/error.dart';
 import 'dart:io';
 
