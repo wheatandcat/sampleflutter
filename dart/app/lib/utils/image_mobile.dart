@@ -46,7 +46,7 @@ Future<List<String>> imageTextRecognizer(File image) async {
   final RecognizedText recognizedText =
       await textRecognizer.processImage(inputImage);
   final texts = recognizedText.blocks
-      .map((block) => block.text)
+      .map((block) => block.text.replaceAll('\n', ' '))
       .where((text) => text.length > 1 && !RegExp(r'^\d+$').hasMatch(text))
       .toList();
 

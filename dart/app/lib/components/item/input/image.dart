@@ -35,8 +35,17 @@ class InputImage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final client = ref.read(graphqlClientProvider);
     final imageByte = useState<Uint8List?>(null);
+    final loading = useState(false);
 
-    Future<void> textRecognizer(File image) async {
+    Future<void> cropImage(String path) async {
+      imageByte.value = await cropImageSetting(path, context);
+      onChangeImageByte(imageByte.value!);
+    }
+
+    Future<void> textRecognizer(String imagePath) async {
+      loading.value = true;
+      final image = File(imagePath);
+
       final texts = await imageTextRecognizer(image);
       if (!context.mounted) return;
 
@@ -54,17 +63,23 @@ class InputImage extends HookConsumerWidget {
       } else {
         images = (result.data!['searchItem']['images'] as List).cast<String>();
       }
+      loading.value = false;
 
       showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
           return InputWordForm(
+            scanImage: image,
             defaultImages: images,
             defaultScreen: defaultScreen,
             words: texts,
             onImage: (String url) {
               context.pop();
               onChangeImageURL(url);
+            },
+            onCropImage: () {
+              context.pop();
+              cropImage(imagePath);
             },
             onCancel: () {
               context.pop();
@@ -77,14 +92,14 @@ class InputImage extends HookConsumerWidget {
     Future<void> setupCamera() async {
       final pickedFile = await picker.pickImage(source: ImageSource.camera);
       if (pickedFile != null) {
-        textRecognizer(File(pickedFile.path));
+        textRecognizer(pickedFile.path);
       }
     }
 
     Future<void> setupGallery() async {
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
-        textRecognizer(File(pickedFile.path));
+        textRecognizer(pickedFile.path);
       }
     }
 
@@ -214,16 +229,22 @@ class InputImage extends HookConsumerWidget {
                     child: SizedBox(
                         width: 300,
                         height: 300,
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          padding:
-                              const EdgeInsets.all(Spacing.xs), // ボーダーの幅を調整
-                          child: const Icon(
-                            Icons.camera_alt,
-                            color: AppColors.text,
-                            size: 40,
-                          ),
-                        ))));
+                        child: loading.value
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColors.text,
+                                ),
+                              )
+                            : Container(
+                                width: 40,
+                                height: 40,
+                                padding: const EdgeInsets.all(
+                                    Spacing.xs), // ボーダーの幅を調整
+                                child: const Icon(
+                                  Icons.camera_alt,
+                                  color: AppColors.text,
+                                  size: 40,
+                                ),
+                              ))));
   }
 }

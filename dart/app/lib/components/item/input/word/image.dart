@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:stockkeeper/utils/style.dart';
+import 'dart:io';
 
 class SelectItems extends StatelessWidget {
+  final File? scanImage;
   final List<String> images;
   final void Function(String) onImage;
+  final void Function() onCropImage;
   final String? prevText;
   final void Function()? onPrev;
   final String? nextText;
@@ -12,7 +15,9 @@ class SelectItems extends StatelessWidget {
   const SelectItems({
     super.key,
     required this.onImage,
+    required this.onCropImage,
     required this.images,
+    this.scanImage,
     this.prevText,
     this.onPrev,
     this.nextText,
@@ -21,13 +26,29 @@ class SelectItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final allImages = [
+      if (scanImage != null) ...[scanImage!],
+      ...images.sublist(0, 15),
+    ];
+
     return Column(
       children: [
         Expanded(
           child: GridView.count(
             crossAxisCount: 2, // 2列に設定
             childAspectRatio: 1.0,
-            children: List.generate(images.length, (index) {
+            children: List.generate(allImages.length, (index) {
+              final image = allImages[index];
+
+              if (image is File) {
+                return Container(
+                  padding: const EdgeInsets.all(Spacing.md), // 余白の調整
+                  child: InkWell(
+                      onTap: () => onCropImage(),
+                      child: Image.file(image, fit: BoxFit.cover)),
+                );
+              }
+
               return Container(
                 padding: const EdgeInsets.all(Spacing.md), // 余白の調整
                 child: InkWell(

@@ -9,6 +9,7 @@ import 'package:stockkeeper/providers/graphql.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stockkeeper/utils/error.dart';
+import 'dart:io';
 
 const screenSelectImageAnalyze = 1;
 const screenSelectWords = 2;
@@ -16,18 +17,22 @@ const screenInputText = 3;
 const screenSelectImage = 4;
 
 class InputWordForm extends HookConsumerWidget {
+  final File scanImage;
   final int defaultScreen;
   final List<String> defaultImages;
   final List<String> words;
   final void Function(String) onImage;
+  final void Function() onCropImage;
   final void Function() onCancel;
 
   const InputWordForm({
     super.key,
+    required this.scanImage,
     required this.defaultScreen,
     required this.defaultImages,
     required this.words,
     required this.onImage,
+    required this.onCropImage,
     required this.onCancel,
   });
 
@@ -62,8 +67,10 @@ class InputWordForm extends HookConsumerWidget {
           switch (screen.value) {
             case screenSelectImageAnalyze:
               return SelectItems(
+                scanImage: scanImage,
                 images: images.value,
                 onImage: onImage,
+                onCropImage: onCropImage,
                 nextText: 'テキストで検索',
                 onNext: () => screen.value = screenSelectWords,
                 prevText: 'キャンセル',
@@ -89,8 +96,10 @@ class InputWordForm extends HookConsumerWidget {
               );
             case screenSelectImage:
               return SelectItems(
+                scanImage: scanImage,
                 images: images.value,
                 onImage: onImage,
+                onCropImage: onCropImage,
                 prevText: '戻る',
                 onPrev: () => screen.value = screenInputText,
               );
