@@ -25,12 +25,12 @@ class Mutation$UpdateInviteCode {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$updateInviteCode = updateInviteCode;
-    resultData['updateInviteCode'] = l$updateInviteCode.toJson();
+    _resultData['updateInviteCode'] = l$updateInviteCode.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -105,7 +105,6 @@ class _CopyWithImpl$Mutation$UpdateInviteCode<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? updateInviteCode = _undefined,
     Object? $__typename = _undefined,
@@ -120,7 +119,6 @@ class _CopyWithImpl$Mutation$UpdateInviteCode<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$UpdateInviteCode$updateInviteCode<TRes>
       get updateInviteCode {
     final local$updateInviteCode = _instance.updateInviteCode;
@@ -133,16 +131,14 @@ class _CopyWithStubImpl$Mutation$UpdateInviteCode<TRes>
     implements CopyWith$Mutation$UpdateInviteCode<TRes> {
   _CopyWithStubImpl$Mutation$UpdateInviteCode(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$UpdateInviteCode$updateInviteCode? updateInviteCode,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$UpdateInviteCode$updateInviteCode<TRes>
       get updateInviteCode =>
           CopyWith$Mutation$UpdateInviteCode$updateInviteCode.stub(_res);
@@ -282,11 +278,11 @@ extension ClientExtension$Mutation$UpdateInviteCode on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$UpdateInviteCode>>
       mutate$UpdateInviteCode(
               [Options$Mutation$UpdateInviteCode? options]) async =>
-          await mutate(options ?? Options$Mutation$UpdateInviteCode());
+          await this.mutate(options ?? Options$Mutation$UpdateInviteCode());
   graphql.ObservableQuery<
       Mutation$UpdateInviteCode> watchMutation$UpdateInviteCode(
           [WatchOptions$Mutation$UpdateInviteCode? options]) =>
-      watchMutation(options ?? WatchOptions$Mutation$UpdateInviteCode());
+      this.watchMutation(options ?? WatchOptions$Mutation$UpdateInviteCode());
 }
 
 class Mutation$UpdateInviteCode$HookResult {
@@ -429,14 +425,14 @@ class Mutation$UpdateInviteCode$updateInviteCode {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$code = code;
-    resultData['code'] = l$code;
+    _resultData['code'] = l$code;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -518,7 +514,6 @@ class _CopyWithImpl$Mutation$UpdateInviteCode$updateInviteCode<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? userId = _undefined,
     Object? code = _undefined,
@@ -541,9 +536,8 @@ class _CopyWithStubImpl$Mutation$UpdateInviteCode$updateInviteCode<TRes>
     implements CopyWith$Mutation$UpdateInviteCode$updateInviteCode<TRes> {
   _CopyWithStubImpl$Mutation$UpdateInviteCode$updateInviteCode(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? userId,
     String? code,

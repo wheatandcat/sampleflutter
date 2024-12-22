@@ -24,12 +24,12 @@ class Mutation$LogoutGuest {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$logoutGuest = logoutGuest;
-    resultData['logoutGuest'] = l$logoutGuest;
+    _resultData['logoutGuest'] = l$logoutGuest;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -100,7 +100,6 @@ class _CopyWithImpl$Mutation$LogoutGuest<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? logoutGuest = _undefined,
     Object? $__typename = _undefined,
@@ -119,9 +118,8 @@ class _CopyWithStubImpl$Mutation$LogoutGuest<TRes>
     implements CopyWith$Mutation$LogoutGuest<TRes> {
   _CopyWithStubImpl$Mutation$LogoutGuest(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     bool? logoutGuest,
     String? $__typename,
@@ -238,10 +236,10 @@ class WatchOptions$Mutation$LogoutGuest
 extension ClientExtension$Mutation$LogoutGuest on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$LogoutGuest>> mutate$LogoutGuest(
           [Options$Mutation$LogoutGuest? options]) async =>
-      await mutate(options ?? Options$Mutation$LogoutGuest());
+      await this.mutate(options ?? Options$Mutation$LogoutGuest());
   graphql.ObservableQuery<Mutation$LogoutGuest> watchMutation$LogoutGuest(
           [WatchOptions$Mutation$LogoutGuest? options]) =>
-      watchMutation(options ?? WatchOptions$Mutation$LogoutGuest());
+      this.watchMutation(options ?? WatchOptions$Mutation$LogoutGuest());
 }
 
 class Mutation$LogoutGuest$HookResult {

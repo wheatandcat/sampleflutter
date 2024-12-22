@@ -97,7 +97,6 @@ class _CopyWithImpl$Variables$Mutation$AddCarts<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? input = _undefined}) =>
       _then(Variables$Mutation$AddCarts._({
         ..._instance._$data,
@@ -110,9 +109,8 @@ class _CopyWithStubImpl$Variables$Mutation$AddCarts<TRes>
     implements CopyWith$Variables$Mutation$AddCarts<TRes> {
   _CopyWithStubImpl$Variables$Mutation$AddCarts(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({List<Input$NewCart?>? input}) => _res;
 }
 
@@ -136,12 +134,12 @@ class Mutation$AddCarts {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$addCarts = addCarts;
-    resultData['addCarts'] = l$addCarts;
+    _resultData['addCarts'] = l$addCarts;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -212,7 +210,6 @@ class _CopyWithImpl$Mutation$AddCarts<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? addCarts = _undefined,
     Object? $__typename = _undefined,
@@ -231,9 +228,8 @@ class _CopyWithStubImpl$Mutation$AddCarts<TRes>
     implements CopyWith$Mutation$AddCarts<TRes> {
   _CopyWithStubImpl$Mutation$AddCarts(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     bool? addCarts,
     String? $__typename,
@@ -371,10 +367,10 @@ class WatchOptions$Mutation$AddCarts
 extension ClientExtension$Mutation$AddCarts on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$AddCarts>> mutate$AddCarts(
           Options$Mutation$AddCarts options) async =>
-      await mutate(options);
+      await this.mutate(options);
   graphql.ObservableQuery<Mutation$AddCarts> watchMutation$AddCarts(
           WatchOptions$Mutation$AddCarts options) =>
-      watchMutation(options);
+      this.watchMutation(options);
 }
 
 class Mutation$AddCarts$HookResult {

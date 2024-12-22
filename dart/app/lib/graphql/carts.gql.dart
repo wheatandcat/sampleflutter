@@ -28,12 +28,12 @@ class Query$Carts {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$carts = carts;
-    resultData['carts'] = l$carts?.map((e) => e?.toJson()).toList();
+    _resultData['carts'] = l$carts?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -101,7 +101,7 @@ abstract class CopyWith$Query$Carts<TRes> {
   TRes carts(
       Iterable<Query$Carts$carts?>? Function(
               Iterable<CopyWith$Query$Carts$carts<Query$Carts$carts>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$Carts<TRes> implements CopyWith$Query$Carts<TRes> {
@@ -116,7 +116,6 @@ class _CopyWithImpl$Query$Carts<TRes> implements CopyWith$Query$Carts<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? carts = _undefined,
     Object? $__typename = _undefined,
@@ -130,13 +129,12 @@ class _CopyWithImpl$Query$Carts<TRes> implements CopyWith$Query$Carts<TRes> {
             : ($__typename as String),
       ));
 
-  @override
   TRes carts(
           Iterable<Query$Carts$carts?>? Function(
                   Iterable<CopyWith$Query$Carts$carts<Query$Carts$carts>?>?)
-              fn) =>
+              _fn) =>
       call(
-          carts: fn(_instance.carts?.map((e) => e == null
+          carts: _fn(_instance.carts?.map((e) => e == null
               ? null
               : CopyWith$Query$Carts$carts(
                   e,
@@ -148,17 +146,15 @@ class _CopyWithStubImpl$Query$Carts<TRes>
     implements CopyWith$Query$Carts<TRes> {
   _CopyWithStubImpl$Query$Carts(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     List<Query$Carts$carts?>? carts,
     String? $__typename,
   }) =>
       _res;
 
-  @override
-  carts(fn) => _res;
+  carts(_fn) => _res;
 }
 
 const documentNodeQueryCarts = DocumentNode(definitions: [
@@ -366,8 +362,9 @@ class WatchOptions$Query$Carts extends graphql.WatchQueryOptions<Query$Carts> {
 }
 
 class FetchMoreOptions$Query$Carts extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$Carts({required super.updateQuery})
+  FetchMoreOptions$Query$Carts({required graphql.UpdateQuery updateQuery})
       : super(
+          updateQuery: updateQuery,
           document: documentNodeQueryCarts,
         );
 }
@@ -375,22 +372,22 @@ class FetchMoreOptions$Query$Carts extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$Carts on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$Carts>> query$Carts(
           [Options$Query$Carts? options]) async =>
-      await query(options ?? Options$Query$Carts());
+      await this.query(options ?? Options$Query$Carts());
   graphql.ObservableQuery<Query$Carts> watchQuery$Carts(
           [WatchOptions$Query$Carts? options]) =>
-      watchQuery(options ?? WatchOptions$Query$Carts());
+      this.watchQuery(options ?? WatchOptions$Query$Carts());
   void writeQuery$Carts({
     required Query$Carts data,
     bool broadcast = true,
   }) =>
-      writeQuery(
+      this.writeQuery(
         graphql.Request(
             operation: graphql.Operation(document: documentNodeQueryCarts)),
         data: data.toJson(),
         broadcast: broadcast,
       );
   Query$Carts? readQuery$Carts({bool optimistic = true}) {
-    final result = readQuery(
+    final result = this.readQuery(
       graphql.Request(
           operation: graphql.Operation(document: documentNodeQueryCarts)),
       optimistic: optimistic,
@@ -450,16 +447,16 @@ class Query$Carts$carts {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$quantity = quantity;
-    resultData['quantity'] = l$quantity;
+    _resultData['quantity'] = l$quantity;
     final l$item = item;
-    resultData['item'] = l$item?.toJson();
+    _resultData['item'] = l$item?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -547,7 +544,6 @@ class _CopyWithImpl$Query$Carts$carts<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? quantity = _undefined,
@@ -567,7 +563,6 @@ class _CopyWithImpl$Query$Carts$carts<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Carts$carts$item<TRes> get item {
     final local$item = _instance.item;
     return local$item == null
@@ -580,9 +575,8 @@ class _CopyWithStubImpl$Query$Carts$carts<TRes>
     implements CopyWith$Query$Carts$carts<TRes> {
   _CopyWithStubImpl$Query$Carts$carts(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? id,
     int? quantity,
@@ -591,7 +585,6 @@ class _CopyWithStubImpl$Query$Carts$carts<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Carts$carts$item<TRes> get item =>
       CopyWith$Query$Carts$carts$item.stub(_res);
 }
@@ -639,20 +632,20 @@ class Query$Carts$carts$item {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$imageURL = imageURL;
-    resultData['imageURL'] = l$imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$categoryId = categoryId;
-    resultData['categoryId'] = l$categoryId;
+    _resultData['categoryId'] = l$categoryId;
     final l$stock = stock;
-    resultData['stock'] = l$stock;
+    _resultData['stock'] = l$stock;
     final l$category = category;
-    resultData['category'] = l$category?.toJson();
+    _resultData['category'] = l$category?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -678,8 +671,7 @@ class Query$Carts$carts$item {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query$Carts$carts$item ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$Carts$carts$item || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -757,7 +749,6 @@ class _CopyWithImpl$Query$Carts$carts$item<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? imageURL = _undefined,
@@ -784,7 +775,6 @@ class _CopyWithImpl$Query$Carts$carts$item<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Carts$carts$item$category<TRes> get category {
     final local$category = _instance.category;
     return local$category == null
@@ -798,9 +788,8 @@ class _CopyWithStubImpl$Query$Carts$carts$item<TRes>
     implements CopyWith$Query$Carts$carts$item<TRes> {
   _CopyWithStubImpl$Query$Carts$carts$item(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? id,
     String? imageURL,
@@ -811,7 +800,6 @@ class _CopyWithStubImpl$Query$Carts$carts$item<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Carts$carts$item$category<TRes> get category =>
       CopyWith$Query$Carts$carts$item$category.stub(_res);
 }
@@ -846,16 +834,16 @@ class Query$Carts$carts$item$category {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$imageURL = imageURL;
-    resultData['imageURL'] = l$imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -944,7 +932,6 @@ class _CopyWithImpl$Query$Carts$carts$item$category<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -968,9 +955,8 @@ class _CopyWithStubImpl$Query$Carts$carts$item$category<TRes>
     implements CopyWith$Query$Carts$carts$item$category<TRes> {
   _CopyWithStubImpl$Query$Carts$carts$item$category(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? id,
     String? name,

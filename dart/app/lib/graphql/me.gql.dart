@@ -26,12 +26,12 @@ class Query$Me {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$me = me;
-    resultData['me'] = l$me?.toJson();
+    _resultData['me'] = l$me?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -100,7 +100,6 @@ class _CopyWithImpl$Query$Me<TRes> implements CopyWith$Query$Me<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? me = _undefined,
     Object? $__typename = _undefined,
@@ -112,7 +111,6 @@ class _CopyWithImpl$Query$Me<TRes> implements CopyWith$Query$Me<TRes> {
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Me$me<TRes> get me {
     final local$me = _instance.me;
     return local$me == null
@@ -124,16 +122,14 @@ class _CopyWithImpl$Query$Me<TRes> implements CopyWith$Query$Me<TRes> {
 class _CopyWithStubImpl$Query$Me<TRes> implements CopyWith$Query$Me<TRes> {
   _CopyWithStubImpl$Query$Me(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$Me$me? me,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Me$me<TRes> get me => CopyWith$Query$Me$me.stub(_res);
 }
 
@@ -263,8 +259,9 @@ class WatchOptions$Query$Me extends graphql.WatchQueryOptions<Query$Me> {
 }
 
 class FetchMoreOptions$Query$Me extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$Me({required super.updateQuery})
+  FetchMoreOptions$Query$Me({required graphql.UpdateQuery updateQuery})
       : super(
+          updateQuery: updateQuery,
           document: documentNodeQueryMe,
         );
 }
@@ -272,22 +269,22 @@ class FetchMoreOptions$Query$Me extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$Me on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$Me>> query$Me(
           [Options$Query$Me? options]) async =>
-      await query(options ?? Options$Query$Me());
+      await this.query(options ?? Options$Query$Me());
   graphql.ObservableQuery<Query$Me> watchQuery$Me(
           [WatchOptions$Query$Me? options]) =>
-      watchQuery(options ?? WatchOptions$Query$Me());
+      this.watchQuery(options ?? WatchOptions$Query$Me());
   void writeQuery$Me({
     required Query$Me data,
     bool broadcast = true,
   }) =>
-      writeQuery(
+      this.writeQuery(
         graphql.Request(
             operation: graphql.Operation(document: documentNodeQueryMe)),
         data: data.toJson(),
         broadcast: broadcast,
       );
   Query$Me? readQuery$Me({bool optimistic = true}) {
-    final result = readQuery(
+    final result = this.readQuery(
       graphql.Request(
           operation: graphql.Operation(document: documentNodeQueryMe)),
       optimistic: optimistic,
@@ -340,14 +337,14 @@ class Query$Me$me {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$uid = uid;
-    resultData['uid'] = l$uid;
+    _resultData['uid'] = l$uid;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -423,7 +420,6 @@ class _CopyWithImpl$Query$Me$me<TRes> implements CopyWith$Query$Me$me<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? uid = _undefined,
@@ -442,9 +438,8 @@ class _CopyWithStubImpl$Query$Me$me<TRes>
     implements CopyWith$Query$Me$me<TRes> {
   _CopyWithStubImpl$Query$Me$me(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? id,
     String? uid,

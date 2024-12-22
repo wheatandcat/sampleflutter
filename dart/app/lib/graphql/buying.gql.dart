@@ -24,12 +24,12 @@ class Mutation$Buying {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$buying = buying;
-    resultData['buying'] = l$buying;
+    _resultData['buying'] = l$buying;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -100,7 +100,6 @@ class _CopyWithImpl$Mutation$Buying<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? buying = _undefined,
     Object? $__typename = _undefined,
@@ -119,9 +118,8 @@ class _CopyWithStubImpl$Mutation$Buying<TRes>
     implements CopyWith$Mutation$Buying<TRes> {
   _CopyWithStubImpl$Mutation$Buying(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     bool? buying,
     String? $__typename,
@@ -236,10 +234,10 @@ class WatchOptions$Mutation$Buying
 extension ClientExtension$Mutation$Buying on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$Buying>> mutate$Buying(
           [Options$Mutation$Buying? options]) async =>
-      await mutate(options ?? Options$Mutation$Buying());
+      await this.mutate(options ?? Options$Mutation$Buying());
   graphql.ObservableQuery<Mutation$Buying> watchMutation$Buying(
           [WatchOptions$Mutation$Buying? options]) =>
-      watchMutation(options ?? WatchOptions$Mutation$Buying());
+      this.watchMutation(options ?? WatchOptions$Mutation$Buying());
 }
 
 class Mutation$Buying$HookResult {

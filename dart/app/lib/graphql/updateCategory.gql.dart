@@ -89,7 +89,6 @@ class _CopyWithImpl$Variables$Mutation$UpdateCategory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? input = _undefined}) =>
       _then(Variables$Mutation$UpdateCategory._({
         ..._instance._$data,
@@ -102,9 +101,8 @@ class _CopyWithStubImpl$Variables$Mutation$UpdateCategory<TRes>
     implements CopyWith$Variables$Mutation$UpdateCategory<TRes> {
   _CopyWithStubImpl$Variables$Mutation$UpdateCategory(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({Input$UpdateCategory? input}) => _res;
 }
 
@@ -129,12 +127,12 @@ class Mutation$UpdateCategory {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$updateCategory = updateCategory;
-    resultData['updateCategory'] = l$updateCategory.toJson();
+    _resultData['updateCategory'] = l$updateCategory.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -152,8 +150,7 @@ class Mutation$UpdateCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation$UpdateCategory ||
-        runtimeType != other.runtimeType) {
+    if (other is! Mutation$UpdateCategory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateCategory = updateCategory;
@@ -207,7 +204,6 @@ class _CopyWithImpl$Mutation$UpdateCategory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? updateCategory = _undefined,
     Object? $__typename = _undefined,
@@ -221,7 +217,6 @@ class _CopyWithImpl$Mutation$UpdateCategory<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Mutation$UpdateCategory$updateCategory<TRes> get updateCategory {
     final local$updateCategory = _instance.updateCategory;
     return CopyWith$Mutation$UpdateCategory$updateCategory(
@@ -233,16 +228,14 @@ class _CopyWithStubImpl$Mutation$UpdateCategory<TRes>
     implements CopyWith$Mutation$UpdateCategory<TRes> {
   _CopyWithStubImpl$Mutation$UpdateCategory(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Mutation$UpdateCategory$updateCategory? updateCategory,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Mutation$UpdateCategory$updateCategory<TRes> get updateCategory =>
       CopyWith$Mutation$UpdateCategory$updateCategory.stub(_res);
 }
@@ -399,10 +392,10 @@ class WatchOptions$Mutation$UpdateCategory
 extension ClientExtension$Mutation$UpdateCategory on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$UpdateCategory>> mutate$UpdateCategory(
           Options$Mutation$UpdateCategory options) async =>
-      await mutate(options);
+      await this.mutate(options);
   graphql.ObservableQuery<Mutation$UpdateCategory> watchMutation$UpdateCategory(
           WatchOptions$Mutation$UpdateCategory options) =>
-      watchMutation(options);
+      this.watchMutation(options);
 }
 
 class Mutation$UpdateCategory$HookResult {
@@ -547,14 +540,14 @@ class Mutation$UpdateCategory$updateCategory {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -636,7 +629,6 @@ class _CopyWithImpl$Mutation$UpdateCategory$updateCategory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -657,9 +649,8 @@ class _CopyWithStubImpl$Mutation$UpdateCategory$updateCategory<TRes>
     implements CopyWith$Mutation$UpdateCategory$updateCategory<TRes> {
   _CopyWithStubImpl$Mutation$UpdateCategory$updateCategory(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? id,
     String? name,

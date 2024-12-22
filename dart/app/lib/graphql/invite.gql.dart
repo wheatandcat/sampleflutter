@@ -26,12 +26,12 @@ class Query$Invite {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$invite = invite;
-    resultData['invite'] = l$invite?.toJson();
+    _resultData['invite'] = l$invite?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -100,7 +100,6 @@ class _CopyWithImpl$Query$Invite<TRes> implements CopyWith$Query$Invite<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? invite = _undefined,
     Object? $__typename = _undefined,
@@ -114,7 +113,6 @@ class _CopyWithImpl$Query$Invite<TRes> implements CopyWith$Query$Invite<TRes> {
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Invite$invite<TRes> get invite {
     final local$invite = _instance.invite;
     return local$invite == null
@@ -127,16 +125,14 @@ class _CopyWithStubImpl$Query$Invite<TRes>
     implements CopyWith$Query$Invite<TRes> {
   _CopyWithStubImpl$Query$Invite(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$Invite$invite? invite,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Invite$invite<TRes> get invite =>
       CopyWith$Query$Invite$invite.stub(_res);
 }
@@ -268,8 +264,9 @@ class WatchOptions$Query$Invite
 }
 
 class FetchMoreOptions$Query$Invite extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$Invite({required super.updateQuery})
+  FetchMoreOptions$Query$Invite({required graphql.UpdateQuery updateQuery})
       : super(
+          updateQuery: updateQuery,
           document: documentNodeQueryInvite,
         );
 }
@@ -277,22 +274,22 @@ class FetchMoreOptions$Query$Invite extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$Invite on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$Invite>> query$Invite(
           [Options$Query$Invite? options]) async =>
-      await query(options ?? Options$Query$Invite());
+      await this.query(options ?? Options$Query$Invite());
   graphql.ObservableQuery<Query$Invite> watchQuery$Invite(
           [WatchOptions$Query$Invite? options]) =>
-      watchQuery(options ?? WatchOptions$Query$Invite());
+      this.watchQuery(options ?? WatchOptions$Query$Invite());
   void writeQuery$Invite({
     required Query$Invite data,
     bool broadcast = true,
   }) =>
-      writeQuery(
+      this.writeQuery(
         graphql.Request(
             operation: graphql.Operation(document: documentNodeQueryInvite)),
         data: data.toJson(),
         broadcast: broadcast,
       );
   Query$Invite? readQuery$Invite({bool optimistic = true}) {
-    final result = readQuery(
+    final result = this.readQuery(
       graphql.Request(
           operation: graphql.Operation(document: documentNodeQueryInvite)),
       optimistic: optimistic,
@@ -345,14 +342,14 @@ class Query$Invite$invite {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$userId = userId;
-    resultData['userId'] = l$userId;
+    _resultData['userId'] = l$userId;
     final l$code = code;
-    resultData['code'] = l$code;
+    _resultData['code'] = l$code;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -431,7 +428,6 @@ class _CopyWithImpl$Query$Invite$invite<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? userId = _undefined,
     Object? code = _undefined,
@@ -454,9 +450,8 @@ class _CopyWithStubImpl$Query$Invite$invite<TRes>
     implements CopyWith$Query$Invite$invite<TRes> {
   _CopyWithStubImpl$Query$Invite$invite(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? userId,
     String? code,

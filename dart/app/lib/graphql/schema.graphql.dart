@@ -124,7 +124,6 @@ class _CopyWithImpl$Input$NewCategory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? name = _undefined,
     Object? imageURL = _undefined,
@@ -142,9 +141,8 @@ class _CopyWithStubImpl$Input$NewCategory<TRes>
     implements CopyWith$Input$NewCategory<TRes> {
   _CopyWithStubImpl$Input$NewCategory(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? name,
     String? imageURL,
@@ -295,7 +293,6 @@ class _CopyWithImpl$Input$UpdateCategory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -315,9 +312,8 @@ class _CopyWithStubImpl$Input$UpdateCategory<TRes>
     implements CopyWith$Input$UpdateCategory<TRes> {
   _CopyWithStubImpl$Input$UpdateCategory(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     String? name,
@@ -508,7 +504,6 @@ class _CopyWithImpl$Input$NewItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? categoryId = _undefined,
     Object? name = _undefined,
@@ -534,9 +529,8 @@ class _CopyWithStubImpl$Input$NewItem<TRes>
     implements CopyWith$Input$NewItem<TRes> {
   _CopyWithStubImpl$Input$NewItem(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? categoryId,
     String? name,
@@ -746,7 +740,6 @@ class _CopyWithImpl$Input$UpdateItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? categoryId = _undefined,
@@ -774,9 +767,8 @@ class _CopyWithStubImpl$Input$UpdateItem<TRes>
     implements CopyWith$Input$UpdateItem<TRes> {
   _CopyWithStubImpl$Input$UpdateItem(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? id,
     int? categoryId,
@@ -890,7 +882,6 @@ class _CopyWithImpl$Input$NewCart<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? itemId = _undefined,
     Object? quantity = _undefined,
@@ -907,9 +898,8 @@ class _CopyWithStubImpl$Input$NewCart<TRes>
     implements CopyWith$Input$NewCart<TRes> {
   _CopyWithStubImpl$Input$NewCart(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     int? itemId,
     int? quantity,
@@ -996,7 +986,6 @@ class _CopyWithImpl$Input$NewGuest<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? code = _undefined}) => _then(Input$NewGuest._({
         ..._instance._$data,
         if (code != _undefined && code != null) 'code': (code as String),
@@ -1007,9 +996,8 @@ class _CopyWithStubImpl$Input$NewGuest<TRes>
     implements CopyWith$Input$NewGuest<TRes> {
   _CopyWithStubImpl$Input$NewGuest(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({String? code}) => _res;
 }
 

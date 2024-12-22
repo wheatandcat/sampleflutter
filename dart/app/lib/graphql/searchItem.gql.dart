@@ -115,7 +115,6 @@ class _CopyWithImpl$Variables$Query$SearchItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? name = _undefined,
     Object? isAnalyze = _undefined,
@@ -131,9 +130,8 @@ class _CopyWithStubImpl$Variables$Query$SearchItem<TRes>
     implements CopyWith$Variables$Query$SearchItem<TRes> {
   _CopyWithStubImpl$Variables$Query$SearchItem(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? name,
     bool? isAnalyze,
@@ -164,12 +162,12 @@ class Query$SearchItem {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$searchItem = searchItem;
-    resultData['searchItem'] = l$searchItem?.toJson();
+    _resultData['searchItem'] = l$searchItem?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -241,7 +239,6 @@ class _CopyWithImpl$Query$SearchItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? searchItem = _undefined,
     Object? $__typename = _undefined,
@@ -255,7 +252,6 @@ class _CopyWithImpl$Query$SearchItem<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$SearchItem$searchItem<TRes> get searchItem {
     final local$searchItem = _instance.searchItem;
     return local$searchItem == null
@@ -269,16 +265,14 @@ class _CopyWithStubImpl$Query$SearchItem<TRes>
     implements CopyWith$Query$SearchItem<TRes> {
   _CopyWithStubImpl$Query$SearchItem(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$SearchItem$searchItem? searchItem,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$SearchItem$searchItem<TRes> get searchItem =>
       CopyWith$Query$SearchItem$searchItem.stub(_res);
 }
@@ -450,9 +444,10 @@ class WatchOptions$Query$SearchItem
 
 class FetchMoreOptions$Query$SearchItem extends graphql.FetchMoreOptions {
   FetchMoreOptions$Query$SearchItem({
-    required super.updateQuery,
+    required graphql.UpdateQuery updateQuery,
     required Variables$Query$SearchItem variables,
   }) : super(
+          updateQuery: updateQuery,
           variables: variables.toJson(),
           document: documentNodeQuerySearchItem,
         );
@@ -461,16 +456,16 @@ class FetchMoreOptions$Query$SearchItem extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$SearchItem on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$SearchItem>> query$SearchItem(
           Options$Query$SearchItem options) async =>
-      await query(options);
+      await this.query(options);
   graphql.ObservableQuery<Query$SearchItem> watchQuery$SearchItem(
           WatchOptions$Query$SearchItem options) =>
-      watchQuery(options);
+      this.watchQuery(options);
   void writeQuery$SearchItem({
     required Query$SearchItem data,
     required Variables$Query$SearchItem variables,
     bool broadcast = true,
   }) =>
-      writeQuery(
+      this.writeQuery(
         graphql.Request(
           operation: graphql.Operation(document: documentNodeQuerySearchItem),
           variables: variables.toJson(),
@@ -482,7 +477,7 @@ extension ClientExtension$Query$SearchItem on graphql.GraphQLClient {
     required Variables$Query$SearchItem variables,
     bool optimistic = true,
   }) {
-    final result = readQuery(
+    final result = this.readQuery(
       graphql.Request(
         operation: graphql.Operation(document: documentNodeQuerySearchItem),
         variables: variables.toJson(),
@@ -501,7 +496,7 @@ graphql.ObservableQuery<Query$SearchItem> useWatchQuery$SearchItem(
     graphql_flutter.useWatchQuery(options);
 
 class Query$SearchItem$Widget extends graphql_flutter.Query<Query$SearchItem> {
-  const Query$SearchItem$Widget({
+  Query$SearchItem$Widget({
     widgets.Key? key,
     required Options$Query$SearchItem options,
     required graphql_flutter.QueryBuilder<Query$SearchItem> builder,
@@ -542,16 +537,16 @@ class Query$SearchItem$searchItem {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$imageURL = imageURL;
-    resultData['imageURL'] = l$imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$images = images;
-    resultData['images'] = l$images?.map((e) => e).toList();
+    _resultData['images'] = l$images?.map((e) => e).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -651,7 +646,6 @@ class _CopyWithImpl$Query$SearchItem$searchItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? name = _undefined,
     Object? imageURL = _undefined,
@@ -677,9 +671,8 @@ class _CopyWithStubImpl$Query$SearchItem$searchItem<TRes>
     implements CopyWith$Query$SearchItem$searchItem<TRes> {
   _CopyWithStubImpl$Query$SearchItem$searchItem(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? name,
     String? imageURL,

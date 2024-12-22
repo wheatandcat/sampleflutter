@@ -28,12 +28,12 @@ class Query$ItemAll {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$itemAll = itemAll;
-    resultData['itemAll'] = l$itemAll?.map((e) => e?.toJson()).toList();
+    _resultData['itemAll'] = l$itemAll?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -102,7 +102,7 @@ abstract class CopyWith$Query$ItemAll<TRes> {
   TRes itemAll(
       Iterable<Query$ItemAll$itemAll?>? Function(
               Iterable<CopyWith$Query$ItemAll$itemAll<Query$ItemAll$itemAll>?>?)
-          fn);
+          _fn);
 }
 
 class _CopyWithImpl$Query$ItemAll<TRes>
@@ -118,7 +118,6 @@ class _CopyWithImpl$Query$ItemAll<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? itemAll = _undefined,
     Object? $__typename = _undefined,
@@ -132,14 +131,13 @@ class _CopyWithImpl$Query$ItemAll<TRes>
             : ($__typename as String),
       ));
 
-  @override
   TRes itemAll(
           Iterable<Query$ItemAll$itemAll?>? Function(
                   Iterable<
                       CopyWith$Query$ItemAll$itemAll<Query$ItemAll$itemAll>?>?)
-              fn) =>
+              _fn) =>
       call(
-          itemAll: fn(_instance.itemAll?.map((e) => e == null
+          itemAll: _fn(_instance.itemAll?.map((e) => e == null
               ? null
               : CopyWith$Query$ItemAll$itemAll(
                   e,
@@ -151,17 +149,15 @@ class _CopyWithStubImpl$Query$ItemAll<TRes>
     implements CopyWith$Query$ItemAll<TRes> {
   _CopyWithStubImpl$Query$ItemAll(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     List<Query$ItemAll$itemAll?>? itemAll,
     String? $__typename,
   }) =>
       _res;
 
-  @override
-  itemAll(fn) => _res;
+  itemAll(_fn) => _res;
 }
 
 const documentNodeQueryItemAll = DocumentNode(definitions: [
@@ -334,8 +330,9 @@ class WatchOptions$Query$ItemAll
 }
 
 class FetchMoreOptions$Query$ItemAll extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$ItemAll({required super.updateQuery})
+  FetchMoreOptions$Query$ItemAll({required graphql.UpdateQuery updateQuery})
       : super(
+          updateQuery: updateQuery,
           document: documentNodeQueryItemAll,
         );
 }
@@ -343,22 +340,22 @@ class FetchMoreOptions$Query$ItemAll extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$ItemAll on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$ItemAll>> query$ItemAll(
           [Options$Query$ItemAll? options]) async =>
-      await query(options ?? Options$Query$ItemAll());
+      await this.query(options ?? Options$Query$ItemAll());
   graphql.ObservableQuery<Query$ItemAll> watchQuery$ItemAll(
           [WatchOptions$Query$ItemAll? options]) =>
-      watchQuery(options ?? WatchOptions$Query$ItemAll());
+      this.watchQuery(options ?? WatchOptions$Query$ItemAll());
   void writeQuery$ItemAll({
     required Query$ItemAll data,
     bool broadcast = true,
   }) =>
-      writeQuery(
+      this.writeQuery(
         graphql.Request(
             operation: graphql.Operation(document: documentNodeQueryItemAll)),
         data: data.toJson(),
         broadcast: broadcast,
       );
   Query$ItemAll? readQuery$ItemAll({bool optimistic = true}) {
-    final result = readQuery(
+    final result = this.readQuery(
       graphql.Request(
           operation: graphql.Operation(document: documentNodeQueryItemAll)),
       optimistic: optimistic,
@@ -429,20 +426,20 @@ class Query$ItemAll$itemAll {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$imageURL = imageURL;
-    resultData['imageURL'] = l$imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$categoryId = categoryId;
-    resultData['categoryId'] = l$categoryId;
+    _resultData['categoryId'] = l$categoryId;
     final l$stock = stock;
-    resultData['stock'] = l$stock;
+    _resultData['stock'] = l$stock;
     final l$category = category;
-    resultData['category'] = l$category?.toJson();
+    _resultData['category'] = l$category?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -546,7 +543,6 @@ class _CopyWithImpl$Query$ItemAll$itemAll<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? imageURL = _undefined,
@@ -573,7 +569,6 @@ class _CopyWithImpl$Query$ItemAll$itemAll<TRes>
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$ItemAll$itemAll$category<TRes> get category {
     final local$category = _instance.category;
     return local$category == null
@@ -587,9 +582,8 @@ class _CopyWithStubImpl$Query$ItemAll$itemAll<TRes>
     implements CopyWith$Query$ItemAll$itemAll<TRes> {
   _CopyWithStubImpl$Query$ItemAll$itemAll(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? id,
     String? imageURL,
@@ -600,7 +594,6 @@ class _CopyWithStubImpl$Query$ItemAll$itemAll<TRes>
   }) =>
       _res;
 
-  @override
   CopyWith$Query$ItemAll$itemAll$category<TRes> get category =>
       CopyWith$Query$ItemAll$itemAll$category.stub(_res);
 }
@@ -630,14 +623,14 @@ class Query$ItemAll$itemAll$category {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -718,7 +711,6 @@ class _CopyWithImpl$Query$ItemAll$itemAll$category<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -739,9 +731,8 @@ class _CopyWithStubImpl$Query$ItemAll$itemAll$category<TRes>
     implements CopyWith$Query$ItemAll$itemAll$category<TRes> {
   _CopyWithStubImpl$Query$ItemAll$itemAll$category(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? id,
     String? name,

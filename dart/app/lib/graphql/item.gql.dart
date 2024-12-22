@@ -83,7 +83,6 @@ class _CopyWithImpl$Variables$Query$Item<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({Object? id = _undefined}) => _then(Variables$Query$Item._({
         ..._instance._$data,
         if (id != _undefined && id != null) 'id': (id as int),
@@ -94,9 +93,8 @@ class _CopyWithStubImpl$Variables$Query$Item<TRes>
     implements CopyWith$Variables$Query$Item<TRes> {
   _CopyWithStubImpl$Variables$Query$Item(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({int? id}) => _res;
 }
 
@@ -122,12 +120,12 @@ class Query$Item {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$item = item;
-    resultData['item'] = l$item?.toJson();
+    _resultData['item'] = l$item?.toJson();
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -196,7 +194,6 @@ class _CopyWithImpl$Query$Item<TRes> implements CopyWith$Query$Item<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? item = _undefined,
     Object? $__typename = _undefined,
@@ -208,7 +205,6 @@ class _CopyWithImpl$Query$Item<TRes> implements CopyWith$Query$Item<TRes> {
             : ($__typename as String),
       ));
 
-  @override
   CopyWith$Query$Item$item<TRes> get item {
     final local$item = _instance.item;
     return local$item == null
@@ -220,16 +216,14 @@ class _CopyWithImpl$Query$Item<TRes> implements CopyWith$Query$Item<TRes> {
 class _CopyWithStubImpl$Query$Item<TRes> implements CopyWith$Query$Item<TRes> {
   _CopyWithStubImpl$Query$Item(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     Query$Item$item? item,
     String? $__typename,
   }) =>
       _res;
 
-  @override
   CopyWith$Query$Item$item<TRes> get item =>
       CopyWith$Query$Item$item.stub(_res);
 }
@@ -415,9 +409,10 @@ class WatchOptions$Query$Item extends graphql.WatchQueryOptions<Query$Item> {
 
 class FetchMoreOptions$Query$Item extends graphql.FetchMoreOptions {
   FetchMoreOptions$Query$Item({
-    required super.updateQuery,
+    required graphql.UpdateQuery updateQuery,
     required Variables$Query$Item variables,
   }) : super(
+          updateQuery: updateQuery,
           variables: variables.toJson(),
           document: documentNodeQueryItem,
         );
@@ -426,16 +421,16 @@ class FetchMoreOptions$Query$Item extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$Item on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$Item>> query$Item(
           Options$Query$Item options) async =>
-      await query(options);
+      await this.query(options);
   graphql.ObservableQuery<Query$Item> watchQuery$Item(
           WatchOptions$Query$Item options) =>
-      watchQuery(options);
+      this.watchQuery(options);
   void writeQuery$Item({
     required Query$Item data,
     required Variables$Query$Item variables,
     bool broadcast = true,
   }) =>
-      writeQuery(
+      this.writeQuery(
         graphql.Request(
           operation: graphql.Operation(document: documentNodeQueryItem),
           variables: variables.toJson(),
@@ -447,7 +442,7 @@ extension ClientExtension$Query$Item on graphql.GraphQLClient {
     required Variables$Query$Item variables,
     bool optimistic = true,
   }) {
-    final result = readQuery(
+    final result = this.readQuery(
       graphql.Request(
         operation: graphql.Operation(document: documentNodeQueryItem),
         variables: variables.toJson(),
@@ -466,7 +461,7 @@ graphql.ObservableQuery<Query$Item> useWatchQuery$Item(
     graphql_flutter.useWatchQuery(options);
 
 class Query$Item$Widget extends graphql_flutter.Query<Query$Item> {
-  const Query$Item$Widget({
+  Query$Item$Widget({
     widgets.Key? key,
     required Options$Query$Item options,
     required graphql_flutter.QueryBuilder<Query$Item> builder,
@@ -527,24 +522,24 @@ class Query$Item$item {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final resultData = <String, dynamic>{};
+    final _resultData = <String, dynamic>{};
     final l$id = id;
-    resultData['id'] = l$id;
+    _resultData['id'] = l$id;
     final l$name = name;
-    resultData['name'] = l$name;
+    _resultData['name'] = l$name;
     final l$imageURL = imageURL;
-    resultData['imageURL'] = l$imageURL;
+    _resultData['imageURL'] = l$imageURL;
     final l$categoryId = categoryId;
-    resultData['categoryId'] = l$categoryId;
+    _resultData['categoryId'] = l$categoryId;
     final l$order = order;
-    resultData['order'] = l$order;
+    _resultData['order'] = l$order;
     final l$stock = stock;
-    resultData['stock'] = l$stock;
+    _resultData['stock'] = l$stock;
     final l$expirationDate = expirationDate;
-    resultData['expirationDate'] = l$expirationDate;
+    _resultData['expirationDate'] = l$expirationDate;
     final l$$__typename = $__typename;
-    resultData['__typename'] = l$$__typename;
-    return resultData;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
   }
 
   @override
@@ -663,7 +658,6 @@ class _CopyWithImpl$Query$Item$item<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -703,9 +697,8 @@ class _CopyWithStubImpl$Query$Item$item<TRes>
     implements CopyWith$Query$Item$item<TRes> {
   _CopyWithStubImpl$Query$Item$item(this._res);
 
-  final TRes _res;
+  TRes _res;
 
-  @override
   call({
     String? id,
     String? name,
