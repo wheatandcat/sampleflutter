@@ -41,7 +41,7 @@ class Variables$Query$ItemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$ItemFromQR) ||
+    if (other is! Variables$Query$ItemFromQR ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -85,6 +85,7 @@ class _CopyWithImpl$Variables$Query$ItemFromQR<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({Object? janCode = _undefined}) =>
       _then(Variables$Query$ItemFromQR._({
         ..._instance._$data,
@@ -97,8 +98,9 @@ class _CopyWithStubImpl$Variables$Query$ItemFromQR<TRes>
     implements CopyWith$Variables$Query$ItemFromQR<TRes> {
   _CopyWithStubImpl$Variables$Query$ItemFromQR(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({String? janCode}) => _res;
 }
 
@@ -125,12 +127,12 @@ class Query$ItemFromQR {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$itemFromQR = itemFromQR;
-    _resultData['itemFromQR'] = l$itemFromQR?.toJson();
+    resultData['itemFromQR'] = l$itemFromQR?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -148,7 +150,7 @@ class Query$ItemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ItemFromQR) || runtimeType != other.runtimeType) {
+    if (other is! Query$ItemFromQR || runtimeType != other.runtimeType) {
       return false;
     }
     final l$itemFromQR = itemFromQR;
@@ -202,6 +204,7 @@ class _CopyWithImpl$Query$ItemFromQR<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? itemFromQR = _undefined,
     Object? $__typename = _undefined,
@@ -215,6 +218,7 @@ class _CopyWithImpl$Query$ItemFromQR<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$ItemFromQR$itemFromQR<TRes> get itemFromQR {
     final local$itemFromQR = _instance.itemFromQR;
     return local$itemFromQR == null
@@ -228,14 +232,16 @@ class _CopyWithStubImpl$Query$ItemFromQR<TRes>
     implements CopyWith$Query$ItemFromQR<TRes> {
   _CopyWithStubImpl$Query$ItemFromQR(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$ItemFromQR$itemFromQR? itemFromQR,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Query$ItemFromQR$itemFromQR<TRes> get itemFromQR =>
       CopyWith$Query$ItemFromQR$itemFromQR.stub(_res);
 }
@@ -394,10 +400,9 @@ class WatchOptions$Query$ItemFromQR
 
 class FetchMoreOptions$Query$ItemFromQR extends graphql.FetchMoreOptions {
   FetchMoreOptions$Query$ItemFromQR({
-    required graphql.UpdateQuery updateQuery,
+    required super.updateQuery,
     required Variables$Query$ItemFromQR variables,
   }) : super(
-          updateQuery: updateQuery,
           variables: variables.toJson(),
           document: documentNodeQueryItemFromQR,
         );
@@ -406,16 +411,16 @@ class FetchMoreOptions$Query$ItemFromQR extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$ItemFromQR on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$ItemFromQR>> query$ItemFromQR(
           Options$Query$ItemFromQR options) async =>
-      await this.query(options);
+      await query(options);
   graphql.ObservableQuery<Query$ItemFromQR> watchQuery$ItemFromQR(
           WatchOptions$Query$ItemFromQR options) =>
-      this.watchQuery(options);
+      watchQuery(options);
   void writeQuery$ItemFromQR({
     required Query$ItemFromQR data,
     required Variables$Query$ItemFromQR variables,
     bool broadcast = true,
   }) =>
-      this.writeQuery(
+      writeQuery(
         graphql.Request(
           operation: graphql.Operation(document: documentNodeQueryItemFromQR),
           variables: variables.toJson(),
@@ -427,7 +432,7 @@ extension ClientExtension$Query$ItemFromQR on graphql.GraphQLClient {
     required Variables$Query$ItemFromQR variables,
     bool optimistic = true,
   }) {
-    final result = this.readQuery(
+    final result = readQuery(
       graphql.Request(
         operation: graphql.Operation(document: documentNodeQueryItemFromQR),
         variables: variables.toJson(),
@@ -446,7 +451,7 @@ graphql.ObservableQuery<Query$ItemFromQR> useWatchQuery$ItemFromQR(
     graphql_flutter.useWatchQuery(options);
 
 class Query$ItemFromQR$Widget extends graphql_flutter.Query<Query$ItemFromQR> {
-  Query$ItemFromQR$Widget({
+  const Query$ItemFromQR$Widget({
     widgets.Key? key,
     required Options$Query$ItemFromQR options,
     required graphql_flutter.QueryBuilder<Query$ItemFromQR> builder,
@@ -487,16 +492,16 @@ class Query$ItemFromQR$itemFromQR {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$name = name;
-    _resultData['name'] = l$name;
+    resultData['name'] = l$name;
     final l$imageURL = imageURL;
-    _resultData['imageURL'] = l$imageURL;
+    resultData['imageURL'] = l$imageURL;
     final l$images = images;
-    _resultData['images'] = l$images?.map((e) => e).toList();
+    resultData['images'] = l$images?.map((e) => e).toList();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -518,7 +523,7 @@ class Query$ItemFromQR$itemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ItemFromQR$itemFromQR) ||
+    if (other is! Query$ItemFromQR$itemFromQR ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -596,6 +601,7 @@ class _CopyWithImpl$Query$ItemFromQR$itemFromQR<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? name = _undefined,
     Object? imageURL = _undefined,
@@ -621,8 +627,9 @@ class _CopyWithStubImpl$Query$ItemFromQR$itemFromQR<TRes>
     implements CopyWith$Query$ItemFromQR$itemFromQR<TRes> {
   _CopyWithStubImpl$Query$ItemFromQR$itemFromQR(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? name,
     String? imageURL,

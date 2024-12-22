@@ -18,7 +18,11 @@ const images = [
   'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fbathroom.png?alt=media&token=8c94662c-ce0a-48d8-944b-b25c4eb57478',
   'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fbedroom.png?alt=media&token=57aede80-3102-41f7-89df-5f0b9e1ce4ee',
   'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fgarage.png?alt=media&token=e6cd82fb-dac4-417e-95e1-97e67026c479',
-  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fstorage.png?alt=media&token=5f9ded09-410a-48b3-8d89-fe689261fe6b'
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fstorage.png?alt=media&token=5f9ded09-410a-48b3-8d89-fe689261fe6b',
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fdining2.png?alt=media&token=12635ee0-b297-4da8-8dd5-0c878e817e16',
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fmedicine_box.png?alt=media&token=1a4801c1-e090-4946-b39f-9eb39e802efb',
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fshelf.png?alt=media&token=4953ad96-d74c-4596-93ea-299f36c4cf07',
+  'https://firebasestorage.googleapis.com/v0/b/stock-keeper-review.appspot.com/o/sample%2Fjapanese_style_room.png?alt=media&token=80d200c0-5645-4945-bc16-6b6d0f6b0033'
 ];
 
 class InputCategory {

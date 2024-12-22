@@ -25,12 +25,12 @@ class Mutation$CreateUser {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$createUser = createUser;
-    _resultData['createUser'] = l$createUser.toJson();
+    resultData['createUser'] = l$createUser.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -48,7 +48,7 @@ class Mutation$CreateUser {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateUser) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$CreateUser || runtimeType != other.runtimeType) {
       return false;
     }
     final l$createUser = createUser;
@@ -102,6 +102,7 @@ class _CopyWithImpl$Mutation$CreateUser<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? createUser = _undefined,
     Object? $__typename = _undefined,
@@ -115,6 +116,7 @@ class _CopyWithImpl$Mutation$CreateUser<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$CreateUser$createUser<TRes> get createUser {
     final local$createUser = _instance.createUser;
     return CopyWith$Mutation$CreateUser$createUser(
@@ -126,14 +128,16 @@ class _CopyWithStubImpl$Mutation$CreateUser<TRes>
     implements CopyWith$Mutation$CreateUser<TRes> {
   _CopyWithStubImpl$Mutation$CreateUser(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$CreateUser$createUser? createUser,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$CreateUser$createUser<TRes> get createUser =>
       CopyWith$Mutation$CreateUser$createUser.stub(_res);
 }
@@ -268,10 +272,10 @@ class WatchOptions$Mutation$CreateUser
 extension ClientExtension$Mutation$CreateUser on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$CreateUser>> mutate$CreateUser(
           [Options$Mutation$CreateUser? options]) async =>
-      await this.mutate(options ?? Options$Mutation$CreateUser());
+      await mutate(options ?? Options$Mutation$CreateUser());
   graphql.ObservableQuery<Mutation$CreateUser> watchMutation$CreateUser(
           [WatchOptions$Mutation$CreateUser? options]) =>
-      this.watchMutation(options ?? WatchOptions$Mutation$CreateUser());
+      watchMutation(options ?? WatchOptions$Mutation$CreateUser());
 }
 
 class Mutation$CreateUser$HookResult {
@@ -410,14 +414,14 @@ class Mutation$CreateUser$createUser {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$uid = uid;
-    _resultData['uid'] = l$uid;
+    resultData['uid'] = l$uid;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -437,7 +441,7 @@ class Mutation$CreateUser$createUser {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateUser$createUser) ||
+    if (other is! Mutation$CreateUser$createUser ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -498,6 +502,7 @@ class _CopyWithImpl$Mutation$CreateUser$createUser<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? uid = _undefined,
@@ -516,8 +521,9 @@ class _CopyWithStubImpl$Mutation$CreateUser$createUser<TRes>
     implements CopyWith$Mutation$CreateUser$createUser<TRes> {
   _CopyWithStubImpl$Mutation$CreateUser$createUser(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? id,
     String? uid,

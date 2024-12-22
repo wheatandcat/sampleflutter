@@ -43,7 +43,7 @@ class Variables$Mutation$UpdateItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$UpdateItem) ||
+    if (other is! Variables$Mutation$UpdateItem ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -87,6 +87,7 @@ class _CopyWithImpl$Variables$Mutation$UpdateItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({Object? input = _undefined}) =>
       _then(Variables$Mutation$UpdateItem._({
         ..._instance._$data,
@@ -99,8 +100,9 @@ class _CopyWithStubImpl$Variables$Mutation$UpdateItem<TRes>
     implements CopyWith$Variables$Mutation$UpdateItem<TRes> {
   _CopyWithStubImpl$Variables$Mutation$UpdateItem(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({Input$UpdateItem? input}) => _res;
 }
 
@@ -125,12 +127,12 @@ class Mutation$UpdateItem {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$updateItem = updateItem;
-    _resultData['updateItem'] = l$updateItem.toJson();
+    resultData['updateItem'] = l$updateItem.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -148,7 +150,7 @@ class Mutation$UpdateItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateItem) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$UpdateItem || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateItem = updateItem;
@@ -202,6 +204,7 @@ class _CopyWithImpl$Mutation$UpdateItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? updateItem = _undefined,
     Object? $__typename = _undefined,
@@ -215,6 +218,7 @@ class _CopyWithImpl$Mutation$UpdateItem<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$UpdateItem$updateItem<TRes> get updateItem {
     final local$updateItem = _instance.updateItem;
     return CopyWith$Mutation$UpdateItem$updateItem(
@@ -226,14 +230,16 @@ class _CopyWithStubImpl$Mutation$UpdateItem<TRes>
     implements CopyWith$Mutation$UpdateItem<TRes> {
   _CopyWithStubImpl$Mutation$UpdateItem(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$UpdateItem$updateItem? updateItem,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$UpdateItem$updateItem<TRes> get updateItem =>
       CopyWith$Mutation$UpdateItem$updateItem.stub(_res);
 }
@@ -415,10 +421,10 @@ class WatchOptions$Mutation$UpdateItem
 extension ClientExtension$Mutation$UpdateItem on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$UpdateItem>> mutate$UpdateItem(
           Options$Mutation$UpdateItem options) async =>
-      await this.mutate(options);
+      await mutate(options);
   graphql.ObservableQuery<Mutation$UpdateItem> watchMutation$UpdateItem(
           WatchOptions$Mutation$UpdateItem options) =>
-      this.watchMutation(options);
+      watchMutation(options);
 }
 
 class Mutation$UpdateItem$HookResult {
@@ -579,22 +585,22 @@ class Mutation$UpdateItem$updateItem {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$name = name;
-    _resultData['name'] = l$name;
+    resultData['name'] = l$name;
     final l$categoryId = categoryId;
-    _resultData['categoryId'] = l$categoryId;
+    resultData['categoryId'] = l$categoryId;
     final l$order = order;
-    _resultData['order'] = l$order;
+    resultData['order'] = l$order;
     final l$stock = stock;
-    _resultData['stock'] = l$stock;
+    resultData['stock'] = l$stock;
     final l$expirationDate = expirationDate;
-    _resultData['expirationDate'] = l$expirationDate;
+    resultData['expirationDate'] = l$expirationDate;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -622,7 +628,7 @@ class Mutation$UpdateItem$updateItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateItem$updateItem) ||
+    if (other is! Mutation$UpdateItem$updateItem ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -707,6 +713,7 @@ class _CopyWithImpl$Mutation$UpdateItem$updateItem<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -743,8 +750,9 @@ class _CopyWithStubImpl$Mutation$UpdateItem$updateItem<TRes>
     implements CopyWith$Mutation$UpdateItem$updateItem<TRes> {
   _CopyWithStubImpl$Mutation$UpdateItem$updateItem(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? id,
     String? name,

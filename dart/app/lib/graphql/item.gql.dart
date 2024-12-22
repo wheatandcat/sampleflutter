@@ -40,7 +40,7 @@ class Variables$Query$Item {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$Item) || runtimeType != other.runtimeType) {
+    if (other is! Variables$Query$Item || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -83,6 +83,7 @@ class _CopyWithImpl$Variables$Query$Item<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({Object? id = _undefined}) => _then(Variables$Query$Item._({
         ..._instance._$data,
         if (id != _undefined && id != null) 'id': (id as int),
@@ -93,8 +94,9 @@ class _CopyWithStubImpl$Variables$Query$Item<TRes>
     implements CopyWith$Variables$Query$Item<TRes> {
   _CopyWithStubImpl$Variables$Query$Item(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({int? id}) => _res;
 }
 
@@ -120,12 +122,12 @@ class Query$Item {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$item = item;
-    _resultData['item'] = l$item?.toJson();
+    resultData['item'] = l$item?.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -143,7 +145,7 @@ class Query$Item {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Item) || runtimeType != other.runtimeType) {
+    if (other is! Query$Item || runtimeType != other.runtimeType) {
       return false;
     }
     final l$item = item;
@@ -194,6 +196,7 @@ class _CopyWithImpl$Query$Item<TRes> implements CopyWith$Query$Item<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? item = _undefined,
     Object? $__typename = _undefined,
@@ -205,6 +208,7 @@ class _CopyWithImpl$Query$Item<TRes> implements CopyWith$Query$Item<TRes> {
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Query$Item$item<TRes> get item {
     final local$item = _instance.item;
     return local$item == null
@@ -216,14 +220,16 @@ class _CopyWithImpl$Query$Item<TRes> implements CopyWith$Query$Item<TRes> {
 class _CopyWithStubImpl$Query$Item<TRes> implements CopyWith$Query$Item<TRes> {
   _CopyWithStubImpl$Query$Item(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Query$Item$item? item,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Query$Item$item<TRes> get item =>
       CopyWith$Query$Item$item.stub(_res);
 }
@@ -409,10 +415,9 @@ class WatchOptions$Query$Item extends graphql.WatchQueryOptions<Query$Item> {
 
 class FetchMoreOptions$Query$Item extends graphql.FetchMoreOptions {
   FetchMoreOptions$Query$Item({
-    required graphql.UpdateQuery updateQuery,
+    required super.updateQuery,
     required Variables$Query$Item variables,
   }) : super(
-          updateQuery: updateQuery,
           variables: variables.toJson(),
           document: documentNodeQueryItem,
         );
@@ -421,16 +426,16 @@ class FetchMoreOptions$Query$Item extends graphql.FetchMoreOptions {
 extension ClientExtension$Query$Item on graphql.GraphQLClient {
   Future<graphql.QueryResult<Query$Item>> query$Item(
           Options$Query$Item options) async =>
-      await this.query(options);
+      await query(options);
   graphql.ObservableQuery<Query$Item> watchQuery$Item(
           WatchOptions$Query$Item options) =>
-      this.watchQuery(options);
+      watchQuery(options);
   void writeQuery$Item({
     required Query$Item data,
     required Variables$Query$Item variables,
     bool broadcast = true,
   }) =>
-      this.writeQuery(
+      writeQuery(
         graphql.Request(
           operation: graphql.Operation(document: documentNodeQueryItem),
           variables: variables.toJson(),
@@ -442,7 +447,7 @@ extension ClientExtension$Query$Item on graphql.GraphQLClient {
     required Variables$Query$Item variables,
     bool optimistic = true,
   }) {
-    final result = this.readQuery(
+    final result = readQuery(
       graphql.Request(
         operation: graphql.Operation(document: documentNodeQueryItem),
         variables: variables.toJson(),
@@ -461,7 +466,7 @@ graphql.ObservableQuery<Query$Item> useWatchQuery$Item(
     graphql_flutter.useWatchQuery(options);
 
 class Query$Item$Widget extends graphql_flutter.Query<Query$Item> {
-  Query$Item$Widget({
+  const Query$Item$Widget({
     widgets.Key? key,
     required Options$Query$Item options,
     required graphql_flutter.QueryBuilder<Query$Item> builder,
@@ -522,24 +527,24 @@ class Query$Item$item {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = l$id;
+    resultData['id'] = l$id;
     final l$name = name;
-    _resultData['name'] = l$name;
+    resultData['name'] = l$name;
     final l$imageURL = imageURL;
-    _resultData['imageURL'] = l$imageURL;
+    resultData['imageURL'] = l$imageURL;
     final l$categoryId = categoryId;
-    _resultData['categoryId'] = l$categoryId;
+    resultData['categoryId'] = l$categoryId;
     final l$order = order;
-    _resultData['order'] = l$order;
+    resultData['order'] = l$order;
     final l$stock = stock;
-    _resultData['stock'] = l$stock;
+    resultData['stock'] = l$stock;
     final l$expirationDate = expirationDate;
-    _resultData['expirationDate'] = l$expirationDate;
+    resultData['expirationDate'] = l$expirationDate;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -569,7 +574,7 @@ class Query$Item$item {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Item$item) || runtimeType != other.runtimeType) {
+    if (other is! Query$Item$item || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -658,6 +663,7 @@ class _CopyWithImpl$Query$Item$item<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
@@ -697,8 +703,9 @@ class _CopyWithStubImpl$Query$Item$item<TRes>
     implements CopyWith$Query$Item$item<TRes> {
   _CopyWithStubImpl$Query$Item$item(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? id,
     String? name,

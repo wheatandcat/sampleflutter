@@ -24,12 +24,12 @@ class Mutation$LogoutGuest {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$logoutGuest = logoutGuest;
-    _resultData['logoutGuest'] = l$logoutGuest;
+    resultData['logoutGuest'] = l$logoutGuest;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -47,7 +47,7 @@ class Mutation$LogoutGuest {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$LogoutGuest) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$LogoutGuest || runtimeType != other.runtimeType) {
       return false;
     }
     final l$logoutGuest = logoutGuest;
@@ -100,6 +100,7 @@ class _CopyWithImpl$Mutation$LogoutGuest<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? logoutGuest = _undefined,
     Object? $__typename = _undefined,
@@ -118,8 +119,9 @@ class _CopyWithStubImpl$Mutation$LogoutGuest<TRes>
     implements CopyWith$Mutation$LogoutGuest<TRes> {
   _CopyWithStubImpl$Mutation$LogoutGuest(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     bool? logoutGuest,
     String? $__typename,
@@ -236,10 +238,10 @@ class WatchOptions$Mutation$LogoutGuest
 extension ClientExtension$Mutation$LogoutGuest on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$LogoutGuest>> mutate$LogoutGuest(
           [Options$Mutation$LogoutGuest? options]) async =>
-      await this.mutate(options ?? Options$Mutation$LogoutGuest());
+      await mutate(options ?? Options$Mutation$LogoutGuest());
   graphql.ObservableQuery<Mutation$LogoutGuest> watchMutation$LogoutGuest(
           [WatchOptions$Mutation$LogoutGuest? options]) =>
-      this.watchMutation(options ?? WatchOptions$Mutation$LogoutGuest());
+      watchMutation(options ?? WatchOptions$Mutation$LogoutGuest());
 }
 
 class Mutation$LogoutGuest$HookResult {

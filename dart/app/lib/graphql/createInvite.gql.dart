@@ -25,12 +25,12 @@ class Mutation$CreateInvite {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$createInvite = createInvite;
-    _resultData['createInvite'] = l$createInvite.toJson();
+    resultData['createInvite'] = l$createInvite.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -48,7 +48,7 @@ class Mutation$CreateInvite {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateInvite) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$CreateInvite || runtimeType != other.runtimeType) {
       return false;
     }
     final l$createInvite = createInvite;
@@ -102,6 +102,7 @@ class _CopyWithImpl$Mutation$CreateInvite<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? createInvite = _undefined,
     Object? $__typename = _undefined,
@@ -115,6 +116,7 @@ class _CopyWithImpl$Mutation$CreateInvite<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$CreateInvite$createInvite<TRes> get createInvite {
     final local$createInvite = _instance.createInvite;
     return CopyWith$Mutation$CreateInvite$createInvite(
@@ -126,14 +128,16 @@ class _CopyWithStubImpl$Mutation$CreateInvite<TRes>
     implements CopyWith$Mutation$CreateInvite<TRes> {
   _CopyWithStubImpl$Mutation$CreateInvite(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$CreateInvite$createInvite? createInvite,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$CreateInvite$createInvite<TRes> get createInvite =>
       CopyWith$Mutation$CreateInvite$createInvite.stub(_res);
 }
@@ -269,10 +273,10 @@ class WatchOptions$Mutation$CreateInvite
 extension ClientExtension$Mutation$CreateInvite on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$CreateInvite>> mutate$CreateInvite(
           [Options$Mutation$CreateInvite? options]) async =>
-      await this.mutate(options ?? Options$Mutation$CreateInvite());
+      await mutate(options ?? Options$Mutation$CreateInvite());
   graphql.ObservableQuery<Mutation$CreateInvite> watchMutation$CreateInvite(
           [WatchOptions$Mutation$CreateInvite? options]) =>
-      this.watchMutation(options ?? WatchOptions$Mutation$CreateInvite());
+      watchMutation(options ?? WatchOptions$Mutation$CreateInvite());
 }
 
 class Mutation$CreateInvite$HookResult {
@@ -412,14 +416,14 @@ class Mutation$CreateInvite$createInvite {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$userId = userId;
-    _resultData['userId'] = l$userId;
+    resultData['userId'] = l$userId;
     final l$code = code;
-    _resultData['code'] = l$code;
+    resultData['code'] = l$code;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -439,7 +443,7 @@ class Mutation$CreateInvite$createInvite {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateInvite$createInvite) ||
+    if (other is! Mutation$CreateInvite$createInvite ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -501,6 +505,7 @@ class _CopyWithImpl$Mutation$CreateInvite$createInvite<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? userId = _undefined,
     Object? code = _undefined,
@@ -523,8 +528,9 @@ class _CopyWithStubImpl$Mutation$CreateInvite$createInvite<TRes>
     implements CopyWith$Mutation$CreateInvite$createInvite<TRes> {
   _CopyWithStubImpl$Mutation$CreateInvite$createInvite(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? userId,
     String? code,

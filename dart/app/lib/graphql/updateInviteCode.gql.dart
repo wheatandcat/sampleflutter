@@ -25,12 +25,12 @@ class Mutation$UpdateInviteCode {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$updateInviteCode = updateInviteCode;
-    _resultData['updateInviteCode'] = l$updateInviteCode.toJson();
+    resultData['updateInviteCode'] = l$updateInviteCode.toJson();
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -48,7 +48,7 @@ class Mutation$UpdateInviteCode {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateInviteCode) ||
+    if (other is! Mutation$UpdateInviteCode ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -105,6 +105,7 @@ class _CopyWithImpl$Mutation$UpdateInviteCode<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? updateInviteCode = _undefined,
     Object? $__typename = _undefined,
@@ -119,6 +120,7 @@ class _CopyWithImpl$Mutation$UpdateInviteCode<TRes>
             : ($__typename as String),
       ));
 
+  @override
   CopyWith$Mutation$UpdateInviteCode$updateInviteCode<TRes>
       get updateInviteCode {
     final local$updateInviteCode = _instance.updateInviteCode;
@@ -131,14 +133,16 @@ class _CopyWithStubImpl$Mutation$UpdateInviteCode<TRes>
     implements CopyWith$Mutation$UpdateInviteCode<TRes> {
   _CopyWithStubImpl$Mutation$UpdateInviteCode(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     Mutation$UpdateInviteCode$updateInviteCode? updateInviteCode,
     String? $__typename,
   }) =>
       _res;
 
+  @override
   CopyWith$Mutation$UpdateInviteCode$updateInviteCode<TRes>
       get updateInviteCode =>
           CopyWith$Mutation$UpdateInviteCode$updateInviteCode.stub(_res);
@@ -278,11 +282,11 @@ extension ClientExtension$Mutation$UpdateInviteCode on graphql.GraphQLClient {
   Future<graphql.QueryResult<Mutation$UpdateInviteCode>>
       mutate$UpdateInviteCode(
               [Options$Mutation$UpdateInviteCode? options]) async =>
-          await this.mutate(options ?? Options$Mutation$UpdateInviteCode());
+          await mutate(options ?? Options$Mutation$UpdateInviteCode());
   graphql.ObservableQuery<
       Mutation$UpdateInviteCode> watchMutation$UpdateInviteCode(
           [WatchOptions$Mutation$UpdateInviteCode? options]) =>
-      this.watchMutation(options ?? WatchOptions$Mutation$UpdateInviteCode());
+      watchMutation(options ?? WatchOptions$Mutation$UpdateInviteCode());
 }
 
 class Mutation$UpdateInviteCode$HookResult {
@@ -425,14 +429,14 @@ class Mutation$UpdateInviteCode$updateInviteCode {
   final String $__typename;
 
   Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
+    final resultData = <String, dynamic>{};
     final l$userId = userId;
-    _resultData['userId'] = l$userId;
+    resultData['userId'] = l$userId;
     final l$code = code;
-    _resultData['code'] = l$code;
+    resultData['code'] = l$code;
     final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
+    resultData['__typename'] = l$$__typename;
+    return resultData;
   }
 
   @override
@@ -452,7 +456,7 @@ class Mutation$UpdateInviteCode$updateInviteCode {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateInviteCode$updateInviteCode) ||
+    if (other is! Mutation$UpdateInviteCode$updateInviteCode ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -514,6 +518,7 @@ class _CopyWithImpl$Mutation$UpdateInviteCode$updateInviteCode<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
+  @override
   TRes call({
     Object? userId = _undefined,
     Object? code = _undefined,
@@ -536,8 +541,9 @@ class _CopyWithStubImpl$Mutation$UpdateInviteCode$updateInviteCode<TRes>
     implements CopyWith$Mutation$UpdateInviteCode$updateInviteCode<TRes> {
   _CopyWithStubImpl$Mutation$UpdateInviteCode$updateInviteCode(this._res);
 
-  TRes _res;
+  final TRes _res;
 
+  @override
   call({
     String? userId,
     String? code,
