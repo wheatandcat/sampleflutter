@@ -114,9 +114,7 @@ class ItemCard extends StatelessWidget {
                   ),
           ),
         ),
-        Text('$stock個',
-            style: const TextStyle(
-                fontSize: FontSize.lg, fontWeight: FontWeight.bold)),
+        Text('$stock個', style: const TextStyle(fontSize: FontSize.lg)),
       ],
     );
   }
