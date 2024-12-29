@@ -73,13 +73,12 @@ class Item extends HookWidget {
             child: Padding(
               padding: const EdgeInsets.only(
                 top: Spacing.sm,
-                left: Spacing.xl,
+                left: Spacing.lg + 4,
               ),
               child: Text(
                 '$stock個',
                 style: const TextStyle(
                   fontSize: FontSize.lg,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             )),

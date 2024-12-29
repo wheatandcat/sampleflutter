@@ -19,7 +19,7 @@ class ShapeTransitionIcon extends HookWidget {
 
     // 0.0 (完全な円形) から 16.0 (角丸) への補間を管理
     final animation = useMemoized(
-      () => Tween<double>(begin: 100.0, end: 25.0).animate(
+      () => Tween<double>(begin: 100.0, end: 10.0).animate(
         CurvedAnimation(parent: controller, curve: Curves.easeInOut),
       ),
       [controller],

@@ -4,6 +4,8 @@ import 'package:stockkeeper/app/items/id/page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stockkeeper/utils/style.dart';
 
+const double imageSize = 110;
+
 class ItemCard extends StatelessWidget {
   final String id;
   final String name;
@@ -29,10 +31,10 @@ class ItemCard extends StatelessWidget {
         builder: (BuildContext context) {
           return Padding(
               padding: const EdgeInsets.only(
-                  top: Spacing.md,
-                  bottom: Spacing.xl,
-                  left: Spacing.md,
-                  right: Spacing.md), // 上に20、下に10の余白を追加
+                top: Spacing.md,
+                bottom: Spacing.xl,
+                left: Spacing.md,
+              ), // 上に20、下に10の余白を追加
               child: Wrap(
                 children: <Widget>[
                   ListTile(
@@ -89,15 +91,15 @@ class ItemCard extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
                 color: AppColors.bg, borderRadius: BorderRadius.circular(10)),
-            width: 100,
-            height: 100,
+            width: imageSize,
+            height: imageSize,
             child: imageURL != null
                 ? ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
                       imageURL!,
-                      width: 100,
-                      height: 100,
+                      width: imageSize,
+                      height: imageSize,
                       fit: BoxFit.cover,
                     ), // 画像URLを指定
                   )
@@ -105,17 +107,14 @@ class ItemCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.asset(
                       'images/noimage.png',
-                      width: 100,
-                      height: 100,
+                      width: imageSize,
+                      height: imageSize,
                       fit: BoxFit.cover,
                     ), // 画像URLを指定
                   ),
           ),
         ),
-        Text('$stock個',
-            style: const TextStyle(
-                fontSize: FontSize.lg, fontWeight: FontWeight.bold)),
-        const SizedBox(width: 20),
+        Text('$stock個', style: const TextStyle(fontSize: FontSize.lg)),
       ],
     );
   }
