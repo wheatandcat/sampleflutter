@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stockkeeper/utils/style.dart';
 import 'package:stockkeeper/features/category/components/shapeTransition.dart';
 
-const double iconSize = 70;
+const double iconSize = 60;
 
 class CategoryIcon extends StatelessWidget {
   final String? imageURL;
@@ -24,8 +24,8 @@ class CategoryIcon extends StatelessWidget {
       return Stack(alignment: Alignment.centerLeft, children: [
         Positioned(
           left: 0,
-          top: 6,
-          bottom: 4,
+          top: 0,
+          bottom: 0,
           child: Container(
             width: 4, // 縦線の幅
             decoration: BoxDecoration(
@@ -35,7 +35,7 @@ class CategoryIcon extends StatelessWidget {
           ),
         ),
         Padding(
-            padding: const EdgeInsets.only(left: Spacing.md),
+            padding: const EdgeInsets.only(left: Spacing.md + 4),
             child: InkWell(
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
@@ -50,19 +50,18 @@ class CategoryIcon extends StatelessWidget {
     return Stack(alignment: Alignment.centerLeft, children: [
       Positioned(
         left: 0,
-        top: 6,
-        bottom: 4,
+        top: 0,
+        bottom: 0,
         child: Container(
           width: 4, // 縦線の幅
           decoration: BoxDecoration(
-            color: Colors.transparent, // 縦線の色
-            borderRadius: BorderRadius.circular(2), // 角を丸くする
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(2),
           ),
-// 縦線の色
         ),
       ),
       Padding(
-          padding: const EdgeInsets.only(left: Spacing.md),
+          padding: const EdgeInsets.only(left: Spacing.md + 4),
           child: InkWell(
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,

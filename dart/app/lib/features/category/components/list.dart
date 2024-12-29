@@ -26,7 +26,7 @@ class CategoryList extends StatelessWidget {
     final double deviceHeight = MediaQuery.of(context).size.height;
 
     return Container(
-        width: 90,
+        width: 85,
         height: deviceHeight,
         color: AppColors.primary.withAlpha(128),
         padding: const EdgeInsets.only(top: Spacing.md),
@@ -38,7 +38,7 @@ class CategoryList extends StatelessWidget {
             Expanded(
                 child: SizedBox(
               width: 100,
-              height: 60,
+              height: 50,
               child: ListView.builder(
                   itemCount: categories.length + 1,
                   itemBuilder: (context, index) {
@@ -60,7 +60,7 @@ class CategoryList extends StatelessWidget {
                     var category = categories[index];
 
                     return Padding(
-                        padding: const EdgeInsets.only(bottom: Spacing.lg),
+                        padding: const EdgeInsets.only(bottom: Spacing.md + 2),
                         child: CategoryIcon(
                           selected: categoryId == int.parse(category.id),
                           imageURL: category.imageURL,
@@ -72,9 +72,8 @@ class CategoryList extends StatelessWidget {
             Container(
               width: 90,
               decoration: const BoxDecoration(
-                color: Colors.brown,
                 border: Border(
-                  top: BorderSide(color: Colors.white, width: Spacing.xs),
+                  top: BorderSide(color: Colors.white, width: Spacing.sm),
                 ),
               ),
               padding: const EdgeInsets.all(0),

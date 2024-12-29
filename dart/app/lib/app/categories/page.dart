@@ -123,7 +123,7 @@ class MyHomePage extends HookConsumerWidget {
               },
             ),
             Container(
-              width: deviceWidth - 100,
+              width: deviceWidth - 85,
               height: deviceHeight,
               color: Colors.transparent,
               margin: const EdgeInsets.symmetric(vertical: Spacing.lg),

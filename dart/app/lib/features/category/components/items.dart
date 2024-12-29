@@ -5,6 +5,8 @@ import 'package:stockkeeper/features/category/components/newItem.dart';
 import 'package:stockkeeper/features/item/components/card.dart';
 import 'package:stockkeeper/utils/style.dart';
 
+const double imageSize = 110;
+
 class CategoryItems extends StatelessWidget {
   final List<Query$Category$items> items;
   final String categoryName;
@@ -39,19 +41,16 @@ class CategoryItems extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                            padding: const EdgeInsets.only(
-                              left: Spacing.md,
-                            ),
-                            margin: const EdgeInsets.all(0),
-                            width: 110,
-                            height: 100,
+                            margin: const EdgeInsets.only(left: Spacing.lg + 1),
+                            width: imageSize,
+                            height: imageSize,
                             child: CategoryNewItem(
                               categoryId: categoryId,
                               onCallback: () => onNewItem(),
                             )),
                         const Padding(
                             padding: EdgeInsets.only(
-                                left: Spacing.md, top: Spacing.lg),
+                                left: Spacing.lg + 3, top: Spacing.lg),
                             child: Text(
                               'OK！\n次は部屋のアイテムを\n登録してみましょう。',
                               style: TextStyle(
@@ -67,26 +66,22 @@ class CategoryItems extends StatelessWidget {
                   crossAxisSpacing: 4.0,
                   children: List.generate(items.length + 1, (index) {
                     if (index == 0) {
-                      return Container(
-                          padding: const EdgeInsets.only(
-                            right: 24,
-                            left: Spacing.md,
-                            bottom: Spacing.xl,
-                          ),
-                          margin: const EdgeInsets.only(top: 0),
-                          width: 50,
-                          height: 50,
-                          child: CategoryNewItem(
-                            categoryId: categoryId,
-                            onCallback: () => onNewItem(),
-                          ));
+                      return Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                              margin: const EdgeInsets.only(top: 0),
+                              width: imageSize,
+                              height: imageSize,
+                              child: CategoryNewItem(
+                                categoryId: categoryId,
+                                onCallback: () => onNewItem(),
+                              )));
                     }
 
                     final item = items[index - 1];
 
-                    return Container(
-                        padding: const EdgeInsets.only(
-                            right: Spacing.md, left: Spacing.md),
+                    return Align(
+                        alignment: Alignment.topCenter,
                         child: ItemCard(
                           id: item.id,
                           name: item.name,
