@@ -51,7 +51,7 @@ class Query$ItemAll {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ItemAll) || runtimeType != other.runtimeType) {
+    if (other is! Query$ItemAll || runtimeType != other.runtimeType) {
       return false;
     }
     final l$itemAll = itemAll;
@@ -465,7 +465,7 @@ class Query$ItemAll$itemAll {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ItemAll$itemAll) || runtimeType != other.runtimeType) {
+    if (other is! Query$ItemAll$itemAll || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -650,7 +650,7 @@ class Query$ItemAll$itemAll$category {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ItemAll$itemAll$category) ||
+    if (other is! Query$ItemAll$itemAll$category ||
         runtimeType != other.runtimeType) {
       return false;
     }

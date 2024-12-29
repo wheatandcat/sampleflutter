@@ -43,7 +43,7 @@ class Variables$Mutation$UpdateItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$UpdateItem) ||
+    if (other is! Variables$Mutation$UpdateItem ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -148,7 +148,7 @@ class Mutation$UpdateItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateItem) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$UpdateItem || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateItem = updateItem;
@@ -622,7 +622,7 @@ class Mutation$UpdateItem$updateItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateItem$updateItem) ||
+    if (other is! Mutation$UpdateItem$updateItem ||
         runtimeType != other.runtimeType) {
       return false;
     }

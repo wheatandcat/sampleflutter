@@ -51,7 +51,7 @@ class Query$Carts {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Carts) || runtimeType != other.runtimeType) {
+    if (other is! Query$Carts || runtimeType != other.runtimeType) {
       return false;
     }
     final l$carts = carts;
@@ -478,7 +478,7 @@ class Query$Carts$carts {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Carts$carts) || runtimeType != other.runtimeType) {
+    if (other is! Query$Carts$carts || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -671,8 +671,7 @@ class Query$Carts$carts$item {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Carts$carts$item) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$Carts$carts$item || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -866,7 +865,7 @@ class Query$Carts$carts$item$category {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Carts$carts$item$category) ||
+    if (other is! Query$Carts$carts$item$category ||
         runtimeType != other.runtimeType) {
       return false;
     }

@@ -49,7 +49,7 @@ class Query$Me {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Me) || runtimeType != other.runtimeType) {
+    if (other is! Query$Me || runtimeType != other.runtimeType) {
       return false;
     }
     final l$me = me;
@@ -364,7 +364,7 @@ class Query$Me$me {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Me$me) || runtimeType != other.runtimeType) {
+    if (other is! Query$Me$me || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;

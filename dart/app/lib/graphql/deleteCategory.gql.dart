@@ -42,7 +42,7 @@ class Variables$Mutation$DeleteCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$DeleteCategory) ||
+    if (other is! Variables$Mutation$DeleteCategory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -146,8 +146,7 @@ class Mutation$DeleteCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteCategory) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Mutation$DeleteCategory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteCategory = deleteCategory;
@@ -548,7 +547,7 @@ class Mutation$DeleteCategory$deleteCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteCategory$deleteCategory) ||
+    if (other is! Mutation$DeleteCategory$deleteCategory ||
         runtimeType != other.runtimeType) {
       return false;
     }

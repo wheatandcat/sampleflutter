@@ -41,7 +41,7 @@ class Variables$Mutation$DeleteItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$DeleteItem) ||
+    if (other is! Variables$Mutation$DeleteItem ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -145,7 +145,7 @@ class Mutation$DeleteItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteItem) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$DeleteItem || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteItem = deleteItem;
@@ -539,7 +539,7 @@ class Mutation$DeleteItem$deleteItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$DeleteItem$deleteItem) ||
+    if (other is! Mutation$DeleteItem$deleteItem ||
         runtimeType != other.runtimeType) {
       return false;
     }

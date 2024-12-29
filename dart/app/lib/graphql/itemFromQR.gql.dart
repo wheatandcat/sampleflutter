@@ -41,7 +41,7 @@ class Variables$Query$ItemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$ItemFromQR) ||
+    if (other is! Variables$Query$ItemFromQR ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -148,7 +148,7 @@ class Query$ItemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ItemFromQR) || runtimeType != other.runtimeType) {
+    if (other is! Query$ItemFromQR || runtimeType != other.runtimeType) {
       return false;
     }
     final l$itemFromQR = itemFromQR;
@@ -518,7 +518,7 @@ class Query$ItemFromQR$itemFromQR {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$ItemFromQR$itemFromQR) ||
+    if (other is! Query$ItemFromQR$itemFromQR ||
         runtimeType != other.runtimeType) {
       return false;
     }

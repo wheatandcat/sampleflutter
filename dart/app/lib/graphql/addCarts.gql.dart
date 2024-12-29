@@ -46,7 +46,7 @@ class Variables$Mutation$AddCarts {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$AddCarts) ||
+    if (other is! Variables$Mutation$AddCarts ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -157,7 +157,7 @@ class Mutation$AddCarts {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$AddCarts) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$AddCarts || runtimeType != other.runtimeType) {
       return false;
     }
     final l$addCarts = addCarts;

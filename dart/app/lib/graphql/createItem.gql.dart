@@ -43,7 +43,7 @@ class Variables$Mutation$CreateItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$CreateItem) ||
+    if (other is! Variables$Mutation$CreateItem ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -148,7 +148,7 @@ class Mutation$CreateItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateItem) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$CreateItem || runtimeType != other.runtimeType) {
       return false;
     }
     final l$createItem = createItem;
@@ -638,7 +638,7 @@ class Mutation$CreateItem$createItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateItem$createItem) ||
+    if (other is! Mutation$CreateItem$createItem ||
         runtimeType != other.runtimeType) {
       return false;
     }

@@ -49,7 +49,7 @@ class Query$Invite {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Invite) || runtimeType != other.runtimeType) {
+    if (other is! Query$Invite || runtimeType != other.runtimeType) {
       return false;
     }
     final l$invite = invite;
@@ -369,7 +369,7 @@ class Query$Invite$invite {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Invite$invite) || runtimeType != other.runtimeType) {
+    if (other is! Query$Invite$invite || runtimeType != other.runtimeType) {
       return false;
     }
     final l$userId = userId;

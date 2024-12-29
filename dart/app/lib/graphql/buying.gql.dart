@@ -47,7 +47,7 @@ class Mutation$Buying {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$Buying) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$Buying || runtimeType != other.runtimeType) {
       return false;
     }
     final l$buying = buying;

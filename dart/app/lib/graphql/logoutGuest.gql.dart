@@ -47,7 +47,7 @@ class Mutation$LogoutGuest {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$LogoutGuest) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$LogoutGuest || runtimeType != other.runtimeType) {
       return false;
     }
     final l$logoutGuest = logoutGuest;

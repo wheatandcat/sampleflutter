@@ -48,7 +48,7 @@ class Mutation$UpdateInviteCode {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateInviteCode) ||
+    if (other is! Mutation$UpdateInviteCode ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -452,7 +452,7 @@ class Mutation$UpdateInviteCode$updateInviteCode {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateInviteCode$updateInviteCode) ||
+    if (other is! Mutation$UpdateInviteCode$updateInviteCode ||
         runtimeType != other.runtimeType) {
       return false;
     }

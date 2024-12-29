@@ -45,7 +45,7 @@ class Variables$Mutation$UpdateCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$UpdateCategory) ||
+    if (other is! Variables$Mutation$UpdateCategory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -150,8 +150,7 @@ class Mutation$UpdateCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateCategory) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Mutation$UpdateCategory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateCategory = updateCategory;
@@ -568,7 +567,7 @@ class Mutation$UpdateCategory$updateCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$UpdateCategory$updateCategory) ||
+    if (other is! Mutation$UpdateCategory$updateCategory ||
         runtimeType != other.runtimeType) {
       return false;
     }

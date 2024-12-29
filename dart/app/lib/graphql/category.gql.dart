@@ -41,7 +41,7 @@ class Variables$Query$Category {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$Category) ||
+    if (other is! Variables$Query$Category ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -159,7 +159,7 @@ class Query$Category {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Category) || runtimeType != other.runtimeType) {
+    if (other is! Query$Category || runtimeType != other.runtimeType) {
       return false;
     }
     final l$category = category;
@@ -648,8 +648,7 @@ class Query$Category$category {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Category$category) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query$Category$category || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -847,7 +846,7 @@ class Query$Category$items {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Category$items) || runtimeType != other.runtimeType) {
+    if (other is! Query$Category$items || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;

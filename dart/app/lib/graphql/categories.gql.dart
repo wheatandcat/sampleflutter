@@ -52,7 +52,7 @@ class Query$Categories {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Categories) || runtimeType != other.runtimeType) {
+    if (other is! Query$Categories || runtimeType != other.runtimeType) {
       return false;
     }
     final l$categories = categories;
@@ -446,7 +446,7 @@ class Query$Categories$categories {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$Categories$categories) ||
+    if (other is! Query$Categories$categories ||
         runtimeType != other.runtimeType) {
       return false;
     }

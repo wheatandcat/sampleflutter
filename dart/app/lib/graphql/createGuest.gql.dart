@@ -43,7 +43,7 @@ class Variables$Mutation$CreateGuest {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$CreateGuest) ||
+    if (other is! Variables$Mutation$CreateGuest ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -148,7 +148,7 @@ class Mutation$CreateGuest {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateGuest) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$CreateGuest || runtimeType != other.runtimeType) {
       return false;
     }
     final l$createGuest = createGuest;
@@ -559,7 +559,7 @@ class Mutation$CreateGuest$createGuest {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateGuest$createGuest) ||
+    if (other is! Mutation$CreateGuest$createGuest ||
         runtimeType != other.runtimeType) {
       return false;
     }

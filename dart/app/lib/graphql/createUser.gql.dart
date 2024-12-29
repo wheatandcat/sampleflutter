@@ -48,7 +48,7 @@ class Mutation$CreateUser {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateUser) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$CreateUser || runtimeType != other.runtimeType) {
       return false;
     }
     final l$createUser = createUser;
@@ -437,7 +437,7 @@ class Mutation$CreateUser$createUser {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateUser$createUser) ||
+    if (other is! Mutation$CreateUser$createUser ||
         runtimeType != other.runtimeType) {
       return false;
     }

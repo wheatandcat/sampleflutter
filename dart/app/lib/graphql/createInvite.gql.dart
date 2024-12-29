@@ -48,7 +48,7 @@ class Mutation$CreateInvite {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateInvite) || runtimeType != other.runtimeType) {
+    if (other is! Mutation$CreateInvite || runtimeType != other.runtimeType) {
       return false;
     }
     final l$createInvite = createInvite;
@@ -439,7 +439,7 @@ class Mutation$CreateInvite$createInvite {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateInvite$createInvite) ||
+    if (other is! Mutation$CreateInvite$createInvite ||
         runtimeType != other.runtimeType) {
       return false;
     }

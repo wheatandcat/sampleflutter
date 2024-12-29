@@ -57,7 +57,7 @@ class Input$NewCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input$NewCategory) || runtimeType != other.runtimeType) {
+    if (other is! Input$NewCategory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$name = name;
@@ -218,7 +218,7 @@ class Input$UpdateCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input$UpdateCategory) || runtimeType != other.runtimeType) {
+    if (other is! Input$UpdateCategory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -409,7 +409,7 @@ class Input$NewItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input$NewItem) || runtimeType != other.runtimeType) {
+    if (other is! Input$NewItem || runtimeType != other.runtimeType) {
       return false;
     }
     final l$categoryId = categoryId;
@@ -637,7 +637,7 @@ class Input$UpdateItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input$UpdateItem) || runtimeType != other.runtimeType) {
+    if (other is! Input$UpdateItem || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -827,7 +827,7 @@ class Input$NewCart {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input$NewCart) || runtimeType != other.runtimeType) {
+    if (other is! Input$NewCart || runtimeType != other.runtimeType) {
       return false;
     }
     final l$itemId = itemId;
@@ -943,7 +943,7 @@ class Input$NewGuest {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input$NewGuest) || runtimeType != other.runtimeType) {
+    if (other is! Input$NewGuest || runtimeType != other.runtimeType) {
       return false;
     }
     final l$code = code;

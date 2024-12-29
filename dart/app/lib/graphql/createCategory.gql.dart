@@ -45,7 +45,7 @@ class Variables$Mutation$CreateCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Mutation$CreateCategory) ||
+    if (other is! Variables$Mutation$CreateCategory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -150,8 +150,7 @@ class Mutation$CreateCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateCategory) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Mutation$CreateCategory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$createCategory = createCategory;
@@ -600,7 +599,7 @@ class Mutation$CreateCategory$createCategory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation$CreateCategory$createCategory) ||
+    if (other is! Mutation$CreateCategory$createCategory ||
         runtimeType != other.runtimeType) {
       return false;
     }

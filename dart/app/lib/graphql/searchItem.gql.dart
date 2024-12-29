@@ -55,7 +55,7 @@ class Variables$Query$SearchItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$SearchItem) ||
+    if (other is! Variables$Query$SearchItem ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -185,7 +185,7 @@ class Query$SearchItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchItem) || runtimeType != other.runtimeType) {
+    if (other is! Query$SearchItem || runtimeType != other.runtimeType) {
       return false;
     }
     final l$searchItem = searchItem;
@@ -568,7 +568,7 @@ class Query$SearchItem$searchItem {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$SearchItem$searchItem) ||
+    if (other is! Query$SearchItem$searchItem ||
         runtimeType != other.runtimeType) {
       return false;
     }
