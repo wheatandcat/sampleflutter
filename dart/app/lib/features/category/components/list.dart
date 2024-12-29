@@ -70,10 +70,10 @@ class CategoryList extends StatelessWidget {
                   }),
             )),
             Container(
-              width: 90,
+              width: 85,
               decoration: const BoxDecoration(
                 border: Border(
-                  top: BorderSide(color: Colors.white, width: Spacing.sm),
+                  top: BorderSide(color: Colors.white, width: Spacing.xs),
                 ),
               ),
               padding: const EdgeInsets.all(0),
