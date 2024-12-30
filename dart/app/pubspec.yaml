@@ -74,11 +74,11 @@ dependencies:
   firebase_storage: ^12.3.6
   image_picker: ^1.1.2
   uuid: ^4.4.0
-  image_cropper: ^8.0.2
+  image_cropper: 8.0.2
   flutter_launcher_icons: ^0.14.1
   flutter_native_splash: ^2.4.0
   image_picker_for_web: ^3.0.4
-  image_cropper_for_web: ^6.0.2
+  image_cropper_for_web: 6.0.2
   flutter_image_compress: ^2.3.0
   qr_flutter: ^4.1.0
   mobile_scanner: ^6.0.2
